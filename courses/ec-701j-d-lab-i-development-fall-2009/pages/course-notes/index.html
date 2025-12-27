@@ -1,0 +1,3048 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+    
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NMQZ25T');</script>
+    
+  
+  
+
+
+    
+    <link href="../../../../static_shared/css/course_v2.ba051.css" rel="stylesheet">
+    
+
+    
+    <link href="../../../../static_shared/css/common.ba051.css" rel="stylesheet">
+    
+
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="This section presents the course lecture notes (selected slides, notebooks, and detailed notes), along with documentation for in-class labs and activities and supporting materials.">
+  <meta name="keywords" content="opencourseware,MIT OCW,courseware,MIT opencourseware,Free Courses,class notes,class syllabus,class materials,tutorials,online courses,MIT courses">
+  
+  <meta property="og:site_name" content="MIT OpenCourseWare">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ocw.mit.edu/courses/ec-701j-d-lab-i-development-fall-2009/pages/course-notes/" />
+  <meta property="og:title" content="Course Notes | D-Lab I: Development | Edgerton Center | MIT OpenCourseWare" />
+  <meta property="og:description" content="This section presents the course lecture notes (selected slides, notebooks, and detailed notes), along with documentation for in-class labs and activities and supporting materials." />
+
+  
+
+<meta property="og:image" content="https://ocw.mit.edu/courses/ec-701j-d-lab-i-development-fall-2009/616e7a7bf16fbcef2928b0da889f6782_ec-701jf09.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@mitocw" />
+<meta name="twitter:image:src" content="https://ocw.mit.edu/courses/ec-701j-d-lab-i-development-fall-2009/616e7a7bf16fbcef2928b0da889f6782_ec-701jf09.jpg" />
+
+  <link rel="canonical" href="index.html" />
+
+  <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type" : "WebPage",
+        "name": "MIT OpenCourseWare",
+        "description": "This section presents the course lecture notes (selected slides, notebooks, and detailed notes), along with documentation for in-class labs and activities and supporting materials.",
+        "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "publisher": {
+          "@type": "CollegeOrUniversity",
+          "name": "MIT OpenCourseWare"
+        }
+      }
+  </script>
+
+  <title>Course Notes | D-Lab I: Development | Edgerton Center | MIT OpenCourseWare</title>
+  <style>
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url(../../../../static_shared/fonts/MaterialIcons-Regular.subset.504c7f0c308e930e9255.woff2) format('woff2'),
+      url(../../../../static_shared/fonts/MaterialIcons-Regular.subset.1f8f08f2bf0d6e078379.woff) format('woff'),
+      url(../../../../static_shared/fonts/MaterialIcons-Regular.subset.aa271372671db14b34f2.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Material Icons Round';
+    font-style: normal;
+    font-weight: 400;
+    src: local("MaterialIcons-Round"),
+    url(../../../../static_shared/fonts/MaterialIconsRound-Regular.subset.7154eae1d0e60e0dabe4.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Cardo Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Cardo'),
+      local('Cardo-Bold'),
+      url(../../../../static_shared/fonts/Cardo-Bold.d7bf1aa6f322a64b2fc3.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Cardo Italic';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Cardo'),
+      local('Cardo-Italic'),
+      url(../../../../static_shared/fonts/Cardo-Italic.0935d2ebbc05be3559b1.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Helvetica Light';
+    font-style: normal`;
+    font-weight: 400;
+    src: local('Helvetica Light'),
+      local('Helvetica-Light'),
+      url(../../../../static_shared/fonts/Helvetica-Light.70359849afb40079a1c8.ttf) format('truetype');
+  }
+  .external-link.nav-link::after {
+    background-image: url('../../../../static_shared/images/external_link.58bbdd86c00a2c146c36.svg'); 
+  }
+  </style>
+</head>
+
+
+<body class="course-home-page">
+  
+    
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMQZ25T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+  
+  <div class="overflow-auto">
+    <span class="course-header">
+    <div
+  id="mobile-course-nav"
+  class="navbar-offcanvas offcanvas-toggle offcanvas-toggle-close medium-and-below-only drawer">
+  <h3 class="my-4 d-flex align-items-center justify-content-between">
+    Browse Course Material
+    <button
+      class="btn"
+      type="button"
+      aria-label="Close Course Menu"
+      onclick="$('#mobile-course-nav-toggle').click();"
+      id="close-mobile-course-menu-button"
+      >
+      <img
+        src="../../../../static_shared/images/close_small.b0a2684ccc0da6407a56.svg"
+        alt=""
+        width="12px"
+      />
+    </button>
+  </h3>
+  
+
+<nav class="course-nav" aria-label="Course materials">
+  <ul class="w-100 m-auto list-unstyled">
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="439b879d-287a-14b2-fc46-cc24d04292ab"
+           href="../syllabus/index.html" >
+          Syllabus
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_439b879d-287a-14b2-fc46-cc24d04292ab"
+    aria-labelledby="nav-button_mobile_439b879d-287a-14b2-fc46-cc24d04292ab"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="bfc4142b-703b-6e39-38b0-36308da800ae"
+           href="index.html" >
+          Course Notes
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_bfc4142b-703b-6e39-38b0-36308da800ae"
+    aria-labelledby="nav-button_mobile_bfc4142b-703b-6e39-38b0-36308da800ae"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+           href="../readings/index.html" >
+          Readings
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+    aria-labelledby="nav-button_mobile_c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="4be700a9-9447-0110-2347-f4cd1fdc5880"
+           href="../assignments/index.html" >
+          Assignments
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_4be700a9-9447-0110-2347-f4cd1fdc5880"
+    aria-labelledby="nav-button_mobile_4be700a9-9447-0110-2347-f4cd1fdc5880"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+           href="../projects/index.html" >
+          Projects
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+    aria-labelledby="nav-button_mobile_1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="667e5689-8ac5-9e52-786e-f14b1644ed99"
+           href="../exams/index.html" >
+          Exams
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_667e5689-8ac5-9e52-786e-f14b1644ed99"
+    aria-labelledby="nav-button_mobile_667e5689-8ac5-9e52-786e-f14b1644ed99"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="a2749512-298f-1014-fdda-cc33cad4ec0d"
+           href="../related-resources/index.html" >
+          Related Resources
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_a2749512-298f-1014-fdda-cc33cad4ec0d"
+    aria-labelledby="nav-button_mobile_a2749512-298f-1014-fdda-cc33cad4ec0d"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</nav>
+
+</div>
+
+    <div
+  id="course-info-drawer"
+  class="bg-faded pt-3 bg-light navbar-offcanvas navbar-offcanvas-right medium-and-below-only drawer"
+>
+  <div class="col-12">
+    <button
+      class="btn close-mobile-course-info"
+      type="button"
+      aria-label="Close Course Info"
+      onclick="$('#mobile-course-info-toggle').click();"
+      id="close-mobile-course-info-button"
+      >
+      <img
+        class=""
+        src="../../../../static_shared/images/close_small.b0a2684ccc0da6407a56.svg"
+        alt=""
+        width="12px"
+      />
+    </button>
+  </div>
+    
+
+<div class="course-info">
+  <div class="course-detail-title bg-light-gray">
+    <h2 class="font-black py-1 pl-3 m-0">
+      Course Info
+    </h2>
+  </div>
+  <div class="px-3 mt-4">
+    <div class="row">
+      <div class="col-12 ">
+        
+        <div class="">
+          
+          <h5 class="panel-course-info-title ">
+            Instructors
+            </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Amy+J.+Smith"  >Amy J. Smith</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Prof.+Bishwapriya+Sanyal"  >Prof. Bishwapriya Sanyal</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Victor+Grau+Serrat"  >Victor Grau Serrat</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+        
+        
+          
+          
+            <div class="mt-4">
+              <h5 class="panel-course-info-title ">
+                Departments
+              </h5>
+              <div class="course-info-content panel-course-info-text">
+                
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-department strip-link-offline"    href="https://ocw.mit.edu/search/?d=Edgerton+Center"  >Edgerton Center</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-department strip-link-offline"    href="https://ocw.mit.edu/search/?d=Urban+Studies+and+Planning"  >Urban Studies and Planning</a>
+  </li>
+  
+</ul>
+
+
+              </div>
+            </div>
+          
+         
+        
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            As Taught In
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            Fall
+            
+              2009
+            
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            Level
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+              
+                <a   class=" strip-link-offline"    href="https://ocw.mit.edu/search/?l=Undergraduate"  >Undergraduate</a><br />
+              
+            
+          </div>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
+
+<div class=" mt-4">
+  <h5 class="panel-course-info-title ">
+    Topics
+  </h5>
+  <ul class="list-unstyled pb-2 m-0 panel-course-info-text">
+      <li>
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1">
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Engineering"  >Engineering</a></span>
+</div>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_mobile_1"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_mobile_1"
+    aria-expanded="false"
+    aria-label="Science subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Science"  >Science</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_mobile_1"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-4 ">
+      
+      <button
+        class="topic-toggle border-0 bg-transparent pl-0"
+        data-target="#speciality-container_mobile_1_0"
+        data-toggle="collapse"
+        aria-controls="speciality-container_mobile_1_0"
+        aria-expanded="false"
+        aria-label="Earth Science specialties"
+      >
+        <i aria-hidden="true" class="material-icons"></i>
+      </button>
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Earth+Science"  >Earth Science</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_mobile_1_0"
+      aria-label="Specialties"
+    >
+      
+      <li class="pt-1 pb-1 pl-5">
+        <span class="topic-text-wrapper">
+          
+          <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Sustainability"  >Sustainability</a></span>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_mobile_2"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_mobile_2"
+    aria-expanded="false"
+    aria-label="Social Science subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Social+Science"  >Social Science</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_mobile_2"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-4 ">
+      
+      <button
+        class="topic-toggle border-0 bg-transparent pl-0"
+        data-target="#speciality-container_mobile_2_0"
+        data-toggle="collapse"
+        aria-controls="speciality-container_mobile_2_0"
+        aria-expanded="false"
+        aria-label="Economics specialties"
+      >
+        <i aria-hidden="true" class="material-icons"></i>
+      </button>
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Economics"  >Economics</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_mobile_2_0"
+      aria-label="Specialties"
+    >
+      
+      <li class="pt-1 pb-1 pl-5">
+        <span class="topic-text-wrapper">
+          
+          <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Developmental+Economics"  >Developmental Economics</a></span>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_mobile_3"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_mobile_3"
+    aria-expanded="false"
+    aria-label="Society subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Society"  >Society</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_mobile_3"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=The+Developing+World"  >The Developing World</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_mobile_3_0"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      
+  </ul>
+</div>
+
+  
+
+
+
+<div class="">
+  <h5 class="course-detail-title panel-course-info-title mt-3">
+    Learning Resource Types
+  </h5>
+  <div>
+    <div class="row d-inline m-0">
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">notes</i>
+    <span>Lecture Notes</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">group_work</i>
+    <span>Projects with Examples</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment</i>
+    <span>Activity Assignments</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment_turned_in</i>
+    <span>Written Assignments with Examples</span>
+  </div>
+</div>
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <hr>
+<div class="pb-3">
+  <a class="download-course-link-button btn btn-outline-primary btn-link link-button text-decoration-none px-4 py-2"
+    role="button"
+    href="https://ocw.mit.edu/courses/ec-701j-d-lab-i-development-fall-2009/download">
+    <div class="text-center w-100">Download Course</div>
+  </a>
+</div>
+</div>
+
+    
+
+
+
+
+
+<div id="mobile-header" class="position-relative bg-black medium-and-below-only">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black d-flex">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="material-icons display-4 text-white align-bottom">menu</i>
+    </button>
+    <div class="mx-auto">
+      <a href="https://ocw.mit.edu/">
+        <img width="200" src="../../../../static_shared/images/ocw_logo_white.cabdc9a745b03db3dad4.svg" alt="MIT OpenCourseWare"/>
+      </a>
+    </div>
+    <div class="user-menu-container"></div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto pl-2 pt-2">
+        <li class="nav-item">
+  
+  
+    <a class="nav-link search-icon text-white pr-6" href="https://ocw.mit.edu/search/">
+      <i class="material-icons">search</i>
+    </a>
+  
+</li>
+        <li class="nav-item">
+          <a   class="nav-link"    href="https://giving.mit.edu/give/to/ocw/?utm_source=ocw&amp;utm_medium=homepage_banner&amp;utm_campaign=nextgen_home"  >Give Now</a>
+        </li>
+        <li class="nav-item">
+          <a   class="nav-link"    href="https://ocw.mit.edu/about"  >About OCW</a>
+        </li>
+        <li class="nav-item">
+          <a   class="nav-link"   target="_blank"   href="https://mitocw.zendesk.com/hc/en-us"  >Help &amp; Faqs</a>
+        </li>
+        <li class="nav-item">
+          <a   class="nav-link"    href="https://ocw.mit.edu/contact"  >Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<div id="desktop-header">
+  <div class="contents">
+    <div class="left">
+      <div class="ocw-logo">
+        <a href="https://ocw.mit.edu/">
+          <img src="../../../../static_shared/images/ocw_logo_white.cabdc9a745b03db3dad4.svg" alt="MIT OpenCourseWare" />
+        </a>
+      </div>
+    </div>
+    <div class="right">
+      
+  
+  
+    <a class="nav-link search-icon text-white pr-6" href="https://ocw.mit.edu/search/">
+      <i class="material-icons">search</i>
+    </a>
+  
+
+      <a class="give-button text-white text-decoration-none font-weight-bold small-link d-flex align-items-center" aria-label="Give Now - Donate to MIT OpenCourseWare" href="https://giving.mit.edu/give/to/ocw/?utm_source=ocw&amp;utm_medium=homepage_banner&amp;utm_campaign=nextgen_home">
+        <span class="m-0 pr-2">GIVE NOW</span>
+        <img src="../../../../static_shared/images/heart_burgundy.e7c8635e8cc6538b89fa.svg" class="heart-burgundy" alt="" />
+      </a>
+      <a   class="text-white text-decoration-none font-weight-bold pl-5 pr-3 py-2"    href="https://ocw.mit.edu/about"  >about ocw</a>
+      <a   class="text-white text-decoration-none font-weight-bold px-3 py-2"   target="_blank"   href="https://mitocw.zendesk.com/hc/en-us"  >help &amp; faqs</a>
+      <a   class="text-white text-decoration-none font-weight-bold px-3 py-2"    href="https://ocw.mit.edu/contact"  >contact us</a>
+      <div class="user-menu-container"></div>
+    </div>
+  </div>
+</div>
+
+<div id="user-list-modal-container"></div>
+<div id="create-user-list-modal-container"></div>
+    </span>
+    
+    
+
+<div id="course-banner" class="p-0">
+  <div class="max-content-width course-banner-content m-auto py-3">
+    <div class="row">
+    <div class="col-11">
+      
+      <span class="course-number-term-detail">EC.701J | Fall 2009 | Undergraduate</span>
+      <br>
+      <br>
+      <h1>
+        <a
+          class="text-capitalize m-0 text-white"
+          href="../../index.html"
+        >D-Lab I: Development</a>
+      </h1>
+    </div>
+    <div class="col-1"><div class="bookmark-button-container" data-resourcereadableid="EC.701J&#43;fall_2009"></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+    <div id="course-main-content">
+      <div class="row">
+        <div class="col-12 course-home-grid">
+          <div class="medium-and-below-only">
+            <div class="d-flex align-items-center mb-3">
+              <div class="col-6 px-0">
+                <div>
+  <button
+    id="mobile-course-nav-toggle"
+    class="mobile-course-nav-toggle-btn d-inline-flex align-items-center offcanvas-toggle"
+    data-toggle="offcanvas"
+    data-target="#mobile-course-nav"
+  >
+    <img src="../../../../static_shared/images/expand.a062b1c47b121e3c7e03.svg" alt=""/>
+    <span class="pl-1">Menu</span>
+  </button>
+</div>
+
+              </div>
+              <div class="col-6 px-0">
+                
+
+
+  <button 
+    class="btn btn-link float-right mobile-course-info-toggle-btn toggle navbar-toggle offcanvas-toggle"
+    id="mobile-course-info-toggle"
+    data-toggle="offcanvas" 
+    data-target="#course-info-drawer">
+    More Info
+  </button>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row course-cards">
+        <div class="col-2 course-home-grid large-and-above-only">  
+          <div class="card">
+  <div class="card-body pr-2">
+    
+
+<nav class="course-nav" aria-label="Course materials">
+  <ul class="w-100 m-auto list-unstyled">
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="439b879d-287a-14b2-fc46-cc24d04292ab"
+           href="../syllabus/index.html" >
+          Syllabus
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_439b879d-287a-14b2-fc46-cc24d04292ab"
+    aria-labelledby="nav-button_desktop_439b879d-287a-14b2-fc46-cc24d04292ab"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="bfc4142b-703b-6e39-38b0-36308da800ae"
+           href="index.html" >
+          Course Notes
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_bfc4142b-703b-6e39-38b0-36308da800ae"
+    aria-labelledby="nav-button_desktop_bfc4142b-703b-6e39-38b0-36308da800ae"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+           href="../readings/index.html" >
+          Readings
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+    aria-labelledby="nav-button_desktop_c2765c9d-b1b0-3d75-c630-7ad2f38ee68d"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="4be700a9-9447-0110-2347-f4cd1fdc5880"
+           href="../assignments/index.html" >
+          Assignments
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_4be700a9-9447-0110-2347-f4cd1fdc5880"
+    aria-labelledby="nav-button_desktop_4be700a9-9447-0110-2347-f4cd1fdc5880"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+           href="../projects/index.html" >
+          Projects
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+    aria-labelledby="nav-button_desktop_1fa3c17d-01e7-3dd2-1f9b-61e1bafe78fe"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="667e5689-8ac5-9e52-786e-f14b1644ed99"
+           href="../exams/index.html" >
+          Exams
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_667e5689-8ac5-9e52-786e-f14b1644ed99"
+    aria-labelledby="nav-button_desktop_667e5689-8ac5-9e52-786e-f14b1644ed99"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      
+        <a class="text-dark nav-link"
+          data-uuid="a2749512-298f-1014-fdda-cc33cad4ec0d"
+           href="../related-resources/index.html" >
+          Related Resources
+        </a>
+      
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_a2749512-298f-1014-fdda-cc33cad4ec0d"
+    aria-labelledby="nav-button_desktop_a2749512-298f-1014-fdda-cc33cad4ec0d"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</nav>
+
+  </div>
+</div>
+
+        </div>
+        <div class="col-sm-12 col-lg-10 course-home-grid">
+          <div class="">
+            <div class="card">
+              <div class="d-flex justify-content-between">
+                <div class="p-0 col-lg-9" id="main-course-section">
+                  <div class="card-body">
+                    
+<div class="mb-2">
+  <header>
+  <div class="course-section-title-container">
+    <div id="course-title">
+      
+      <h2 class="pb-1 mb-1">Course Notes</h2>
+    </div>
+  </div>
+</header>
+
+  <article class="content pt-3 mt-1">
+    <main id="course-content-section"><p>This page presents lecture materials in several forms:</p>
+<ul>
+<li>Illustrated notebooks prepared by <a   class="external-link-warning external-link "   target="_blank"   href="http://chefcooke.com/"  aria-label="Nathan Cooke (opens in a new tab)"   onclick="event.preventDefault()" >Nathan Cooke</a></li>
+<li>Selected detailed lecture notes prepared by Jessica Huang</li>
+<li>Selected lecture slides and supporting material</li>
+</ul>
+<p><a   class="external-link-warning external-link "   target="_blank"   href="http://www.flickr.com/photos/d-lab/sets/72157624747524867/"  aria-label="Flickr photo collection of various lectures, labs, and activities (opens in a new tab)"   onclick="event.preventDefault()" >Flickr photo collection of various lectures, labs, and activities</a></p>
+<p><table>
+<thead>
+<tr>
+<th>
+
+SES #
+</th>
+<th>
+
+CLASS TOPICS
+</th>
+<th>
+
+NOTEBOOKS
+</th>
+<th>
+
+DETAILED NOTES
+</th>
+<th>
+
+SLIDES &amp; SUPPORTING MATERIAL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+1
+</td>
+<td>
+
+Introduction
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec01_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec01_notes/index.html">PDF</a>)
+</td>
+<td>
+</p>
+<p>Slides (<a href="../../resources/mitec_701jf09_lec01/index.html">PDF - 4.7MB</a>)</p>
+<p>World Fact Quiz teaching note (<a href="../../resources/mitec_701jf09_lec1worldfact/index.html">PDF</a>)</p>
+<p></td>
+</tr>
+<tr>
+<td>
+
+2
+</td>
+<td>
+</p>
+<p>D-Lab philosophy of development</p>
+<p>Stakeholder analysis &amp; participation</p>
+<p>Role play activity: wheelchairs</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec02_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec02_notes/index.html">PDF</a>)
+</td>
+<td>
+</p>
+<p>Slides (<a href="../../resources/mitec_701jf09_lec02/index.html">PDF - 2.1MB</a>)</p>
+<p>Wheelchair role play: teaching note and instructions (<a href="../../resources/mitec_701jf09_act02chair_rp/index.html">PDF</a>)</p>
+<p></td>
+</tr>
+<tr>
+<td>
+
+3
+</td>
+<td>
+
+History of development: (1950-1970): The colonial legacy
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec03_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec03_notes/index.html">PDF</a>)
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec03/index.html">PDF</a>)
+</td>
+</tr>
+<tr>
+<td>
+
+4
+</td>
+<td>
+</p>
+<p>History of development: (1970-1990)</p>
+<p>Appropriate technology</p>
+<p>Intermediate technology</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec04_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec04_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+5
+</td>
+<td>
+</p>
+<p>History of development: (1990-present)</p>
+<p>Millennium development goals</p>
+<p>Participatory development</p>
+<p>Co-Creation</p>
+<p><em>Guest speaker</em>: Mitch Resnick (<a   class="external-link-warning external-link "   target="_blank"   href="http://web.media.mit.edu/~mres/"  aria-label="MIT Media Lab (opens in a new tab)"   onclick="event.preventDefault()" >MIT Media Lab</a>)</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec05_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec05_notes/index.html">PDF</a>)
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec05/index.html">PDF - 1.3MB</a>)
+</td>
+</tr>
+<tr>
+<td>
+
+6
+</td>
+<td>
+</p>
+<p>Entrepreneurship, government, and development in Africa</p>
+<p><em>Guest speaker</em>: John Kufuor, (former president of Ghana)</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec06_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec06_notes/index.html">PDF</a>)
+</td>
+<td>
+
+Video of this talk: &ldquo;<a   class="external-link-warning external-link "   target="_blank"   href="http://techtv.mit.edu/videos/16579-entrepreneurship-government-and-development-in-africa"  aria-label="Entrepreneurship, Government, and Development in Africa (opens in a new tab)"   onclick="event.preventDefault()" >Entrepreneurship, Government, and Development in Africa</a>.&rdquo; MIT World. September 21, 2009.
+</td>
+</tr>
+<tr>
+<td>
+
+7
+</td>
+<td>
+</p>
+<p>Agriculture</p>
+<p>Agricultural technology showcase: post-harvest processing</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec07_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec07_notes/index.html">PDF</a>)
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec07/index.html">PDF - 1.8MB</a>)
+</td>
+</tr>
+<tr>
+<td>
+
+8
+</td>
+<td>
+
+Projects and partners: China, India, Rwanda, Sierra Leone, Tanzania, Zambia
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec08_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+9
+</td>
+<td>
+</p>
+<p>Projects and partners: Peru, Ecuador, Brazil</p>
+<p>Agricultural technology showcase: drip irrigation</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec09_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+10
+</td>
+<td>
+
+Country team meetings
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+11
+</td>
+<td>
+</p>
+<p>Agricultural focus groups:</p>
+<p>- Green revolution  <br>
+- Agriculture and external aid  <br>
+- Agriculture and human rights</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec11_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec11_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+12
+</td>
+<td>
+</p>
+<p>Energy: biomass, biogas and biodiesel</p>
+<p>Energy lab: charcoal</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec12_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec12/index.html">PDF - 2.3MB</a>)
+</td>
+</tr>
+<tr>
+<td>
+
+13
+</td>
+<td>
+</p>
+<p>Energy: sun</p>
+<p>Energy labs: photovoltaics, LED lighting</p>
+<p><em>Guest speaker</em>: Jim Bales (<a   class="external-link-warning external-link "   target="_blank"   href="http://web.mit.edu/edgerton/main.html"  aria-label="MIT Edgerton Center (opens in a new tab)"   onclick="event.preventDefault()" >MIT Edgerton Center</a>)</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec13_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+14
+</td>
+<td>
+</p>
+<p>Energy: human power</p>
+<p>Energy lab: human power production</p>
+<p></td>
+<td>
+
+ 
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec14_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+15
+</td>
+<td>
+</p>
+<p>Energy: Wind and water</p>
+<p><em>Guest speakers</em>: Shawn Frayne (<a   class="external-link-warning external-link "   target="_blank"   href="https://www.bloomberg.com/profile/company/0149409D:US"  aria-label="Humdinger Wind Energy (opens in a new tab)"   onclick="event.preventDefault()" >Humdinger Wind Energy</a>), Peter Haas (<a   class="external-link-warning external-link "   target="_blank"   href="https://www.idealist.org/en/nonprofit/664ef7b8a2c246bc92f729faaf1de717-appropriate-infrastructure-development-group-aidg-boston"  aria-label="Appropriate Infrastructure Development Group (opens in a new tab)"   onclick="event.preventDefault()" >Appropriate Infrastructure Development Group</a>)</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec15_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+16
+</td>
+<td>
+</p>
+<p>Modeling energy systems</p>
+<p>Village energy assessment</p>
+<p>HOMER</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec16_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+<a   class="external-link-warning external-link "   target="_blank"   href="http://www.homerenergy.com/index.html"  aria-label="HOMER (opens in a new tab)"   onclick="event.preventDefault()" >HOMER</a> download (free registration required)
+</td>
+</tr>
+<tr>
+<td>
+
+17
+</td>
+<td>
+</p>
+<p>Water quality I</p>
+<p>Water lab 1: bacterial testing</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec17_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+</p>
+<p>&ldquo;Low-Cost Water Testing Apparatus.&rdquo; (<a href="../../resources/mitec_701jf09_lab17water_dtm/index.html">PDF</a>) (Courtesy of the TestWaterCheap team from MIT course <em>Design that Matters</em>, 2004. Used with permission.)</p>
+<p>Spreadsheet of student lab results (<a href="../../resources/mitec_701jf09_lab17_water/index.html">XLS</a>)</p>
+<p></td>
+</tr>
+<tr>
+<td>
+
+18
+</td>
+<td>
+</p>
+<p>Water issues in the developing world</p>
+<p><em>Guest speaker</em>: Susan Murcott</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec18_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec18_notes/index.html">PDF</a>)
+</td>
+<td>
+
+<a   class="external-link-warning external-link "   target="_blank"   href="http://web.mit.edu/watsan/"  aria-label="Safe Water for 1 Billion People (H2O-1B) (opens in a new tab)"   onclick="event.preventDefault()" >Safe Water for 1 Billion People (H2O-1B)</a>
+</td>
+</tr>
+<tr>
+<td>
+
+19
+</td>
+<td>
+</p>
+<p>Harnessing the wind</p>
+<p><em>Guest speaker</em>: William Kamkwamba</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec19_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec19_notes/index.html">PDF</a>)
+</td>
+<td>
+</p>
+<p><a   class="external-link-warning external-link "   target="_blank"   href="http://techtv.mit.edu/videos/4282-technology-culture-forum"  aria-label="Video of William Kamkwamba&amp;rsquo;s talk (opens in a new tab)"   onclick="event.preventDefault()" >Video of William Kamkwamba&rsquo;s talk</a> at MIT Technology &amp; Culture Forum (later that same day). TechTV, October 27, 2009.</p>
+<p>Videos from TED:</p>
+<ul>
+<li>&ldquo;<a   class="external-link-warning external-link "   target="_blank"   href="http://www.ted.com/talks/lang/en/william_kamkwamba_how_i_harnessed_the_wind.html"  aria-label="William Kamkwamba: How I harnessed the wind (opens in a new tab)"   onclick="event.preventDefault()" >William Kamkwamba: How I harnessed the wind</a>.&rdquo; TEDGlobal 2007.</li>
+<li>&ldquo;<a   class="external-link-warning external-link "   target="_blank"   href="http://www.ted.com/talks/lang/en/william_kamkwamba_on_building_a_windmill.html"  aria-label="William Kamkwamba on building a windmill (opens in a new tab)"   onclick="event.preventDefault()" >William Kamkwamba on building a windmill</a>.&rdquo; TEDGlobal 2009.</li>
+</ul>
+<p></td>
+</tr>
+<tr>
+<td>
+
+20
+</td>
+<td>
+</p>
+<p>Water quality II</p>
+<p>Water lab 2: chemical testing</p>
+<p></td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+21
+</td>
+<td>
+</p>
+<p>Institutions of development: WB and IMF</p>
+<p><em>Guest speaker</em>: Rachel Glennerster (Executive Director, <a   class="external-link-warning external-link "   target="_blank"   href="http://www.povertyactionlab.org/"  aria-label="Abdul Latif Jameel Poverty Action Lab (opens in a new tab)"   onclick="event.preventDefault()" >Abdul Latif Jameel Poverty Action Lab</a> (J-PAL))</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec21_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec21_rg/index.html">PDF</a>) (Courtesy of Rachel Glennerster. Used with permission.)
+</td>
+</tr>
+<tr>
+<td>
+
+22
+</td>
+<td>
+</p>
+<p>Institutions of development</p>
+<p>Role of NGOs in development</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec22_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+23
+</td>
+<td>
+
+Microfinance
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec23_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+Slides (<a href="../../resources/mitec_701jf09_lec23/index.html">PDF</a>)
+</td>
+</tr>
+<tr>
+<td>
+
+24
+</td>
+<td>
+</p>
+<p>Micro-enterprise case study: Grameen Phone</p>
+<p><em>Guest speaker</em>: Iqbal Quadir, (Founder &amp; Director, <a   class="external-link-warning external-link "   target="_blank"   href="http://legatum.mit.edu/"  aria-label="MIT Legatum Center for Development and Entrepreneurship (opens in a new tab)"   onclick="event.preventDefault()" >MIT Legatum Center for Development and Entrepreneurship</a>)</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec24_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec24_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+25
+</td>
+<td>
+</p>
+<p>Discussion of <em>Drowned Out</em></p>
+<p><em>Guest speaker</em>: Balakrishnan Rajagopal</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec25_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec25_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+26
+</td>
+<td>
+
+ICT4D
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec26_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+27
+</td>
+<td>
+</p>
+<p>ICT4C</p>
+<p><em>Guest speaker</em>: Mitch Resnick</p>
+<p>Scratch activity</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec27_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec27_notes/index.html">PDF</a>)
+</td>
+<td>
+
+<a   class="external-link-warning external-link "   target="_blank"   href="http://scratch.mit.edu/"  aria-label="SCRATCH (opens in a new tab)"   onclick="event.preventDefault()" >SCRATCH</a> website
+</td>
+</tr>
+<tr>
+<td>
+
+28
+</td>
+<td>
+</p>
+<p>Creative capacity building</p>
+<p>Concrete</p>
+<p>Concrete lab</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec28_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec28_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+29
+</td>
+<td>
+</p>
+<p>Cooking</p>
+<p>Cooking lab</p>
+<p></td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+30
+</td>
+<td>
+
+The AIDS/HIV crisis
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec30_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+31
+</td>
+<td>
+</p>
+<p>Health issues in the developing world</p>
+<p><em>Guest speaker</em>: Jose Gomez-Marquez (MIT; Innovations in International Health (IIH))</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec31_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec31_notes/index.html">PDF - 3.0MB</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+32
+</td>
+<td>
+
+Team presentations
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec32_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+See presentations on the <a href="../projects/index.html#proj_work">projects</a> page
+</td>
+</tr>
+<tr>
+<td>
+
+33
+</td>
+<td>
+</p>
+<p>Valuing indigenous knowledge</p>
+<p>Cultural taboos</p>
+<p>Cultural implications of development</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec33_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+34
+</td>
+<td>
+</p>
+<p>Market approaches to development</p>
+<p>Supply chains</p>
+<p><em>Guest speaker</em>: Paul Polak (<a   class="external-link-warning external-link "   target="_blank"   href="http://www.ideorg.org/"  aria-label="International Development Enterprises (opens in a new tab)"   onclick="event.preventDefault()" >International Development Enterprises</a> (IDE))</p>
+<p>Role play activity: water resources</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec34_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec34_notes/index.html">PDF</a>)
+</td>
+<td>
+</p>
+<p>Water role play: teaching note and instructions (<a href="../../resources/mitec_701jf09_act34water_rp/index.html">PDF</a>)</p>
+<p><a   class="external-link-warning external-link "   target="_blank"   href="http://www.paulpolak.com/"  aria-label="Paul Polak&amp;rsquo;s website (opens in a new tab)"   onclick="event.preventDefault()" >Paul Polak&rsquo;s website</a></p>
+<p></td>
+</tr>
+<tr>
+<td>
+
+35
+</td>
+<td>
+</p>
+<p>What works: lessons from J-PAL</p>
+<p><em>Guest speaker:</em> Kamilla Gumede (<a   class="external-link-warning external-link "   target="_blank"   href="http://www.povertyactionlab.org/"  aria-label="Abdul Latif Jameel Poverty Action Lab (opens in a new tab)"   onclick="event.preventDefault()" >Abdul Latif Jameel Poverty Action Lab</a> (J-PAL))</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec35_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec35_notes/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec35_jpal/index.html">PDF - 1.3MB</a>) (Courtesy of Kamilla T. Gumede. Used with permission.)
+</td>
+</tr>
+<tr>
+<td>
+
+36
+</td>
+<td>
+</p>
+<p>Climate change sustainability</p>
+<p><em>Guest speaker:</em> Ben Linder</p>
+<p></td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec36_nb/index.html">PDF</a>)
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec36_notes/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+37
+</td>
+<td>
+
+Panel discussion with <a   class="external-link-warning external-link "   target="_blank"   href="http://web.mit.edu/spurs/www/"  aria-label="Special Program for Urban and Regional Studies (SPURS) (opens in a new tab)"   onclick="event.preventDefault()" >Special Program for Urban and Regional Studies (SPURS)</a> fellows
+</td>
+<td>
+
+(<a href="../../resources/mitec_701jf09_lec37_nb/index.html">PDF</a>)
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+38
+</td>
+<td>
+
+Evaluations
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+<tr>
+<td>
+
+39
+</td>
+<td>
+
+Final posters and presentations
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+<td>
+
+ 
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</main>
+  </article>
+</div>
+
+
+                  </div>
+                </div>
+                
+                  <button 
+  type="button" 
+  class="btn course-info-button large-and-above-only"
+  id="desktop-course-drawer-button"
+  data-target="#desktop-course-drawer"
+  data-toggle="collapse"
+  aria-label="Course Info"
+  aria-controls="desktop-course-drawer"
+  aria-expanded="false"
+>
+  <img
+    class="expand-drawer-img drawer-icon-img"
+    src="../../../../static_shared/images/left_arrow.3c482a1f6223bff3f0e6.svg"
+    alt=""
+  />
+  <img
+    class="collapse-drawer-img drawer-icon-img"
+    src="../../../../static_shared/images/close_small.b0a2684ccc0da6407a56.svg"
+    alt=""
+  />
+</button>
+
+<div class="collapse border-left p-0 large-and-above-only col-3" id="desktop-course-drawer">
+    
+
+<div class="course-info">
+  <div class="course-detail-title bg-light-gray">
+    <h2 class="font-black py-1 pl-3 m-0">
+      Course Info
+    </h2>
+  </div>
+  <div class="px-3 mt-4">
+    <div class="row">
+      <div class="col-12 ">
+        
+        <div class="">
+          
+          <h5 class="panel-course-info-title ">
+            Instructors
+            </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Amy+J.+Smith"  >Amy J. Smith</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Prof.+Bishwapriya+Sanyal"  >Prof. Bishwapriya Sanyal</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-instructor strip-link-offline"    href="https://ocw.mit.edu/search/?q=Victor+Grau+Serrat"  >Victor Grau Serrat</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+        
+        
+          
+          
+            <div class="mt-4">
+              <h5 class="panel-course-info-title ">
+                Departments
+              </h5>
+              <div class="course-info-content panel-course-info-text">
+                
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-department strip-link-offline"    href="https://ocw.mit.edu/search/?d=Edgerton+Center"  >Edgerton Center</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a   class="course-info-department strip-link-offline"    href="https://ocw.mit.edu/search/?d=Urban+Studies+and+Planning"  >Urban Studies and Planning</a>
+  </li>
+  
+</ul>
+
+
+              </div>
+            </div>
+          
+         
+        
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            As Taught In
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            Fall
+            
+              2009
+            
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            Level
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+              
+                <a   class=" strip-link-offline"    href="https://ocw.mit.edu/search/?l=Undergraduate"  >Undergraduate</a><br />
+              
+            
+          </div>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+  <div class="px-3">
+    
+
+
+
+
+
+<div class=" mt-4">
+  <h5 class="panel-course-info-title ">
+    Topics
+  </h5>
+  <ul class="list-unstyled pb-2 m-0 panel-course-info-text">
+      <li>
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1">
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Engineering"  >Engineering</a></span>
+</div>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_desktop_1"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_desktop_1"
+    aria-expanded="false"
+    aria-label="Science subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Science"  >Science</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_desktop_1"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-4 ">
+      
+      <button
+        class="topic-toggle border-0 bg-transparent pl-0"
+        data-target="#speciality-container_desktop_1_0"
+        data-toggle="collapse"
+        aria-controls="speciality-container_desktop_1_0"
+        aria-expanded="false"
+        aria-label="Earth Science specialties"
+      >
+        <i aria-hidden="true" class="material-icons"></i>
+      </button>
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Earth+Science"  >Earth Science</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_desktop_1_0"
+      aria-label="Specialties"
+    >
+      
+      <li class="pt-1 pb-1 pl-5">
+        <span class="topic-text-wrapper">
+          
+          <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Sustainability"  >Sustainability</a></span>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_desktop_2"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_desktop_2"
+    aria-expanded="false"
+    aria-label="Social Science subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Social+Science"  >Social Science</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_desktop_2"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-4 ">
+      
+      <button
+        class="topic-toggle border-0 bg-transparent pl-0"
+        data-target="#speciality-container_desktop_2_0"
+        data-toggle="collapse"
+        aria-controls="speciality-container_desktop_2_0"
+        aria-expanded="false"
+        aria-label="Economics specialties"
+      >
+        <i aria-hidden="true" class="material-icons"></i>
+      </button>
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Economics"  >Economics</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_desktop_2_0"
+      aria-label="Specialties"
+    >
+      
+      <li class="pt-1 pb-1 pl-5">
+        <span class="topic-text-wrapper">
+          
+          <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Developmental+Economics"  >Developmental Economics</a></span>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_desktop_3"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_desktop_3"
+    aria-expanded="false"
+    aria-label="Society subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=Society"  >Society</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse list-unstyled"
+  id="subtopic-container_desktop_3"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a   class="text-black course-info-topic strip-link-offline"    href="https://ocw.mit.edu/search/?t=The+Developing+World"  >The Developing World</a></span>
+    </div>
+    <ul
+      class="collapse list-unstyled"
+      id="speciality-container_desktop_3_0"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      
+  </ul>
+</div>
+
+    
+
+
+
+<div class="">
+  <h5 class="course-detail-title panel-course-info-title mt-3">
+    Learning Resource Types
+  </h5>
+  <div>
+    <div class="row d-inline m-0">
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">notes</i>
+    <span>Lecture Notes</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">group_work</i>
+    <span>Projects with Examples</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment</i>
+    <span>Activity Assignments</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment_turned_in</i>
+    <span>Written Assignments with Examples</span>
+  </div>
+</div>
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+    <hr>
+<div class="pb-3">
+  <a class="download-course-link-button btn btn-outline-primary btn-link link-button text-decoration-none px-4 py-2"
+    role="button"
+    href="https://ocw.mit.edu/courses/ec-701j-d-lab-i-development-fall-2009/download">
+    <div class="text-center w-100">Download Course</div>
+  </a>
+</div>
+  </div>
+</div>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+<div class="footer">
+    <div class="footer-main-content mx-auto">
+    	<div class="col-12 px-0">
+        	<div class="row align-items-center mx-0">
+            	<div class="col-12 col-md-8 px-0">
+					<div class="d-md-flex align-items-center">
+						<a href="https://openlearning.mit.edu/" target="_blank">
+							<img width="117px" src="../../../../static_shared/images/mit_ol.4165342f87abb1da46fd.svg" alt="MIT Open Learning" />
+						</a>
+						<div class="ml-md-3 mt-4 mt-md-0">
+							<div class="font-weight-bold">
+								Over 2,500 courses & materials
+							</div>
+							<div>
+								Freely sharing knowledge with learners and educators around the world. <a href='https://ocw.mit.edu/about'>Learn more</a>
+							</div>
+						</div>
+					</div>
+            	</div>
+				<div class="col-12 col-md-4 px-0 d-none d-md-block">
+					<div class="d-flex justify-content-md-end">
+	<div>
+		<a href="https://www.facebook.com/MITOCW" target="_blank">
+			<img class="footer-social-icon ml-0" src="../../../../static_shared/images/Facebook.d1f5caeb73d7d12505a2.png" alt="facebook"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.instagram.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/Instagram.4df41828ffee4ff33d8a.png" alt="instagram"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/MITOCW" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/x-formerly-twitter-black.f8c75ad9f42902726d25.png" alt="x (formerly twitter)"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.youtube.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/Youtube.7c9f62c4f1dc9515ebb4.png" alt="youtube"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.linkedin.com/company/mit-opencourseware/" target="_blank">
+			<img class="footer-social-icon nudge-up" src="../../../../static_shared/images/linkedin-black.2f7f8a6a3899f5d1e1d6.png" alt="linkedin"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://bsky.app/profile/mitocw.bsky.social" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/bluesky-black.9f4523fcefa9b6f25be7.png" alt="bluesky"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://mastodon.social/@mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/mastodon-black.9e2de31a28415c123800.png" alt="mastodon"/>
+		</a>
+	</div>
+</div>
+
+				</div>
+        	</div>
+    	</div>
+		
+		<div class="col-12 mt-3 mt-md-4 px-0">
+			<div class="row align-items-center mx-0">
+            	<div class="col-12 col-md-8 px-0">
+					<div class="d-lg-flex">
+						<div class="pr-md-2 mt-2 mt-lg-0 d-none d-lg-block">
+							© 2001–2025 Massachusetts Institute of Technology
+						</div>
+						<div class="px-lg-2 mt-2 mt-lg-0">
+							<a href="https://accessibility.mit.edu" target="_blank">Accessibility</a>
+						</div>
+						<div class="px-lg-2 mt-2 mt-lg-0">
+							<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons License</a>
+						</div>
+						<div class="px-lg-2 mt-2 mt-lg-0">
+							<a class="hide-offline" href='https://ocw.mit.edu/pages/privacy-and-terms-of-use/'>Terms and Conditions</a>
+						</div>
+					</div>
+            	</div>
+				<div class="col-12 col-md-4 px-0">
+					<div class="d-flex justify-content-md-end mt-4 mt-lg-0">
+						<div>
+						Proud member of: 
+						<a href="https://www.oeglobal.org/" target="_blank">
+							<img class="oeg-logo" src="../../../../static_shared/images/oeg_logo.8a31f7b87f30df2d0169.png" alt="Open Education Global"/>
+						</a>
+						</div>
+					</div>
+				</div>
+        	</div>
+		</div>
+
+		<div class="col-12 mt-5 px-0 d-md-none">
+			<div class="d-flex justify-content-md-end">
+	<div>
+		<a href="https://www.facebook.com/MITOCW" target="_blank">
+			<img class="footer-social-icon ml-0" src="../../../../static_shared/images/Facebook.d1f5caeb73d7d12505a2.png" alt="facebook"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.instagram.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/Instagram.4df41828ffee4ff33d8a.png" alt="instagram"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/MITOCW" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/x-formerly-twitter-black.f8c75ad9f42902726d25.png" alt="x (formerly twitter)"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.youtube.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/Youtube.7c9f62c4f1dc9515ebb4.png" alt="youtube"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.linkedin.com/company/mit-opencourseware/" target="_blank">
+			<img class="footer-social-icon nudge-up" src="../../../../static_shared/images/linkedin-black.2f7f8a6a3899f5d1e1d6.png" alt="linkedin"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://bsky.app/profile/mitocw.bsky.social" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/bluesky-black.9f4523fcefa9b6f25be7.png" alt="bluesky"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://mastodon.social/@mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../../../static_shared/images/mastodon-black.9e2de31a28415c123800.png" alt="mastodon"/>
+		</a>
+	</div>
+</div>
+
+		</div>
+
+		<div class="col-12 mt-4 px-0 d-lg-none">
+			© 2001–2025 Massachusetts Institute of Technology
+		</div>
+    
+
+
+    
+    <script src="../../../../static_shared/js/common.ba051.js"></script>
+    
+
+    
+    <script src="../../../../static_shared/js/course_v2.ba051.js"></script>
+    
+
+
+
+
+
+    
+<script async src="https://w.appzi.io/w.js?token=Tgs1d"></script>
+
+	</div>
+</div>
+
+  </div>
+  <script>
+function hideLinksOffline(){
+  if (!window.navigator.onLine) {
+    const stripLinks = document.querySelectorAll(".strip-link-offline")
+    const hideOffline = document.querySelectorAll(".hide-offline")
+    const showOffline = document.querySelectorAll(".show-offline")
+    Array.prototype.forEach.call(stripLinks, function(link) {
+      link.outerHTML = link.innerHTML
+    })
+    Array.prototype.forEach.call(hideOffline, function(link) {
+      link.classList.add("d-none")
+    })
+    Array.prototype.forEach.call(showOffline, function(link) {
+      link.classList.remove("d-none")
+    })
+  }
+}
+hideLinksOffline()
+</script>
+
+  
+
+<div
+  class="modal"
+  id="external-link-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="external-link-modal-title"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-3">
+      <div class="modal-header d-flex align-items-center">
+        <div class="d-flex align-items-center">
+          <img
+            class="modal-header-icon-img mr-3 align-baseline"
+            src="../../../../static_shared/images/external_link.58bbdd86c00a2c146c36.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <h1 class="modal-title" id="external-link-modal-title">
+            You are leaving MIT OpenCourseWare
+          </h1>
+        </div>
+        <button type="button" class="border-0 p-0 bg-transparent d-flex" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="material-icons modal-header-icon">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please be advised that external sites may have terms and conditions, 
+        including license rights, that differ from ours. MIT OCW is not responsible 
+        for any content on third party sites, nor does a link suggest an endorsement 
+        of those sites and/or their content.
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-primary btn-link link-button"
+          data-dismiss="modal"
+          >
+            Stay Here
+        </button>
+        <a
+          role="button"
+          class="btn btn-primary btn-continue"
+          target="_blank"
+          href="index.html#"
+        >
+          Continue
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    
+    
+    
+    
+    
+    
+    'use strict';
+    const COURSE_DRAWER_LOCAL_STORAGE_KEY = "desktopCourseDrawerState"
+    const COURSE_DRAWER_OPENED = "opened"
+    const COURSE_DRAWER_CLOSED = "closed"
+    
+    const DESKTOP_COURSE_DRAWER_ID = "desktop-course-drawer"
+    const COURSE_DRAWER_BTN_ID = "desktop-course-drawer-button"
+    const MAIN_COURSE_SECTION_ID = "main-course-section"
+
+    try{
+
+      
+
+      function initializeDesktopCourseDrawerState() {
+        const state = getLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY)
+        if (state === null) {
+          
+          setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_OPENED)
+          showOrHideDesktopCourseDrawer(COURSE_DRAWER_OPENED)
+        } else {
+          showOrHideDesktopCourseDrawer(state)
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          const drawer = $(`#${DESKTOP_COURSE_DRAWER_ID}`)
+          const mainSection = $(`#${MAIN_COURSE_SECTION_ID}`)
+
+          drawer.on("shown.bs.collapse", (event) => {
+            if (event.target.id !== DESKTOP_COURSE_DRAWER_ID) {
+              return;
+            }
+            mainSection.addClass("col-lg-9")
+            mainSection.removeClass("col-12")
+            setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_OPENED)
+          })
+      
+          drawer.on("hidden.bs.collapse", (event) => {
+            if (event.target.id !== DESKTOP_COURSE_DRAWER_ID) {
+              return;
+            }
+            mainSection.addClass("col-12")
+            mainSection.removeClass("col-lg-9")
+            setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_CLOSED)
+          })
+        })
+      }
+
+      function showOrHideDesktopCourseDrawer(state) {
+        const drawer = document.getElementById(DESKTOP_COURSE_DRAWER_ID)
+        const button = document.getElementById(COURSE_DRAWER_BTN_ID)
+        const mainSection = document.getElementById(MAIN_COURSE_SECTION_ID)
+
+        if (state === COURSE_DRAWER_OPENED) {
+          drawer.classList.add("show")
+          button.setAttribute("aria-expanded", "true")
+        } else {
+          drawer.classList.remove("show")
+          button.setAttribute("aria-expanded", "false")
+          mainSection.classList.remove("col-lg-9")
+          mainSection.classList.add("col-12")
+        }
+      }
+
+      function setOrGetLocalStorageItem(action,key,value) {
+        try {
+          
+          if (typeof Storage !== "undefined") {
+            if (action === "set") {
+              localStorage.setItem(key, value)
+              return true
+            } else {
+              return localStorage.getItem(key)
+            }
+          }
+          console.error("This browser has no web storage support.")
+          return null
+        } catch (e) {
+          console.error("An exception occurred while storing/fetching data in/from localstorage: ", e)
+          return null
+        }
+      }
+
+      function setLocalStorageItem(key, value) {
+        return setOrGetLocalStorageItem("set", key, value)
+      }
+      
+      function getLocalStorageItem(key){
+        return setOrGetLocalStorageItem("get", key)
+      }
+
+      initializeDesktopCourseDrawerState();
+    }
+    catch(e){
+      console.error("Something went wrong in maintaining/toggling course drawer state", e)
+    }
+  </script>
+
+  
+
+<script>
+function expandNav(e,t){t.classList.add("show"),e.querySelector(".course-nav-section-toggle, video-tab-toggle-section").setAttribute("aria-expanded","true")}function courseNav(){document.querySelectorAll(".course-nav, .transcript-header").forEach(e=>{e.querySelectorAll(".nav-link").forEach(e=>{const t=e.getAttribute("href")?e.getAttribute("href"):"";if(t.replace(/\/$/,"")===window.location.pathname.replace(/\/$/,"")){e.classList.add("active");const s=e.dataset.uuid,t=e.closest(".course-nav-list-item"),n=t?.querySelector(".collapse"),o=Array.prototype.filter.call(document.querySelectorAll(".course-nav-section-toggle"),e=>e.dataset.uuid===s);t&&n&&o.length>0&&expandNav(t,n)}});const t=e.querySelector("a.nav-link.active");e.querySelectorAll(".course-nav-list-item").forEach(e=>{const n=e.querySelector(".collapse");n&&n.contains(t)&&expandNav(e,n)})})}courseNav()
+</script>
+
+  
+
+<script>
+(()=>{var e=()=>document.querySelectorAll("#course-content-section table"),t=()=>document.getElementById("course-content-section");function n(){const o=e(),n=t();if(!n)return;if(!window.ResizeObserver)return;const i=new ResizeObserver(()=>s());i.observe(n),o.forEach(e=>{const t=e.getElementsByTagName("th"),n=e.querySelectorAll("table tr");n.forEach(e=>{const n=e.querySelectorAll("td");n.forEach((e,s)=>{t.length>=s+1&&(n[s].dataset.title=t[s].innerText.trim().concat(": "))})})})}function s(){const s=e(),n=t();if(!n)return;s.forEach(e=>{const t=n.getBoundingClientRect(),o=+(e.dataset.minWidth??0);t.width>o&&e.classList.remove("mobile-table");const s=e.getBoundingClientRect();s.right>t.right&&(e.dataset.minWidth=`${s.width}`,e.classList.add("mobile-table"))})}n()})()
+</script>
+
+</body>
+
+</html>
