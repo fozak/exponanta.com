@@ -242,3 +242,84 @@ a:hover {
    - No decorative gradients
    - No gray soup
    ========================================================= */
+
+   /* =========================================================
+   11. EVENT COMPONENTS (BOOTSTRAP + EXPONANTA BRAND)
+   ========================================================= */
+
+/* --- Date Badge --- */
+.date-badge {
+  width: 60px;
+  height: 60px;
+  background: var(--blue-700);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-0);
+  flex-shrink: 0;
+}
+
+.date-badge__day {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.date-badge__month {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* --- Stacked Avatars --- */
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-stack .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--blue-300);
+  color: var(--neutral-0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  border: 2px solid var(--neutral-0);
+  margin-left: -10px;
+}
+
+.avatar-stack .avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar-stack .avatar-more {
+  background: var(--neutral-50);
+  color: var(--blue-700);
+}
+
+/* --- Event Card Enhancements --- */
+.event-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.event-card--featured {
+  border: 2px solid var(--blue-700);
+  background: linear-gradient(to bottom, rgba(200, 223, 250, 0.15), var(--neutral-0));
+}
+
+/* --- Event Meta Icons --- */
+.event-meta svg {
+  vertical-align: text-top;
+}
