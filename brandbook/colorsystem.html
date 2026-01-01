@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Example</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #F5F7FA;
+    margin: 0;
+    padding: 20px;
+    color: #1E1E2F;
+  }
+
+  h1, h2 {
+    margin-bottom: 10px;
+  }
+
+  .palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .color-swatch {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .gradient-swatch {
+    width: 180px;
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #C8DFFA, #2446C8);
+  }
+
+  .btn-accent {
+    background: linear-gradient(135deg, #FF6F61, #FFC1B0);
+  }
+
+  .btn-teal {
+    background: linear-gradient(135deg, #4FD1C5, #2C7A7B);
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Cards */
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin: 10px 0;
+  }
+
+  .card-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2446C8;
+  }
+
+  .card-content {
+    color: #1E1E2F;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Design System Demo</h1>
+
+<h2>Main Blue Palette</h2>
+<div class="palette">
+  <div class="color-swatch" style="background-color: #C8DFFA;">#C8DFFA</div>
+  <div class="color-swatch" style="background-color: #82A0FA;">#82A0FA</div>
+  <div class="color-swatch" style="background-color: #2446C8;">#2446C8</div>
+</div>
+
+<h2>Supporting Colors</h2>
+<div class="palette">
+  <div class="color-swatch" style="background-color: #FF6F61;">#FF6F61</div>
+  <div class="color-swatch" style="background-color: #4FD1C5;">#4FD1C5</div>
+  <div class="color-swatch" style="background-color: #F5F7FA; color: #1E1E2F; border:1px solid #ccc;">#F5F7FA</div>
+  <div class="color-swatch" style="background-color: #1E1E2F;">#1E1E2F</div>
+</div>
+
+<h2>Gradient Examples</h2>
+<div class="palette">
+  <div class="gradient-swatch" style="background: linear-gradient(135deg, #C8DFFA, #82A0FA, #2446C8);">Main Blue Gradient</div>
+  <div class="gradient-swatch" style="background: linear-gradient(135deg, #2446C8, #1B2FA8, #0F1C5F);">Deep Ocean</div>
+  <div class="gradient-swatch" style="background: linear-gradient(135deg, #FF6F61, #FF947E, #FFC1B0);">Coral Accent</div>
+  <div class="gradient-swatch" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">Purple-Blue</div>
+</div>
+
+<h2>Buttons</h2>
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-accent">Accent</button>
+<button class="btn btn-teal">Teal</button>
+
+<h2>Cards</h2>
+<div class="card">
+  <div class="card-header">Card Title 1</div>
+  <div class="card-content">This is an example card using main colors. Perfect for UI components.</div>
+</div>
+
+<div class="card">
+  <div class="card-header" style="color:#FF6F61;">Card Title 2</div>
+  <div class="card-content">Accent color can be used for highlights or important info.</div>
+</div>
+
+</body>
+</html>
