@@ -246,78 +246,9 @@ a:hover {
    /* =========================================================
    11. EVENT COMPONENTS (BOOTSTRAP + EXPONANTA BRAND)
    ========================================================= */
-/* =========================================================
-   11. EVENT COMPONENTS (BOOTSTRAP + EXPONANTA BRAND)
-   ========================================================= */
 
-/* --- Event Card with Hero Image --- */
-.event-card {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.event-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.event-card--featured {
-  border: 2px solid var(--blue-700);
-}
-
-/* Hero Image */
-.event-card__hero {
-  position: relative;
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  background: var(--neutral-50);
-}
-
-.event-card__hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Status Badge Overlay */
-.event-card__status {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.event-card__status--featured {
-  background: rgba(255, 111, 97, 0.95);
-  color: var(--neutral-0);
-}
-
-.event-card__status--filling {
-  background: rgba(79, 209, 197, 0.95);
-  color: var(--neutral-900);
-}
-
-.event-card__status--full {
-  background: rgba(130, 160, 250, 0.95);
-  color: var(--neutral-0);
-}
-
-/* Date Badge on Hero */
-.event-card__date {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
+/* --- Date Badge --- */
+.date-badge {
   width: 60px;
   height: 60px;
   background: var(--blue-700);
@@ -327,78 +258,20 @@ a:hover {
   align-items: center;
   justify-content: center;
   color: var(--neutral-0);
-  box-shadow: 0 4px 12px rgba(36, 70, 200, 0.3);
+  flex-shrink: 0;
 }
 
-.event-card__date-day {
+.date-badge__day {
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
 }
 
-.event-card__date-month {
+.date-badge__month {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   opacity: 0.9;
-  margin-top: 2px;
-}
-
-/* Card Body */
-.event-card__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-}
-
-/* Content Area */
-.event-card__content {
-  flex: 1;
-  margin-bottom: 16px;
-}
-
-.event-card__title {
-  font-size: var(--text-lg);
-  font-weight: 600;
-  color: var(--blue-700);
-  margin-bottom: 12px;
-  line-height: var(--leading-tight);
-}
-
-.event-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 12px;
-  font-size: var(--text-sm);
-  color: #6B7280;
-}
-
-.event-card__meta-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.event-card__meta-item svg {
-  flex-shrink: 0;
-}
-
-.event-card__description {
-  font-size: var(--text-sm);
-  color: var(--neutral-900);
-  line-height: 1.5;
-}
-
-/* Footer (Fixed to bottom) */
-.event-card__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid rgba(36, 70, 200, 0.08);
-  margin-top: auto;
 }
 
 /* --- Stacked Avatars --- */
@@ -431,38 +304,22 @@ a:hover {
   color: var(--blue-700);
 }
 
-/* --- Past Events (Compact List) --- */
-.event-list .list-group-item {
-  transition: background 0.2s ease;
+/* --- Event Card Enhancements --- */
+.event-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.event-list .list-group-item:hover {
-  background: var(--blue-100);
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.event-list__date {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  background: var(--blue-700);
-  border-radius: var(--radius-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--neutral-0);
+.event-card--featured {
+  border: 2px solid var(--blue-700);
+  background: linear-gradient(to bottom, rgba(200, 223, 250, 0.15), var(--neutral-0));
 }
 
-.event-list__date-day {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.event-list__date-month {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  opacity: 0.9;
-  margin-top: 2px;
+/* --- Event Meta Icons --- */
+.event-meta svg {
+  vertical-align: text-top;
 }
