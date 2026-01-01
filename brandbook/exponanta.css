@@ -466,3 +466,591 @@ a:hover {
   opacity: 0.9;
   margin-top: 2px;
 }
+
+/* =========================================================
+   12. HERO & SEARCH COMPONENTS
+   ========================================================= */
+
+/* Hero Search Bar */
+.hero-search .search-bar {
+  background: var(--neutral-0);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-search .search-bar .form-control,
+.hero-search .search-bar .form-select {
+  border: 1px solid rgba(36, 70, 200, 0.15);
+  background: var(--neutral-50);
+}
+
+/* Quick Stats in Hero */
+.hero-search .text-white small {
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   13. EVENT DETAIL HEADER
+   ========================================================= */
+
+.event-detail-hero {
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+}
+
+.event-detail-hero .breadcrumb {
+  background: transparent;
+  padding: 0;
+}
+
+.event-detail-hero .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.event-detail-hero .breadcrumb-item a {
+  color: var(--neutral-0);
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.event-detail-hero .breadcrumb-item a:hover {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   14. TICKET CARDS & REGISTRATION
+   ========================================================= */
+
+.ticket-option {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.ticket-option:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.ticket-option.border-primary {
+  border-color: var(--blue-700) !important;
+  border-width: 2px;
+}
+
+/* Sticky Sidebar */
+.sticky-top {
+  position: sticky;
+  top: 20px;
+}
+
+
+/* =========================================================
+   15. FOOTER
+   ========================================================= */
+
+footer.bg-dark {
+  background: var(--neutral-900) !important;
+}
+
+footer.bg-dark h5,
+footer.bg-dark h6 {
+  color: var(--neutral-0);
+}
+
+footer.bg-dark .text-light {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+footer.bg-dark .text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+footer.bg-dark a.text-light:hover {
+  color: var(--blue-300) !important;
+}
+
+footer.bg-dark .border-secondary {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+/* =========================================================
+   16. TESTIMONIALS
+   ========================================================= */
+
+.testimonials .card {
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.testimonials .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(36, 70, 200, 0.15);
+}
+
+.testimonials .avatar {
+  flex-shrink: 0;
+}
+
+.testimonials .text-warning {
+  color: #FFC107 !important;
+}
+
+
+/* =========================================================
+   17. COMMUNITY STATS
+   ========================================================= */
+
+.community-stats {
+  background: var(--neutral-50);
+}
+
+.community-stats .stat-item {
+  padding: 20px;
+}
+
+.community-stats .display-3 {
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* =========================================================
+   18. SPEAKER CARDS
+   ========================================================= */
+
+.speakers .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.speakers .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.speakers img {
+  border: 3px solid var(--blue-100);
+  transition: border-color 0.2s ease;
+}
+
+.speakers .card:hover img {
+  border-color: var(--blue-700);
+}
+
+.speakers .btn-outline-primary.rounded-circle {
+  transition: all 0.2s ease;
+}
+
+.speakers .btn-outline-primary.rounded-circle:hover {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+  transform: scale(1.1);
+}
+
+
+/* =========================================================
+   19. CALENDAR VIEW
+   ========================================================= */
+
+.calendar-view table {
+  font-size: var(--text-sm);
+}
+
+.calendar-view th {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  font-weight: 600;
+  padding: 12px 8px;
+  border: 1px solid rgba(36, 70, 200, 0.1);
+}
+
+.calendar-view td {
+  padding: 12px 8px;
+  vertical-align: top;
+  min-height: 80px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.calendar-view td:hover {
+  background: var(--blue-100);
+}
+
+.calendar-view .bg-primary.bg-opacity-10 {
+  background: rgba(36, 70, 200, 0.1) !important;
+  border: 2px solid var(--blue-700);
+  font-weight: 600;
+}
+
+.calendar-view .bg-primary.bg-opacity-10:hover {
+  background: rgba(36, 70, 200, 0.2) !important;
+}
+
+
+/* =========================================================
+   20. PAST EVENTS GALLERY
+   ========================================================= */
+
+.past-events .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.past-events .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.past-events .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.past-events .card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.past-events .badge-success {
+  background: #28a745 !important;
+}
+
+
+/* =========================================================
+   21. MEMBER NETWORKING / WHO'S ATTENDING
+   ========================================================= */
+
+.member-networking .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(36, 70, 200, 0.1);
+}
+
+.member-networking .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-700);
+}
+
+.member-networking img {
+  border: 3px solid var(--blue-100);
+  object-fit: cover;
+}
+
+.member-networking .badge {
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+
+/* =========================================================
+   22. Q&A BOARD
+   ========================================================= */
+
+.qa-board textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.qa-board .card {
+  transition: box-shadow 0.2s ease;
+}
+
+.qa-board .card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.qa-board .avatar {
+  flex-shrink: 0;
+}
+
+.qa-board .bg-light {
+  background: var(--neutral-50) !important;
+  border-left: 3px solid var(--accent-teal);
+}
+
+
+/* =========================================================
+   23. LIVE ACTIVITY FEED
+   ========================================================= */
+
+.activity-feed .card {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.activity-feed .avatar {
+  flex-shrink: 0;
+}
+
+.activity-feed .border-bottom:last-child {
+  border-bottom: none !important;
+}
+
+.activity-feed p strong {
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   24. VIDEO HERO
+   ========================================================= */
+
+.video-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-hero video {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.video-hero .btn-light {
+  background: var(--neutral-0);
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+.video-hero .btn-light:hover {
+  background: var(--blue-100);
+  transform: translateY(-2px);
+}
+
+.video-hero .btn-outline-light {
+  border: 2px solid var(--neutral-0);
+  color: var(--neutral-0);
+  font-weight: 600;
+}
+
+.video-hero .btn-outline-light:hover {
+  background: var(--neutral-0);
+  color: var(--blue-700);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   25. SHARED AVATAR STYLES
+   ========================================================= */
+
+.avatar,
+.avatar-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 50%;
+  background: var(--blue-300);
+  color: var(--neutral-0);
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  font-size: var(--text-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   26. UTILITY CLASSES
+   ========================================================= */
+
+/* Background Utilities */
+.bg-light {
+  background: var(--neutral-50) !important;
+}
+
+/* Text Color Utilities */
+.text-primary {
+  color: var(--blue-700) !important;
+}
+
+.text-secondary {
+  color: var(--blue-300) !important;
+}
+
+/* Border Utilities */
+.border-primary {
+  border-color: var(--blue-700) !important;
+}
+
+
+/* =========================================================
+   27. RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* Event Cards */
+  .event-card__hero {
+    height: 160px;
+  }
+  
+  /* Hero Text */
+  h1.display-2,
+  h1.display-3,
+  h1.display-4 {
+    font-size: var(--text-3xl) !important;
+  }
+  
+  /* Stats */
+  .community-stats .display-3,
+  .community-stats .display-4 {
+    font-size: var(--text-2xl) !important;
+  }
+  
+  /* Calendar */
+  .calendar-view table {
+    font-size: 12px;
+  }
+  
+  .calendar-view td {
+    padding: 6px 4px;
+    min-height: 60px;
+  }
+  
+  /* Speaker Cards */
+  .speakers img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  /* Footer */
+  footer .col-6 {
+    margin-bottom: 2rem;
+  }
+  
+  /* Video Hero */
+  .video-hero {
+    height: 400px !important;
+  }
+  
+  /* Buttons in Hero */
+  .video-hero .btn-lg {
+    padding: 10px 20px;
+    font-size: var(--text-md);
+  }
+}
+
+@media (max-width: 576px) {
+  /* Section Padding */
+  .section {
+    padding: 40px 0;
+  }
+  
+  /* Event Cards */
+  .event-card__date {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .event-card__date-day {
+    font-size: 20px;
+  }
+  
+  .event-card__date-month {
+    font-size: 10px;
+  }
+  
+  /* Hero Search */
+  .hero-search .search-bar .row {
+    gap: 10px;
+  }
+  
+  .hero-search .search-bar .col-md-5,
+  .hero-search .search-bar .col-md-4,
+  .hero-search .search-bar .col-md-3 {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   28. PRINT STYLES
+   ========================================================= */
+
+@media print {
+  .video-hero,
+  .activity-feed,
+  .sticky-top,
+  footer {
+    display: none;
+  }
+  
+  .event-card {
+    page-break-inside: avoid;
+  }
+}
+
+
+/* =========================================================
+   29. ACCESSIBILITY ENHANCEMENTS
+   ========================================================= */
+
+/* Focus Styles */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  outline: 3px solid var(--blue-300);
+  outline-offset: 2px;
+}
+
+/* Skip to Content Link */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--blue-700);
+  color: var(--neutral-0);
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 10px;
+  left: 10px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =========================================================
+   30. DARK MODE PREPARATION (Optional)
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+  /* Uncomment when implementing dark mode */
+  /*
+  :root {
+    --neutral-0: #1E1E2F;
+    --neutral-50: #2A2A3C;
+    --neutral-900: #F5F7FA;
+  }
+  
+  body {
+    background-color: var(--neutral-0);
+    color: var(--neutral-900);
+  }
+  
+  .card {
+    background: var(--neutral-50);
+    border-color: rgba(200, 223, 250, 0.1);
+  }
+  */
+}
