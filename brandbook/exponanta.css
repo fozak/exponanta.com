@@ -1569,3 +1569,125 @@ footer.bg-dark .border-secondary {
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease forwards;
 }
+
+/* =========================================================
+   40. FOOTER OPTION 3: DARK GRADIENT (MAIN BLUE)
+   ========================================================= */
+
+.footer-option-3 {
+  background: linear-gradient(135deg, #1a3596 0%, var(--blue-700) 50%, #0d1f5c 100%);
+  color: var(--neutral-0);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+.footer-option-3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(130, 160, 250, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(200, 223, 250, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.footer-option-3 .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-option-3 .footer-heading-gradient {
+  color: var(--blue-100);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  letter-spacing: 0.5px;
+}
+
+.footer-option-3 .footer-links-gradient li {
+  margin-bottom: 10px;
+}
+
+.footer-option-3 .footer-links-gradient a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer-option-3 .footer-links-gradient a:hover {
+  color: var(--blue-100);
+  transform: translateX(4px);
+}
+
+.footer-option-3 .newsletter-signup-gradient .form-control {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(200, 223, 250, 0.3);
+  color: var(--neutral-0);
+  backdrop-filter: blur(10px);
+}
+
+.footer-option-3 .newsletter-signup-gradient .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-option-3 .newsletter-signup-gradient .form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--blue-100);
+  color: var(--neutral-0);
+  box-shadow: 0 0 0 0.2rem rgba(200, 223, 250, 0.25);
+}
+
+.footer-option-3 .btn-light {
+  background: var(--neutral-0);
+  border: none;
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+.footer-option-3 .btn-light:hover {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  transform: translateY(-1px);
+}
+
+.footer-option-3 .footer-bottom-gradient {
+  border-top: 1px solid rgba(200, 223, 250, 0.2);
+}
+
+.footer-option-3 .social-icon-gradient {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(200, 223, 250, 0.3);
+  color: var(--blue-100);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+}
+
+.footer-option-3 .social-icon-gradient:hover {
+  background: var(--neutral-0);
+  border-color: var(--neutral-0);
+  color: var(--blue-700);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .footer-option-3 {
+    text-align: center;
+  }
+  
+  .footer-option-3 .footer-links-gradient a:hover {
+    transform: translateX(0);
+  }
+}
