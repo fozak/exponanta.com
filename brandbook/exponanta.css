@@ -2128,6 +2128,10 @@ footer.bg-dark .border-secondary {
    43. BENEFIT CARDS - EVENT CARD STYLE
    ========================================================= */
 
+   /* =========================================================
+   43. BENEFIT CARDS - EVENT CARD STYLE
+   ========================================================= */
+
 .benefit-card-new {
   background: var(--neutral-0);
   border-radius: var(--radius-lg);
