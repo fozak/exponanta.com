@@ -2209,79 +2209,72 @@ footer.bg-dark .border-secondary {
   margin-bottom: 16px;
 }
 
-/* Benefit Tags */
-.benefit-card-new__tags {
+/* Benefit Highlights - Underlined Text */
+.benefit-card-new__highlights {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.benefit-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
+.benefit-highlight {
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  transition: all 0.2s ease;
-  color: white;
-  white-space: nowrap;
+  color: var(--neutral-900);
+  position: relative;
+  padding-bottom: 6px;
+  display: inline-block;
+  transition: all 0.3s ease;
 }
 
-.benefit-tag:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.benefit-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-/* Color Variants */
-.benefit-tag--blue {
+.benefit-highlight:hover {
+  transform: translateX(4px);
+}
+
+.benefit-highlight:hover::after {
+  height: 4px;
+}
+
+/* Color Variants - Underlines */
+.benefit-highlight--blue::after {
   background: var(--blue-700);
+  box-shadow: 0 2px 8px rgba(36, 70, 200, 0.3);
 }
 
-.benefit-tag--blue:hover {
-  background: #1a3596;
-}
-
-.benefit-tag--teal {
+.benefit-highlight--teal::after {
   background: var(--accent-teal);
+  box-shadow: 0 2px 8px rgba(79, 209, 197, 0.3);
 }
 
-.benefit-tag--teal:hover {
-  background: #3db8ad;
-}
-
-.benefit-tag--coral {
+.benefit-highlight--coral::after {
   background: var(--accent-coral);
+  box-shadow: 0 2px 8px rgba(255, 111, 97, 0.3);
 }
 
-.benefit-tag--coral:hover {
-  background: #ff5547;
-}
-
-.benefit-tag--green {
+.benefit-highlight--green::after {
   background: var(--green);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
-.benefit-tag--green:hover {
-  background: #0d9668;
-}
-
-.benefit-tag--purple {
+.benefit-highlight--purple::after {
   background: var(--purple);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
 
-.benefit-tag--purple:hover {
-  background: #6d28d9;
-}
-
-.benefit-tag--amber {
+.benefit-highlight--amber::after {
   background: var(--amber);
-}
-
-.benefit-tag--amber:hover {
-  background: #d97706;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 /* Metric Display */
@@ -2329,9 +2322,8 @@ footer.bg-dark .border-secondary {
     padding: 20px;
   }
   
-  .benefit-tag {
-    font-size: 11px;
-    padding: 5px 10px;
+  .benefit-highlight {
+    font-size: 13px;
   }
   
   .benefit-card-new__metric .metric-value {
