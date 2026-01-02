@@ -1691,3 +1691,347 @@ footer.bg-dark .border-secondary {
     transform: translateX(0);
   }
 }
+
+/* =========================================================
+   41. PARTNER COMPONENTS
+   ========================================================= */
+
+/* Partner Logos Grid (Simple) */
+.partner-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 30px;
+  align-items: center;
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(36, 70, 200, 0.1);
+  transition: all 0.3s ease;
+  min-height: 100px;
+}
+
+.partner-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-300);
+}
+
+.partner-logo img {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.partner-logo:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+/* Partner Tier Badges */
+.partner-tier-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.partner-tier-badge--platinum {
+  background: linear-gradient(135deg, #E5E4E2, #C0C0C0);
+  color: var(--neutral-900);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.partner-tier-badge--gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: var(--neutral-900);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.partner-tier-badge--silver {
+  background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+  color: var(--neutral-900);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Partner Cards */
+.partner-card {
+  position: relative;
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(36, 70, 200, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.partner-card--platinum {
+  border: 2px solid #C0C0C0;
+}
+
+.partner-card--platinum:hover {
+  box-shadow: 0 8px 32px rgba(192, 192, 192, 0.3);
+}
+
+.partner-card--gold {
+  border: 2px solid #FFD700;
+}
+
+.partner-card--gold:hover {
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+}
+
+.partner-card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  z-index: 2;
+  letter-spacing: 0.5px;
+}
+
+.partner-card--platinum .partner-card__badge {
+  background: linear-gradient(135deg, #E5E4E2, #C0C0C0);
+  color: var(--neutral-900);
+}
+
+.partner-card--gold .partner-card__badge {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: var(--neutral-900);
+}
+
+.partner-card__logo {
+  padding: 30px 20px;
+  background: var(--neutral-50);
+  border-bottom: 1px solid rgba(36, 70, 200, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.partner-card__logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.partner-card__content {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-card__name {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--blue-700);
+  margin-bottom: 8px;
+}
+
+.partner-card__industry {
+  font-size: var(--text-sm);
+  color: var(--blue-300);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.partner-card__description {
+  font-size: var(--text-sm);
+  color: var(--neutral-900);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.partner-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 20px;
+  border-top: 1px solid rgba(36, 70, 200, 0.08);
+  border-bottom: 1px solid rgba(36, 70, 200, 0.08);
+}
+
+.partner-card__stats .stat {
+  text-align: center;
+}
+
+.partner-card__stats .stat-value {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--blue-700);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.partner-card__stats .stat-label {
+  font-size: var(--text-xs);
+  color: var(--neutral-900);
+  opacity: 0.7;
+}
+
+.partner-card__actions {
+  margin-top: auto;
+}
+
+/* Partner Logos Simple (Silver Tier) */
+.partner-logos-simple {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.partner-logo-simple {
+  text-align: center;
+  padding: 20px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(36, 70, 200, 0.08);
+  transition: all 0.2s ease;
+}
+
+.partner-logo-simple:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.partner-logo-simple img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  opacity: 0.8;
+  filter: grayscale(50%);
+  transition: all 0.3s ease;
+}
+
+.partner-logo-simple:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.partner-logo-simple__name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--blue-700);
+}
+
+/* Benefit Cards */
+.benefit-card {
+  padding: 32px 20px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(36, 70, 200, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-300);
+}
+
+.benefit-card__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: var(--blue-100);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-700);
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-card__icon {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+  transform: scale(1.1);
+}
+
+.benefit-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--blue-700);
+  margin-bottom: 12px;
+}
+
+.benefit-card__description {
+  font-size: var(--text-sm);
+  color: var(--neutral-900);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Partners Page Header */
+.partners-page-header {
+  background: var(--gradient-primary);
+}
+
+/* Partnership CTA */
+.partner-cta {
+  background: var(--gradient-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .partner-logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .partner-tier-badge {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .partner-tier-badge svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .partner-card__stats {
+    gap: 12px;
+  }
+  
+  .partner-logos-simple {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .partner-card__logo {
+    padding: 20px 16px;
+    min-height: 100px;
+  }
+  
+  .partner-card__content {
+    padding: 20px 16px;
+  }
+}
