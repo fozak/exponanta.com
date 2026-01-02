@@ -2283,3 +2283,86 @@ footer.bg-dark .border-secondary {
     font-size: 12px;
   }
 }
+
+/* Benefit Tags */
+.benefit-card-new__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.benefit-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  color: white;
+  white-space: nowrap;
+}
+
+.benefit-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Color Variants */
+.benefit-tag--blue {
+  background: var(--blue-700);
+}
+
+.benefit-tag--blue:hover {
+  background: #1a3596;
+}
+
+.benefit-tag--teal {
+  background: var(--accent-teal);
+}
+
+.benefit-tag--teal:hover {
+  background: #3db8ad;
+}
+
+.benefit-tag--coral {
+  background: var(--accent-coral);
+}
+
+.benefit-tag--coral:hover {
+  background: #ff5547;
+}
+
+.benefit-tag--green {
+  background: var(--green);
+}
+
+.benefit-tag--green:hover {
+  background: #0d9668;
+}
+
+.benefit-tag--purple {
+  background: var(--purple);
+}
+
+.benefit-tag--purple:hover {
+  background: #6d28d9;
+}
+
+.benefit-tag--amber {
+  background: var(--amber);
+}
+
+.benefit-tag--amber:hover {
+  background: #d97706;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .benefit-tag {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
