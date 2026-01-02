@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Grid – Lucide Icons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style>
+    :root {
+      --radius: 14px;
+      --icon-size: 28px;
+      --tile-size: 52px;
+      --gap: 28px;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+      
+      /* Exponanta Brand Colors */
+      --blue-primary: #2446C8;
+      --blue-secondary: #82A0FA;
+      --accent-teal: #4FD1C5;
+      --accent-coral: #FF6F61;
+      --neutral-gray: #4B5563;
+      
+      /* Extended Palette */
+      --amber: #F59E0B;
+      --green: #10B981;
+      --purple: #8B5CF6;
+    }
+    
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 40px;
+    }
+    
+    h1 {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--gap);
+    }
+    
+    .item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .icon {
+      width: var(--tile-size);
+      height: var(--tile-size);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .icon svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      stroke-width: 2.5px;
+    }
+    
+    .content {
+      line-height: 1.2;
+    }
+    
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    /* Exponanta Color Classes */
+    .blue { background: var(--blue-primary); }
+    .blue-secondary { background: var(--blue-secondary); }
+    .gray { background: var(--neutral-gray); }
+    .teal { background: var(--accent-teal); }
+    .coral { background: var(--accent-coral); }
+    .amber { background: var(--amber); }
+    .green { background: var(--green); }
+    .purple { background: var(--purple); }
+  </style>
+</head>
+<body>
+  <h1>Products & Integrations</h1>
+  
+  <div class="grid">
+    <!-- Events Platform (Core) -->
+    <div class="item">
+      <div class="icon blue">
+        <i data-lucide="calendar"></i>
+      </div>
+      <div class="content">
+        <div class="title">Events Platform</div>
+        <div class="subtitle">calendar · ticket</div>
+      </div>
+    </div>
+    
+    <!-- Framework (Infrastructure) -->
+    <div class="item">
+      <div class="icon gray">
+        <i data-lucide="box"></i>
+      </div>
+      <div class="content">
+        <div class="title">Framework</div>
+        <div class="subtitle">box · layers</div>
+      </div>
+    </div>
+    
+    <!-- Community (Growth) -->
+    <div class="item">
+      <div class="icon green">
+        <i data-lucide="users"></i>
+      </div>
+      <div class="content">
+        <div class="title">Community</div>
+        <div class="subtitle">users · user-plus</div>
+      </div>
+    </div>
+    
+    <!-- Learning (Growth) -->
+    <div class="item">
+      <div class="icon green">
+        <i data-lucide="book-open"></i>
+      </div>
+      <div class="content">
+        <div class="title">Learning</div>
+        <div class="subtitle">book-open · graduation-cap</div>
+      </div>
+    </div>
+    
+    <!-- Analytics (Teal) -->
+    <div class="item">
+      <div class="icon teal">
+        <i data-lucide="trending-up"></i>
+      </div>
+      <div class="content">
+        <div class="title">Analytics</div>
+        <div class="subtitle">trending-up · bar-chart</div>
+      </div>
+    </div>
+    
+    <!-- Networking (Communication) -->
+    <div class="item">
+      <div class="icon coral">
+        <i data-lucide="message-circle"></i>
+      </div>
+      <div class="content">
+        <div class="title">Networking</div>
+        <div class="subtitle">message-circle · users</div>
+      </div>
+    </div>
+    
+    <!-- Registration (Core) -->
+    <div class="item">
+      <div class="icon blue">
+        <i data-lucide="clipboard-check"></i>
+      </div>
+      <div class="content">
+        <div class="title">Registration</div>
+        <div class="subtitle">clipboard-check · ticket</div>
+      </div>
+    </div>
+    
+    <!-- Sponsorship (Financial) -->
+    <div class="item">
+      <div class="icon amber">
+        <i data-lucide="landmark"></i>
+      </div>
+      <div class="content">
+        <div class="title">Sponsorship</div>
+        <div class="subtitle">landmark · handshake</div>
+      </div>
+    </div>
+    
+    <!-- Messaging (Communication) -->
+    <div class="item">
+      <div class="icon blue-secondary">
+        <i data-lucide="mail"></i>
+      </div>
+      <div class="content">
+        <div class="title">Messaging</div>
+        <div class="subtitle">mail · send</div>
+      </div>
+    </div>
+    
+    <!-- Resources (Growth) -->
+    <div class="item">
+      <div class="icon green">
+        <i data-lucide="book"></i>
+      </div>
+      <div class="content">
+        <div class="title">Resources</div>
+        <div class="subtitle">book · file-text</div>
+      </div>
+    </div>
+    
+    <!-- Support (Premium) -->
+    <div class="item">
+      <div class="icon purple">
+        <i data-lucide="life-buoy"></i>
+      </div>
+      <div class="content">
+        <div class="title">Support</div>
+        <div class="subtitle">life-buoy · headphones</div>
+      </div>
+    </div>
+    
+    <!-- Cloud Infrastructure (Utilities) -->
+    <div class="item">
+      <div class="icon blue-secondary">
+        <i data-lucide="cloud-upload"></i>
+      </div>
+      <div class="content">
+        <div class="title">Cloud</div>
+        <div class="subtitle">cloud-upload · server</div>
+      </div>
+    </div>
+    
+    <!-- Ticketing (Financial) -->
+    <div class="item">
+      <div class="icon amber">
+        <i data-lucide="ticket"></i>
+      </div>
+      <div class="content">
+        <div class="title">Ticketing</div>
+        <div class="subtitle">ticket · credit-card</div>
+      </div>
+    </div>
+    
+    <!-- Insights (Teal) -->
+    <div class="item">
+      <div class="icon teal">
+        <i data-lucide="pie-chart"></i>
+      </div>
+      <div class="content">
+        <div class="title">Insights</div>
+        <div class="subtitle">pie-chart · bar-chart-2</div>
+      </div>
+    </div>
+    
+    <!-- Member Portal (Premium) -->
+    <div class="item">
+      <div class="icon purple">
+        <i data-lucide="user-circle"></i>
+      </div>
+      <div class="content">
+        <div class="title">Member Portal</div>
+        <div class="subtitle">user-circle · shield-check</div>
+      </div>
+    </div>
+    
+    <!-- Marketing (Communication) -->
+    <div class="item">
+      <div class="icon coral">
+        <i data-lucide="megaphone"></i>
+      </div>
+      <div class="content">
+        <div class="title">Marketing</div>
+        <div class="subtitle">megaphone · radio</div>
+      </div>
+    </div>
+    
+    <!-- Payments (Financial) -->
+    <div class="item">
+      <div class="icon amber">
+        <i data-lucide="wallet"></i>
+      </div>
+      <div class="content">
+        <div class="title">Payments</div>
+        <div class="subtitle">wallet · banknote</div>
+      </div>
+    </div>
+    
+    <!-- Builder (Core) -->
+    <div class="item">
+      <div class="icon blue">
+        <i data-lucide="pencil-ruler"></i>
+      </div>
+      <div class="content">
+        <div class="title">Builder</div>
+        <div class="subtitle">pencil-ruler · layout</div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!--stopped on some icons change -->
+
+<!--*https://claude.ai/chat/95638e13-8e80-4b8a-8f83-31328f2e8605*-->
+<!--TODO finilize colors and shapes-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Grid – Phosphor Icons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Phosphor Icons CDN -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --radius: 14px;
+      --icon-size: 28px;
+      --tile-size: 52px;
+      --gap: 28px;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--gap);
+    }
+
+    .item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .icon {
+      width: var(--tile-size);
+      height: var(--tile-size);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+
+   .icon i {
+  font-size: 24px; /* slightly smaller size */
+  transform: scale(1.25);       
+}
+
+    .content {
+      line-height: 1.2;
+    }
+
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Colors (match SaaS vibe) */
+    .blue { background: #2563eb; }
+    .gray { background: #6b7280; }
+    .green { background: #16a34a; }
+    .teal { background: #0d9488; }
+    .purple { background: #7c3aed; }
+    .pink { background: #d946ef; }
+    .orange { background: #f59e0b; }
+    .cyan { background: #06b6d4; }
+
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Products & Integrations</h1>
+
+  <div class="grid">
+
+    <!-- ERP -->
+    <div class="item">
+      <div class="icon blue">
+        <i class="ph-bold ph-buildings" ></i>
+      </div>
+      <div class="content">
+        <div class="title">ERP</div>
+        <div class="subtitle">buildings · factory</div>
+      </div>
+    </div>
+
+    <!-- Framework -->
+    <div class="item">
+      <div class="icon gray">
+        <i class="ph-bold ph-cube" ></i>
+      </div>
+      <div class="content">
+        <div class="title">Framework</div>
+        <div class="subtitle">cube · stack</div>
+      </div>
+    </div>
+
+    <!-- HR -->
+    <div class="item">
+      <div class="icon green">
+        <i class="ph-bold ph-users" data-weight="bold"></i>
+      </div>
+      <div class="content">
+        <div class="title">HR</div>
+        <div class="subtitle">users · user-circle</div>
+      </div>
+    </div>
+
+    <!-- Learning -->
+    <div class="item">
+      <div class="icon teal">
+        <i class="ph-bold ph-book-open"></i>
+      </div>
+      <div class="content">
+        <div class="title">Learning</div>
+        <div class="subtitle">book-open · graduation-cap</div>
+      </div>
+    </div>
+
+    <!-- Insights -->
+    <div class="item">
+      <div class="icon cyan">
+        <i class="ph-bold ph-chart-line"></i>
+      </div>
+      <div class="content">
+        <div class="title">Insights</div>
+        <div class="subtitle">chart-line · chart-bar</div>
+      </div>
+    </div>
+
+    <!-- CRM -->
+    <div class="item">
+      <div class="icon pink">
+        <i class="ph-bold ph-funnel"></i>
+      </div>
+      <div class="content">
+        <div class="title">CRM</div>
+        <div class="subtitle">funnel · users-three</div>
+      </div>
+    </div>
+
+    <!-- Builder -->
+    <div class="item">
+      <div class="icon blue">
+        <i class="ph-bold ph-pencil"></i>
+      </div>
+      <div class="content">
+        <div class="title">Builder</div>
+        <div class="subtitle">pen-tool · layout</div>
+      </div>
+    </div>
+
+    <!-- Lending -->
+    <div class="item">
+      <div class="icon green">
+        <i class="ph-bold ph-bank"></i>
+      </div>
+      <div class="content">
+        <div class="title">Lending</div>
+        <div class="subtitle">bank · hand-coins</div>
+      </div>
+    </div>
+
+    <!-- Gameplan -->
+    <div class="item">
+      <div class="icon orange">
+        <i class="ph-bold ph-chat-circle"></i>
+      </div>
+      <div class="content">
+        <div class="title">Gameplan</div>
+        <div class="subtitle">chat-circle · kanban</div>
+      </div>
+    </div>
+
+    <!-- Books -->
+    <div class="item">
+      <div class="icon green">
+        <i class="ph-bold ph-book"></i>
+      </div>
+      <div class="content">
+        <div class="title">Books</div>
+        <div class="subtitle">book · receipt</div>
+      </div>
+    </div>
+
+    <!-- Helpdesk -->
+    <div class="item">
+      <div class="icon purple">
+        <i class="ph-bold ph-lifebuoy"></i>
+      </div>
+      <div class="content">
+        <div class="title">Helpdesk</div>
+        <div class="subtitle">lifebuoy · headset</div>
+      </div>
+    </div>
+
+    <!-- Cloud -->
+    <div class="item">
+      <div class="icon cyan" style="position: relative">
+        <i class="ph-bold ph-cloud-arrow-up"></i>
+        <span style="position: absolute; bottom: 11px; left: 14px; width: 24px; height: 2.5px; background: white;"></span>
+      </div>
+      <div class="content">
+        <div class="title">Cloud</div>
+        <div class="subtitle">cloud · cloud-arrow-up</div>
+      </div>
+    </div>
+
+    <!-- Sales -->
+<div class="item">
+  <div class="icon blue">
+    <i class="ph-bold ph-chart-line-up"></i>
+  </div>
+  <div class="content">
+    <div class="title">Sales</div>
+    <div class="subtitle">chart-line-up · trend-up</div>
+  </div>
+</div>
+
+<!-- Marketing -->
+<div class="item">
+  <div class="icon orange">
+    <i class="ph-bold ph-megaphone"></i>
+  </div>
+  <div class="content">
+    <div class="title">Marketing</div>
+    <div class="subtitle">megaphone · broadcast</div>
+  </div>
+</div>
+
+<!-- Support -->
+<div class="item">
+  <div class="icon green">
+    <i class="ph-bold ph-headset"></i>
+  </div>
+  <div class="content">
+    <div class="title">Support</div>
+    <div class="subtitle">chats-circle · chat-text</div>
+  </div>
+</div>
+
+<div class="item">
+  <div class="icon blue" style="position: relative;">
+    <i class="ph-bold ph-chart-line-up"></i>
+    <span style="position: absolute; bottom: 11px; left: 14px; width: 24px; height: 2.5px; background: white;"></span>
+  </div>
+  <div class="content">
+    <div class="title">Sales</div>
+    <div class="subtitle">chart-line-up · trend-up</div>
+  </div>
+</div>
+
+  </div>
+
+</body>
+</html>
+

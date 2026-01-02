@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Letter Monograms – ERPNext Boxed Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- Google Fonts - Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --radius: 14px;
+      --tile-size: 52px;
+      --gap: 28px;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+      
+      /* Exponanta Brand Colors */
+      --blue-primary: #2446C8;
+      --blue-secondary: #82A0FA;
+      --accent-teal: #4FD1C5;
+      --accent-coral: #FF6F61;
+      --neutral-gray: #4B5563;
+      --amber: #F59E0B;
+      --green: #10B981;
+      --purple: #8B5CF6;
+    }
+    
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 40px;
+    }
+    
+    h1 {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 32px;
+      font-family: Inter, sans-serif;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--gap);
+    }
+    
+    .item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .icon {
+      width: var(--tile-size);
+      height: var(--tile-size);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    
+    .content {
+      line-height: 1.2;
+    }
+    
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    /* Color Classes */
+    .blue { background: var(--blue-primary); }
+    .blue-secondary { background: var(--blue-secondary); }
+    .teal { background: var(--accent-teal); }
+    .coral { background: var(--accent-coral); }
+    .amber { background: var(--amber); }
+    .green { background: var(--green); }
+    .purple { background: var(--purple); }
+    .gray { background: var(--neutral-gray); }
+  </style>
+</head>
+<body>
+  <h1>Letter Monograms</h1>
+  
+  <div class="grid">
+    
+    <!-- D - Dashboard -->
+    <div class="item">
+      <div class="icon blue">D</div>
+      <div class="content">
+        <div class="title">Dashboard</div>
+        <div class="subtitle">Main interface</div>
+      </div>
+    </div>
+    
+    <!-- E - Events (ERPNext style) -->
+    <div class="item">
+      <div class="icon green">E</div>
+      <div class="content">
+        <div class="title">Events</div>
+        <div class="subtitle">Event management</div>
+      </div>
+    </div>
+    
+    <!-- F - Forms (Frappe style) -->
+    <div class="item">
+      <div class="icon coral">F</div>
+      <div class="content">
+        <div class="title">Forms</div>
+        <div class="subtitle">Data collection</div>
+      </div>
+    </div>
+    
+    <!-- H - Hub -->
+    <div class="item">
+      <div class="icon teal">H</div>
+      <div class="content">
+        <div class="title">Hub</div>
+        <div class="subtitle">Central connection</div>
+      </div>
+    </div>
+    
+    <!-- I - Insights -->
+    <div class="item">
+      <div class="icon purple">I</div>
+      <div class="content">
+        <div class="title">Insights</div>
+        <div class="subtitle">Intelligence</div>
+      </div>
+    </div>
+    
+    <!-- G - Gateway -->
+    <div class="item">
+      <div class="icon amber">G</div>
+      <div class="content">
+        <div class="title">Gateway</div>
+        <div class="subtitle">Access portal</div>
+      </div>
+    </div>
+    
+    <!-- L - Library -->
+    <div class="item">
+      <div class="icon blue-secondary">L</div>
+      <div class="content">
+        <div class="title">Library</div>
+        <div class="subtitle">Resource center</div>
+      </div>
+    </div>
+    
+    <!-- M - Members -->
+    <div class="item">
+      <div class="icon green">M</div>
+      <div class="content">
+        <div class="title">Members</div>
+        <div class="subtitle">User directory</div>
+      </div>
+    </div>
+    
+    <!-- N - Network -->
+    <div class="item">
+      <div class="icon coral">N</div>
+      <div class="content">
+        <div class="title">Network</div>
+        <div class="subtitle">Connections</div>
+      </div>
+    </div>
+    
+    <!-- R - Reports -->
+    <div class="item">
+      <div class="icon blue">R</div>
+      <div class="content">
+        <div class="title">Reports</div>
+        <div class="subtitle">Analytics</div>
+      </div>
+    </div>
+    
+    <!-- T - Tickets -->
+    <div class="item">
+      <div class="icon teal">T</div>
+      <div class="content">
+        <div class="title">Tickets</div>
+        <div class="subtitle">Support system</div>
+      </div>
+    </div>
+    
+    <!-- U - Users -->
+    <div class="item">
+      <div class="icon purple">U</div>
+      <div class="content">
+        <div class="title">Users</div>
+        <div class="subtitle">Account management</div>
+      </div>
+    </div>
+    
+    <!-- A - Analytics -->
+    <div class="item">
+      <div class="icon teal">A</div>
+      <div class="content">
+        <div class="title">Analytics</div>
+        <div class="subtitle">Data insights</div>
+      </div>
+    </div>
+    
+    <!-- C - Calendar -->
+    <div class="item">
+      <div class="icon blue">C</div>
+      <div class="content">
+        <div class="title">Calendar</div>
+        <div class="subtitle">Schedule</div>
+      </div>
+    </div>
+    
+    <!-- P - Payments -->
+    <div class="item">
+      <div class="icon amber">P</div>
+      <div class="content">
+        <div class="title">Payments</div>
+        <div class="subtitle">Transactions</div>
+      </div>
+    </div>
+    
+    <!-- S - Settings -->
+    <div class="item">
+      <div class="icon gray">S</div>
+      <div class="content">
+        <div class="title">Settings</div>
+        <div class="subtitle">Configuration</div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>
