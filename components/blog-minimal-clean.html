@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Layout 2 - Minimal Clean | Exponanta</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+    
+    <style>
+        .blog-minimal {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .blog-minimal-header {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        
+        .blog-minimal-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .blog-minimal-post {
+            margin-bottom: 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid rgba(36, 70, 200, 0.1);
+        }
+        
+        .blog-minimal-post:last-child {
+            border-bottom: none;
+        }
+        
+        .blog-minimal-post__meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--neutral-900);
+            opacity: 0.7;
+        }
+        
+        .blog-minimal-post__category {
+            color: var(--blue-700);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+        }
+        
+        .blog-minimal-post__title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .blog-minimal-post__title a {
+            color: var(--neutral-900);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .blog-minimal-post__title a:hover {
+            color: var(--blue-700);
+        }
+        
+        .blog-minimal-post__image {
+            width: 100%;
+            height: 450px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .blog-minimal-post__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .blog-minimal-post__excerpt {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--neutral-900);
+            margin-bottom: 24px;
+        }
+        
+        .blog-minimal-post__read-more {
+            font-weight: 600;
+            color: var(--blue-700);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s ease;
+        }
+        
+        .blog-minimal-post__read-more:hover {
+            gap: 12px;
+        }
+        
+        .blog-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .blog-filter-btn {
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(36, 70, 200, 0.2);
+            background: transparent;
+            color: var(--neutral-900);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .blog-filter-btn:hover,
+        .blog-filter-btn.active {
+            background: var(--blue-700);
+            color: white;
+            border-color: var(--blue-700);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-option-2 navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav2">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">Events<span class="nav-accent"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">Community<span class="nav-accent"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur active" href="#">Blog<span class="nav-accent"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">Resources<span class="nav-accent"></span></a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-primary btn-sm px-4">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="blog-minimal">
+        <div class="blog-minimal-header">
+            <h1>Stories & Insights</h1>
+            <p class="lead">Thoughtful perspectives on professional growth and leadership</p>
+        </div>
+
+        <!-- Filter -->
+        <div class="blog-filter">
+            <button class="blog-filter-btn active">All Posts</button>
+            <button class="blog-filter-btn">Leadership</button>
+            <button class="blog-filter-btn">Career</button>
+            <button class="blog-filter-btn">Events</button>
+            <button class="blog-filter-btn">Technology</button>
+        </div>
+
+        <!-- Posts -->
+        <article class="blog-minimal-post">
+            <div class="blog-minimal-post__meta">
+                <span class="blog-minimal-post__category">Leadership</span>
+                <span>•</span>
+                <span>January 3, 2025</span>
+                <span>•</span>
+                <span>8 min read</span>
+            </div>
+            <h2 class="blog-minimal-post__title">
+                <a href="#">The Art of Giving Constructive Feedback That Actually Works</a>
+            </h2>
+            <div class="blog-minimal-post__image">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&h=500&fit=crop" alt="Post">
+            </div>
+            <p class="blog-minimal-post__excerpt">
+                Most managers struggle with delivering feedback that drives positive change without damaging relationships. Learn a framework that transforms difficult conversations into opportunities for growth, backed by research from Stanford's organizational psychology program.
+            </p>
+            <a href="#" class="blog-minimal-post__read-more">
+                Read full article
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </a>
+        </article>
+
+        <article class="blog-minimal-post">
+            <div class="blog-minimal-post__meta">
+                <span class="blog-minimal-post__category">Career</span>
+                <span>•</span>
+                <span>December 28, 2024</span>
+                <span>•</span>
+                <span>6 min read</span>
+            </div>
+            <h2 class="blog-minimal-post__title">
+                <a href="#">Why Your Side Project Might Be More Valuable Than Your Job</a>
+            </h2>
+            <div class="blog-minimal-post__image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&h=500&fit=crop" alt="Post">
+            </div>
+            <p class="blog-minimal-post__excerpt">
+                The traditional career ladder is broken. Discover how professionals are building portfolios of passion projects that lead to unexpected opportunities, greater autonomy, and career paths that didn't exist five years ago.
+            </p>
+            <a href="#" class="blog-minimal-post__read-more">
+                Read full article
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </a>
+        </article>
+
+        <article class="blog-minimal-post">
+            <div class="blog-minimal-post__meta">
+                <span class="blog-minimal-post__category">Events</span>
+                <span>•</span>
+                <span>December 20, 2024</span>
+                <span>•</span>
+                <span>10 min read</span>
+            </div>
+            <h2 class="blog-minimal-post__title">
+                <a href="#">What 500 Events Taught Us About Building Real Professional Communities</a>
+            </h2>
+            <div class="blog-minimal-post__image">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=900&h=500&fit=crop" alt="Post">
+            </div>
+            <p class="blog-minimal-post__excerpt">
+                After hosting hundreds of professional gatherings, we've identified the patterns that separate forgettable networking events from communities that transform careers. Here are the counterintuitive insights that actually matter.
+            </p>
+            <a href="#" class="blog-minimal-post__read-more">
+                Read full article
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </a>
+        </article>
+
+        <!-- Pagination -->
+        <div class="text-center py-5">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-option-3">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                    <p class="mb-4 text-white-50">Empowering professionals through world-class events and continuous learning.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Platform</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-gradient pt-4 mt-4">
+                <div class="text-center">
+                    <small class="text-white-50">© 2025 Exponanta. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

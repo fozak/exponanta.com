@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Layout 1 - Magazine Style | Exponanta</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+    
+    <style>
+        .blog-featured {
+            position: relative;
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        
+        .blog-featured__image {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .blog-featured__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .blog-featured__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(30,30,47,0.85) 100%);
+        }
+        
+        .blog-featured__content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px;
+            color: white;
+        }
+        
+        .blog-featured__category {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--accent-coral);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+        
+        .blog-featured__title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .blog-featured__excerpt {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            max-width: 700px;
+        }
+        
+        .blog-featured__meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .blog-post-card {
+            background: var(--neutral-0);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(36, 70, 200, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(36, 70, 200, 0.12);
+        }
+        
+        .blog-post-card__image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-post-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .blog-post-card:hover .blog-post-card__image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-post-card__body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-post-card__category {
+            color: var(--blue-700);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        
+        .blog-post-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .blog-post-card__excerpt {
+            font-size: 14px;
+            color: var(--neutral-900);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        
+        .blog-post-card__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid rgba(36, 70, 200, 0.1);
+            font-size: 13px;
+            color: var(--neutral-900);
+            opacity: 0.7;
+        }
+        
+        .blog-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .sidebar-widget {
+            background: var(--neutral-0);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(36, 70, 200, 0.08);
+        }
+        
+        .sidebar-widget__title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blue-700);
+            margin-bottom: 16px;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(36, 70, 200, 0.08);
+        }
+        
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--neutral-900);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .category-list a:hover {
+            color: var(--blue-700);
+        }
+        
+        .category-count {
+            font-size: 12px;
+            padding: 2px 8px;
+            background: var(--blue-100);
+            color: var(--blue-700);
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-primary btn-sm">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="section--hero py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 mb-3">Insights & Resources</h1>
+            <p class="lead mb-0">Expert perspectives on professional development, networking, and career growth</p>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-4">
+        <div class="container">
+            <div class="blog-featured">
+                <div class="blog-featured__image">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&h=600&fit=crop" alt="Featured Post">
+                </div>
+                <div class="blog-featured__overlay"></div>
+                <div class="blog-featured__content">
+                    <span class="blog-featured__category">Featured</span>
+                    <h2 class="blog-featured__title">The Future of Professional Networking in 2025</h2>
+                    <p class="blog-featured__excerpt">Discover how AI, virtual events, and authentic connections are reshaping how professionals build meaningful relationships in the digital age.</p>
+                    <div class="blog-featured__meta">
+                        <span>Sarah Johnson</span>
+                        <span>•</span>
+                        <span>Jan 3, 2025</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid with Sidebar -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <div class="row g-4">
+                        <!-- Post 1 -->
+                        <div class="col-md-6">
+                            <article class="blog-post-card">
+                                <div class="blog-post-card__image">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop" alt="Post">
+                                </div>
+                                <div class="blog-post-card__body">
+                                    <div class="blog-post-card__category">Leadership</div>
+                                    <h3 class="blog-post-card__title">Building High-Performance Teams in Remote Environments</h3>
+                                    <p class="blog-post-card__excerpt">Learn proven strategies for fostering collaboration, trust, and productivity when your team is distributed across time zones.</p>
+                                    <div class="blog-post-card__meta">
+                                        <span>Dec 28, 2024</span>
+                                        <span>6 min read</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Post 2 -->
+                        <div class="col-md-6">
+                            <article class="blog-post-card">
+                                <div class="blog-post-card__image">
+                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&h=300&fit=crop" alt="Post">
+                                </div>
+                                <div class="blog-post-card__body">
+                                    <div class="blog-post-card__category">Career Growth</div>
+                                    <h3 class="blog-post-card__title">5 Skills Every Professional Needs to Master in 2025</h3>
+                                    <p class="blog-post-card__excerpt">From AI literacy to emotional intelligence, discover the essential competencies that will define career success this year.</p>
+                                    <div class="blog-post-card__meta">
+                                        <span>Dec 25, 2024</span>
+                                        <span>5 min read</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Post 3 -->
+                        <div class="col-md-6">
+                            <article class="blog-post-card">
+                                <div class="blog-post-card__image">
+                                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=300&fit=crop" alt="Post">
+                                </div>
+                                <div class="blog-post-card__body">
+                                    <div class="blog-post-card__category">Events</div>
+                                    <h3 class="blog-post-card__title">How to Create Memorable Event Experiences That Drive Engagement</h3>
+                                    <p class="blog-post-card__excerpt">Event planning tips from industry experts on designing experiences that attendees will remember and talk about for months.</p>
+                                    <div class="blog-post-card__meta">
+                                        <span>Dec 20, 2024</span>
+                                        <span>7 min read</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Post 4 -->
+                        <div class="col-md-6">
+                            <article class="blog-post-card">
+                                <div class="blog-post-card__image">
+                                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&h=300&fit=crop" alt="Post">
+                                </div>
+                                <div class="blog-post-card__body">
+                                    <div class="blog-post-card__category">Productivity</div>
+                                    <h3 class="blog-post-card__title">The Science of Deep Work: Maximizing Focus in a Distracted World</h3>
+                                    <p class="blog-post-card__excerpt">Research-backed techniques for achieving flow state and producing your best work in an age of constant interruptions.</p>
+                                    <div class="blog-post-card__meta">
+                                        <span>Dec 15, 2024</span>
+                                        <span>9 min read</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="text-center mt-5">
+                        <button class="btn btn-outline-primary btn-lg px-5">Load More Articles</button>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="blog-sidebar">
+                        <!-- Search Widget -->
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-widget__title">Search</h4>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search articles...">
+                                <button class="btn btn-primary">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Categories Widget -->
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-widget__title">Categories</h4>
+                            <ul class="category-list">
+                                <li><a href="#"><span>Leadership</span><span class="category-count">24</span></a></li>
+                                <li><a href="#"><span>Career Growth</span><span class="category-count">18</span></a></li>
+                                <li><a href="#"><span>Events</span><span class="category-count">32</span></a></li>
+                                <li><a href="#"><span>Productivity</span><span class="category-count">15</span></a></li>
+                                <li><a href="#"><span>Networking</span><span class="category-count">21</span></a></li>
+                                <li><a href="#"><span>Technology</span><span class="category-count">12</span></a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Newsletter Widget -->
+                        <div class="sidebar-widget" style="background: var(--gradient-primary); color: white;">
+                            <h4 class="sidebar-widget__title" style="color: white;">Stay Updated</h4>
+                            <p style="font-size: 14px; margin-bottom: 16px; opacity: 0.9;">Get the latest insights delivered to your inbox weekly.</p>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your email" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                            </div>
+                            <button class="btn btn-light w-100">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-option-3">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                    <p class="mb-4 text-white-50">Empowering professionals through world-class events and continuous learning.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Platform</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Company</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-gradient pt-4 mt-4">
+                <div class="text-center">
+                    <small class="text-white-50">© 2025 Exponanta. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

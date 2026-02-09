@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Layout 3 - Card Grid | Exponanta</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+    
+    <style>
+        .blog-grid-card {
+            background: var(--neutral-0);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(36, 70, 200, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-grid-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(36, 70, 200, 0.15);
+        }
+        
+        .blog-grid-card--large {
+            grid-column: span 2;
+        }
+        
+        .blog-grid-card__image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-grid-card--large .blog-grid-card__image {
+            height: 400px;
+        }
+        
+        .blog-grid-card--normal .blog-grid-card__image {
+            height: 240px;
+        }
+        
+        .blog-grid-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .blog-grid-card:hover .blog-grid-card__image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-grid-card__badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--blue-700);
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+        
+        .blog-grid-card__body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-grid-card__meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--neutral-900);
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        
+        .blog-grid-card__title {
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .blog-grid-card--large .blog-grid-card__title {
+            font-size: 28px;
+        }
+        
+        .blog-grid-card--normal .blog-grid-card__title {
+            font-size: 20px;
+        }
+        
+        .blog-grid-card__excerpt {
+            font-size: 14px;
+            color: var(--neutral-900);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        
+        .blog-grid-card__author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(36, 70, 200, 0.1);
+        }
+        
+        .blog-grid-card__author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .blog-grid-card__author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .blog-grid-card__author-info {
+            font-size: 13px;
+        }
+        
+        .blog-grid-card__author-name {
+            font-weight: 600;
+            color: var(--neutral-900);
+            display: block;
+        }
+        
+        .blog-grid-card__author-title {
+            color: var(--neutral-900);
+            opacity: 0.6;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        
+        @media (max-width: 991px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .blog-grid-card--large {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-grid-card--large {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-primary btn-sm">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                    <h1 class="display-4 mb-3">Latest Articles</h1>
+                    <p class="lead mb-0">Expert insights, success stories, and practical guides</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-inline-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary">All Topics</button>
+                        <button class="btn btn-sm btn-outline-primary">Popular</button>
+                        <button class="btn btn-sm btn-outline-primary">Recent</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Large Featured Card -->
+                <article class="blog-grid-card blog-grid-card--large">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=500&fit=crop" alt="Featured Post">
+                        <div class="blog-grid-card__badge">Featured</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Leadership</span>
+                            <span>•</span>
+                            <span>Jan 3, 2025</span>
+                            <span>•</span>
+                            <span>12 min read</span>
+                        </div>
+                        <h2 class="blog-grid-card__title">Transforming Company Culture: Lessons from 50 High-Growth Startups</h2>
+                        <p class="blog-grid-card__excerpt">An in-depth analysis of how successful companies build cultures that attract top talent, drive innovation, and maintain values during rapid scaling. Includes interviews with founders from Airbnb, Stripe, and Notion.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">Michael Chen</span>
+                                <span class="blog-grid-card__author-title">CEO, TechVentures</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Normal Card 1 -->
+                <article class="blog-grid-card blog-grid-card--normal">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Post">
+                        <div class="blog-grid-card__badge">Productivity</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Dec 30, 2024</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="blog-grid-card__title">The 4-Hour Deep Work Block That Changed My Career</h3>
+                        <p class="blog-grid-card__excerpt">How one simple habit transformed productivity and led to breakthrough results.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">Sarah Kim</span>
+                                <span class="blog-grid-card__author-title">Product Lead</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Normal Card 2 -->
+                <article class="blog-grid-card blog-grid-card--normal">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop" alt="Post">
+                        <div class="blog-grid-card__badge">Career</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Dec 28, 2024</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                        </div>
+                        <h3 class="blog-grid-card__title">From Developer to CTO: A Non-Traditional Path</h3>
+                        <p class="blog-grid-card__excerpt">Navigating career transitions without a computer science degree.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=8" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">Alex Rivera</span>
+                                <span class="blog-grid-card__author-title">CTO, StartupX</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Normal Card 3 -->
+                <article class="blog-grid-card blog-grid-card--normal">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop" alt="Post">
+                        <div class="blog-grid-card__badge">Events</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Dec 25, 2024</span>
+                            <span>•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="blog-grid-card__title">5 Networking Mistakes Everyone Makes</h3>
+                        <p class="blog-grid-card__excerpt">And how to avoid them at your next professional event.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=12" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">Emma Watson</span>
+                                <span class="blog-grid-card__author-title">Event Strategist</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Normal Card 4 -->
+                <article class="blog-grid-card blog-grid-card--normal">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" alt="Post">
+                        <div class="blog-grid-card__badge">Technology</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Dec 20, 2024</span>
+                            <span>•</span>
+                            <span>10 min read</span>
+                        </div>
+                        <h3 class="blog-grid-card__title">AI Tools Every Professional Should Use in 2025</h3>
+                        <p class="blog-grid-card__excerpt">A curated list of AI assistants that actually save time.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=15" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">David Park</span>
+                                <span class="blog-grid-card__author-title">Tech Analyst</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Normal Card 5 -->
+                <article class="blog-grid-card blog-grid-card--normal">
+                    <div class="blog-grid-card__image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop" alt="Post">
+                        <div class="blog-grid-card__badge">Collaboration</div>
+                    </div>
+                    <div class="blog-grid-card__body">
+                        <div class="blog-grid-card__meta">
+                            <span>Dec 18, 2024</span>
+                            <span>•</span>
+                            <span>7 min read</span>
+                        </div>
+                        <h3 class="blog-grid-card__title">Building Trust in Remote Teams</h3>
+                        <p class="blog-grid-card__excerpt">Practical strategies for distributed team leadership.</p>
+                        <div class="blog-grid-card__author">
+                            <div class="blog-grid-card__author-avatar">
+                                <img src="https://i.pravatar.cc/150?img=20" alt="Author">
+                            </div>
+                            <div class="blog-grid-card__author-info">
+                                <span class="blog-grid-card__author-name">Lisa Zhang</span>
+                                <span class="blog-grid-card__author-title">VP Operations</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Load More -->
+            <div class="text-center mt-5">
+                <button class="btn btn-primary btn-lg px-5">Load More Articles</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-option-3">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                    <p class="mb-4 text-white-50">Empowering professionals through world-class events and continuous learning.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Platform</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-gradient pt-4 mt-4">
+                <div class="text-center">
+                    <small class="text-white-50">© 2025 Exponanta. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

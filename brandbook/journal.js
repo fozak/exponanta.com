@@ -5,6 +5,11 @@
  * This file documents what has been completed and what remains
  * to be built for the Exponanta event & community platform.
  */
+// ============================================================
+// act as methodologist for developing programs for entreprenuers and start ups, that work in groups pitch->assessment-> feedback from community -> implementation plan-> report back after some time. 
+// ============================================================
+
+
 
 const ExponantaJournal = {
   projectName: "Exponanta Event & Community Platform",
@@ -585,18 +590,202 @@ const ExponantaJournal = {
   ]
 };
 
+
+const SPARK365 = {
+  name: "SPARK365 Growth Methodology",
+  description: "A Group-Based Founder Development Loop for early- to growth-stage founders working in cohorts. Monthly cycle: Pitch → Assess → Community Feedback → Implement → Report Back. Designed for clarity, accountability, learning velocity, and autonomy.",
+  cycleLength: "1 month",
+  phases: [
+    {
+      id: "S",
+      name: "Success Frame",
+      purpose: "Force founders and groups to define success before persuasion, not after feedback.",
+      humanMethodology: [
+        "Define a single primary outcome for the monthly cycle",
+        "Declare constraints (time, money, capacity, ethics)",
+        "Agree on what will count as progress",
+        "Define stop or pivot conditions"
+      ],
+      artifacts: [
+        "One-sentence success definition",
+        "1–3 measurable indicators",
+        "Explicit non-goals",
+        "Time-bound checkpoint"
+      ],
+      checkboxes: [
+        "Outcome is explicit and shared across the group",
+        "Metrics are observable within the cycle",
+        "Constraints documented",
+        "Kill / pivot condition defined",
+        "Priority level agreed"
+      ]
+    },
+    {
+      id: "P",
+      name: "Problem & Perspective",
+      purpose: "Ensure the group understands the real problem, user, and context — not just the idea.",
+      humanMethodology: [
+        "Map the problem from the user/customer perspective",
+        "Surface assumptions (market, behavior, pricing, timing)",
+        "Identify unknowns that could kill the idea",
+        "Define a working hypothesis (not a belief)"
+      ],
+      artifacts: [
+        "Problem statement (user POV)",
+        "Assumption list",
+        "Risk & uncertainty map",
+        "Hypothesis to test this cycle"
+      ],
+      checkboxes: [
+        "Problem is user-centered",
+        "Assumptions explicitly listed",
+        "Unknowns ranked by risk",
+        "Evidence vs. belief separated",
+        "Hypothesis selected"
+      ]
+    },
+    {
+      id: "A",
+      name: "Action Plan",
+      purpose: "Convert insight into a concrete, testable plan the group can hold accountable.",
+      humanMethodology: [
+        "Design the smallest meaningful experiment",
+        "Break into ordered steps",
+        "Assign owners (individual or sub-team)",
+        "Define what evidence will be collected"
+      ],
+      artifacts: [
+        "Experiment / implementation plan",
+        "Timeline & responsibilities",
+        "Expected outputs",
+        "Evidence collection method"
+      ],
+      checkboxes: [
+        "Plan exists in writing",
+        "Steps are sequenced",
+        "Owners assigned",
+        "Evidence defined",
+        "Risks acknowledged"
+      ]
+    },
+    {
+      id: "I",
+      name: "Implementation / Execution",
+      purpose: "Turn the plan into action and capture what actually happens.",
+      humanMethodology: [
+        "Execute the planned steps",
+        "Log progress, outputs, and deviations",
+        "Record unexpected observations",
+        "Maintain focus on primary outcome"
+      ],
+      artifacts: [
+        "Execution log",
+        "Outputs and deviations recorded",
+        "Notes on unanticipated results"
+      ],
+      checkboxes: [
+        "Plan executed",
+        "Outputs documented",
+        "Deviations captured",
+        "Observations logged",
+        "Primary outcome tracked"
+      ]
+    },
+    {
+      id: "R",
+      name: "Review & Reality Check",
+      purpose: "Evaluate results objectively and learn from peer insights.",
+      humanMethodology: [
+        "Present outcomes to cohort or peer group",
+        "Measure success vs defined metrics",
+        "Identify gaps, surprises, and signals",
+        "Separate execution failure from idea failure"
+      ],
+      artifacts: [
+        "Results summary",
+        "Metrics vs targets",
+        "Peer feedback themes",
+        "Outcome classification (success | partial | failure)"
+      ],
+      checkboxes: [
+        "Results reported transparently",
+        "Metrics compared to goals",
+        "Deviations identified",
+        "Peer feedback captured",
+        "Outcome classified"
+      ]
+    },
+    {
+      id: "K",
+      name: "Knowledge & Next Move",
+      purpose: "Turn experience into institutional knowledge and decide the next monthly cycle deliberately.",
+      humanMethodology: [
+        "Extract lessons (market, product, team, execution)",
+        "Update assumptions and constraints",
+        "Decide: repeat, pivot, scale, or stop",
+        "Document next cycle focus"
+      ],
+      artifacts: [
+        "Lessons learned log",
+        "Updated hypothesis / assumptions",
+        "Decision rationale",
+        "Next cycle commitment"
+      ],
+      checkboxes: [
+        "Lessons documented",
+        "Assumptions updated",
+        "Strategy adjusted",
+        "Decision recorded",
+        "Next action chosen"
+      ]
+    }
+  ],
+  groupDynamics: {
+    "1:Many": {
+      description: "Founder → Cohort",
+      size: "5–12 founders",
+      flow: [
+        "Start of month: submit Success Frame & Problem & Perspective",
+        "End-of-month live session (~2–3 hours) to present execution results, gather feedback, share lessons"
+      ]
+    },
+    pairs: {
+      description: "Founder ↔ Co-founder / Peer Partner",
+      flow: [
+        "Exchange Action Plans and assumptions asynchronously",
+        "Reflect on outcomes together before cohort session"
+      ]
+    },
+    smallCohorts: {
+      description: "3–5 founders",
+      flow: [
+        "Monthly asynchronous prep on plan & assumptions",
+        "End-of-month live session to review results and provide feedback"
+      ]
+    },
+    principles: [
+      "Only one live session per month",
+      "Asynchronous prep and reflection are encouraged",
+      "Peer and cohort feedback drives learning and accountability"
+    ]
+  },
+  roles: [
+    "Presenter / Founder: Leads cycle and executes plan",
+    "Peer Reviewer: Provides feedback on assumptions, risks, and outcomes",
+    "Cohort Facilitator: Moderates live session and discussion",
+    "Mentor / Expert (optional): Escalates critical issues"
+  ],
+  benefits: [
+    "Provides enough time for meaningful execution",
+    "Reduces meeting fatigue → one live session per month",
+    "Encourages deep reflection and learning",
+    "Maintains structured growth loop for founders and teams"
+  ]
+};
+
+
 // Export for use in other files if needed
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = ExponantaJournal;
 }
 
-// Console summary
-console.log("=== EXPONANTA PROJECT JOURNAL ===");
-console.log(`Completion: ${ExponantaJournal.metrics.completionPercentage}`);
-console.log(`Components: ${ExponantaJournal.metrics.completedComponents}/${ExponantaJournal.metrics.totalComponents}`);
-console.log(`CSS Lines: ${ExponantaJournal.metrics.totalCSSLines}`);
-console.log(`Ready for prototype: ${ExponantaJournal.metrics.readyForPrototype}`);
-console.log("\nNext Priority Tasks:");
-ExponantaJournal.nextSteps.slice(0, 3).forEach(step => {
-  console.log(`${step.step}. ${step.task} (${step.priority})`);
-});

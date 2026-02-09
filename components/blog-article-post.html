@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transforming Company Culture - Exponanta Blog</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Article Hero */
+        .article-hero {
+            position: relative;
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        
+        .article-hero__image {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .article-hero__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(30,30,47,0.9) 100%);
+        }
+        
+        .article-hero__content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px;
+            color: white;
+        }
+        
+        .article-hero__category {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--accent-coral);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+        
+        .article-hero__title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            max-width: 900px;
+        }
+        
+        .article-hero__meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+        
+        .article-hero__author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .article-hero__author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .article-body {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--neutral-900);
+        }
+        
+        .article-body h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--blue-700);
+            margin-top: 48px;
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+        
+        .article-body h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-top: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .article-body p {
+            margin-bottom: 24px;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+        
+        .article-body li {
+            margin-bottom: 12px;
+        }
+        
+        .article-body blockquote {
+            border-left: 4px solid var(--blue-700);
+            padding-left: 24px;
+            margin: 40px 0;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--neutral-900);
+            opacity: 0.9;
+        }
+        
+        .article-body img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            margin: 40px 0;
+        }
+        
+        .article-body .highlight-box {
+            background: var(--blue-100);
+            border-left: 4px solid var(--blue-700);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin: 32px 0;
+        }
+        
+        .article-body .highlight-box h4 {
+            color: var(--blue-700);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        /* Share Buttons */
+        .article-share {
+            position: sticky;
+            top: 120px;
+        }
+        
+        .share-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .share-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(36, 70, 200, 0.2);
+            background: var(--neutral-0);
+            color: var(--neutral-900);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .share-btn:hover {
+            background: var(--blue-700);
+            color: white;
+            border-color: var(--blue-700);
+            transform: translateY(-2px);
+        }
+        
+        /* Author Card */
+        .author-card {
+            background: var(--neutral-50);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin: 60px 0;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        
+        .author-card__avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .author-card__content h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--blue-700);
+            margin-bottom: 8px;
+        }
+        
+        .author-card__title {
+            color: var(--neutral-900);
+            opacity: 0.7;
+            margin-bottom: 16px;
+        }
+        
+        .author-card__bio {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+        }
+        
+        .author-card__social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .author-card__social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--neutral-0);
+            color: var(--blue-700);
+            transition: all 0.2s ease;
+        }
+        
+        .author-card__social a:hover {
+            background: var(--blue-700);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Related Posts */
+        .related-posts {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 2px solid rgba(36, 70, 200, 0.1);
+        }
+        
+        .related-posts__title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--blue-700);
+            margin-bottom: 40px;
+        }
+        
+        .related-post-card {
+            background: var(--neutral-0);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(36, 70, 200, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .related-post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(36, 70, 200, 0.12);
+        }
+        
+        .related-post-card__image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .related-post-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .related-post-card:hover .related-post-card__image img {
+            transform: scale(1.05);
+        }
+        
+        .related-post-card__body {
+            padding: 24px;
+        }
+        
+        .related-post-card__category {
+            color: var(--blue-700);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .related-post-card__title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .related-post-card__meta {
+            font-size: 13px;
+            color: var(--neutral-900);
+            opacity: 0.7;
+        }
+        
+        /* Tags */
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 40px 0;
+        }
+        
+        .article-tag {
+            padding: 6px 16px;
+            background: var(--blue-100);
+            color: var(--blue-700);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .article-tag:hover {
+            background: var(--blue-700);
+            color: white;
+        }
+        
+        /* Newsletter CTA */
+        .newsletter-cta {
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            margin: 60px 0;
+            color: white;
+        }
+        
+        .newsletter-cta h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .newsletter-cta p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        
+        .newsletter-cta .input-group {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-cta .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+        }
+        
+        .newsletter-cta .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-cta .btn {
+            padding: 12px 32px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .article-hero {
+                height: 400px;
+            }
+            
+            .article-hero__title {
+                font-size: 36px;
+            }
+            
+            .article-share {
+                position: static;
+                margin-bottom: 40px;
+            }
+            
+            .share-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .author-card {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .article-hero {
+                height: 300px;
+            }
+            
+            .article-hero__content {
+                padding: 24px;
+            }
+            
+            .article-hero__title {
+                font-size: 28px;
+            }
+            
+            .article-body {
+                font-size: 16px;
+            }
+            
+            .article-body h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-primary btn-sm">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero -->
+    <section class="py-5">
+        <div class="container">
+            <div class="article-hero">
+                <div class="article-hero__image">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1400&h=600&fit=crop" alt="Article Hero">
+                </div>
+                <div class="article-hero__overlay"></div>
+                <div class="article-hero__content">
+                    <span class="article-hero__category">Leadership</span>
+                    <h1 class="article-hero__title">Transforming Company Culture: Lessons from 50 High-Growth Startups</h1>
+                    <div class="article-hero__meta">
+                        <div class="article-hero__author">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Author" class="article-hero__author-avatar">
+                            <span><strong>Michael Chen</strong>, CEO at TechVentures</span>
+                        </div>
+                        <span>•</span>
+                        <span>January 3, 2025</span>
+                        <span>•</span>
+                        <span>12 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="row">
+                <!-- Share Sidebar (Desktop) -->
+                <div class="col-lg-1 d-none d-lg-block">
+                    <div class="article-share">
+                        <div class="share-buttons">
+                            <button class="share-btn" title="Share on Twitter">
+                                <i data-lucide="twitter" width="20" height="20"></i>
+                            </button>
+                            <button class="share-btn" title="Share on LinkedIn">
+                                <i data-lucide="linkedin" width="20" height="20"></i>
+                            </button>
+                            <button class="share-btn" title="Share on Facebook">
+                                <i data-lucide="facebook" width="20" height="20"></i>
+                            </button>
+                            <button class="share-btn" title="Copy link">
+                                <i data-lucide="link" width="20" height="20"></i>
+                            </button>
+                            <button class="share-btn" title="Bookmark">
+                                <i data-lucide="bookmark" width="20" height="20"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Content -->
+                <div class="col-lg-11">
+                    <div class="article-content">
+                        <div class="article-body">
+                            <p class="lead" style="font-size: 22px; font-weight: 500; color: var(--neutral-900); margin-bottom: 40px;">
+                                After spending three years studying how successful companies build and maintain exceptional cultures during rapid growth, I've identified patterns that separate thriving organizations from those that struggle to scale.
+                            </p>
+
+                            <p>
+                                Company culture isn't just about ping pong tables and free snacks. It's the invisible force that determines whether talented people stay or leave, whether innovation flourishes or dies, and whether your organization can scale from 10 to 1,000 employees without losing what made it special.
+                            </p>
+
+                            <p>
+                                I interviewed founders, executives, and employees at 50 high-growth startups—including companies like Airbnb, Stripe, Notion, and Linear—to understand how they've maintained strong cultures while scaling rapidly. Here's what I learned.
+                            </p>
+
+                            <h2>The Culture Paradox</h2>
+
+                            <p>
+                                The most counterintuitive finding? Companies with the strongest cultures don't focus on culture directly. Instead, they obsess over three specific things:
+                            </p>
+
+                            <ul>
+                                <li><strong>Decision-making frameworks</strong> that empower people at every level</li>
+                                <li><strong>Transparent communication</strong> about both successes and failures</li>
+                                <li><strong>Consistent hiring standards</strong> that never compromise on values fit</li>
+                            </ul>
+
+                            <div class="highlight-box">
+                                <h4>💡 Key Insight</h4>
+                                <p style="margin-bottom: 0;">Culture is not what you say in company values slides. It's what you do when nobody's watching, what you reward, and what behaviors you tolerate or reject.</p>
+                            </div>
+
+                            <h2>Lesson 1: Define Your Non-Negotiables Early</h2>
+
+                            <p>
+                                Stripe's Patrick Collison told me something that stuck with me: "We decided early that we'd rather be a $1B company that moves fast than a $10B company that moves slow. That single decision shaped every hire, every process, every tool we built."
+                            </p>
+
+                            <blockquote>
+                                "Your culture is defined by the worst behavior you're willing to tolerate, not the best behavior you occasionally celebrate."
+                            </blockquote>
+
+                            <p>
+                                Every company I studied had identified 3-5 non-negotiable principles before reaching 50 employees. These weren't generic values like "innovation" or "teamwork"—they were specific, opinionated stances on how work gets done.
+                            </p>
+
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=450&fit=crop" alt="Team collaboration">
+
+                            <h3>Examples of Strong Non-Negotiables</h3>
+
+                            <p>
+                                Here are real examples from companies I studied:
+                            </p>
+
+                            <ul>
+                                <li><strong>Notion:</strong> "We write everything down. If it's not documented, it doesn't exist."</li>
+                                <li><strong>Linear:</strong> "We optimize for speed and quality, never one at the expense of the other."</li>
+                                <li><strong>Figma:</strong> "We default to transparency. Everything is visible unless there's a specific reason to hide it."</li>
+                            </ul>
+
+                            <h2>Lesson 2: Hire for Culture Add, Not Culture Fit</h2>
+
+                            <p>
+                                The shift from "culture fit" to "culture add" might seem like semantics, but it's transformational. Culture fit leads to homogeneity. Culture add leads to evolution.
+                            </p>
+
+                            <p>
+                                Airbnb's Head of Talent told me they explicitly ask in every hiring decision: "What unique perspective or experience does this person bring that we're currently missing?" If the answer is "nothing," that's a red flag—even for otherwise exceptional candidates.
+                            </p>
+
+                            <h2>Lesson 3: Communication Scales, Culture Doesn't</h2>
+
+                            <p>
+                                The hardest truth about scaling: you can't maintain the same intimate culture you had at 10 people when you reach 100 or 1,000. The companies that succeed don't try to preserve the old culture—they intentionally evolve it.
+                            </p>
+
+                            <p>
+                                What does scale? Clear communication systems. Every successful company I studied had:
+                            </p>
+
+                            <ul>
+                                <li>Weekly all-hands meetings (even at 1,000+ employees)</li>
+                                <li>Public channels for nearly all conversations</li>
+                                <li>Written decision documentation that anyone can access</li>
+                                <li>Regular AMAs with leadership</li>
+                            </ul>
+
+                            <h2>Lesson 4: Values Must Have Teeth</h2>
+
+                            <p>
+                                I asked every founder: "Tell me about a time you fired someone for values misalignment, even though they were performing well." Every single one had a story.
+                            </p>
+
+                            <p>
+                                These weren't easy decisions. But they were defining moments that showed the entire organization what actually matters. When you fire a top performer for violating your values, you make your values real.
+                            </p>
+
+                            <h2>The Bottom Line</h2>
+
+                            <p>
+                                Building a strong culture isn't about perks, slogans, or motivational posters. It's about making hard decisions consistently over time:
+                            </p>
+
+                            <ol>
+                                <li>Who you hire</li>
+                                <li>Who you fire</li>
+                                <li>Who you promote</li>
+                                <li>What you celebrate</li>
+                                <li>What you punish</li>
+                            </ol>
+
+                            <p>
+                                Your culture is the sum of these decisions, repeated thousands of times. Get them right, and you'll build something remarkable. Get them wrong, and all the ping pong tables in the world won't save you.
+                            </p>
+
+                            <!-- Tags -->
+                            <div class="article-tags">
+                                <a href="#" class="article-tag">Leadership</a>
+                                <a href="#" class="article-tag">Company Culture</a>
+                                <a href="#" class="article-tag">Startups</a>
+                                <a href="#" class="article-tag">Team Building</a>
+                                <a href="#" class="article-tag">Management</a>
+                            </div>
+                        </div>
+
+                        <!-- Author Card -->
+                        <div class="author-card">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Michael Chen" class="author-card__avatar">
+                            <div class="author-card__content">
+                                <h4>Michael Chen</h4>
+                                <div class="author-card__title">CEO at TechVentures</div>
+                                <p class="author-card__bio">
+                                    Michael is a serial entrepreneur and CEO of TechVentures, a venture studio focused on building B2B SaaS companies. He's invested in and advised 50+ startups on scaling their organizations and has written extensively about company building and leadership.
+                                </p>
+                                <div class="author-card__social">
+                                    <a href="#" title="Twitter">
+                                        <i data-lucide="twitter" width="18" height="18"></i>
+                                    </a>
+                                    <a href="#" title="LinkedIn">
+                                        <i data-lucide="linkedin" width="18" height="18"></i>
+                                    </a>
+                                    <a href="#" title="Website">
+                                        <i data-lucide="globe" width="18" height="18"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter CTA -->
+                        <div class="newsletter-cta">
+                            <h3>Get insights like this in your inbox</h3>
+                            <p>Join 12,000+ professionals receiving weekly articles on leadership, career growth, and professional development.</p>
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Enter your email">
+                                <button class="btn btn-light">Subscribe</button>
+                            </div>
+                        </div>
+
+                        <!-- Related Posts -->
+                        <div class="related-posts">
+                            <h3 class="related-posts__title">Continue Reading</h3>
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <article class="related-post-card">
+                                        <div class="related-post-card__image">
+                                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Related Post">
+                                        </div>
+                                        <div class="related-post-card__body">
+                                            <span class="related-post-card__category">Leadership</span>
+                                            <h4 class="related-post-card__title">Building High-Performance Teams in Remote Environments</h4>
+                                            <div class="related-post-card__meta">Dec 28, 2024 • 6 min read</div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <article class="related-post-card">
+                                        <div class="related-post-card__image">
+                                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop" alt="Related Post">
+                                        </div>
+                                        <div class="related-post-card__body">
+                                            <span class="related-post-card__category">Career Growth</span>
+                                            <h4 class="related-post-card__title">5 Skills Every Professional Needs to Master in 2025</h4>
+                                            <div class="related-post-card__meta">Dec 25, 2024 • 5 min read</div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <article class="related-post-card">
+                                        <div class="related-post-card__image">
+                                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" alt="Related Post">
+                                        </div>
+                                        <div class="related-post-card__body">
+                                            <span class="related-post-card__category">Productivity</span>
+                                            <h4 class="related-post-card__title">The Science of Deep Work: Maximizing Focus</h4>
+                                            <div class="related-post-card__meta">Dec 15, 2024 • 9 min read</div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-option-3">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                    <p class="mb-4 text-white-50">Empowering professionals through world-class events, networking, and continuous learning opportunities.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Platform</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Browse Events</a></li>
+                        <li><a href="#">Host Event</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Features</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Resources</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Company</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading-gradient">Legal</h6>
+                    <ul class="list-unstyled footer-links-gradient">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom-gradient pt-4 mt-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <small class="text-white-50">© 2025 Exponanta Technologies. All rights reserved.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex gap-2 justify-content-md-end">
+                            <a href="#" class="social-icon-gradient">
+                                <i data-lucide="facebook" width="18" height="18"></i>
+                            </a>
+                            <a href="#" class="social-icon-gradient">
+                                <i data-lucide="twitter" width="18" height="18"></i>
+                            </a>
+                            <a href="#" class="social-icon-gradient">
+                                <i data-lucide="linkedin" width="18" height="18"></i>
+                            </a>
+                            <a href="#" class="social-icon-gradient">
+                                <i data-lucide="youtube" width="18" height="18"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
