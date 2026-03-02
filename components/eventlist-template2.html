@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Tech Community Events | Exponanta</title>
+    <meta name="description" content="Join our community events, workshops, and meetups focused on technology and innovation.">
+    <link rel="canonical" href="https://exponanta.com/blog/events.html">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Structured Data (Article Schema) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Upcoming Tech Events & Meetups",
+        "author": {
+            "@type": "Organization",
+            "name": "Exponanta"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Exponanta",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://exponanta.com/assets/images/logo/siteicon.png"
+            }
+        },
+        "datePublished": "2025-01-29",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://exponanta.com/blog/events"
+        }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLH4990V1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", "G-NSLH4990V1");
+    </script>
+</head>
+
+<body class="blog-post">
+    <!-- Header -->
+    
+     <!-- =========================================================
+     TIER 1: MUST-HAVE COMPONENTS
+     ========================================================= -->
+
+<!-- 1. HERO WITH SEARCH -->
+<section class="hero-search section--hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-3 mb-3">Discover Events That Matter</h1>
+                <p class="lead mb-4">Join thousands of tech enthusiasts at workshops, meetups, and conferences across the globe.</p>
+                
+                <!-- Search Bar -->
+                <div class="search-bar card p-2">
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="Search events...">
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select">
+                                <option>All Categories</option>
+                                <option>Workshops</option>
+                                <option>Networking</option>
+                                <option>Conferences</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100">Search</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="d-flex gap-4 mt-4 text-white">
+                    <div>
+                        <div class="h4 mb-0">1,200+</div>
+                        <small>Events Hosted</small>
+                    </div>
+                    <div>
+                        <div class="h4 mb-0">45K+</div>
+                        <small>Members</small>
+                    </div>
+                    <div>
+                        <div class="h4 mb-0">120+</div>
+                        <small>Cities</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=400&fit=crop" 
+                     alt="Community Event" 
+                     class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     PASTE THIS BLOCK INTO YOUR PAGE
+     Replaces the "Upcoming Events Grid" section
+     ═══════════════════════════════════════════ -->
+<style>
+    :root {
+      --blue-100: #C8DFFA;
+      --blue-300: #82A0FA;
+      --blue-700: #2446C8;
+      --accent-coral: #FF6F61;
+      --accent-teal:  #4FD1C5;
+      --neutral-0:   #ffffff;
+      --neutral-50:  #F5F7FA;
+      --neutral-400: #9CA3AF;
+      --neutral-600: #4B5563;
+      --neutral-900: #1E1E2F;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 2px 6px rgba(36,70,200,.08);
+      --shadow-md: 0 6px 16px rgba(36,70,200,.12);
+    }
+    body {
+      font-family: "Inter","Segoe UI",system-ui,sans-serif;
+      background: var(--neutral-50);
+      color: var(--neutral-900);
+      padding: 40px 24px;
+    }
+
+    /* ─── SHARED BASE ─── */
+    .evx {
+      display: flex;
+      width: 90%; /* 10% narrower */
+      background: var(--neutral-0);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(36,70,200,.10);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+      margin-bottom: 16px;
+    }
+    .evx:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    /* ─── IMAGE PANEL ─── */
+    .evx__img {
+      position: relative;
+      flex-shrink: 0;
+      width: 220px;
+      min-height: 200px;
+    }
+    .evx__img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* STATUS PILL — top left */
+    .evx__status {
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      padding: 4px 11px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; letter-spacing: .4px;
+      text-transform: uppercase; backdrop-filter: blur(8px);
+    }
+    .evx__status--filling { background: rgba(79,209,197,.92); color: var(--neutral-900); }
+    .evx__status--featured { background: rgba(255,111,97,.92); color: #fff; }
+
+    /* BIG DATE BADGE — centered, ~50% of image */
+    .evx__date {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px; height: 100px;
+      background: var(--blue-700);
+      border-radius: 16px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(36,70,200,.45);
+      z-index: 2;
+    }
+    .evx__date-day   { font-size: 42px; font-weight: 800; line-height: 1; }
+    .evx__date-month { font-size: 13px; font-weight: 700; text-transform: uppercase; opacity: .85; margin-top: 4px; }
+
+    /* image tint overlay */
+    .evx__img-tint {
+      position: absolute; inset: 0;
+      background: rgba(36,70,200,.18);
+      z-index: 1;
+    }
+
+    /* ─── BODY ─── */
+    .evx__body {
+      flex: 1; padding: 18px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    /* TITLE ROW: title left, tags right */
+    .evx__title-row {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 14px;
+    }
+    .evx__title {
+      font-size: 22px; /* ~30% bigger than 17px base */
+      font-weight: 700; color: var(--blue-700);
+      margin: 0; line-height: 1.25;
+    }
+    .evx__tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      flex-shrink: 0; align-items: flex-start; padding-top: 4px;
+    }
+    .etag {
+      display: inline-flex; align-items: center;
+      padding: 5px 13px; border-radius: 20px;
+      font-size: 13px; /* ~20% bigger than 11px */
+      font-weight: 600; letter-spacing: .2px; white-space: nowrap;
+    }
+    .etag--free  { background: #fff; color: var(--neutral-600); border: 1.5px solid var(--neutral-400); }
+    .etag--blue  { background: var(--blue-100); color: var(--blue-700); }
+    .etag--teal  { background: rgba(79,209,197,.15); color: #1a8a80; }
+    .etag--coral { background: rgba(255,111,97,.12); color: #c9392e; }
+
+    /* DESCRIPTION */
+    .evx__desc {
+      font-size: 13px; color: var(--neutral-600);
+      line-height: 1.55; margin: 0;
+    }
+
+    /* META ROW */
+    .evx__meta {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      font-size: 13px; color: var(--neutral-600);
+    }
+    .evx__meta-item { display: flex; align-items: center; gap: 5px; }
+
+    /* FOOTER: buttons left, avatars right */
+    .evx__footer {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(36,70,200,.07);
+      margin-top: auto;
+    }
+    .evx__btns { display: flex; gap: 10px; }
+
+    /* BUTTONS — 20% bigger */
+    .btn-cal {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: var(--radius-md);
+      font-size: 14px; font-weight: 600;
+      background: var(--accent-coral); color: #fff;
+      border: none; cursor: pointer;
+      transition: opacity .15s, transform .15s;
+    }
+    .btn-cal:hover { opacity: .88; transform: translateY(-1px); }
+
+    .btn-connect {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 20px; border-radius: var(--radius-md);
+      font-size: 14px; font-weight: 700;
+      background: var(--blue-700); color: #fff;
+      border: none; cursor: pointer;
+      transition: opacity .15s, transform .15s;
+    }
+    .btn-connect:hover { opacity: .88; transform: translateY(-1px); }
+
+    /* AVATAR STACK */
+    .av-stack { display: flex; align-items: center; }
+    .av {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--blue-300); color: #fff;
+      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #fff; margin-left: -9px;
+    }
+    .av:first-child { margin-left: 0; }
+    .av--more { background: var(--neutral-50); color: var(--blue-700); font-size: 10px; }
+    .av-label { font-size: 12px; color: var(--neutral-600); margin-left: 8px; }
+
+    /* ═══════════════════════════════
+       VARIANT-SPECIFIC OVERRIDES
+    ═══════════════════════════════ */
+
+    /* V1: clean white, square blue date */
+    .evx--v1 .evx__date { border-radius: 16px; background: var(--blue-700); }
+
+    /* V2: dark image tint, coral date */
+    .evx--v2 .evx__img-tint { background: rgba(20,20,40,.40); }
+    .evx--v2 .evx__date { background: var(--accent-coral); border-radius: 50%; }
+    .evx--v2 .evx__date-day { font-size: 40px; }
+    .evx--v2 { border-left: 4px solid var(--accent-coral); }
+    .evx--v2 .btn-connect {
+      background: linear-gradient(135deg, var(--accent-teal), #38b2ac);
+      color: var(--neutral-900);
+    }
+
+    /* V3: gradient stripe, date is glass */
+    .evx--v3 .evx__img-tint {
+      background: linear-gradient(135deg, rgba(36,70,200,.5) 0%, rgba(79,209,197,.2) 100%);
+    }
+    .evx--v3 .evx__date {
+      background: rgba(255,255,255,.18);
+      border: 2px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .evx--v3 .evx__date-day, .evx--v3 .evx__date-month { color: #fff; }
+    .evx--v3 .evx__stripe {
+      width: 5px; flex-shrink: 0;
+      background: linear-gradient(to bottom, var(--blue-700), var(--accent-teal));
+    }
+    .evx--v3 .evx__title { color: var(--neutral-900); }
+    .evx--v3 .btn-connect {
+      background: linear-gradient(135deg, var(--blue-100), var(--blue-700));
+    }
+    .evx--v3 .evx__kicker {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .6px; color: var(--accent-coral); margin-bottom: -4px;
+    }
+
+    /* ── responsive ── */
+    @media (max-width: 640px) {
+      .evx { width: 100%; flex-direction: column; }
+      .evx__img { width: 100%; height: 180px; }
+      .evx__title-row { flex-direction: column; }
+      .evx--v3 .evx__stripe { width: 100%; height: 5px; }
+    }
+
+    .variant-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--neutral-400); margin: 28px 0 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     VARIANT 1 — CLEAN WHITE + BLUE DATE
+════════════════════════════════════ -->
+<p class="variant-label">Variant 1 — Clean White</p>
+
+<div class="evx evx--v1">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--filling">Almost Full</div>
+    <div class="evx__date">
+      <span class="evx__date-day">15</span>
+      <span class="evx__date-month">FEB</span>
+    </div>
+  </div>
+  <div class="evx__body">
+    <div class="evx__title-row">
+      <h3 class="evx__title">AI &amp; Machine Learning Workshop</h3>
+      <div class="evx__tags">
+        <span class="etag etag--free">Free</span>
+        <span class="etag etag--blue">Workshop</span>
+        <span class="etag etag--teal">Online</span>
+      </div>
+    </div>
+    <p class="evx__desc">Hands-on workshop exploring the latest in AI and machine learning. Perfect for developers and data scientists looking to level up.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        18:00 – 21:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        InnoHub, Cambridge
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">JD</span><span class="av">SK</span><span class="av">AM</span><span class="av av--more">+15</span>
+        <span class="av-label">18 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- featured card -->
+<div class="evx evx--v1">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--featured">Featured</div>
+    <div class="evx__date">
+      <span class="evx__date-day">05</span>
+      <span class="evx__date-month">MAR</span>
+    </div>
+  </div>
+  <div class="evx__body">
+    <div class="evx__title-row">
+      <h3 class="evx__title">Tech Innovation Summit 2025</h3>
+      <div class="evx__tags">
+        <span class="etag etag--coral">Paid</span>
+        <span class="etag etag--blue">Conference</span>
+        <span class="etag etag--teal">In-Person</span>
+      </div>
+    </div>
+    <p class="evx__desc">Full-day conference featuring industry leaders, workshops, and networking. Early bird tickets available.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        09:00 – 18:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Skolkovo, Moscow
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">VK</span><span class="av">NP</span><span class="av">IR</span><span class="av av--more">+42</span>
+        <span class="av-label">45 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     VARIANT 2 — DARK TINT + CORAL CIRCLE DATE
+════════════════════════════════════ -->
+<p class="variant-label">Variant 2 — Dark Tint + Coral Circle Date</p>
+
+<div class="evx evx--v2">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--filling">Almost Full</div>
+    <div class="evx__date">
+      <span class="evx__date-day">15</span>
+      <span class="evx__date-month">FEB</span>
+    </div>
+  </div>
+  <div class="evx__body">
+    <div class="evx__title-row">
+      <h3 class="evx__title">AI &amp; Machine Learning Workshop</h3>
+      <div class="evx__tags">
+        <span class="etag etag--free">Free</span>
+        <span class="etag etag--blue">Workshop</span>
+        <span class="etag etag--teal">Online</span>
+      </div>
+    </div>
+    <p class="evx__desc">Hands-on workshop exploring the latest in AI and machine learning. Perfect for developers and data scientists looking to level up.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        18:00 – 21:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        InnoHub, Cambridge
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">JD</span><span class="av">SK</span><span class="av">AM</span><span class="av av--more">+15</span>
+        <span class="av-label">18 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="evx evx--v2">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--featured">Featured</div>
+    <div class="evx__date">
+      <span class="evx__date-day">05</span>
+      <span class="evx__date-month">MAR</span>
+    </div>
+  </div>
+  <div class="evx__body">
+    <div class="evx__title-row">
+      <h3 class="evx__title">Tech Innovation Summit 2025</h3>
+      <div class="evx__tags">
+        <span class="etag etag--coral">Paid</span>
+        <span class="etag etag--blue">Conference</span>
+        <span class="etag etag--teal">In-Person</span>
+      </div>
+    </div>
+    <p class="evx__desc">Full-day conference featuring industry leaders, workshops, and networking. Early bird tickets available.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        09:00 – 18:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Skolkovo, Moscow
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">VK</span><span class="av">NP</span><span class="av">IR</span><span class="av av--more">+42</span>
+        <span class="av-label">45 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     VARIANT 3 — GLASS DATE + GRADIENT TINT + STRIPE
+════════════════════════════════════ -->
+<p class="variant-label">Variant 3 — Glass Date + Gradient Tint</p>
+
+<div class="evx evx--v3">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--filling">Almost Full</div>
+    <div class="evx__date">
+      <span class="evx__date-day">15</span>
+      <span class="evx__date-month">FEB</span>
+    </div>
+  </div>
+  <div class="evx__stripe"></div>
+  <div class="evx__body">
+    <div class="evx__kicker">Workshop · Online</div>
+    <div class="evx__title-row">
+      <h3 class="evx__title">AI &amp; Machine Learning Workshop</h3>
+      <div class="evx__tags">
+        <span class="etag etag--free">Free</span>
+        <span class="etag etag--blue">Workshop</span>
+        <span class="etag etag--teal">Online</span>
+      </div>
+    </div>
+    <p class="evx__desc">Hands-on workshop exploring the latest in AI and machine learning. Perfect for developers and data scientists looking to level up.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        18:00 – 21:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        InnoHub, Cambridge
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">JD</span><span class="av">SK</span><span class="av">AM</span><span class="av av--more">+15</span>
+        <span class="av-label">18 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="evx evx--v3">
+  <div class="evx__img">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop" alt="">
+    <div class="evx__img-tint"></div>
+    <div class="evx__status evx__status--featured">Featured</div>
+    <div class="evx__date">
+      <span class="evx__date-day">05</span>
+      <span class="evx__date-month">MAR</span>
+    </div>
+  </div>
+  <div class="evx__stripe" style="background: linear-gradient(to bottom, var(--accent-coral), var(--blue-300));"></div>
+  <div class="evx__body">
+    <div class="evx__kicker" style="color: var(--accent-coral);">Conference · In-Person</div>
+    <div class="evx__title-row">
+      <h3 class="evx__title">Tech Innovation Summit 2025</h3>
+      <div class="evx__tags">
+        <span class="etag etag--coral">Paid</span>
+        <span class="etag etag--blue">Conference</span>
+        <span class="etag etag--teal">In-Person</span>
+      </div>
+    </div>
+    <p class="evx__desc">Full-day conference featuring industry leaders, workshops, and networking. Early bird tickets available.</p>
+    <div class="evx__meta">
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        09:00 – 18:00
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Skolkovo, Moscow
+      </div>
+      <div class="evx__meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        45 going
+      </div>
+    </div>
+    <div class="evx__footer">
+      <div class="evx__btns">
+        <button class="btn-cal">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button class="btn-connect">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Connect
+        </button>
+      </div>
+      <div class="av-stack">
+        <span class="av">VK</span><span class="av">NP</span><span class="av">IR</span><span class="av av--more">+42</span>
+        <span class="av-label">45 going</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 2. EVENT CARD GRID (Already provided in previous response) -->
+<!-- Use the event-card structure from earlier -->
+
+<!-- 3. EVENT DETAIL HEADER -->
+<section class="event-detail-header">
+    <!-- Hero Cover Image -->
+    <div class="event-detail-hero" style="background: linear-gradient(rgba(36, 70, 200, 0.7), rgba(36, 70, 200, 0.7)), url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=400&fit=crop'); background-size: cover; background-position: center;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#" class="text-white">Events</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="text-white">Conferences</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Tech Summit 2025</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="display-4 text-white mb-3">Tech Innovation Summit 2025</h1>
+                    
+                    <!-- Quick Info Bar -->
+                    <div class="d-flex flex-wrap gap-3 text-white mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            <span>March 5, 2025</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg>
+                            <span>09:00 - 18:00</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            <span>Skolkovo Innovation Center, Moscow</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Host Info -->
+                    <div class="d-flex align-items-center gap-3 text-white">
+                        <div class="avatar-large" style="width: 48px; height: 48px; background: var(--blue-300);">EX</div>
+                        <div>
+                            <div class="fw-semibold">Hosted by Exponanta Community</div>
+                            <small>Verified Organizer • 24 events hosted</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. REGISTRATION/TICKET CARDS -->
+<section class="event-tickets py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="mb-4">About This Event</h2>
+                <p>Join us for a full-day conference featuring industry leaders, hands-on workshops, and unparalleled networking opportunities. This year's summit focuses on emerging technologies, AI innovations, and the future of digital transformation.</p>
+                
+                <h3 class="mt-4 mb-3">What You'll Learn</h3>
+                <ul>
+                    <li>Latest trends in artificial intelligence and machine learning</li>
+                    <li>Practical strategies for digital transformation</li>
+                    <li>Networking with 500+ tech professionals</li>
+                    <li>Hands-on workshops with industry experts</li>
+                </ul>
+            </div>
+            
+            <!-- Sidebar - Ticket Options -->
+            <div class="col-lg-4">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Select Tickets</h5>
+                        
+                        <!-- Ticket Option 1 -->
+                        <div class="ticket-option card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">Early Bird</h6>
+                                        <small class="text-muted">Available until Feb 15</small>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="h5 mb-0 text-primary">$99</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <small class="text-success">15 remaining</small>
+                                    <button class="btn btn-sm btn-outline-primary">Select</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ticket Option 2 -->
+                        <div class="ticket-option card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">General Admission</h6>
+                                        <small class="text-muted">Full conference access</small>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="h5 mb-0 text-primary">$149</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <small class="text-muted">200 available</small>
+                                    <button class="btn btn-sm btn-outline-primary">Select</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ticket Option 3 - VIP -->
+                        <div class="ticket-option card border-primary">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">VIP</span>
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">VIP Pass</h6>
+                                        <small class="text-muted">Premium seating + networking dinner</small>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="h5 mb-0 text-primary">$299</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <small class="text-warning">Only 5 left!</small>
+                                    <button class="btn btn-sm btn-primary">Select</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Share -->
+                        <div class="border-top pt-3 mt-3">
+                            <div class="small text-muted mb-2">Share this event</div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-secondary flex-fill">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary flex-fill">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary flex-fill">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. BASIC FOOTER -->
+<footer class="bg-dark text-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="mb-3">Exponanta</h5>
+                <p>Building communities through meaningful events and connections.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-light"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
+                    <a href="#" class="text-light"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a>
+                    <a href="#" class="text-light"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                <h6 class="mb-3">Events</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Browse Events</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Create Event</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Categories</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Calendar</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                <h6 class="mb-3">Community</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Members</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Groups</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Blog</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Success Stories</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                <h6 class="mb-3">Support</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Help Center</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Safety</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Report</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6">
+                <h6 class="mb-3">Company</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">About</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Careers</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Press</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Partners</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="my-4 border-secondary">
+        <div class="row">
+            <div class="col-md-6 small text-muted">
+                © 2025 Exponanta. All rights reserved.
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-muted text-decoration-none small me-3">Privacy Policy</a>
+                <a href="#" class="text-muted text-decoration-none small me-3">Terms of Service</a>
+                <a href="#" class="text-muted text-decoration-none small">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- =========================================================
+     TIER 2: HIGH VALUE COMPONENTS
+     ========================================================= -->
+
+<!-- 6. TESTIMONIALS -->
+<section class="testimonials section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>What Attendees Say</h2>
+            <p class="text-muted">Hear from our community members</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Testimonial Card 1 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"Best tech conference I've attended. The networking opportunities alone were worth the ticket price. Met my future co-founder here!"</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <div class="avatar" style="width: 48px; height: 48px; background: var(--blue-300); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">SA</div>
+                            <div>
+                                <div class="fw-semibold">Sarah Anderson</div>
+                                <small class="text-muted">Product Manager, TechCorp</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial Card 2 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"The workshops were incredibly hands-on and practical. I implemented what I learned the very next day at work. Highly recommended!"</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <div class="avatar" style="width: 48px; height: 48px; background: var(--accent-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">MK</div>
+                            <div>
+                                <div class="fw-semibold">Michael Kim</div>
+                                <small class="text-muted">Software Engineer, StartupXYZ</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial Card 3 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"As a first-time attendee, I was nervous, but everyone was so welcoming. The community vibe here is unmatched. Can't wait for the next one!"</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <div class="avatar" style="width: 48px; height: 48px; background: var(--accent-coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">EP</div>
+                            <div>
+                                <div class="fw-semibold">Elena Petrova</div>
+                                <small class="text-muted">UX Designer, Freelance</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. COMMUNITY STATS -->
+<section class="community-stats section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4 mb-md-0">
+                <div class="stat-item">
+                    <div class="display-3 fw-bold text-primary mb-2">1.2K+</div>
+                    <div class="h5 mb-0">Events Hosted</div>
+                    <small class="text-muted">Since 2020</small>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <div class="stat-item">
+                    <div class="display-3 fw-bold text-primary mb-2">45K+</div>
+                    <div class="h5 mb-0">Community Members</div>
+                    <small class="text-muted">And growing</small>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <div class="stat-item">
+                    <div class="display-3 fw-bold text-primary mb-2">98%</div>
+                    <div class="h5 mb-0">Satisfaction Rate</div>
+                    <small class="text-muted">Would recommend</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="display-3 fw-bold text-primary mb-2">120+</div>
+                    <div class="h5 mb-0">Cities Worldwide</div>
+                    <small class="text-muted">Global presence</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. SPEAKER CARDS -->
+<section class="speakers section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Featured Speakers</h2>
+            <p class="text-muted">Learn from industry experts</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Speaker Card 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/150?img=33" 
+                             alt="Speaker" 
+                             class="rounded-circle mb-3" 
+                             width="120" 
+                             height="120"
+                             style="object-fit: cover;">
+                        <h5 class="card-title mb-1">Dr. Anna Chen</h5>
+                        <p class="text-muted small mb-3">AI Research Lead, DeepMind</p>
+                        <p class="card-text small">Pioneer in neural network optimization and ethical AI development.</p>
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Speaker Card 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/150?img=12" 
+                             alt="Speaker" 
+                             class="rounded-circle mb-3" 
+                             width="120" 
+                             height="120"
+                             style="object-fit: cover;">
+                        <h5 class="card-title mb-1">Marcus Johnson</h5>
+                        <p class="text-muted small mb-3">CTO, CloudScale Inc</p>
+                        <p class="card-text small">Cloud architecture expert with 15+ years building distributed systems.</p>
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Speaker Card 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/150?img=47" 
+                             alt="Speaker" 
+                             class="rounded-circle mb-3" 
+                             width="120" 
+                             height="120"
+                             style="object-fit: cover;">
+                        <h5 class="card-title mb-1">Sofia Rodriguez</h5>
+                        <p class="text-muted small mb-3">VP Product, InnovateLabs</p>
+                        <p class="card-text small">Product strategy leader specializing in user-centric design and growth.</p>
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Speaker Card 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/150?img=68" 
+                             alt="Speaker" 
+                             class="rounded-circle mb-3" 
+                             width="120" 
+                             height="120"
+                             style="object-fit: cover;">
+                        <h5 class="card-title mb-1">James Park</h5>
+                        <p class="text-muted small mb-3">Security Expert, CyberShield</p>
+                        <p class="card-text small">Cybersecurity consultant helping companies build resilient systems.</p>
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. CALENDAR VIEW (Simple Month View) -->
+<section class="calendar-view section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Event Calendar</h2>
+            <p class="text-muted">See what's happening this month</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <!-- Calendar Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <button class="btn btn-outline-primary btn-sm">← Previous</button>
+                    <h4 class="mb-0">February 2025</h4>
+                    <button class="btn btn-outline-primary btn-sm">Next →</button>
+                </div>
+                
+                <!-- Calendar Grid (Simplified) -->
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-muted">27</td>
+                                <td class="text-muted">28</td>
+                                <td class="text-muted">29</td>
+                                <td class="text-muted">30</td>
+                                <td class="text-muted">31</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                                <td>14</td>
+                                <td class="bg-primary bg-opacity-10">
+                                    <div class="fw-bold">15</div>
+                                    <small class="text-primary d-block">AI Workshop</small>
+                                </td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td>18</td>
+                                <td>19</td>
+                                <td>20</td>
+                                <td>21</td>
+                                <td class="bg-primary bg-opacity-10">
+                                    <div class="fw-bold">22</div>
+                                    <small class="text-primary d-block">Design Meetup</small>
+                                </td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                                <td>28</td>
+                                <td class="text-muted">1</td>
+                                <td class="text-muted">2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-outline-primary">View All Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. PAST EVENTS GALLERY -->
+<section class="past-events section py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Recent Events</h2>
+            <p class="text-muted">Highlights from our community</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Gallery Item 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&h=300&fit=crop" 
+                         class="card-img-top" 
+                         alt="Past Event">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Completed</span>
+                        <h5 class="card-title">JavaScript Masterclass</h5>
+                        <p class="text-muted small mb-2">January 28, 2025 • 45 attendees</p>
+                        <p class="card-text small">An intensive deep-dive into modern JavaScript patterns and best practices.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Photos</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 2 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=300&fit=crop" 
+                         class="card-img-top" 
+                         alt="Past Event">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Completed</span>
+                        <h5 class="card-title">Cloud Architecture Workshop</h5>
+                        <p class="text-muted small mb-2">January 14, 2025 • 32 attendees</p>
+                        <p class="card-text small">Hands-on session building scalable cloud infrastructure from scratch.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Photos</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 3 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&h=300&fit=crop" 
+                         class="card-img-top" 
+                         alt="Past Event">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Completed</span>
+                        <h5 class="card-title">Tech Trends 2024 Recap</h5>
+                        <p class="text-muted small mb-2">January 7, 2025 • 68 attendees</p>
+                        <p class="card-text small">Year-end review of the biggest technology shifts and predictions for 2025.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Photos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================
+     TIER 3: ENHANCED EXPERIENCE
+     ========================================================= -->
+
+<!-- 11. MEMBER NETWORKING / WHO'S ATTENDING -->
+<section class="member-networking section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Connect With Attendees</h2>
+            <p class="text-muted">Start networking before the event</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Member Card 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/100?img=1" 
+                             alt="Member" 
+                             class="rounded-circle mb-3" 
+                             width="80" 
+                             height="80">
+                        <h6 class="card-title mb-1">Alex Thompson</h6>
+                        <p class="text-muted small mb-2">Full Stack Developer</p>
+                        <div class="mb-3">
+                            <span class="badge bg-light text-dark me-1">React</span>
+                            <span class="badge bg-light text-dark me-1">Node.js</span>
+                        </div>
+                        <p class="card-text small text-muted">Attending 3 upcoming events</p>
+                        <button class="btn btn-sm btn-primary w-100">Connect</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member Card 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/100?img=5" 
+                             alt="Member" 
+                             class="rounded-circle mb-3" 
+                             width="80" 
+                             height="80">
+                        <h6 class="card-title mb-1">Maria Garcia</h6>
+                        <p class="text-muted small mb-2">UX Designer</p>
+                        <div class="mb-3">
+                            <span class="badge bg-light text-dark me-1">Figma</span>
+                            <span class="badge bg-light text-dark me-1">Research</span>
+                        </div>
+                        <p class="card-text small text-muted">Attended 12 events</p>
+                        <button class="btn btn-sm btn-primary w-100">Connect</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member Card 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/100?img=8" 
+                             alt="Member" 
+                             class="rounded-circle mb-3" 
+                             width="80" 
+                             height="80">
+                        <h6 class="card-title mb-1">David Lee</h6>
+                        <p class="text-muted small mb-2">Product Manager</p>
+                        <div class="mb-3">
+                            <span class="badge bg-light text-dark me-1">Agile</span>
+                            <span class="badge bg-light text-dark me-1">Strategy</span>
+                        </div>
+                        <p class="card-text small text-muted">New member</p>
+                        <button class="btn btn-sm btn-primary w-100">Connect</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member Card 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://i.pravatar.cc/100?img=20" 
+                             alt="Member" 
+                             class="rounded-circle mb-3" 
+                             width="80" 
+                             height="80">
+                        <h6 class="card-title mb-1">Emma Wilson</h6>
+                        <p class="text-muted small mb-2">Data Scientist</p>
+                        <div class="mb-3">
+                            <span class="badge bg-light text-dark me-1">Python</span>
+                            <span class="badge bg-light text-dark me-1">ML</span>
+                        </div>
+                        <p class="card-text small text-muted">Attending 5 upcoming events</p>
+                        <button class="btn btn-sm btn-primary w-100">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary">View All Members</a>
+        </div>
+    </div>
+</section>
+
+<!-- 12. Q&A BOARD -->
+<section class="qa-board section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center mb-5">
+                    <h2>Event Q&A</h2>
+                    <p class="text-muted">Ask questions and get answers from organizers and attendees</p>
+                </div>
+                
+                <!-- Ask Question -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <textarea class="form-control mb-2" rows="3" placeholder="Ask a question about this event..."></textarea>
+                        <button class="btn btn-primary">Post Question</button>
+                    </div>
+                </div>
+                
+                <!-- Q&A Thread 1 -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex gap-3 mb-3">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--blue-300); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">JD</div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <div class="fw-semibold">John Doe</div>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                </div>
+                                <p class="mb-2">Will there be parking available at the venue?</p>
+                                
+                                <!-- Answer -->
+                                <div class="ms-4 mt-3 p-3 bg-light rounded">
+                                    <div class="d-flex gap-2 mb-2">
+                                        <div class="avatar" style="width: 32px; height: 32px; background: var(--accent-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 11px; flex-shrink: 0;">ORG</div>
+                                        <div>
+                                            <div class="fw-semibold small">Exponanta Team</div>
+                                            <small class="text-muted">Organizer • 1 hour ago</small>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0 small">Yes! Free parking is available for all attendees. The venue has a dedicated parking lot with 200+ spaces.</p>
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-link text-muted p-0">👍 Helpful (5)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Q&A Thread 2 -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--accent-coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">SM</div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <div class="fw-semibold">Sarah Martinez</div>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </div>
+                                </div>
+                                <p class="mb-2">What's the refund policy if I can't make it?</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-outline-primary">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-outline-primary">Load More Questions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 13. LIVE ACTIVITY FEED -->
+<section class="activity-feed section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="text-center mb-4">
+                    <h2>Live Activity</h2>
+                    <p class="text-muted">See what's happening right now</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Activity Item 1 -->
+                        <div class="d-flex gap-3 mb-3 pb-3 border-bottom">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--blue-300); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">MK</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1"><strong>Michael Kim</strong> just registered for <strong>AI Workshop</strong></p>
+                                <small class="text-muted">2 minutes ago</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item 2 -->
+                        <div class="d-flex gap-3 mb-3 pb-3 border-bottom">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--accent-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">EP</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1"><strong>Elena Petrova</strong> posted a comment on <strong>Design Meetup</strong></p>
+                                <small class="text-muted">15 minutes ago</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item 3 -->
+                        <div class="d-flex gap-3 mb-3 pb-3 border-bottom">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--accent-coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">JW</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1"><strong>James Wilson</strong> became a community member</p>
+                                <small class="text-muted">1 hour ago</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item 4 -->
+                        <div class="d-flex gap-3 mb-3 pb-3">
+                            <div class="avatar" style="width: 40px; height: 40px; background: var(--blue-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; flex-shrink: 0;">AL</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1"><strong>Anna Lee</strong> shared photos from <strong>JavaScript Masterclass</strong></p>
+                                <small class="text-muted">2 hours ago</small>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-sm btn-outline-primary">Load More Activity</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 14. VIDEO HERO (Alternative Hero) -->
+<section class="video-hero position-relative" style="height: 600px; overflow: hidden;">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+        <source src="https://cdn.coverr.co/videos/coverr-tech-conference-crowd-4157/1080p.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Overlay -->
+    <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(36, 70, 200, 0.7), rgba(36, 70, 200, 0.9)); top: 0; left: 0;"></div>
+    
+    <!-- Content -->
+    <div class="container position-relative h-100 d-flex align-items-center" style="z-index: 1;">
+        <div class="text-center text-white w-100">
+            <h1 class="display-2 fw-bold mb-4">Join The Movement</h1>
+            <p class="lead mb-4">Connect with innovators, learn from experts, and shape the future of technology.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <button class="btn btn-light btn-lg">Browse Events</button>
+                <button class="btn btn-outline-light btn-lg">Host An Event</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container py-5">
+        <article>
+            <!-- Blog Title -->
+            <header class="mb-5">
+                <h1 data-semantic="blog-title">Tech Community Events</h1>
+                <p data-semantic="blog-date" class="text-muted">January 2025</p>
+            </header>
+
+            <!-- Introduction -->
+            <section data-semantic="blog-intro" class="mb-5">
+                <p class="lead">Join our growing community of developers, designers, and tech enthusiasts. From hands-on workshops to networking meetups, there's something for everyone.</p>
+            </section>
+
+            <!-- Upcoming Events Grid -->
+            <section data-semantic="blog-section" class="mb-5">
+                <h2 data-semantic="blog-subtitle" class="mb-4">Upcoming Events</h2>
+                
+                <div class="row g-4">
+                    <!-- Event Card 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card event-card h-100">
+                            <!-- Hero Image -->
+                            <div class="event-card__hero">
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=400&fit=crop" alt="AI Workshop">
+                                <div class="event-card__status event-card__status--filling">Almost Full</div>
+                                <div class="event-card__date">
+                                    <span class="event-card__date-day">15</span>
+                                    <span class="event-card__date-month">FEB</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Body -->
+                            <div class="event-card__body">
+                                <div class="event-card__content">
+                                    <h3 class="event-card__title">AI & Machine Learning Workshop</h3>
+                                    
+                                    <div class="event-card__meta">
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                            </svg>
+                                            18:00 - 21:00
+                                        </div>
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                            </svg>
+                                            Online Event
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="event-card__description">
+                                        Hands-on workshop exploring the latest in AI and machine learning. Perfect for developers and data scientists.
+                                    </p>
+                                </div>
+                                
+                                <div class="event-card__footer">
+                                    <div class="avatar-stack">
+                                        <span class="avatar">JD</span>
+                                        <span class="avatar">SK</span>
+                                        <span class="avatar">AM</span>
+                                        <span class="avatar avatar-more">+15</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Card 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card event-card h-100">
+                            <!-- Hero Image -->
+                            <div class="event-card__hero">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop" alt="Design Meetup">
+                                <div class="event-card__date">
+                                    <span class="event-card__date-day">22</span>
+                                    <span class="event-card__date-month">FEB</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Body -->
+                            <div class="event-card__body">
+                                <div class="event-card__content">
+                                    <h3 class="event-card__title">Product Design Meetup</h3>
+                                    
+                                    <div class="event-card__meta">
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                            </svg>
+                                            19:00 - 22:00
+                                        </div>
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                            </svg>
+                                            Tech Hub, Moscow
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="event-card__description">
+                                        Monthly gathering for product designers to share insights, review portfolios, and discuss UX trends.
+                                    </p>
+                                </div>
+                                
+                                <div class="event-card__footer">
+                                    <div class="avatar-stack">
+                                        <span class="avatar">EL</span>
+                                        <span class="avatar">MK</span>
+                                        <span class="avatar avatar-more">+8</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Card 3 - Featured -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card event-card event-card--featured h-100">
+                            <!-- Hero Image -->
+                            <div class="event-card__hero">
+                                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=400&fit=crop" alt="Tech Summit">
+                                <div class="event-card__status event-card__status--featured">Featured</div>
+                                <div class="event-card__date">
+                                    <span class="event-card__date-day">05</span>
+                                    <span class="event-card__date-month">MAR</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Body -->
+                            <div class="event-card__body">
+                                <div class="event-card__content">
+                                    <h3 class="event-card__title">Tech Innovation Summit 2025</h3>
+                                    
+                                    <div class="event-card__meta">
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                            </svg>
+                                            09:00 - 18:00
+                                        </div>
+                                        <div class="event-card__meta-item">
+                                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                            </svg>
+                                            Skolkovo, Moscow
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="event-card__description">
+                                        Full-day conference featuring industry leaders, workshops, and networking. Early bird tickets available.
+                                    </p>
+                                </div>
+                                
+                                <div class="event-card__footer">
+                                    <div class="avatar-stack">
+                                        <span class="avatar">VK</span>
+                                        <span class="avatar">NP</span>
+                                        <span class="avatar">IR</span>
+                                        <span class="avatar avatar-more">+42</span>
+                                    </div>
+                                    <button class="btn btn-accent btn-sm">Get Tickets</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Past Events List -->
+            <section data-semantic="blog-section" class="mb-5">
+                <h2 data-semantic="blog-subtitle" class="mb-4">Past Events</h2>
+                
+                <div class="list-group event-list">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 align-items-center gap-3">
+                            <div class="event-list__date">
+                                <span class="event-list__date-day">28</span>
+                                <span class="event-list__date-month">JAN</span>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">JavaScript Framework Comparison</h6>
+                                <small class="text-muted">18:30 - 20:30 • 45 attendees</small>
+                            </div>
+                            <span class="badge badge-accent">Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 align-items-center gap-3">
+                            <div class="event-list__date">
+                                <span class="event-list__date-day">14</span>
+                                <span class="event-list__date-month">JAN</span>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Cloud Architecture Workshop</h6>
+                                <small class="text-muted">10:00 - 16:00 • 32 attendees</small>
+                            </div>
+                            <span class="badge badge-accent">Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 align-items-center gap-3">
+                            <div class="event-list__date">
+                                <span class="event-list__date-day">07</span>
+                                <span class="event-list__date-month">JAN</span>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Year in Review: Tech Trends 2024</h6>
+                                <small class="text-muted">19:00 - 21:00 • 68 attendees</small>
+                            </div>
+                            <span class="badge badge-accent">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Stats -->
+            <section data-semantic="blog-section" class="mb-5">
+                <h2 data-semantic="blog-subtitle" class="mb-4">Our Community</h2>
+                
+                <div class="card">
+                    <div class="card-body text-center p-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">127</div>
+                                <div class="text-muted">Members</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">24</div>
+                                <div class="text-muted">Events Hosted</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">1.2k</div>
+                                <div class="text-muted">Total Attendees</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary mt-4">Join Community</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section data-semantic="blog-section">
+                <h2 data-semantic="blog-subtitle">Stay Connected</h2>
+                <p>Don't miss out on upcoming events. Follow us to get notified about new workshops, meetups, and conferences.</p>
+            </section>
+        </article>
+    </main>
+
+
+    <!-- =========================================================
+         NAVBAR OPTION 1: CLEAN WHITE STICKY
+         ========================================================= -->
+    <nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Resources</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-sm btn-search">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-primary btn-sm">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================================================
+         NAVBAR OPTION 2: TRANSLUCENT BLUR
+         ========================================================= -->
+    <nav class="navbar navbar-option-2 navbar-expand-lg" style="display: none;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="navbar-brand-text">Exponanta</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav2">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur active" href="#">
+                            Events
+                            <span class="nav-accent"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">
+                            Community
+                            <span class="nav-accent"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">
+                            Calendar
+                            <span class="nav-accent"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-blur" href="#">
+                            Resources
+                            <span class="nav-accent"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-primary btn-sm px-4">Host Event</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================================================
+         HERO VARIANT 1: WHITE + IMAGE LEFT
+         ========================================================= -->
+    <section class="hero-variant-1 py-5">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=500&fit=crop" 
+                         alt="Community Event" 
+                         class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6">
+                    <div class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2">
+                        <svg width="16" height="16" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                        New Events Platform
+                    </div>
+                    <h1 class="display-3 mb-4">Connect, Learn, Grow Together</h1>
+                    <p class="lead text-muted mb-4">
+                        Join 45,000+ professionals at workshops, meetups, and conferences designed to accelerate your career and expand your network.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <button class="btn btn-primary btn-lg">
+                            Browse Events
+                            <svg width="18" height="18" fill="currentColor" class="ms-2" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg">Learn More</button>
+                    </div>
+                    <!-- Trust Indicators -->
+                    <div class="d-flex flex-wrap gap-4 pt-3 border-top">
+                        <div class="trust-stat">
+                            <div class="h5 mb-0 text-primary">1,200+</div>
+                            <small class="text-muted">Events</small>
+                        </div>
+                        <div class="trust-stat">
+                            <div class="h5 mb-0 text-primary">45K+</div>
+                            <small class="text-muted">Members</small>
+                        </div>
+                        <div class="trust-stat">
+                            <div class="h5 mb-0 text-primary">98%</div>
+                            <small class="text-muted">Satisfaction</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         HERO VARIANT 2: CENTERED WITH BACKGROUND IMAGE
+         ========================================================= -->
+    <section class="hero-variant-2">
+        <div class="hero-variant-2__overlay"></div>
+        <div class="hero-variant-2__content container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <span class="badge hero-badge mb-3">Upcoming in March</span>
+                    <h1 class="display-2 fw-bold mb-4">Tech Innovation Summit 2025</h1>
+                    <p class="lead mb-4 px-lg-5">
+                        Three days of cutting-edge insights, networking, and hands-on workshops with industry leaders from Google, Microsoft, and Tesla.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+                        <button class="btn btn-primary btn-lg px-5">
+                            Get Tickets
+                        </button>
+                        <button class="btn btn-outline-dark btn-lg px-5">
+                            View Agenda
+                        </button>
+                    </div>
+                    
+                    <!-- Event Meta -->
+                    <div class="hero-meta d-flex flex-wrap justify-content-center gap-4 text-muted">
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            <span>March 5-7, 2025</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            <span>Skolkovo, Moscow</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                            </svg>
+                            <span>500+ Attendees</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         HERO VARIANT 3: SPLIT WITH GRADIENT ACCENT
+         ========================================================= -->
+    <section class="hero-variant-3">
+        <div class="container py-5">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-5 order-lg-2">
+                    <div class="hero-variant-3__image-wrapper">
+                        <div class="hero-variant-3__gradient-blob"></div>
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&h=600&fit=crop" 
+                             alt="Conference" 
+                             class="hero-variant-3__image img-fluid">
+                        
+                        <!-- Floating Stats Card -->
+                        <div class="hero-variant-3__stats-card card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="hero-variant-3__stat-icon">
+                                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-primary">24</div>
+                                        <small class="text-muted">Events This Month</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7 order-lg-1">
+                    <div class="pe-lg-5">
+                        <div class="d-inline-flex align-items-center gap-2 bg-primary bg-opacity-10 rounded-pill px-3 py-2 mb-3">
+                            <span class="badge bg-primary rounded-circle" style="width: 8px; height: 8px;"></span>
+                            <small class="text-primary fw-semibold">Join 45K+ Members</small>
+                        </div>
+                        
+                        <h1 class="display-3 fw-bold mb-4">
+                            Your Next <span class="text-primary">Career Move</span> Starts Here
+                        </h1>
+                        
+                        <p class="lead text-muted mb-4">
+                            Access exclusive workshops, connect with industry leaders, and accelerate your professional growth through curated events.
+                        </p>
+                        
+                        <!-- Feature List -->
+                        <ul class="hero-variant-3__features list-unstyled mb-4">
+                            <li class="mb-3">
+                                <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16">
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                </svg>
+                                <strong>Expert-led workshops</strong> every week
+                            </li>
+                            <li class="mb-3">
+                                <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16">
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                </svg>
+                                <strong>Networking events</strong> with top professionals
+                            </li>
+                            <li class="mb-3">
+                                <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16">
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                </svg>
+                                <strong>Career resources</strong> and mentorship programs
+                            </li>
+                        </ul>
+                        
+                        <div class="d-flex flex-wrap gap-3">
+                            <button class="btn btn-primary btn-lg px-4">
+                                Get Started Free
+                            </button>
+                            <button class="btn btn-outline-secondary btn-lg px-4">
+                                Watch Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacer for demo purposes -->
+    <div style="height: 100vh;"></div>
+
+    <!-- =========================================================
+         FOOTER OPTION 1: SOFT BLUE GRADIENT
+         ========================================================= -->
+    <footer class="footer-option-1">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Brand Column -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold">Exponanta</h5>
+                    <p class="mb-4">Building communities through meaningful events and connections. Join thousands of professionals growing together.</p>
+                    
+                    <!-- Newsletter -->
+                    <div class="newsletter-signup">
+                        <label class="form-label small fw-semibold">Stay Updated</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Columns -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold">Events</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Browse Events</a></li>
+                        <li><a href="#">Host Event</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Calendar</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold">Community</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Members</a></li>
+                        <li><a href="#">Groups</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold">Support</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Safety</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold">Company</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social & Bottom Bar -->
+            <div class="footer-bottom pt-4 mt-4 border-top">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="d-flex gap-3">
+                            <a href="#" class="social-icon">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <small class="text-muted">
+                            © 2025 Exponanta. All rights reserved. 
+                            <a href="#" class="ms-3">Privacy</a>
+                            <a href="#" class="ms-3">Terms</a>
+                            <a href="#" class="ms-3">Cookies</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         FOOTER OPTION 2: DARK BLUE PROFESSIONAL
+         ========================================================= -->
+    <footer class="footer-option-2" style="display: none;">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
+                <!-- Brand Column -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                    <p class="mb-4 text-white-50">Empowering professionals through world-class events, networking, and continuous learning opportunities.</p>
+                    
+                    <!-- Newsletter -->
+                    <div class="newsletter-signup-dark">
+                        <label class="form-label small fw-semibold text-white">Get Event Updates</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                            <button class="btn btn-accent">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Links Columns -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading">Platform</h6>
+                    <ul class="list-unstyled footer-links-dark">
+                        <li><a href="#">Browse Events</a></li>
+                        <li><a href="#">Host Event</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Features</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading">Resources</h6>
+                    <ul class="list-unstyled footer-links-dark">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading">Company</h6>
+                    <ul class="list-unstyled footer-links-dark">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h6 class="mb-3 fw-semibold footer-heading">Legal</h6>
+                    <ul class="list-unstyled footer-links-dark">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="footer-bottom-dark pt-4 mt-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <small class="text-white-50">© 2025 Exponanta Technologies. All rights reserved.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex gap-2 justify-content-md-end">
+                            <a href="#" class="social-icon-dark">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon-dark">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon-dark">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon-dark">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+     FOOTER OPTION 3: DARK GRADIENT (MAIN BLUE)
+     ========================================================= -->
+<footer class="footer-option-3" >
+    <div class="container py-5">
+        <div class="row g-4 pb-4">
+            <!-- Brand Column -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="mb-3 fw-bold text-white">Exponanta</h5>
+                <p class="mb-4 text-white-50">Empowering professionals through world-class events, networking, and continuous learning opportunities.</p>
+                
+                <!-- Newsletter -->
+                <div class="newsletter-signup-gradient">
+                    <label class="form-label small fw-semibold text-white">Get Event Updates</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button class="btn btn-light">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Links Columns -->
+            <div class="col-6 col-lg-2">
+                <h6 class="mb-3 fw-semibold footer-heading-gradient">Platform</h6>
+                <ul class="list-unstyled footer-links-gradient">
+                    <li><a href="#">Browse Events</a></li>
+                    <li><a href="#">Host Event</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Features</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-6 col-lg-2">
+                <h6 class="mb-3 fw-semibold footer-heading-gradient">Resources</h6>
+                <ul class="list-unstyled footer-links-gradient">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-6 col-lg-2">
+                <h6 class="mb-3 fw-semibold footer-heading-gradient">Company</h6>
+                <ul class="list-unstyled footer-links-gradient">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Kit</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-6 col-lg-2">
+                <h6 class="mb-3 fw-semibold footer-heading-gradient">Legal</h6>
+                <ul class="list-unstyled footer-links-gradient">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="footer-bottom-gradient pt-4 mt-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <small class="text-white-50">© 2025 Exponanta Technologies. All rights reserved.</small>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-2 justify-content-md-end">
+                        <a href="#" class="social-icon-gradient">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon-gradient">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon-gradient">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon-gradient">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <!-- Scripts -->
+    <script src="https://fozak.github.io/yoursa.org/assets/js/_loader.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+/* =========================================================
+   HORIZONTAL EVENT LIST CARDS
+   Add this AFTER exponanta.css in your <head>
+   All selectors are scoped to .evh to avoid conflicts
+   ========================================================= */
+
+/* ── Card shell ── */
+.evh {
+  display: flex !important;          /* fight Bootstrap .card flex-direction:column */
+  flex-direction: row !important;
+  width: 90%;
+  min-height: 180px;
+  overflow: hidden;
+  /* inherits .card border-radius, shadow, border from exponanta.css §6 */
+}
+
+/* ── Image column ── */
+.evh__img {
+  position: relative;
+  flex: 0 0 220px;                   /* fixed width, won't shrink */
+  width: 220px;
+  align-self: stretch;               /* fill full card height */
+  overflow: hidden;
+}
+
+.evh__img img {
+  position: absolute;                /* pull out of flow so it doesn't push height */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Image overlay tint */
+.evh__img-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.evh--v1 .evh__img-overlay { background: rgba(36,70,200,.12); }
+.evh--v2 .evh__img-overlay { background: linear-gradient(to right, rgba(20,20,40,.45), rgba(36,70,200,.1)); }
+.evh--v3 .evh__img-overlay { background: linear-gradient(to right, rgba(36,70,200,.35) 0%, rgba(79,209,197,.12) 100%); }
+
+/* ── Reuse existing .event-card__date — only override position ── */
+/* exponanta.css puts it bottom:12px left:12px — we move it to top-left */
+.evh .event-card__date {
+  top: 14px !important;
+  bottom: auto !important;
+  left: 14px !important;
+  z-index: 2;
+}
+
+/* ── Status pill stays top-right (already correct in exponanta.css) ── */
+.evh .event-card__status {
+  z-index: 2;
+}
+
+/* ── Vertical stripe (V3 only) ── */
+.evh__stripe {
+  flex: 0 0 4px;
+  width: 4px;
+  align-self: stretch;
+  background: linear-gradient(to bottom, var(--blue-700), var(--accent-teal));
+}
+
+/* ── Body column ── */
+.evh__body {
+  flex: 1 1 0;
+  min-width: 0;                      /* prevent overflow in flex */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+}
+
+/* Kicker label (V3) */
+.evh__kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--accent-coral);
+  line-height: 1;
+}
+
+/* ── Title + tags row ── */
+.evh__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.evh__title {
+  font-size: 22px !important;        /* override h3 from exponanta.css §4 (30px) */
+  font-weight: 700;
+  color: var(--blue-700);
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* ── Tags — right of title ── */
+.evh__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+  align-items: flex-start;
+  padding-top: 3px;
+}
+
+.evh__tags .etag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.evh__tags .etag--free  { background: var(--neutral-0); color: var(--neutral-600); border: 1.5px solid var(--neutral-400); }
+.evh__tags .etag--blue  { background: var(--blue-100);  color: var(--blue-700); border: none; }
+.evh__tags .etag--teal  { background: rgba(79,209,197,.15); color: #1a8a80; border: none; }
+.evh__tags .etag--coral { background: rgba(255,111,97,.12); color: #c9392e; border: none; }
+
+/* ── Description ── */
+.evh__desc {
+  font-size: var(--text-sm);
+  color: var(--neutral-600);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Meta row ── */
+.evh__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: var(--text-sm);
+  color: var(--neutral-600);
+}
+
+.evh__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Footer: buttons LEFT, avatars RIGHT ── */
+.evh__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(36,70,200,.07);
+  margin-top: auto;
+}
+
+.evh__btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Calendar — coral outline */
+.btn-ev-cal {
+  display: inline-flex !important;   /* fight .btn display issues */
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border: 1.5px solid var(--accent-coral) !important;
+  color: var(--accent-coral) !important;
+  background: transparent !important;
+  cursor: pointer;
+  line-height: 1;
+  transition: background .15s, color .15s, transform .15s !important;
+}
+.btn-ev-cal:hover {
+  background: var(--accent-coral) !important;
+  color: var(--neutral-0) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Connect — gradient fill (same look as .btn-primary) */
+.btn-ev-connect {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  background: var(--gradient-primary) !important;
+  color: var(--neutral-0) !important;
+  border: none !important;
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity .15s, transform .15s !important;
+}
+.btn-ev-connect:hover {
+  opacity: .88 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Avatar label */
+.evh .av-label {
+  font-size: 12px;
+  color: var(--neutral-600);
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+/* Variant accents */
+.evh--v2 {
+  border-left: 3px solid var(--blue-700) !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .evh {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .evh__img {
+    flex: none;
+    width: 100%;
+    height: 180px;
+    position: relative;             /* restore for stacked layout */
+  }
+
+  .evh__img img {
+    position: absolute;
+  }
+
+  .evh__stripe {
+    width: 100%;
+    height: 4px;
+  }
+
+  .evh__title-row {
+    flex-direction: column;
+  }
+
+  .evh__title {
+    font-size: 18px !important;
+  }
+}

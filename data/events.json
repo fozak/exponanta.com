@@ -1,0 +1,42 @@
+[ 
+    {
+  "id": "event03032619",
+  "title": "All of Scarlatti’s Sonatas",
+  "description": "Students in the Pianos department present Scarlatti Sonatas: K.90 through K.120.",
+  "image": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=300&fit=crop",
+  "status": "",
+  "tags": ["Free", "Concert", "In-Person"],
+  "location": "Jordan Hall, Boston",
+  "going": 0,
+  "avatars": [],
+  "calendar": {
+    "google": "http://www.google.com/calendar/event?action=TEMPLATE&text=All+of+Scarlatti%27s+Sonatas+at+New+England+Conservatory&dates=20260304T003000Z/20260304T003000Z&sprop=website:https%3A%2F%2Fwww.classical-scene.com&sprop=name:All+of+Scarlatti%27s+Sonatas&location=New+England+Conservatory%2C+Jordan+Hall%2C+Boston%2C+US&details=Notes%3A+Students+in+the+Pianos+department+present%0D%0AScarlatti+Sonatas:+K.90+through+K.120+All+Ages&trp=true",
+    "ical": "https://www.classical-scene.com/?feed=gigpress-ical&show_id=25477"
+  },
+  "presenter": "New England Conservatory",
+  "city": "Boston",
+  "source": "boster.org"
+},
+  {
+    "id": "event03082617",
+    "title": "AI & Machine Learning Workshop",
+    "description": "Hands-on workshop exploring the latest in AI and machine learning.",
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop",
+    "status": "filling",
+    "tags": ["Free", "Workshop", "Online"],
+    "location": "InnoHub, Cambridge",
+    "going": 18,
+    "avatars": ["JD", "SK", "AM"]
+  },
+  {
+    "id": "event03052609",
+    "title": "Tech Innovation Summit 2025",
+    "description": "Full-day conference featuring industry leaders.",
+    "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop",
+    "status": "featured",
+    "tags": ["Paid", "Conference", "In-Person"],
+    "location": "Skolkovo, Moscow",
+    "going": 45,
+    "avatars": ["VK", "NP", "IR"]
+  }
+]

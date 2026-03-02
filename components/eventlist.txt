@@ -1,0 +1,19 @@
+ Almost Full          Workshop · Online
+15 FEB                AI & Machine Learning Workshop
+                      Full-day conference featuring industry leaders, workshops, and networking. Early bird tickets available.
+                      18:00 – 21:00 
+                      InnoHub, Camridget, 45 going
+                      Add to Calendar       + Connect            AVATARS
+18 going
+Hands-on workshop exploring the latest in AI and machine learning. Perfect for developers and data scientists.
+
+
+I think. entire list item should be 10% narrower 
+1) the DATE square over image should be bigger (like 50% of the image)
+
+ then Title is 30% bigger, 
+ tags to the right of title 20% bigger, buttons 20% bigger at the bottom left. 
+ 
+ Add to calendar button is coral color
+
+ give 3 variants
