@@ -61,11 +61,18 @@
 
 
 <script>
+// ===============================
+// CONFIG
+// ===============================
+const EVENTS_JSON_URL = "/data/events.json";
+
 const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-// 🔹 Parse event03082617
+// ===============================
+// Parse event03082617
+// ===============================
 function parseEventId(id) {
-  const m = id.match(/event(\d{2})(\d{2})(\d{2})(\d{2})/);
+  const m = id?.match(/event(\d{2})(\d{2})(\d{2})(\d{2})/);
   if (!m) return null;
 
   const month = parseInt(m[1], 10) - 1;
@@ -79,49 +86,76 @@ function parseEventId(id) {
     day,
     monthLabel: MONTHS[month],
     weekday: date.toLocaleDateString("en-US", { weekday: "short" }),
-    timeLabel: `${hour.toString().padStart(2,"0")}:00`
+    timeLabel: `${hour.toString().padStart(2,"0")}:00`,
+    ts: date.getTime()
   };
 }
 
-// 🔹 status → label
+// ===============================
+// Status label
+// ===============================
 function statusLabel(status) {
   if (status === "filling") return "Almost Full";
   if (status === "featured") return "Featured";
   return "";
 }
 
-// 🔹 tag → css
+// ===============================
+// Tag → CSS
+// ===============================
 function tagClass(tag) {
   if (tag === "Free") return "etag--free";
   if (tag === "Paid") return "etag--coral";
-  if (tag === "Workshop" || tag === "Conference" || tag === "Meetup") return "etag--blue";
-  if (tag === "Online" || tag === "In-Person") return "etag--teal";
+  if (["Workshop","Conference","Meetup","Concert"].includes(tag)) return "etag--blue";
+  if (["Online","In-Person"].includes(tag)) return "etag--teal";
   return "";
 }
 
-// 🔹 render one card
+// ===============================
+// Escape HTML (safety)
+// ===============================
+function esc(str) {
+  return (str ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+// ===============================
+// Render one card
+// ===============================
 function renderEventCard(ev) {
   const d = parseEventId(ev.id);
   if (!d) return "";
 
+  // status
   const statusHtml = ev.status
     ? `<div class="event-card__status event-card__status--${ev.status}">
          ${statusLabel(ev.status)}
        </div>`
     : "";
 
-  const tagsHtml = ev.tags
-    .map(t => `<span class="etag ${tagClass(t)}">${t}</span>`)
+  // tags
+  const tagsHtml = (ev.tags || [])
+    .map(t => `<span class="etag ${tagClass(t)}">${esc(t)}</span>`)
     .join("");
 
-  const avatarsHtml = ev.avatars
-    .map(a => `<span class="avatar">${a}</span>`)
+  // avatars
+  const avatarsHtml = (ev.avatars || [])
+    .map(a => `<span class="avatar">${esc(a)}</span>`)
     .join("");
+
+  const moreCount = Math.max(0, (ev.going || 0) - (ev.avatars?.length || 0));
+
+  // calendar button
+  const calendarBtn = ev.calendar?.google
+    ? `<a class="btn-ev-cal" href="${ev.calendar.google}" target="_blank" rel="noopener">Add to Calendar</a>`
+    : `<button class="btn-ev-cal">Add to Calendar</button>`;
 
   return `
 <div class="card event-card evh evh--v1 mb-3">
   <div class="evh__img">
-    <img src="${ev.image}" alt="${ev.title}">
+    <img src="${esc(ev.image)}" alt="${esc(ev.title)}">
     <div class="evh__img-overlay"></div>
     ${statusHtml}
     <div class="event-card__date">
@@ -132,44 +166,62 @@ function renderEventCard(ev) {
 
   <div class="evh__body">
     <div class="evh__title-row">
-      <h3 class="evh__title">${ev.title}</h3>
+      <h3 class="evh__title">${esc(ev.title)}</h3>
       <div class="evh__tags">${tagsHtml}</div>
     </div>
 
-    <p class="evh__desc">${ev.description}</p>
+    <p class="evh__desc">${esc(ev.description)}</p>
 
     <div class="evh__meta">
       <div class="evh__meta-item">
         ${d.weekday}, ${d.monthLabel} ${d.day} · ${d.timeLabel}
       </div>
-      <div class="evh__meta-item">${ev.location}</div>
-      <div class="evh__meta-item">${ev.going} going</div>
+      <div class="evh__meta-item">${esc(ev.location)}</div>
+      <div class="evh__meta-item">${ev.going || 0} going</div>
     </div>
 
     <div class="evh__footer">
       <div class="evh__btns">
         ${calendarBtn}
-<button class="btn-ev-connect">Connect</button>
+        <button class="btn-ev-connect">Connect</button>
       </div>
       <div class="avatar-stack">
         ${avatarsHtml}
-        <span class="avatar avatar-more">+${Math.max(0, ev.going - ev.avatars.length)}</span>
-        <span class="av-label">${ev.going} going</span>
+        ${moreCount > 0 ? `<span class="avatar avatar-more">+${moreCount}</span>` : ""}
+        <span class="av-label">${ev.going || 0} going</span>
       </div>
     </div>
   </div>
-</div>
-`;
+</div>`;
 }
 
-// 🔹 load JSON
-fetch("/data/events.json")
-  .then(r => r.json())
-  .then(events => {
+// ===============================
+// Load + render
+// ===============================
+async function loadEvents() {
+  try {
+    const res = await fetch(EVENTS_JSON_URL);
+    const events = await res.json();
+
+    // sort by date ascending
+    events.sort((a,b) => {
+      const da = parseEventId(a.id)?.ts || 0;
+      const db = parseEventId(b.id)?.ts || 0;
+      return da - db;
+    });
+
     const html = events.map(renderEventCard).join("");
     document.getElementById("events-container").innerHTML = html;
-  })
-  .catch(err => console.error("Events load error:", err));
+
+  } catch (err) {
+    console.error("Events load error:", err);
+    document.getElementById("events-container").innerHTML =
+      `<div class="text-muted">Events unavailable</div>`;
+  }
+}
+
+// ===============================
+document.addEventListener("DOMContentLoaded", loadEvents);
 </script>
 
 
