@@ -132,10 +132,8 @@ function isImagePath(value) {
 function getInitials(value) {
   if (!value) return "?";
 
-  // short value like PH → use directly
   if (value.length <= 3 && !value.includes("/")) return value.toUpperCase();
 
-  // extract from filename
   const file = value.split("/").pop();
   const name = file.split(".")[0];
 
@@ -164,7 +162,6 @@ function avatarHtml(value) {
     `;
   }
 
-  // raw initials / short string
   return `<span class="avatar">${getInitials(value)}</span>`;
 }
 
@@ -199,6 +196,15 @@ function renderEventCard(ev) {
     ? `<a class="btn-ev-register" href="${ev.registerUrl}" target="_blank" rel="noopener">Register</a>`
     : "";
 
+  const connectBtn = ev.connectUrl
+    ? `<a class="btn-ev-connect" href="${ev.connectUrl}" target="_blank" rel="noopener">Connect</a>`
+    : `<button class="btn-ev-connect">Connect</button>`;
+
+  // Title clickable (registerUrl)
+  const titleHtml = ev.registerUrl
+    ? `<a href="${ev.registerUrl}" target="_blank" rel="noopener">${esc(ev.title)}</a>`
+    : esc(ev.title);
+
   return `
 <div class="card event-card evh evh--v1 mb-3">
   <div class="evh__img">
@@ -213,7 +219,7 @@ function renderEventCard(ev) {
 
   <div class="evh__body">
     <div class="evh__title-row">
-      <h3 class="evh__title">${esc(ev.title)}</h3>
+      <h3 class="evh__title">${titleHtml}</h3>
       <div class="evh__tags">${tagsHtml}</div>
     </div>
 
@@ -231,7 +237,7 @@ function renderEventCard(ev) {
       <div class="evh__btns">
         ${calendarBtn}
         ${registerBtn}
-        <button class="btn-ev-connect">Connect</button>
+        ${connectBtn}
       </div>
       <div class="avatar-stack">
         ${avatarsHtml}
@@ -267,7 +273,6 @@ async function loadEvents() {
   }
 }
 
-// =====================================================
 document.addEventListener("DOMContentLoaded", loadEvents);
 </script>
 

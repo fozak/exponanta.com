@@ -17,8 +17,9 @@
     "google": "http://www.google.com/calendar/event?action=TEMPLATE&text=All+of+Scarlatti%27s+Sonatas+at+New+England+Conservatory&dates=20260304T003000Z/20260304T003000Z&sprop=website:https%3A%2F%2Fwww.classical-scene.com&sprop=name:All+of+Scarlatti%27s+Sonatas&location=New+England+Conservatory%2C+Jordan+Hall%2C+Boston%2C+US&details=Notes%3A+Students+in+the+Pianos+department+present%0D%0AScarlatti+Sonatas:+K.90+through+K.120+All+Ages&trp=true",
     "ical": "https://www.classical-scene.com/?feed=gigpress-ical&show_id=25477"
   },
-   "registerUrl": "https://boster.org/register/event03032619",
-  "presenter": "New England Conservatory",
+   "registerUrl": "https://necmusic.edu/events/nec-piano-department-concert-no-4-scarlatti-sonatas/",
+  "connectUrl": "https://www.linkedin.com/in/dennis-didkovski/",
+   "presenter": "New England Conservatory",
   "city": "Boston",
   "source": "boster.org"
 },
@@ -43,5 +44,24 @@
     "location": "Skolkovo, Moscow",
     "going": 45,
     "avatars": ["VK", "NP", "IR"]
+  },
+{
+    "id": "event03102620",
+    "title": "Commmunity at the concert: Jingtong Zhang '26 BM, Harp",
+    "description": "NEC's students meet one-on-one each week with a faculty artist to perfect their craft. As each one leaves NEC to make their mark in the performance world, they present a full, professional recital that is free and open to the public.",
+    "image": "https://www.bowdoinfestival.org/contents/media/2020/06/junehan-800x425.jpg",
+    "status": "",
+    "tags": ["Free","In-Person"],
+    "location": "Eben Jordan Hall, Boston",
+    "going": 3,
+    "avatars": ["/images/dennis-didkovskiy.jpg","/images/elena-logacheva.jpg","PH"],
+    "calendar": {
+      "google": "http://www.google.com/calendar/event?action=TEMPLATE&text=Recital+Jingtong+Zhang+%2726+BM,+Harp&dates=20260310T200000/20260310T220000&location=Eben+Jordan+Hall,+Boston,+US&details=Free+professional+harp+recital+presented+by+NEC+students&trp=true"
+    },
+    "registerUrl": "https://necmusic.edu/events/recital-jingtong-zhang-26-bm-harp/",
+    "connectUrl": "https://www.linkedin.com/in/dennis-didkovski/",
+    "presenter": "New England Conservatory",
+    "city": "Boston",
+    "source": "boster.org"
   }
 ]
