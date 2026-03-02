@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>Tech Community Events | Exponanta</title>
-    <meta name="description" content="Join our community events, workshops, and meetups focused on technology and innovation.">
-    <link rel="canonical" href="https://exponanta.com/blog/events.html">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Structured Data (Article Schema) -->
-    <script type="application/ld+json">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>Tech Community Events | Exponanta</title>
+  <meta name="description"
+    content="Join our community events, workshops, and meetups focused on technology and innovation.">
+  <link rel="canonical" href="https://exponanta.com/blog/events.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Structured Data (Article Schema) -->
+  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -36,161 +38,210 @@
         }
     }
     </script>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
-    
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/brandbook/exponanta.css" rel="stylesheet">
-    <link href="/brandbook/cards.css" rel="stylesheet">
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLH4990V1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag("js", new Date());
-        gtag("config", "G-NSLH4990V1");
-    </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/brandbook/exponanta.css" rel="stylesheet">
+  <link href="/brandbook/cards.css" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLH4990V1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-NSLH4990V1");
+  </script>
 </head>
 
 
 <body>
-<div id="events-container"></div>
+  <div id="events-container"></div>
 
 
-<script>
-// =====================================================
-// CONFIG
-// =====================================================
-const EVENTS_JSON_URL = "/data/events.json";
-const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  <script>
+    // =====================================================
+    // CONFIG
+    // =====================================================
+    const EVENTS_JSON_URL = "/data/events.json";
+    const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
-// =====================================================
-// ESCAPE HTML (safety)
-// =====================================================
-function esc(str) {
-  return (str ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
-}
+    // =====================================================
+    // ESCAPE HTML (safety)
+    // =====================================================
+    function esc(str) {
+      return (str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
 
-// =====================================================
-// PARSE eventMMDDYYHH
-// =====================================================
-function parseEventId(id) {
-  const m = id?.match(/event(\d{2})(\d{2})(\d{2})(\d{2})/);
-  if (!m) return null;
+    // =====================================================
+    // PARSE eventMMDDYYHH
+    // =====================================================
+    function parseEventId(id) {
+      const m = id?.match(/event(\d{2})(\d{2})(\d{2})(\d{2})/);
+      if (!m) return null;
 
-  const month = parseInt(m[1], 10) - 1;
-  const day = parseInt(m[2], 10);
-  const year = 2000 + parseInt(m[3], 10);
-  const hour = parseInt(m[4], 10);
+      const month = parseInt(m[1], 10) - 1;
+      const day = parseInt(m[2], 10);
+      const year = 2000 + parseInt(m[3], 10);
+      const hour = parseInt(m[4], 10);
 
-  const date = new Date(year, month, day, hour);
+      const date = new Date(year, month, day, hour);
 
-  return {
-    day,
-    monthLabel: MONTHS[month],
-    weekday: date.toLocaleDateString("en-US", { weekday: "short" }),
-    timeLabel: `${hour.toString().padStart(2,"0")}:00`,
-    ts: date.getTime()
-  };
-}
+      return {
+        day,
+        monthLabel: MONTHS[month],
+        weekday: date.toLocaleDateString("en-US", { weekday: "short" }),
+        timeLabel: `${hour.toString().padStart(2, "0")}:00`,
+        ts: date.getTime()
+      };
+    }
 
-// =====================================================
-// STATUS LABEL
-// =====================================================
-function statusLabel(status) {
-  if (status === "filling") return "Almost Full";
-  if (status === "featured") return "Featured";
-  return "";
-}
+    // =====================================================
+    // STATUS LABEL
+    // =====================================================
+    function statusLabel(status) {
+      if (status === "filling") return "Almost Full";
+      if (status === "featured") return "Featured";
+      return "";
+    }
 
-// =====================================================
-// TAG → CSS
-// =====================================================
-function tagClass(tag) {
-  if (tag === "Free") return "etag--free";
-  if (tag === "Paid") return "etag--coral";
-  if (["Workshop","Conference","Meetup","Concert"].includes(tag)) return "etag--blue";
-  if (["Online","In-Person"].includes(tag)) return "etag--teal";
-  return "";
-}
+    // =====================================================
+    // TAG → CSS
+    // =====================================================
+    function tagClass(tag) {
+      if (tag === "Free") return "etag--free";
+      if (tag === "Paid") return "etag--coral";
+      if (["Workshop", "Conference", "Meetup", "Concert"].includes(tag)) return "etag--blue";
+      if (["Online", "In-Person"].includes(tag)) return "etag--teal";
+      return "";
+    }
 
-// =====================================================
-// INITIALS FROM IMAGE PATH
-// images/denis-didkovsky.jpg → DD
-// =====================================================
-function getInitialsFromPath(path) {
-  if (!path) return "?";
+    // =====================================================
+    // INITIALS FROM IMAGE PATH
+    // images/denis-didkovsky.jpg → DD
+    // =====================================================
+    function getInitialsFromPath(path) {
+      if (!path) return "?";
 
-  const file = path.split("/").pop();
-  const name = file.split(".")[0];
-  const parts = name.split(/[-_ ]+/);
+      const file = path.split("/").pop();
+      const name = file.split(".")[0];
+      const parts = name.split(/[-_ ]+/);
 
-  const initials = parts
-    .filter(Boolean)
-    .map(p => p[0].toUpperCase())
-    .slice(0, 2)
-    .join("");
+      const initials = parts
+        .filter(Boolean)
+        .map(p => p[0].toUpperCase())
+        .slice(0, 2)
+        .join("");
 
-  return initials || "?";
-}
+      return initials || "?";
+    }
 
-// =====================================================
-// AVATAR HTML (image → fallback initials)
-// =====================================================
-function avatarHtml(path) {
-  const initials = getInitialsFromPath(path);
+    // ===============================
+    // Detect if value is image path
+    // ===============================
+    function isImagePath(value) {
+      return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(value);
+    }
 
-  return `
+    // ===============================
+    // Extract initials from string
+    // ===============================
+    function getInitials(value) {
+      if (!value) return "?";
+
+      // If already short like "PH"
+      if (value.length <= 3 && !value.includes("/")) {
+        return value.toUpperCase();
+      }
+
+      // If path → extract filename
+      const file = value.split("/").pop();
+      const name = file.split(".")[0];
+
+      const parts = name.split(/[-_ ]+/);
+
+      const initials = parts
+        .filter(Boolean)
+        .map(p => p[0].toUpperCase())
+        .slice(0, 2)
+        .join("");
+
+      return initials || "?";
+    }
+
+    // =====================================================
+    // AVATAR HTML (image → fallback initials)
+    // =====================================================
+    // ===============================
+    // Avatar renderer (mixed support)
+    // ===============================
+    function avatarHtml(value) {
+      if (!value) return "";
+
+      // Case 1: Image path
+      if (isImagePath(value)) {
+        const initials = getInitials(value);
+
+        return `
+      <span class="avatar">
+        <img src="${value}"
+             alt=""
+             loading="lazy"
+             onerror="this.remove(); this.parentNode.textContent='${initials}'">
+      </span>
+    `;
+      }
+
+      // Case 2: Raw initials or name
+      return `
     <span class="avatar">
-      <img src="${esc(path)}"
-           alt=""
-           loading="lazy"
-           onerror="this.remove(); this.parentNode.textContent='${initials}'">
+      ${getInitials(value)}
     </span>
   `;
-}
+    }
 
-// =====================================================
-// RENDER ONE CARD
-// =====================================================
-function renderEventCard(ev) {
-  const d = parseEventId(ev.id);
-  if (!d) return "";
 
-  const statusHtml = ev.status
-    ? `<div class="event-card__status event-card__status--${ev.status}">
+    // =====================================================
+    // RENDER ONE CARD
+    // =====================================================
+    function renderEventCard(ev) {
+      const d = parseEventId(ev.id);
+      if (!d) return "";
+
+      const statusHtml = ev.status
+        ? `<div class="event-card__status event-card__status--${ev.status}">
          ${statusLabel(ev.status)}
        </div>`
-    : "";
+        : "";
 
-  const tagsHtml = (ev.tags || [])
-    .map(t => `<span class="etag ${tagClass(t)}">${esc(t)}</span>`)
-    .join("");
+      const tagsHtml = (ev.tags || [])
+        .map(t => `<span class="etag ${tagClass(t)}">${esc(t)}</span>`)
+        .join("");
 
-  const avatarsHtml = (ev.avatars || [])
-    .map(avatarHtml)
-    .join("");
+      const avatarsHtml = (ev.avatars || [])
+        .map(avatarHtml)
+        .join("");
 
-  const moreCount = Math.max(0, (ev.going || 0) - (ev.avatars?.length || 0));
+      const moreCount = Math.max(0, (ev.going || 0) - (ev.avatars?.length || 0));
 
-  const calendarBtn = ev.calendar?.google
-    ? `<a class="btn-ev-cal" href="${ev.calendar.google}" target="_blank" rel="noopener">Add to Calendar</a>`
-    : `<button class="btn-ev-cal">Add to Calendar</button>`;
+      const calendarBtn = ev.calendar?.google
+        ? `<a class="btn-ev-cal" href="${ev.calendar.google}" target="_blank" rel="noopener">Add to Calendar</a>`
+        : `<button class="btn-ev-cal">Add to Calendar</button>`;
 
-  return `
+      return `
 <div class="card event-card evh evh--v1 mb-3">
   <div class="evh__img">
     <img src="${esc(ev.image)}" alt="${esc(ev.title)}">
     <div class="evh__img-overlay"></div>
     ${statusHtml}
     <div class="event-card__date">
-      <span class="event-card__date-day">${String(d.day).padStart(2,"0")}</span>
+      <span class="event-card__date-day">${String(d.day).padStart(2, "0")}</span>
       <span class="event-card__date-month">${d.monthLabel}</span>
     </div>
   </div>
@@ -214,6 +265,9 @@ function renderEventCard(ev) {
     <div class="evh__footer">
       <div class="evh__btns">
         ${calendarBtn}
+        <a class="btn-ev-register" href="${ev.registerUrl || '#'}" target="_blank" rel="noopener">
+    Register
+  </a>
         <button class="btn-ev-connect">Connect</button>
       </div>
       <div class="avatar-stack">
@@ -224,39 +278,40 @@ function renderEventCard(ev) {
     </div>
   </div>
 </div>`;
-}
+    }
 
-// =====================================================
-// LOAD + SORT + RENDER
-// =====================================================
-async function loadEvents() {
-  try {
-    const res = await fetch(EVENTS_JSON_URL);
-    const events = await res.json();
+    // =====================================================
+    // LOAD + SORT + RENDER
+    // =====================================================
+    async function loadEvents() {
+      try {
+        const res = await fetch(EVENTS_JSON_URL);
+        const events = await res.json();
 
-    // sort by event date
-    events.sort((a,b) => {
-      const da = parseEventId(a.id)?.ts || 0;
-      const db = parseEventId(b.id)?.ts || 0;
-      return da - db;
-    });
+        // sort by event date
+        events.sort((a, b) => {
+          const da = parseEventId(a.id)?.ts || 0;
+          const db = parseEventId(b.id)?.ts || 0;
+          return da - db;
+        });
 
-    const html = events.map(renderEventCard).join("");
-    document.getElementById("events-container").innerHTML = html;
+        const html = events.map(renderEventCard).join("");
+        document.getElementById("events-container").innerHTML = html;
 
-  } catch (err) {
-    console.error("Events load error:", err);
-    document.getElementById("events-container").innerHTML =
-      `<div class="text-muted">Events unavailable</div>`;
-  }
-}
+      } catch (err) {
+        console.error("Events load error:", err);
+        document.getElementById("events-container").innerHTML =
+          `<div class="text-muted">Events unavailable</div>`;
+      }
+    }
 
-// =====================================================
-document.addEventListener("DOMContentLoaded", loadEvents);
-</script>
+    // =====================================================
+    document.addEventListener("DOMContentLoaded", loadEvents);
+  </script>
 
 
-    <!-- Scripts -->
-    <script src="https://fozak.github.io/yoursa.org/assets/js/_loader.js" defer></script>
+  <!-- Scripts -->
+  <script src="https://fozak.github.io/yoursa.org/assets/js/_loader.js" defer></script>
 </body>
+
 </html>

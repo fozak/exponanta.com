@@ -246,6 +246,27 @@
   object-fit: cover;
 }
 
+
+.btn-ev-register {
+  background: #ff7f50;       /* example coral shade */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s;
+}
+
+.btn-ev-register:hover {
+  background: #ff6230;
+}
+
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .evh {
