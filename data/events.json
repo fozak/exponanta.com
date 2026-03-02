@@ -8,7 +8,11 @@
   "tags": ["Free", "Concert", "In-Person"],
   "location": "Jordan Hall, Boston",
   "going": 3,
-  "avatars": ["EL", "DD", "AM"],
+  "avatars": 
+  ["/images/dennis-didkovskiy.jpg",
+   "/images/elena-logacheva.jpg",
+"PH"],
+
   "calendar": {
     "google": "http://www.google.com/calendar/event?action=TEMPLATE&text=All+of+Scarlatti%27s+Sonatas+at+New+England+Conservatory&dates=20260304T003000Z/20260304T003000Z&sprop=website:https%3A%2F%2Fwww.classical-scene.com&sprop=name:All+of+Scarlatti%27s+Sonatas&location=New+England+Conservatory%2C+Jordan+Hall%2C+Boston%2C+US&details=Notes%3A+Students+in+the+Pianos+department+present%0D%0AScarlatti+Sonatas:+K.90+through+K.120+All+Ages&trp=true",
     "ical": "https://www.classical-scene.com/?feed=gigpress-ical&show_id=25477"

@@ -61,16 +61,25 @@
 
 
 <script>
-// ===============================
+// =====================================================
 // CONFIG
-// ===============================
+// =====================================================
 const EVENTS_JSON_URL = "/data/events.json";
-
 const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-// ===============================
-// Parse event03082617
-// ===============================
+// =====================================================
+// ESCAPE HTML (safety)
+// =====================================================
+function esc(str) {
+  return (str ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+// =====================================================
+// PARSE eventMMDDYYHH
+// =====================================================
 function parseEventId(id) {
   const m = id?.match(/event(\d{2})(\d{2})(\d{2})(\d{2})/);
   if (!m) return null;
@@ -91,18 +100,18 @@ function parseEventId(id) {
   };
 }
 
-// ===============================
-// Status label
-// ===============================
+// =====================================================
+// STATUS LABEL
+// =====================================================
 function statusLabel(status) {
   if (status === "filling") return "Almost Full";
   if (status === "featured") return "Featured";
   return "";
 }
 
-// ===============================
-// Tag → CSS
-// ===============================
+// =====================================================
+// TAG → CSS
+// =====================================================
 function tagClass(tag) {
   if (tag === "Free") return "etag--free";
   if (tag === "Paid") return "etag--coral";
@@ -111,43 +120,65 @@ function tagClass(tag) {
   return "";
 }
 
-// ===============================
-// Escape HTML (safety)
-// ===============================
-function esc(str) {
-  return (str ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
+// =====================================================
+// INITIALS FROM IMAGE PATH
+// images/denis-didkovsky.jpg → DD
+// =====================================================
+function getInitialsFromPath(path) {
+  if (!path) return "?";
+
+  const file = path.split("/").pop();
+  const name = file.split(".")[0];
+  const parts = name.split(/[-_ ]+/);
+
+  const initials = parts
+    .filter(Boolean)
+    .map(p => p[0].toUpperCase())
+    .slice(0, 2)
+    .join("");
+
+  return initials || "?";
 }
 
-// ===============================
-// Render one card
-// ===============================
+// =====================================================
+// AVATAR HTML (image → fallback initials)
+// =====================================================
+function avatarHtml(path) {
+  const initials = getInitialsFromPath(path);
+
+  return `
+    <span class="avatar">
+      <img src="${esc(path)}"
+           alt=""
+           loading="lazy"
+           onerror="this.remove(); this.parentNode.textContent='${initials}'">
+    </span>
+  `;
+}
+
+// =====================================================
+// RENDER ONE CARD
+// =====================================================
 function renderEventCard(ev) {
   const d = parseEventId(ev.id);
   if (!d) return "";
 
-  // status
   const statusHtml = ev.status
     ? `<div class="event-card__status event-card__status--${ev.status}">
          ${statusLabel(ev.status)}
        </div>`
     : "";
 
-  // tags
   const tagsHtml = (ev.tags || [])
     .map(t => `<span class="etag ${tagClass(t)}">${esc(t)}</span>`)
     .join("");
 
-  // avatars
   const avatarsHtml = (ev.avatars || [])
-    .map(a => `<span class="avatar">${esc(a)}</span>`)
+    .map(avatarHtml)
     .join("");
 
   const moreCount = Math.max(0, (ev.going || 0) - (ev.avatars?.length || 0));
 
-  // calendar button
   const calendarBtn = ev.calendar?.google
     ? `<a class="btn-ev-cal" href="${ev.calendar.google}" target="_blank" rel="noopener">Add to Calendar</a>`
     : `<button class="btn-ev-cal">Add to Calendar</button>`;
@@ -195,15 +226,15 @@ function renderEventCard(ev) {
 </div>`;
 }
 
-// ===============================
-// Load + render
-// ===============================
+// =====================================================
+// LOAD + SORT + RENDER
+// =====================================================
 async function loadEvents() {
   try {
     const res = await fetch(EVENTS_JSON_URL);
     const events = await res.json();
 
-    // sort by date ascending
+    // sort by event date
     events.sort((a,b) => {
       const da = parseEventId(a.id)?.ts || 0;
       const db = parseEventId(b.id)?.ts || 0;
@@ -220,7 +251,7 @@ async function loadEvents() {
   }
 }
 
-// ===============================
+// =====================================================
 document.addEventListener("DOMContentLoaded", loadEvents);
 </script>
 
