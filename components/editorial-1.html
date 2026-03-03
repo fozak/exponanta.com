@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exponanta — Editorial Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/brandbook/exponanta.css" rel="stylesheet">
+  <link href="/brandbook/exponanta-editorial.css" rel="stylesheet">
+  <!-- INLINE for demo — remove when using real files -->
+  <style>
+    /* ── Exponanta tokens (subset) ── */
+    :root {
+      --blue-100:#C8DFFA;--blue-300:#82A0FA;--blue-700:#2446C8;
+      --accent-coral:#FF6F61;--accent-teal:#4FD1C5;
+      --neutral-0:#ffffff;--neutral-50:#F5F7FA;
+      --neutral-400:#9CA3AF;--neutral-600:#4B5563;--neutral-900:#1E1E2F;
+      --font-sans:"Inter","Segoe UI",system-ui,sans-serif;
+      --font-serif:"Georgia","Times New Roman",serif;
+      --text-sm:14px;--text-md:16px;
+      --radius-md:8px;--radius-lg:12px;
+      --shadow-sm:0 2px 6px rgba(36,70,200,.08);
+      --shadow-md:0 6px 16px rgba(36,70,200,.12);
+      --gradient-primary:linear-gradient(135deg,var(--blue-100),var(--blue-700));
+      /* editorial */
+      --ed-display:56px;--ed-headline:36px;--ed-title:22px;
+      --ed-title-sm:17px;--ed-deck:18px;--ed-caption:13px;--ed-label:11px;
+      --ed-ink:var(--neutral-900);--ed-ink-soft:var(--neutral-600);
+      --ed-ink-faint:var(--neutral-400);
+      --ed-rule:var(--blue-700);--ed-rule-light:var(--blue-100);
+      --ed-accent:var(--accent-coral);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family:var(--font-sans);font-size:var(--text-md);background:var(--neutral-0);color:var(--neutral-900);line-height:1.5; }
+    a { color:var(--blue-700);text-decoration:none; }
+    a:hover { color:var(--accent-coral); }
+    h1,h2,h3,h4,h5,h6 { font-weight:700;line-height:1.2;color:var(--neutral-900); }
+    p { margin-bottom:1rem; }
+
+    /* ── Paste full editorial CSS here in prod ── */
+    .ed-display    { font-family:var(--font-serif);font-size:var(--ed-display);font-weight:700;line-height:1.1;letter-spacing:-.5px;color:var(--ed-ink); }
+    .ed-headline   { font-family:var(--font-serif);font-size:var(--ed-headline);font-weight:700;line-height:1.2;letter-spacing:-.3px;color:var(--ed-ink);margin:0 0 10px; }
+    .ed-headline a,.ed-headline a:hover { color:inherit;text-decoration:none; }
+    .ed-headline a:hover { color:var(--blue-700); }
+    .ed-title      { font-family:var(--font-sans);font-size:var(--ed-title);font-weight:700;line-height:1.3;color:var(--ed-ink);margin:0 0 8px; }
+    .ed-title a,.ed-title a:hover { color:inherit;text-decoration:none; }
+    .ed-title a:hover { color:var(--blue-700); }
+    .ed-title-sm   { font-family:var(--font-sans);font-size:var(--ed-title-sm);font-weight:700;line-height:1.35;color:var(--ed-ink);margin:0 0 6px; }
+    .ed-title-sm a,.ed-title-sm a:hover { color:inherit;text-decoration:none; }
+    .ed-title-sm a:hover { color:var(--blue-700); }
+    .ed-deck       { font-family:var(--font-serif);font-size:var(--ed-deck);font-style:italic;color:var(--ed-ink-soft);line-height:1.6;margin:0 0 16px; }
+    .ed-kicker     { display:inline-block;font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ed-accent);margin-bottom:8px; }
+    .ed-byline     { font-size:var(--ed-caption);color:var(--ed-ink-faint);display:flex;align-items:center;flex-wrap:wrap;gap:6px; }
+    .ed-byline strong { color:var(--ed-ink-soft);font-weight:600; }
+    .ed-caption    { font-size:12px;color:var(--ed-ink-faint);line-height:1.4;margin-top:6px;font-style:italic; }
+    .ed-readtime   { display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--ed-ink-faint);text-transform:uppercase;letter-spacing:.5px; }
+    .ed-section-header { display:flex;align-items:baseline;justify-content:space-between;border-top:3px solid var(--ed-rule);padding-top:10px;margin-bottom:24px; }
+    .ed-section-header__title { font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--ed-ink);margin:0; }
+    .ed-section-header__link  { font-size:var(--ed-caption);color:var(--blue-700);font-weight:500;text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .15s; }
+    .ed-section-header__link:hover { color:var(--ed-accent); }
+    .ed-divider { border:none;border-top:1px solid var(--ed-rule-light);margin:20px 0; }
+    .ed-img { position:relative;overflow:hidden;background:var(--neutral-50);display:block; }
+    .ed-img--16-9 { padding-top:56.25%; }
+    .ed-img--4-3  { padding-top:75%; }
+    .ed-img--3-2  { padding-top:66.67%; }
+    .ed-img--1-1  { padding-top:100%; }
+    .ed-img--wide { padding-top:50%; }
+    .ed-img img   { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease; }
+    .ed-img:hover img { transform:scale(1.03); }
+    .ed-featured { display:grid;grid-template-columns:1fr 400px;gap:0;border-bottom:1px solid var(--ed-rule-light);padding-bottom:32px;margin-bottom:32px; }
+    .ed-featured__img { position:relative; }
+    .ed-featured__img .ed-img { height:100%;min-height:340px;padding-top:0; }
+    .ed-featured__img .ed-img img { position:absolute;inset:0; }
+    .ed-featured__body { padding:0 0 0 32px;display:flex;flex-direction:column;justify-content:center; }
+    .ed-featured__sponsor { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ed-ink-faint);border-top:1px solid var(--ed-rule-light);padding-top:12px;margin-top:24px; }
+    .ed-card { display:flex;flex-direction:column; }
+    .ed-card__img { margin-bottom:14px; }
+    .ed-card__body { flex:1;display:flex;flex-direction:column; }
+    .ed-card__footer { margin-top:auto;padding-top:12px; }
+    .ed-card--horiz { flex-direction:row;gap:16px;align-items:flex-start; }
+    .ed-card--horiz .ed-card__img { flex:0 0 100px;margin-bottom:0; }
+    .ed-card--horiz .ed-card__body { padding-top:2px; }
+    .ed-grid-3 { display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px; }
+    .ed-grid-feature { display:grid;grid-template-columns:2fr 1fr;gap:28px 32px; }
+    .ed-grid-feature__secondary { display:flex;flex-direction:column;gap:24px;border-left:1px solid var(--ed-rule-light);padding-left:32px; }
+    .ed-grid-main-sidebar { display:grid;grid-template-columns:1fr 300px;gap:40px; }
+    .ed-digest { display:grid;grid-template-columns:repeat(4,1fr); }
+    .ed-digest__item { padding:16px 20px;border-right:1px solid var(--ed-rule-light); }
+    .ed-digest__item:first-child { padding-left:0; }
+    .ed-digest__item:last-child  { border-right:none;padding-right:0; }
+    .ed-ranked { display:flex;flex-direction:column; }
+    .ed-ranked__item { display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--ed-rule-light); }
+    .ed-ranked__item:last-child { border-bottom:none; }
+    .ed-ranked__num { font-family:var(--font-serif);font-size:32px;font-weight:700;color:var(--blue-100);line-height:1;flex-shrink:0;width:36px;text-align:right;padding-top:2px; }
+    .ed-ranked__body { flex:1; }
+    .ed-topic-nav { display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 0;border-top:1px solid var(--ed-rule-light);border-bottom:1px solid var(--ed-rule-light);margin-bottom:32px; }
+    .ed-topic-nav::-webkit-scrollbar { display:none; }
+    .ed-topic-pill { flex-shrink:0;padding:6px 16px;border-radius:20px;font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:.8px;text-decoration:none;border:1.5px solid var(--ed-rule-light);transition:all .15s;cursor:pointer;white-space:nowrap;background:transparent;color:var(--ed-ink-soft); }
+    .ed-topic-pill:hover,.ed-topic-pill--active { background:var(--blue-700);color:var(--neutral-0);border-color:var(--blue-700); }
+    .ed-newsletter { background:var(--neutral-900);padding:48px 0;margin:48px 0; }
+    .ed-newsletter__inner { display:flex;align-items:center;gap:40px; }
+    .ed-newsletter__text { flex:1; }
+    .ed-newsletter__label { font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent-teal);margin-bottom:8px; }
+    .ed-newsletter__headline { font-family:var(--font-serif);font-size:28px;font-weight:700;color:var(--neutral-0);line-height:1.25;margin:0 0 6px; }
+    .ed-newsletter__desc { font-size:var(--ed-caption);color:rgba(255,255,255,.6);margin:0; }
+    .ed-newsletter__form { flex-shrink:0;display:flex;gap:10px;width:380px; }
+    .ed-newsletter__input { flex:1;padding:11px 16px;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:var(--neutral-0);font-size:var(--ed-caption);outline:none;transition:border-color .15s; }
+    .ed-newsletter__input::placeholder { color:rgba(255,255,255,.4); }
+    .ed-newsletter__input:focus { border-color:var(--accent-teal); }
+    .ed-newsletter__btn { padding:11px 22px;border-radius:var(--radius-md);background:var(--accent-coral);color:var(--neutral-0);font-size:var(--ed-caption);font-weight:700;border:none;cursor:pointer;white-space:nowrap; }
+    .ed-newsletter__btn:hover { opacity:.88; }
+    .ed-author { display:flex;gap:14px;align-items:flex-start;padding:20px;background:var(--neutral-0);border-radius:var(--radius-lg);border:1px solid var(--ed-rule-light); }
+    .ed-author__avatar { flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--blue-700); }
+    .ed-author__body { flex:1; }
+    .ed-author__name { font-size:var(--ed-caption);font-weight:700;color:var(--ed-ink);margin:0 0 2px; }
+    .ed-author__role { font-size:12px;color:var(--ed-ink-faint);margin:0 0 8px; }
+    .ed-author__bio  { font-size:12px;color:var(--ed-ink-soft);line-height:1.5;margin:0; }
+    .ed-author__follow { display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;border-radius:20px;border:1.5px solid var(--blue-700);color:var(--blue-700);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;background:transparent;transition:all .15s; }
+    .ed-author__follow:hover { background:var(--blue-700);color:var(--neutral-0); }
+    .ed-pullquote { border-left:4px solid var(--ed-rule);padding:8px 0 8px 24px;margin:24px 0; }
+    .ed-pullquote__text { font-family:var(--font-serif);font-size:22px;font-style:italic;color:var(--ed-ink);line-height:1.45;margin:0 0 10px; }
+    .ed-pullquote__attribution { font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ed-ink-faint); }
+    .ed-widget { margin-bottom:32px; }
+    .ed-widget+.ed-widget { border-top:1px solid var(--ed-rule-light);padding-top:32px; }
+    .ed-widget__header { font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--ed-ink);border-top:3px solid var(--ed-rule);padding-top:10px;margin-bottom:20px; }
+    .ed-ticker { background:var(--blue-700);padding:8px 0;overflow:hidden;display:flex;align-items:center;padding-left:24px; }
+    .ed-ticker__label { flex-shrink:0;padding:0 16px 0 0;font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent-teal);border-right:1px solid rgba(255,255,255,.3);margin-right:20px;white-space:nowrap; }
+    .ed-ticker__track { display:flex;gap:40px;animation:ticker-scroll 35s linear infinite;white-space:nowrap; }
+    .ed-ticker__item  { font-size:var(--ed-caption);color:rgba(255,255,255,.9);text-decoration:none;display:inline-flex;align-items:center;gap:8px; }
+    .ed-ticker__item:hover { color:var(--accent-teal); }
+    .ed-ticker__sep   { color:rgba(255,255,255,.3); }
+    @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .btn-ghost { display:inline-flex;align-items:center;gap:6px;padding:0;background:none;border:none;color:var(--blue-700);font-size:var(--ed-caption);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px; }
+    .btn-ghost:hover { color:var(--ed-accent); }
+    .btn-more { display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--radius-md);border:1.5px solid var(--ed-rule-light);background:transparent;color:var(--ed-ink);font-size:var(--ed-label);font-weight:700;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;transition:all .15s; }
+    .btn-more:hover { border-color:var(--blue-700);color:var(--blue-700); }
+    .ed-section { padding:40px 0; }
+    .ed-section+.ed-section { border-top:1px solid var(--ed-rule-light); }
+    .ed-section--tinted { background:var(--neutral-50); }
+    .ed-section--dark   { background:var(--neutral-900);padding:48px 0; }
+
+    /* Navbar minimal */
+    .site-nav { border-bottom:1px solid var(--blue-100);background:var(--neutral-0);position:sticky;top:0;z-index:100; }
+    .site-nav__inner { display:flex;align-items:center;justify-content:space-between;height:56px; }
+    .site-nav__brand { font-size:22px;font-weight:800;color:var(--blue-700);letter-spacing:-.5px; }
+    .site-nav__links { display:flex;gap:4px; }
+    .site-nav__link { padding:6px 12px;border-radius:var(--radius-md);font-size:13px;font-weight:500;color:var(--neutral-600);text-decoration:none;transition:all .15s; }
+    .site-nav__link:hover,.site-nav__link--active { color:var(--blue-700);background:var(--blue-100); }
+    .site-nav__cta { padding:8px 18px;border-radius:var(--radius-md);background:var(--gradient-primary);color:var(--neutral-0);font-size:13px;font-weight:700;border:none;cursor:pointer; }
+
+    @media(max-width:900px){.ed-featured{grid-template-columns:1fr}.ed-featured__img .ed-img{min-height:0;padding-top:56.25%;height:auto}.ed-featured__body{padding:20px 0 0}.ed-grid-3{grid-template-columns:repeat(2,1fr)}.ed-grid-feature{grid-template-columns:1fr}.ed-grid-feature__secondary{border-left:none;padding-left:0;border-top:1px solid var(--ed-rule-light);padding-top:24px}.ed-grid-main-sidebar{grid-template-columns:1fr}.ed-digest{grid-template-columns:repeat(2,1fr)}.ed-newsletter__inner{flex-direction:column;gap:24px}.ed-newsletter__form{width:100%}.site-nav__links{display:none}}
+    @media(max-width:640px){.ed-grid-3{grid-template-columns:1fr}.ed-digest{grid-template-columns:1fr}.ed-digest__item{border-right:none;border-bottom:1px solid var(--ed-rule-light);padding:14px 0}.ed-digest__item:last-child{border-bottom:none}}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     TICKER BAR
+═══════════════════════════════════════════ -->
+<div class="ed-ticker">
+  <span class="ed-ticker__label">Live</span>
+  <div class="ed-ticker__track">
+    <a href="#" class="ed-ticker__item">Tech Summit registrations open — 3 days left <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">New: AI Workshop series announced <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">Cambridge meetup sold out — join waitlist <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">45,000 members milestone reached <span class="ed-ticker__sep">·</span></a>
+    <!-- duplicate for infinite loop -->
+    <a href="#" class="ed-ticker__item">Tech Summit registrations open — 3 days left <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">New: AI Workshop series announced <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">Cambridge meetup sold out — join waitlist <span class="ed-ticker__sep">·</span></a>
+    <a href="#" class="ed-ticker__item">45,000 members milestone reached <span class="ed-ticker__sep">·</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="container site-nav__inner">
+    <a href="#" class="site-nav__brand">Exponanta</a>
+    <div class="site-nav__links">
+      <a href="#" class="site-nav__link site-nav__link--active">Events</a>
+      <a href="#" class="site-nav__link">Community</a>
+      <a href="#" class="site-nav__link">Pitches</a>
+      <a href="#" class="site-nav__link">Calendar</a>
+      <a href="#" class="site-nav__link">Resources</a>
+    </div>
+    <button class="site-nav__cta">Host Event</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC NAV
+═══════════════════════════════════════════ -->
+<div class="container">
+  <nav class="ed-topic-nav" style="margin-top:20px;">
+    <a href="#" class="ed-topic-pill ed-topic-pill--active">All</a>
+    <a href="#" class="ed-topic-pill">Technology</a>
+    <a href="#" class="ed-topic-pill">Leadership</a>
+    <a href="#" class="ed-topic-pill">Startups</a>
+    <a href="#" class="ed-topic-pill">AI & Machine Learning</a>
+    <a href="#" class="ed-topic-pill">Design</a>
+    <a href="#" class="ed-topic-pill">Finance</a>
+    <a href="#" class="ed-topic-pill">Marketing</a>
+    <a href="#" class="ed-topic-pill">Sustainability</a>
+    <a href="#" class="ed-topic-pill">Product</a>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — FEATURED STORY
+═══════════════════════════════════════════ -->
+<div class="ed-section">
+  <div class="container">
+
+    <div class="ed-section-header">
+      <h2 class="ed-section-header__title">Featured</h2>
+      <a href="#" class="ed-section-header__link">See all events →</a>
+    </div>
+
+    <div class="ed-featured">
+      <div class="ed-featured__img">
+        <a href="#" class="ed-img" style="height:100%;min-height:360px;padding-top:0;position:relative;">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop" alt="Tech Summit">
+        </a>
+      </div>
+      <div class="ed-featured__body">
+        <span class="ed-kicker">Conference · Moscow</span>
+        <h2 class="ed-headline"><a href="#">Tech Innovation Summit 2025: Where the Next Wave of Business Leaders Converge</a></h2>
+        <p class="ed-deck">A full-day event bringing together 500+ founders, investors, and operators to share what's actually working right now.</p>
+        <div class="ed-byline" style="margin-bottom:16px;">
+          <strong>Mar 5, 2025</strong>
+          <span class="ed-byline__dot">·</span>
+          Skolkovo Innovation Centre
+          <span class="ed-byline__dot">·</span>
+          <span class="ed-readtime">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Full day
+          </span>
+        </div>
+        <div class="ed-pullquote">
+          <p class="ed-pullquote__text">"The single best event for meeting decision-makers outside of a pitch context."</p>
+          <div class="ed-pullquote__attribution">— Vera K., GP at Horizon Ventures</div>
+        </div>
+        <div class="ed-featured__sponsor">Presented in partnership with Skolkovo Foundation</div>
+      </div>
+    </div>
+
+    <!-- 3-card grid below feature -->
+    <div class="ed-grid-3">
+
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=340&fit=crop" alt="AI Workshop">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Workshop · Online</span>
+          <h3 class="ed-title"><a href="#">AI & Machine Learning: Hands-On for Developers</a></h3>
+          <p class="ed-deck" style="font-size:15px;">Three hours of practical deep-learning techniques you can apply immediately.</p>
+          <div class="ed-byline">
+            <strong>Feb 15</strong><span class="ed-byline__dot">·</span>
+            <span class="ed-readtime"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>18 going</span>
+            <span class="ed-byline__dot">·</span>Free
+          </div>
+        </div>
+      </div>
+
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=340&fit=crop" alt="Design Meetup">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Meetup · Cambridge</span>
+          <h3 class="ed-title"><a href="#">Product Design Meetup: UX Portfolios & Brutally Honest Feedback</a></h3>
+          <p class="ed-deck" style="font-size:15px;">Bring your work, get real critique from senior designers in the room.</p>
+          <div class="ed-byline">
+            <strong>Feb 22</strong><span class="ed-byline__dot">·</span>
+            <span class="ed-readtime"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>10 going</span>
+            <span class="ed-byline__dot">·</span>Free
+          </div>
+        </div>
+      </div>
+
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=340&fit=crop" alt="Founder Pitch">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Pitch Night · London</span>
+          <h3 class="ed-title"><a href="#">Founder Pitch Night: Seed Stage Showcase Q1</a></h3>
+          <p class="ed-deck" style="font-size:15px;">Six founders pitch to a room of angels and early-stage VCs. Doors open at 18:30.</p>
+          <div class="ed-byline">
+            <strong>Mar 1</strong><span class="ed-byline__dot">·</span>
+            <span class="ed-readtime"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>32 going</span>
+            <span class="ed-byline__dot">·</span>£15
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <button class="btn-more">Load more events →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — DIGEST STRIP (quick reads)
+═══════════════════════════════════════════ -->
+<div class="ed-section ed-section--tinted">
+  <div class="container">
+    <div class="ed-section-header">
+      <h2 class="ed-section-header__title">This Week</h2>
+      <a href="#" class="ed-section-header__link">Full calendar →</a>
+    </div>
+    <div class="ed-digest">
+      <div class="ed-digest__item">
+        <span class="ed-kicker">Today</span>
+        <p class="ed-title-sm"><a href="#">Startup Legal Bootcamp — contracts, IP, equity splits</a></p>
+        <div class="ed-byline">Online · Free</div>
+      </div>
+      <div class="ed-digest__item">
+        <span class="ed-kicker">Tomorrow</span>
+        <p class="ed-title-sm"><a href="#">Growth Marketing Roundtable: B2B SaaS Edition</a></p>
+        <div class="ed-byline">Berlin · €10</div>
+      </div>
+      <div class="ed-digest__item">
+        <span class="ed-kicker">Thu Feb 20</span>
+        <p class="ed-title-sm"><a href="#">No-Code Tools for Non-Technical Founders</a></p>
+        <div class="ed-byline">Online · Free</div>
+      </div>
+      <div class="ed-digest__item">
+        <span class="ed-kicker">Fri Feb 21</span>
+        <p class="ed-title-sm"><a href="#">Investor Office Hours — open Q&A with 3 angels</a></p>
+        <div class="ed-byline">London · Members only</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     NEWSLETTER STRIP
+═══════════════════════════════════════════ -->
+<div class="ed-newsletter">
+  <div class="container">
+    <div class="ed-newsletter__inner">
+      <div class="ed-newsletter__text">
+        <div class="ed-newsletter__label">Weekly Digest</div>
+        <div class="ed-newsletter__headline">The best events, delivered Tuesday morning.</div>
+        <p class="ed-newsletter__desc">Curated picks from 1,200+ events — no noise, just what matters to your city and industry.</p>
+      </div>
+      <div class="ed-newsletter__form">
+        <input class="ed-newsletter__input" type="email" placeholder="your@email.com">
+        <button class="ed-newsletter__btn">Subscribe →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — FEATURE + SIDEBAR (Most Popular)
+═══════════════════════════════════════════ -->
+<div class="ed-section">
+  <div class="container">
+    <div class="ed-grid-main-sidebar">
+
+      <!-- Main: Feature + secondary list -->
+      <div>
+        <div class="ed-section-header">
+          <h2 class="ed-section-header__title">Trending Now</h2>
+        </div>
+        <div class="ed-grid-feature" style="margin-bottom:32px;">
+          <div>
+            <a href="#" class="ed-img ed-img--3-2" style="border-radius:8px;margin-bottom:14px;">
+              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&h=460&fit=crop" alt="">
+            </a>
+            <span class="ed-kicker">Leadership · Panel</span>
+            <h3 class="ed-title"><a href="#">How the Best Operators Build Teams That Don't Need Them</a></h3>
+            <p class="ed-deck" style="font-size:15px;">A panel of 4 COOs discuss delegation, hiring for culture, and the mistakes they made scaling from 10 to 100.</p>
+            <div class="ed-byline">
+              <strong>Feb 28</strong><span class="ed-byline__dot">·</span>Amsterdam<span class="ed-byline__dot">·</span>Free
+            </div>
+          </div>
+          <div class="ed-grid-feature__secondary">
+            <div class="ed-card--horiz ed-card">
+              <a href="#" class="ed-card__img ed-img ed-img--1-1" style="border-radius:6px;">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop" alt="">
+              </a>
+              <div class="ed-card__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Finance</span>
+                <p class="ed-title-sm"><a href="#">The Fundraising Playbook: What Actually Works in 2025</a></p>
+                <div class="ed-byline">Mar 3 · Online · Free</div>
+              </div>
+            </div>
+            <hr class="ed-divider" style="margin:0;">
+            <div class="ed-card--horiz ed-card">
+              <a href="#" class="ed-card__img ed-img ed-img--1-1" style="border-radius:6px;">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=200&h=200&fit=crop" alt="">
+              </a>
+              <div class="ed-card__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Sustainability</span>
+                <p class="ed-title-sm"><a href="#">Green Tech Founders Meetup: Climate Capital & Policy</a></p>
+                <div class="ed-byline">Mar 6 · Berlin · €5</div>
+              </div>
+            </div>
+            <hr class="ed-divider" style="margin:0;">
+            <div class="ed-card--horiz ed-card">
+              <a href="#" class="ed-card__img ed-img ed-img--1-1" style="border-radius:6px;">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=200&h=200&fit=crop" alt="">
+              </a>
+              <div class="ed-card__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Product</span>
+                <p class="ed-title-sm"><a href="#">From Zero to One: Building Your First Product Roadmap</a></p>
+                <div class="ed-byline">Mar 8 · Online · Free</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pull quote standalone -->
+        <div class="ed-pullquote">
+          <p class="ed-pullquote__text">"We've hired three people directly from Exponanta events. The quality of the community is unlike anything else."</p>
+          <div class="ed-pullquote__attribution">— Dmitri N., CTO at Forma Health</div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <!-- Most Popular widget -->
+        <div class="ed-widget">
+          <div class="ed-widget__header">Most Popular</div>
+          <div class="ed-ranked">
+            <div class="ed-ranked__item">
+              <div class="ed-ranked__num">1</div>
+              <div class="ed-ranked__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">AI</span>
+                <p class="ed-title-sm"><a href="#">AI for Non-Technical Founders: What You Actually Need to Know</a></p>
+                <div class="ed-byline">Online · Free · 312 going</div>
+              </div>
+            </div>
+            <div class="ed-ranked__item">
+              <div class="ed-ranked__num">2</div>
+              <div class="ed-ranked__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Finance</span>
+                <p class="ed-title-sm"><a href="#">Pitch Deck Surgery: Real Decks, Real Feedback</a></p>
+                <div class="ed-byline">London · £20 · 89 going</div>
+              </div>
+            </div>
+            <div class="ed-ranked__item">
+              <div class="ed-ranked__num">3</div>
+              <div class="ed-ranked__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Design</span>
+                <p class="ed-title-sm"><a href="#">Portfolio Review Night with Senior Designers</a></p>
+                <div class="ed-byline">Remote · Free · 67 going</div>
+              </div>
+            </div>
+            <div class="ed-ranked__item">
+              <div class="ed-ranked__num">4</div>
+              <div class="ed-ranked__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Startups</span>
+                <p class="ed-title-sm"><a href="#">Co-Founder Speed Dating: Find Your Technical Co-Founder</a></p>
+                <div class="ed-byline">Berlin · Free · 54 going</div>
+              </div>
+            </div>
+            <div class="ed-ranked__item">
+              <div class="ed-ranked__num">5</div>
+              <div class="ed-ranked__body">
+                <span class="ed-kicker" style="margin-bottom:4px;">Leadership</span>
+                <p class="ed-title-sm"><a href="#">Managing Remote Teams Across Time Zones</a></p>
+                <div class="ed-byline">Online · Free · 41 going</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Author card widget -->
+        <div class="ed-widget">
+          <div class="ed-widget__header">Community Spotlight</div>
+          <div class="ed-author">
+            <div class="ed-author__avatar">VP</div>
+            <div class="ed-author__body">
+              <div class="ed-author__name">Vera Petrova</div>
+              <div class="ed-author__role">General Partner, Horizon Ventures</div>
+              <p class="ed-author__bio">Vera has spoken at 12 Exponanta events on pre-seed investing and founder-market fit. Her sessions regularly sell out in under 24 hours.</p>
+              <button class="ed-author__follow">+ Follow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topics widget -->
+        <div class="ed-widget">
+          <div class="ed-widget__header">Browse by Topic</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">AI & ML</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Startups</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Design</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Finance</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Marketing</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Leadership</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Sustainability</a>
+            <a href="#" class="ed-topic-pill" style="font-size:10px;padding:5px 12px;">Product</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — BY TOPIC (horizontal strip per topic)
+═══════════════════════════════════════════ -->
+<div class="ed-section ed-section--tinted">
+  <div class="container">
+    <div class="ed-section-header">
+      <h2 class="ed-section-header__title">AI & Technology</h2>
+      <a href="#" class="ed-section-header__link">All AI events →</a>
+    </div>
+    <div class="ed-grid-3">
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--3-2" style="border-radius:8px;">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=340&fit=crop" alt="">
+        </a>
+        <div class="ed-card__body" style="padding-top:14px;">
+          <span class="ed-kicker">Workshop · Online</span>
+          <p class="ed-title"><a href="#">LLMs in Production: Avoiding the Mistakes Everyone Makes</a></p>
+          <div class="ed-byline"><strong>Feb 18</strong><span class="ed-byline__dot">·</span>Free<span class="ed-byline__dot">·</span>24 going</div>
+        </div>
+      </div>
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--3-2" style="border-radius:8px;">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=340&fit=crop" alt="">
+        </a>
+        <div class="ed-card__body" style="padding-top:14px;">
+          <span class="ed-kicker">Panel · London</span>
+          <p class="ed-title"><a href="#">Ethics of AI: Who Is Responsible When Models Fail?</a></p>
+          <div class="ed-byline"><strong>Mar 2</strong><span class="ed-byline__dot">·</span>£10<span class="ed-byline__dot">·</span>38 going</div>
+        </div>
+      </div>
+      <div class="ed-card">
+        <a href="#" class="ed-card__img ed-img ed-img--3-2" style="border-radius:8px;">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&h=340&fit=crop" alt="">
+        </a>
+        <div class="ed-card__body" style="padding-top:14px;">
+          <span class="ed-kicker">Hackathon · Berlin</span>
+          <p class="ed-title"><a href="#">48-Hour AI Hackathon: Build with Open Models</a></p>
+          <div class="ed-byline"><strong>Mar 14–15</strong><span class="ed-byline__dot">·</span>Free<span class="ed-byline__dot">·</span>76 going</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — COMMUNITY VOICES (testimonial editorial style)
+═══════════════════════════════════════════ -->
+<div class="ed-section">
+  <div class="container">
+    <div class="ed-section-header">
+      <h2 class="ed-section-header__title">Community Voices</h2>
+    </div>
+    <div class="ed-grid-3" style="gap:24px;">
+      <div class="ed-author" style="flex-direction:column;align-items:flex-start;">
+        <div style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--ed-ink);line-height:1.55;margin-bottom:16px;">"I came to one pitch night expecting nothing and left with two investor intros and a co-founder conversation."</div>
+        <div class="ed-author" style="padding:0;border:none;background:none;">
+          <div class="ed-author__avatar" style="width:40px;height:40px;font-size:15px;">AK</div>
+          <div class="ed-author__body">
+            <div class="ed-author__name">Alexei Kuznetsov</div>
+            <div class="ed-author__role">Founder, Stackr</div>
+          </div>
+        </div>
+      </div>
+      <div class="ed-author" style="flex-direction:column;align-items:flex-start;">
+        <div style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--ed-ink);line-height:1.55;margin-bottom:16px;">"The AI workshop was the most practically useful thing I did all quarter. Applied it the next morning."</div>
+        <div class="ed-author" style="padding:0;border:none;background:none;">
+          <div class="ed-author__avatar" style="width:40px;height:40px;font-size:15px;background:var(--accent-teal);color:white;">MB</div>
+          <div class="ed-author__body">
+            <div class="ed-author__name">Maria Brennan</div>
+            <div class="ed-author__role">Head of Product, Forma</div>
+          </div>
+        </div>
+      </div>
+      <div class="ed-author" style="flex-direction:column;align-items:flex-start;">
+        <div style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--ed-ink);line-height:1.55;margin-bottom:16px;">"I've hired three engineers and one designer through connections made at Exponanta meetups."</div>
+        <div class="ed-author" style="padding:0;border:none;background:none;">
+          <div class="ed-author__avatar" style="width:40px;height:40px;font-size:15px;background:var(--accent-coral);color:white;">DN</div>
+          <div class="ed-author__body">
+            <div class="ed-author__name">Dmitri Nikitin</div>
+            <div class="ed-author__role">CTO, Forma Health</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer style="background:var(--neutral-900);padding:48px 0 24px;margin-top:0;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1);">
+      <div>
+        <div style="font-size:22px;font-weight:800;color:var(--neutral-0);margin-bottom:12px;">Exponanta</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;max-width:28ch;">Building the world's best professional events community. Join 45K+ members across 120 cities.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-bottom:14px;">Events</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Browse Events</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Host an Event</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Calendar</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Past Events</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-bottom:14px;">Community</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Members</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Pitches</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Blog</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Partners</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-bottom:14px;">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">About</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Careers</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Press</a>
+          <a href="#" style="font-size:13px;color:rgba(255,255,255,.7);">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:20px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-size:12px;color:rgba(255,255,255,.3);">© 2025 Exponanta. All rights reserved.</div>
+      <div style="display:flex;gap:20px;">
+        <a href="#" style="font-size:12px;color:rgba(255,255,255,.3);">Privacy</a>
+        <a href="#" style="font-size:12px;color:rgba(255,255,255,.3);">Terms</a>
+        <a href="#" style="font-size:12px;color:rgba(255,255,255,.3);">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
