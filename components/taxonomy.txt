@@ -1,0 +1,225 @@
+MARKET VERTICALS
+
+1. Technology, Software & Telecommunications
+   1.1 Enterprise Software (SaaS, ERP, CRM)
+   1.2 Cloud Computing & Data Infrastructure
+   1.3 Artificial Intelligence & Machine Learning
+   1.4 Cybersecurity
+   1.5 Semiconductors & Hardware
+   1.6 Developer Tools & Platforms
+   1.7 Data & Analytics Platforms
+   1.8 Robotics & Automation
+   1.9 Web3 & Blockchain
+   1.10 AR/VR & Spatial Computing
+   1.11 Internet of Things (IoT)
+   1.12 Telecommunications
+
+
+2. Healthcare, Life Sciences & Biopharma
+   2.1 Hospital Systems & Health Networks
+   2.2 Medical Devices & Equipment
+   2.3 Diagnostics & Imaging
+   2.4 Digital Health & Telemedicine
+   2.5 Health IT & EHR Systems
+   2.6 Clinical Care Providers
+   2.7 Biotechnology Research
+   2.8 Genomics & Precision Medicine
+   2.9 Mental & Behavioral Health
+   2.10 Branded & Generic Drug Manufacturers
+   2.11 Biologics & Advanced Therapies
+   2.12 Vaccine Development
+   2.13 CROs & CDMOs
+   2.14 Clinical Trials & Site Networks
+   2.15 Drug Distribution & Specialty Pharmacy
+
+3. Financial Services & FinTech
+   3.1 Commercial & Retail Banking
+   3.2 Investment Banking & Capital Markets
+   3.3 Asset & Wealth Management
+   3.4 Insurance & Reinsurance
+   3.5 Payments & Card Networks
+   3.6 FinTech Platforms
+   3.7 Mortgage & Lending Platforms
+   3.8 Accounting & Audit Firms
+
+4. Energy, Climate & Utilities
+   4.1 Oil & Gas Upstream
+   4.2 Oil & Gas Midstream & Downstream
+   4.3 Power Generation & Electric Utilities
+   4.4 Natural Gas Utilities
+   4.5 Renewable Energy — Solar
+   4.6 Renewable Energy — Wind
+   4.7 Energy Storage & Batteries
+   4.8 Nuclear Energy
+   4.9 Grid & Transmission Infrastructure
+   4.10 Climate Tech
+   4.11 Carbon Markets & Offsets
+   4.12 Waste Management & Recycling
+   4.13 Water & Wastewater Technology
+   4.14 ESG & Sustainability Consulting
+
+5. Industrial, Manufacturing & Supply Chain
+   5.1 Industrial Machinery & Equipment
+   5.2 Advanced Manufacturing
+   5.3 Factory Automation
+   5.4 Electronics Manufacturing
+   5.5 Heavy Equipment
+   5.6 3D Printing & Additive Manufacturing
+   5.7 Chemicals & Petrochemicals
+   5.8 Packaging Materials
+   5.9 Supply Chain Technology
+   5.10 Warehousing & Fulfillment
+   5.11 Procurement & Sourcing
+
+6. Infrastructure, Construction & Real Estate
+   6.1 Civil Engineering & Public Works
+   6.2 Transportation Infrastructure
+   6.3 Smart Cities Technology
+   6.4 Urban Planning & Development
+   6.5 Commercial Real Estate
+   6.6 Residential Real Estate
+   6.7 Real Estate Development
+   6.8 Property Management
+   6.9 Construction Contractors
+   6.10 Architecture Firms
+   6.11 Engineering Firms
+   6.12 Construction Tech (ConTech)
+   6.13 Building Materials
+
+7. Mobility, Automotive & Transportation
+   7.1 Automotive OEMs
+   7.2 Auto Parts Suppliers
+   7.3 Electric Vehicles (EV)
+   7.4 EV Charging Infrastructure
+   7.5 Autonomous Driving Technology
+   7.6 Mobility Platforms
+   7.7 Fleet Management
+   7.8 Freight & Shipping
+   7.9 Trucking & Fleet Operations
+   7.10 Rail Logistics
+   7.11 Air Cargo & Aviation
+   7.12 Maritime Shipping
+   7.13 Last-Mile Delivery
+   7.14 Aerospace & Space Technology
+   7.15 Drone & Unmanned Systems
+   7.16 Aviation MRO
+
+8. Consumer, Retail & Food
+   8.1 Mass Retailers & Big Box Chains
+   8.2 E-commerce Marketplaces
+   8.3 Grocery & Supermarket Chains
+   8.4 Apparel & Fashion Brands
+   8.5 Consumer Electronics Brands
+   8.6 Personal Care & Beauty Brands
+   8.7 Luxury Goods
+   8.8 Direct-to-Consumer (DTC) Brands
+   8.9 Retail Tech & POS Systems
+   8.10 Packaged Food Manufacturers
+   8.11 Beverage Manufacturers — Alcoholic
+   8.12 Beverage Manufacturers — Non-Alcoholic
+   8.13 Restaurant Chains & Foodservice
+   8.14 Food Distribution
+   8.15 Specialty & Organic Food Producers
+   8.16 Agriculture & Agritech
+   8.17 Farm Equipment & Inputs
+
+9. Media, Entertainment & Sports
+   9.1 Film & TV Studios
+   9.2 Streaming Platforms
+   9.3 Digital Media Publishers
+   9.4 Gaming Studios
+   9.5 Music Labels & Distribution
+   9.6 Live Entertainment Production
+   9.7 Professional Sports Leagues & Teams
+   9.8 Sports Technology
+   9.9 Esports Organizations
+   9.10 Sporting Goods Manufacturers
+   9.11 Fitness & Wellness Operators
+
+10. Hospitality & Travel
+    10.1 Hotel Chains & Resorts
+    10.2 Short-Term Rental Platforms
+    10.3 Airlines
+    10.4 Cruise Lines
+    10.5 Travel Booking Platforms
+    10.6 Tour Operators
+    10.7 Business Travel Management
+    10.8 Restaurant & Dining Brands
+    10.9 Theme Parks & Attractions
+
+11. Government, Defense & Public Sector
+    11.1 Federal Government Agencies
+    11.2 State & Local Government
+    11.3 Public Health Agencies
+    11.4 Defense Contractors
+    11.5 Military Systems & Equipment
+    11.6 Smart Government Tech
+    11.7 Law Enforcement Technology
+    11.8 Emergency Response Services
+
+12. Education & Research
+    12.1 K-12 School Systems
+    12.2 Higher Education Institutions
+    12.3 Online Education Platforms
+    12.4 EdTech Providers
+    12.5 Vocational Training
+    12.6 Education Publishing
+    12.7 Research Institutes & National Labs
+    12.8 Innovation Hubs & Accelerators
+
+13. Nonprofit & Associations
+    13.1 Foundations & Grantmakers
+    13.2 NGOs & International Aid
+    13.3 Advocacy Organizations
+    13.4 Trade Associations
+    13.5 Cultural Institutions
+    13.6 Membership Organizations
+
+
+CROSS-INDUSTRY ECOSYSTEMS
+
+14. Investors & Capital
+    14.1 Private Equity
+    14.2 Venture Capital
+    14.3 Family Offices
+    14.4 Hedge Funds
+    14.5 Angel Investors & Syndicates
+    14.6 Sovereign Wealth Funds
+    14.7 Corporate Venture Arms
+
+15. Professional & Business Services
+    15.1 Management Consulting
+    15.2 IT Consulting & System Integrators
+    15.3 Legal Services
+    15.4 Executive Search & Recruiting
+    15.5 Staffing & BPO
+    15.6 Outsourcing & Managed Services
+    15.7 PR & Communications Firms
+
+16. Marketing, Media & Events
+    16.1 Advertising Technology (AdTech)
+    16.2 Marketing Technology (MarTech)
+    16.3 Brand & Creative Agencies
+    16.4 Media Buying Agencies
+    16.5 Event Organizers & Trade Show Producers
+    16.6 Event Technology Platforms
+    16.7 Experiential Marketing Agencies
+    16.8 Sponsorship & Talent Agencies
+    16.9 Talent & Creator Economy
+
+17. Security
+    17.1 Cybersecurity Software & Services
+    17.2 Physical Security Systems
+    17.3 Identity & Access Management
+    17.4 Surveillance & Monitoring Tech
+    17.5 Critical Infrastructure Protection
+    17.6 Fraud Prevention & Risk Management
+
+18. Corporate Functions & Enterprise Operations
+    18.1 HR & Future of Work
+    18.2 Finance & CFO Office
+    18.3 Legal & Compliance
+    18.4 Procurement & Supply Chain Leadership
+    18.5 Operations & Business Continuity
+    18.6 Diversity, Equity & Inclusion (DEI)
+    18.7 Sustainability & ESG Leadership

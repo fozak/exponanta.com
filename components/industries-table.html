@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industries – Periodic Table</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* ── Tokens (mirrors nesen.css / exponanta.css) ── */
+    :root {
+      --blue-700: #2446c8;
+      --blue-100: #c8dffa;
+      --blue-50: #e8f0fe;
+      --neutral-0: #ffffff;
+      --neutral-50: #f5f7fa;
+      --neutral-100: #eaf0fb;
+      --neutral-400: #9ca3af;
+      --neutral-600: #4b5563;
+      --neutral-900: #1e1e2f;
+      --accent-coral: #ff6f61;
+      --accent-teal: #4fd1c5;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --shadow-sm: 0 2px 8px rgba(36, 70, 200, .10);
+
+      /* industry palette — one per sector */
+      --c-agri: #4caf6e;
+      --c-auto: #2446c8;
+      --c-aero: #6c5ce7;
+      --c-energy: #f59e0b;
+      --c-health: #e05c7a;
+      --c-fin: #0ea5e9;
+      --c-tech: #4fd1c5;
+      --c-tele: #8b5cf6;
+      --c-trans: #f97316;
+      --c-mfg: #6b7280;
+      --c-const: #a16207;
+      --c-retail: #db2777;
+      --c-media: #dc2626;
+      --c-tour: #059669;
+      --c-edu: #7c3aed;
+    }
+
+    /* ── Page ── */
+    body {
+      background: var(--neutral-50);
+      color: var(--neutral-900);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      padding: 32px 20px 60px;
+    }
+
+    .pt-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .pt-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--blue-700);
+      letter-spacing: -.5px;
+      margin-bottom: 6px;
+    }
+
+    .pt-header p {
+      font-size: 14px;
+      color: var(--neutral-400);
+    }
+
+    /* ── Filter bar ── */
+    .pt-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      justify-content: center;
+    }
+
+    .pt-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all .15s;
+      background: var(--neutral-0);
+      color: var(--neutral-600);
+      border-color: var(--neutral-100);
+    }
+
+    .pt-filter-btn:hover {
+      border-color: var(--blue-700);
+      color: var(--blue-700);
+    }
+
+    .pt-filter-btn.active {
+      background: var(--blue-700);
+      color: var(--neutral-0);
+      border-color: var(--blue-700);
+    }
+
+    .pt-filter-btn .pt-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Grid ── */
+    .pt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+    }
+
+    /* ── Element card ── */
+    .pt-element {
+      position: relative;
+      border-radius: var(--radius-md);
+      padding: 10px 10px 12px;
+      background: var(--neutral-0);
+      border: 1.5px solid var(--neutral-100);
+      cursor: default;
+      transition: transform .15s, box-shadow .15s;
+      overflow: hidden;
+      min-height: 90px;
+    }
+
+    .pt-element:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      z-index: 2;
+    }
+
+    /* colour stripe top */
+    .pt-element::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--sector-color);
+    }
+
+    /* subtle tint background */
+    .pt-element {
+      background: color-mix(in srgb, var(--sector-color) 6%, white);
+    }
+
+    .pt-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--neutral-400);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pt-symbol {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--sector-color);
+      letter-spacing: .3px;
+      line-height: 1;
+      margin-bottom: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pt-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--neutral-900);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .pt-sector-label {
+      font-size: 9px;
+      color: var(--sector-color);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 5px;
+      opacity: .8;
+    }
+
+    /* hidden state */
+    .pt-element.hidden {
+      display: none;
+    }
+
+    /* ── Legend ── */
+    .pt-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .pt-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--neutral-600);
+      font-weight: 600;
+    }
+
+    .pt-legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 480px) {
+      .pt-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+
+      .pt-element {
+        min-height: 80px;
+      }
+    }
+
+    /*addded*/
+
+    .pt-prefix {
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--neutral-400);
+  line-height: 1.2;
+}
+
+.pt-keyword {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="pt-header">
+    <h1>U.S. Industries</h1>
+    <p>Periodic table of sub-industries · click a sector to filter</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="pt-legend" id="ptLegend"></div>
+
+  <!-- Filter bar -->
+  <div class="pt-filters" id="ptFilters"></div>
+
+  <!-- Grid -->
+  <div class="pt-grid" id="ptGrid"></div>
+
+  <script>
+    const SECTORS = [
+      { id: 'agri', label: 'Agriculture & Food', color: 'var(--c-agri)', abbr: 'AG' },
+      { id: 'auto', label: 'Automotive', color: 'var(--c-auto)', abbr: 'AU' },
+      { id: 'aero', label: 'Aerospace & Defense', color: 'var(--c-aero)', abbr: 'AS' },
+      { id: 'energy', label: 'Energy', color: 'var(--c-energy)', abbr: 'EN' },
+      { id: 'health', label: 'Healthcare & Pharma', color: 'var(--c-health)', abbr: 'HC' },
+      { id: 'fin', label: 'Finance & Insurance', color: 'var(--c-fin)', abbr: 'FI' },
+      { id: 'tech', label: 'Technology & Software', color: 'var(--c-tech)', abbr: 'TC' },
+      { id: 'tele', label: 'Telecommunications', color: 'var(--c-tele)', abbr: 'TL' },
+      { id: 'trans', label: 'Transportation & Logistics', color: 'var(--c-trans)', abbr: 'TR' },
+      { id: 'mfg', label: 'Manufacturing & Industrial', color: 'var(--c-mfg)', abbr: 'MF' },
+      { id: 'const', label: 'Construction & Real Estate', color: 'var(--c-const)', abbr: 'CR' },
+      { id: 'retail', label: 'Retail & E-commerce', color: 'var(--c-retail)', abbr: 'RT' },
+      { id: 'media', label: 'Media & Entertainment', color: 'var(--c-media)', abbr: 'ME' },
+      { id: 'tour', label: 'Tourism & Hospitality', color: 'var(--c-tour)', abbr: 'TH' },
+      { id: 'edu', label: 'Education', color: 'var(--c-edu)', abbr: 'ED' },
+    ];
+
+    const ELEMENTS = [
+      // Agriculture & Food (AG)
+      { s: 'agri', n: 'Crop Farming – Grains' },
+      { s: 'agri', n: 'Crop Farming – Corn' },
+      { s: 'agri', n: 'Crop Farming – Wheat' },
+      { s: 'agri', n: 'Crop Farming – Rice & Cereals' },
+      { s: 'agri', n: 'Crop Farming – Apples & Citrus' },
+      { s: 'agri', n: 'Crop Farming – Berries' },
+      { s: 'agri', n: 'Crop Farming – Leafy Greens' },
+      { s: 'agri', n: 'Crop Farming – Root Crops' },
+      { s: 'agri', n: 'Nuts & Specialty Crops' },
+      { s: 'agri', n: 'Livestock – Beef Cattle' },
+      { s: 'agri', n: 'Livestock – Dairy Cattle' },
+      { s: 'agri', n: 'Livestock – Poultry Chicken' },
+      { s: 'agri', n: 'Livestock – Poultry Turkey' },
+      { s: 'agri', n: 'Livestock – Pigs' },
+      { s: 'agri', n: 'Livestock – Sheep & Goats' },
+      { s: 'agri', n: 'Dairy – Milk Processing' },
+      { s: 'agri', n: 'Dairy – Cheese & Yogurt' },
+      { s: 'agri', n: 'Dairy – Butter & Cream' },
+      { s: 'agri', n: 'Fisheries – Wild-Capture' },
+      { s: 'agri', n: 'Aquaculture – Fish Farming' },
+      { s: 'agri', n: 'Aquaculture – Shellfish' },
+      { s: 'agri', n: 'Food Processing – Packaged' },
+      { s: 'agri', n: 'Food Processing – Frozen' },
+      { s: 'agri', n: 'Food Processing – Snacks' },
+      { s: 'agri', n: 'Food Processing – Confectionery' },
+      { s: 'agri', n: 'Beverage – Beer' },
+      { s: 'agri', n: 'Beverage – Wine' },
+      { s: 'agri', n: 'Beverage – Spirits' },
+      { s: 'agri', n: 'Beverage – Soda' },
+      { s: 'agri', n: 'Beverage – Bottled Water' },
+      { s: 'agri', n: 'Beverage – Coffee' },
+      { s: 'agri', n: 'Beverage – Tea' },
+      { s: 'agri', n: 'Agricultural Machinery' },
+      { s: 'agri', n: 'Fertilizer & Agrochemicals' },
+      // Automotive (AU)
+      { s: 'auto', n: 'Passenger Car Mfg' },
+      { s: 'auto', n: 'Light Truck & Commercial Vehicles' },
+      { s: 'auto', n: 'Electric Vehicle Mfg' },
+      { s: 'auto', n: 'Auto Parts – Engines & Powertrain' },
+      { s: 'auto', n: 'Auto Parts – Brakes & Suspension' },
+      { s: 'auto', n: 'EV Battery Mfg' },
+      { s: 'auto', n: 'EV Charging Infrastructure' },
+      { s: 'auto', n: 'Auto Repair & Maintenance' },
+      { s: 'auto', n: 'Aftermarket – Accessories & Tires' },
+      { s: 'auto', n: 'Autonomous Vehicle Tech' },
+      // Aerospace (AS)
+      { s: 'aero', n: 'Commercial Aircraft Mfg' },
+      { s: 'aero', n: 'Military Aircraft Mfg' },
+      { s: 'aero', n: 'Satellites & Spacecraft' },
+      { s: 'aero', n: 'Space Launch Services' },
+      { s: 'aero', n: 'Drones & UAS' },
+      { s: 'aero', n: 'Aviation MRO' },
+      { s: 'aero', n: 'Defense Electronics' },
+      { s: 'aero', n: 'Defense Logistics' },
+      // Energy (EN)
+      { s: 'energy', n: 'Oil & Gas Exploration' },
+      { s: 'energy', n: 'Oil Refining & Distribution' },
+      { s: 'energy', n: 'Coal Mining & Processing' },
+      { s: 'energy', n: 'Solar – Utility Scale' },
+      { s: 'energy', n: 'Solar – Rooftop' },
+      { s: 'energy', n: 'Wind – Onshore' },
+      { s: 'energy', n: 'Wind – Offshore' },
+      { s: 'energy', n: 'Hydro Energy' },
+      { s: 'energy', n: 'Geothermal Energy' },
+      { s: 'energy', n: 'Nuclear Energy' },
+      { s: 'energy', n: 'Energy Storage – Batteries' },
+      { s: 'energy', n: 'Energy Storage – Hydrogen' },
+      { s: 'energy', n: 'Utilities – Electricity' },
+      { s: 'energy', n: 'Utilities – Natural Gas' },
+      { s: 'energy', n: 'Utilities – Water & Wastewater' },
+      // Healthcare (HC)
+      { s: 'health', n: 'General Hospitals' },
+      { s: 'health', n: 'Specialty – Cardiac' },
+      { s: 'health', n: 'Specialty – Orthopedic' },
+      { s: 'health', n: 'Specialty – Oncology' },
+      { s: 'health', n: 'Outpatient Care Centers' },
+      { s: 'health', n: 'Urgent Care & Walk-In' },
+      { s: 'health', n: 'Nursing & Long-Term Care' },
+      { s: 'health', n: 'Mental Health – Inpatient' },
+      { s: 'health', n: 'Mental Health – Outpatient' },
+      { s: 'health', n: 'Behavioral Health' },
+      { s: 'health', n: 'Pharma – Prescription' },
+      { s: 'health', n: 'Pharma – OTC' },
+      { s: 'health', n: 'Biotech & Gene Therapy' },
+      { s: 'health', n: 'Medical Devices – Diagnostic' },
+      { s: 'health', n: 'Medical Devices – Surgical' },
+      { s: 'health', n: 'Medical Devices – Wearable' },
+      { s: 'health', n: 'Telemedicine & Digital Health' },
+      { s: 'health', n: 'Health Insurance – Commercial' },
+      { s: 'health', n: 'Health Insurance – Govt' },
+      { s: 'health', n: 'Clinical Research & CROs' },
+      // Finance (FI)
+      { s: 'fin', n: 'Commercial Banking – Retail' },
+      { s: 'fin', n: 'Commercial Banking – Corporate' },
+      { s: 'fin', n: 'Investment Banking' },
+      { s: 'fin', n: 'Asset Mgmt – Mutual Funds' },
+      { s: 'fin', n: 'Asset Mgmt – ETFs' },
+      { s: 'fin', n: 'Asset Mgmt – Private Equity' },
+      { s: 'fin', n: 'Venture Capital' },
+      { s: 'fin', n: 'Life Insurance' },
+      { s: 'fin', n: 'Health Insurance' },
+      { s: 'fin', n: 'Property & Casualty Insurance' },
+      { s: 'fin', n: 'Fintech – Payments & Wallets' },
+      { s: 'fin', n: 'Fintech – Lending Platforms' },
+      { s: 'fin', n: 'Fintech – Neobanks' },
+      { s: 'fin', n: 'Mortgage & Real Estate Finance' },
+      { s: 'fin', n: 'Credit Rating & Risk Mgmt' },
+      // Technology (TC)
+      { s: 'tech', n: 'Enterprise SaaS' },
+      { s: 'tech', n: 'Consumer Apps & Platforms' },
+      { s: 'tech', n: 'Gaming Software' },
+      { s: 'tech', n: 'Cloud Computing & Data Centers' },
+      { s: 'tech', n: 'Semiconductors – Microchips' },
+      { s: 'tech', n: 'Semiconductors – Memory' },
+      { s: 'tech', n: 'AI & Machine Learning' },
+      { s: 'tech', n: 'Cybersecurity' },
+      { s: 'tech', n: 'IT Services & Consulting' },
+      { s: 'tech', n: 'PC & Hardware Mfg' },
+      { s: 'tech', n: 'Robotics – Industrial' },
+      { s: 'tech', n: 'Robotics – Service & Consumer' },
+      { s: 'tech', n: 'Blockchain & Web3' },
+      { s: 'tech', n: 'Internet of Things (IoT)' },
+      { s: 'tech', n: 'AR & VR' },
+      // Telecom (TL)
+      { s: 'tele', n: 'Mobile Network Operators' },
+      { s: 'tele', n: 'Broadband & Fiber' },
+      { s: 'tele', n: 'Satellite Communications' },
+      { s: 'tele', n: 'Network Infrastructure' },
+      { s: 'tele', n: 'VoIP & Unified Comms' },
+      { s: 'tele', n: '5G Technology' },
+      // Transportation (TR)
+      { s: 'trans', n: 'Shipping – Ocean Freight' },
+      { s: 'trans', n: 'Shipping – Air Freight' },
+      { s: 'trans', n: 'Railroads & Commuter Rail' },
+      { s: 'trans', n: 'Airlines – Passenger' },
+      { s: 'trans', n: 'Airlines – Cargo' },
+      { s: 'trans', n: 'Trucking – Regional' },
+      { s: 'trans', n: 'Trucking – Long-Haul' },
+      { s: 'trans', n: 'Warehousing & Fulfillment' },
+      { s: 'trans', n: 'Port & Maritime Ops' },
+      { s: 'trans', n: 'Last-Mile Delivery' },
+      { s: 'trans', n: 'Cold-Chain Logistics' },
+      // Manufacturing (MF)
+      { s: 'mfg', n: 'Heavy Industrial Machinery' },
+      { s: 'mfg', n: 'Light & Precision Machinery' },
+      { s: 'mfg', n: 'Chemicals – Industrial' },
+      { s: 'mfg', n: 'Chemicals – Specialty' },
+      { s: 'mfg', n: 'Petrochemicals' },
+      { s: 'mfg', n: 'Steel & Ferrous Metals' },
+      { s: 'mfg', n: 'Non-Ferrous Metals' },
+      { s: 'mfg', n: 'Electronics – Consumer' },
+      { s: 'mfg', n: 'Electronics – Industrial' },
+      { s: 'mfg', n: 'Industrial Automation' },
+      { s: 'mfg', n: '3D Printing & Additive Mfg' },
+      { s: 'mfg', n: 'Plastics & Polymers' },
+      { s: 'mfg', n: 'Packaging Materials' },
+      // Construction (CR)
+      { s: 'const', n: 'Residential – Single-Family' },
+      { s: 'const', n: 'Residential – Multi-Family' },
+      { s: 'const', n: 'Commercial – Offices' },
+      { s: 'const', n: 'Commercial – Retail & Hospitality' },
+      { s: 'const', n: 'Infrastructure – Roads & Bridges' },
+      { s: 'const', n: 'Infrastructure – Airports & Rail' },
+      { s: 'const', n: 'RE Development – Residential' },
+      { s: 'const', n: 'RE Development – Commercial' },
+      { s: 'const', n: 'Property Mgmt – Residential' },
+      { s: 'const', n: 'Property Mgmt – Commercial' },
+      { s: 'const', n: 'Architecture Services' },
+      { s: 'const', n: 'Engineering Services' },
+      { s: 'const', n: 'Interior Design & FM' },
+      // Retail (RT)
+      { s: 'retail', n: 'Grocery & Food Retail' },
+      { s: 'retail', n: 'Convenience Stores' },
+      { s: 'retail', n: 'Apparel – Luxury' },
+      { s: 'retail', n: 'Apparel – Mass Market' },
+      { s: 'retail', n: 'Footwear Retail' },
+      { s: 'retail', n: 'Jewelry & Accessories' },
+      { s: 'retail', n: 'Electronics & Appliances' },
+      { s: 'retail', n: 'Home Improvement & Furniture' },
+      { s: 'retail', n: 'Sporting Goods' },
+      { s: 'retail', n: 'Hobby & Leisure' },
+      { s: 'retail', n: 'Cosmetics & Personal Care' },
+      { s: 'retail', n: 'E-Commerce Platforms' },
+      { s: 'retail', n: 'Consumer Goods Mfg' },
+      { s: 'retail', n: 'Supply Chain & Last-Mile' },
+      // Media (ME)
+      { s: 'media', n: 'Film Production' },
+      { s: 'media', n: 'TV Production' },
+      { s: 'media', n: 'Streaming & Digital Platforms' },
+      { s: 'media', n: 'Music Recording & Distribution' },
+      { s: 'media', n: 'Gaming & Interactive Media' },
+      { s: 'media', n: 'Publishing – Books' },
+      { s: 'media', n: 'Publishing – Magazines' },
+      { s: 'media', n: 'Publishing – Digital Media' },
+      { s: 'media', n: 'Advertising Agencies' },
+      { s: 'media', n: 'Marketing & PR' },
+      { s: 'media', n: 'Live Events & Performing Arts' },
+      { s: 'media', n: 'Sports Leagues & Events' },
+      // Tourism (TH)
+      { s: 'tour', n: 'Hotels – Luxury' },
+      { s: 'tour', n: 'Hotels – Midscale & Budget' },
+      { s: 'tour', n: 'Resorts & Lodges' },
+      { s: 'tour', n: 'Restaurants – Fine Dining' },
+      { s: 'tour', n: 'Restaurants – Casual Dining' },
+      { s: 'tour', n: 'Restaurants – Fast Food' },
+      { s: 'tour', n: 'Airlines – Leisure Travel' },
+      { s: 'tour', n: 'Airlines – Business Travel' },
+      { s: 'tour', n: 'Cruise Lines' },
+      { s: 'tour', n: 'Theme Parks & Attractions' },
+      { s: 'tour', n: 'Travel Agencies & Booking' },
+      { s: 'tour', n: 'Event Planning & Conventions' },
+      // Education (ED)
+      { s: 'edu', n: 'K–12 Public Schools' },
+      { s: 'edu', n: 'K–12 Private Schools' },
+      { s: 'edu', n: 'Universities – Public' },
+      { s: 'edu', n: 'Universities – Private' },
+      { s: 'edu', n: 'Vocational & Technical Training' },
+      { s: 'edu', n: 'Online Education & Edtech' },
+      { s: 'edu', n: 'Educational Publishing' },
+      { s: 'edu', n: 'Tutoring & Test Prep' },
+      { s: 'edu', n: 'Language & Adult Education' },
+    ];
+
+    // Build sector map
+    const sectorMap = {};
+    SECTORS.forEach(s => { sectorMap[s.id] = s; });
+
+    // Count per sector for numbering
+    const sectorCount = {};
+
+    // Render legend
+    const legend = document.getElementById('ptLegend');
+    SECTORS.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'pt-legend-item';
+      item.innerHTML = `<span class="pt-legend-swatch" style="background:${s.color}"></span>${s.label}`;
+      legend.appendChild(item);
+    });
+
+    // Render filter buttons
+    const filters = document.getElementById('ptFilters');
+    const allBtn = document.createElement('button');
+    allBtn.className = 'pt-filter-btn active';
+    allBtn.textContent = 'All';
+    allBtn.dataset.sector = 'all';
+    filters.appendChild(allBtn);
+
+    SECTORS.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'pt-filter-btn';
+      btn.dataset.sector = s.id;
+      btn.innerHTML = `<span class="pt-dot" style="background:${s.color}"></span>${s.label}`;
+      filters.appendChild(btn);
+    });
+
+    // Render grid
+    const grid = document.getElementById('ptGrid');
+    let globalNum = 1;
+
+    ELEMENTS.forEach(el => {
+      const sector = sectorMap[el.s];
+      if (!sectorCount[el.s]) sectorCount[el.s] = 0;
+      sectorCount[el.s]++;
+      const localNum = sectorCount[el.s];
+      const symbol = `${sector.abbr}${String(localNum).padStart(2, '0')}`;
+
+      const div = document.createElement('div');
+      div.className = 'pt-element';
+      div.dataset.sector = el.s;
+      div.style.setProperty('--sector-color', sector.color);
+      //added
+      function formatName(name, color) {
+        const parts = name.split('–');
+        const keyword = parts[parts.length - 1].trim();
+        const prefix = parts.length > 1 ? parts.slice(0, -1).join('–').trim() : null;
+        return prefix
+          ? `<span class="pt-prefix">${prefix} –</span><br><span class="pt-keyword" style="color:${color}">${keyword}</span>`
+          : `<span class="pt-keyword" style="color:${color}">${name}</span>`;
+      }
+
+
+
+      div.innerHTML = `
+  <div class="pt-num">${globalNum}</div>
+  <div class="pt-symbol">${symbol}</div>
+  <div class="pt-name">${formatName(el.n, sector.color)}</div>
+  <div class="pt-sector-label">${sector.label}</div>
+`;
+      grid.appendChild(div);
+      globalNum++;
+    });
+
+    // Filter logic
+    filters.addEventListener('click', e => {
+      const btn = e.target.closest('.pt-filter-btn');
+      if (!btn) return;
+
+      filters.querySelectorAll('.pt-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.sector;
+      document.querySelectorAll('.pt-element').forEach(el => {
+        if (target === 'all' || el.dataset.sector === target) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

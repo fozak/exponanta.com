@@ -738,3 +738,63 @@
 .ed-section + .ed-section {
   border-top: 1px solid var(--ed-rule-light);
 }
+
+/* Secondary cards — border separator, no horiz */
+.ed-grid-feature__secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--ed-rule-light);
+  padding-left: 32px;
+}
+
+.ed-grid-feature__secondary .ed-card {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ed-rule-light);
+}
+
+.ed-grid-feature__secondary .ed-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ed-grid-feature__secondary .ed-card__img {
+  margin-bottom: 10px;
+}
+
+/* Ranked items — no number, no gap */
+.ed-ranked__item {
+  gap: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ed-rule-light);
+}
+
+.ed-ranked__item:last-child {
+  border-bottom: none;
+}
+
+/* ── Mobile ── */
+@media (max-width: 1024px) {
+  /* secondary stack loses left border, gets top border instead */
+  .ed-grid-feature__secondary {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--ed-rule-light);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* restore card bottom border in grid context */
+  .ed-grid-feature__secondary .ed-card {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ed-grid-feature__secondary {
+    grid-template-columns: 1fr;
+  }
+}

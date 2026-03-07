@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. Industries Isotope Table</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  h1 { text-align: center; }
+  .button-group { margin: 10px 0; }
+  .button { margin-right: 5px; padding: 5px 10px; cursor: pointer; border: 1px solid #333; background: #eee; }
+  .button.is-checked { background: #333; color: #fff; }
+  .grid { display: flex; flex-wrap: wrap; margin-top: 20px; }
+  .element-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    margin: 5px;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+  .name { font-weight: bold; font-size: 1.1em; }
+  .symbol, .number, .weight, .category { font-size: 0.9em; margin: 2px 0; }
+</style>
+</head>
+<body>
+
+<h1>U.S. Industries - Mendeleev-like Table</h1>
+
+<h2>Filter</h2>
+<div id="filters" class="button-group">
+  <button class="button is-checked" data-filter="*">show all</button>
+  <button class="button" data-filter=".agriculture">Agriculture</button>
+  <button class="button" data-filter=".automotive">Automotive</button>
+  <button class="button" data-filter=".aerospace">Aerospace & Defense</button>
+  <button class="button" data-filter=".energy">Energy</button>
+  <button class="button" data-filter=".healthcare">Healthcare</button>
+  <button class="button" data-filter=".finance">Finance</button>
+  <button class="button" data-filter=".tech">Technology</button>
+  <button class="button" data-filter=".telecom">Telecommunications</button>
+  <button class="button" data-filter=".transportation">Transportation</button>
+  <button class="button" data-filter=".manufacturing">Manufacturing</button>
+  <button class="button" data-filter=".construction">Construction</button>
+  <button class="button" data-filter=".retail">Retail</button>
+  <button class="button" data-filter=".media">Media</button>
+  <button class="button" data-filter=".tourism">Tourism</button>
+  <button class="button" data-filter=".education">Education</button>
+</div>
+
+<h2>Sort</h2>
+<div id="sorts" class="button-group">
+  <button class="button is-checked" data-sort-by="original-order">Original Order</button>
+  <button class="button" data-sort-by="name">Name</button>
+  <button class="button" data-sort-by="category">Category</button>
+</div>
+
+<div class="grid">
+  <!-- Example Elements -->
+  <div class="element-item agriculture" data-category="Agriculture">
+    <h3 class="name">Crop Farming</h3>
+    <p class="symbol">AG01</p>
+    <p class="number">1</p>
+    <p class="weight">High</p>
+    <p class="category">Agriculture</p>
+  </div>
+  <div class="element-item agriculture" data-category="Agriculture">
+    <h3 class="name">Livestock Farming</h3>
+    <p class="symbol">AG02</p>
+    <p class="number">2</p>
+    <p class="weight">High</p>
+    <p class="category">Agriculture</p>
+  </div>
+  <div class="element-item automotive" data-category="Automotive">
+    <h3 class="name">Passenger Car Manufacturing</h3>
+    <p class="symbol">AU01</p>
+    <p class="number">8</p>
+    <p class="weight">High</p>
+    <p class="category">Automotive</p>
+  </div>
+  <div class="element-item aerospace" data-category="Aerospace">
+    <h3 class="name">Commercial Aircraft</h3>
+    <p class="symbol">AS01</p>
+    <p class="number">15</p>
+    <p class="weight">Very High</p>
+    <p class="category">Aerospace</p>
+  </div>
+  <div class="element-item energy" data-category="Energy">
+    <h3 class="name">Oil & Gas Production</h3>
+    <p class="symbol">EN01</p>
+    <p class="number">21</p>
+    <p class="weight">Very High</p>
+    <p class="category">Energy</p>
+  </div>
+  <div class="element-item healthcare" data-category="Healthcare">
+    <h3 class="name">Hospitals</h3>
+    <p class="symbol">HC01</p>
+    <p class="number">28</p>
+    <p class="weight">High</p>
+    <p class="category">Healthcare</p>
+  </div>
+  <!-- Add all other 100 sub-industries similarly -->
+</div>
+
+<!-- Include Isotope -->
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+  // init Isotope
+  var grid = document.querySelector('.grid');
+  var iso = new Isotope(grid, {
+    itemSelector: '.element-item',
+    layoutMode: 'fitRows',
+    getSortData: {
+      name: '.name',
+      symbol: '.symbol',
+      number: el => parseInt(el.querySelector('.number').textContent),
+      category: '[data-category]'
+    }
+  });
+
+  // Filter buttons
+  var filtersElem = document.querySelector('#filters');
+  filtersElem.addEventListener('click', function(event){
+    if (!event.target.matches('button')) return;
+    var filterValue = event.target.getAttribute('data-filter');
+    iso.arrange({ filter: filterValue });
+    filtersElem.querySelectorAll('.is-checked').forEach(btn => btn.classList.remove('is-checked'));
+    event.target.classList.add('is-checked');
+  });
+
+  // Sort buttons
+  var sortsElem = document.querySelector('#sorts');
+  sortsElem.addEventListener('click', function(event){
+    if (!event.target.matches('button')) return;
+    var sortValue = event.target.getAttribute('data-sort-by');
+    iso.arrange({ sortBy: sortValue });
+    sortsElem.querySelectorAll('.is-checked').forEach(btn => btn.classList.remove('is-checked'));
+    event.target.classList.add('is-checked');
+  });
+</script>
+
+</body>
+</html>

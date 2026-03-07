@@ -1,0 +1,319 @@
+/* =========================================================
+   EXPONANTA — Global Left Sidebar (Twitch-style)
+   Add to <head> AFTER exponanta.css + exponanta-editorial.css
+   ========================================================= */
+
+
+/* =========================================================
+   S1. LAYOUT WRAPPER — wraps sidebar + main content
+   ========================================================= */
+
+:root {
+  --sidebar-collapsed: 56px;
+  --sidebar-expanded:  220px;
+  --sidebar-bg:        var(--neutral-0);
+  --sidebar-border:    var(--blue-100);
+  --sidebar-hover:     var(--neutral-50);
+  --sidebar-active-bg: var(--blue-100);
+  --sidebar-active-fg: var(--blue-700);
+  --sidebar-label:     var(--neutral-600);
+  --sidebar-icon:      var(--neutral-400);
+  --navbar-height:     56px;
+  --sidebar-transition: 220ms ease;
+}
+
+/* Page layout shell */
+.site-layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: var(--navbar-height);
+}
+
+/* Navbar sits above everything */
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  z-index: 200;
+  background: var(--neutral-0);
+  border-bottom: 1px solid var(--blue-100);
+}
+
+/* Main content shifts right to make room for sidebar */
+.site-main {
+  flex: 1;
+  margin-left: var(--sidebar-collapsed);
+  transition: margin-left var(--sidebar-transition);
+  min-width: 0;
+}
+
+/* When sidebar is expanded (hover or pinned), push content */
+.site-sidebar:hover ~ .site-main,
+.site-sidebar--expanded ~ .site-main {
+  margin-left: var(--sidebar-expanded);
+}
+
+
+/* =========================================================
+   S2. SIDEBAR SHELL
+   ========================================================= */
+
+.site-sidebar {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-collapsed);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 100;
+  transition: width var(--sidebar-transition);
+  display: flex;
+  flex-direction: column;
+}
+.site-sidebar::-webkit-scrollbar { display: none; }
+
+/* Expand on hover */
+.site-sidebar:hover,
+.site-sidebar--expanded {
+  width: var(--sidebar-expanded);
+  box-shadow: 2px 0 16px rgba(36,70,200,.08);
+}
+
+/* Toggle pin button — top of sidebar */
+.sidebar-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sidebar-collapsed);
+  height: 48px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--sidebar-icon);
+  transition: color .15s, background .15s;
+  align-self: flex-start;
+}
+.sidebar-toggle:hover { color: var(--blue-700); background: var(--sidebar-hover); }
+
+/* Pin icon rotates when pinned */
+.site-sidebar--expanded .sidebar-toggle .sidebar-toggle__icon {
+  transform: rotate(180deg);
+}
+.sidebar-toggle__icon { transition: transform var(--sidebar-transition); }
+
+
+/* =========================================================
+   S3. SIDEBAR SECTIONS + ITEMS
+   ========================================================= */
+
+.sidebar-section {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+.sidebar-section:last-child { border-bottom: none; }
+
+/* Section label — only visible when expanded */
+.sidebar-section__label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--neutral-400);
+  padding: 8px 16px 4px 16px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--sidebar-transition);
+}
+.site-sidebar:hover .sidebar-section__label,
+.site-sidebar--expanded .sidebar-section__label {
+  opacity: 1;
+}
+
+/* Individual nav item */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 40px;
+  text-decoration: none;
+  color: var(--sidebar-label);
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  transition: background .12s, color .12s;
+  position: relative;
+}
+.sidebar-item:hover {
+  background: var(--sidebar-hover);
+  color: var(--neutral-900);
+  text-decoration: none;
+}
+.sidebar-item--active {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-fg);
+  font-weight: 600;
+}
+.sidebar-item--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--blue-700);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Icon — always visible */
+.sidebar-item__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+/* Label — hidden when collapsed, slides in when expanded */
+.sidebar-item__label {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--sidebar-transition), transform var(--sidebar-transition);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-sidebar:hover .sidebar-item__label,
+.site-sidebar--expanded .sidebar-item__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Count badge */
+.sidebar-item__count {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--neutral-400);
+  opacity: 0;
+  transition: opacity var(--sidebar-transition);
+}
+.site-sidebar:hover .sidebar-item__count,
+.site-sidebar--expanded .sidebar-item__count {
+  opacity: 1;
+}
+
+/* Color dot for topic items */
+.sidebar-item__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: -4px;
+}
+
+
+/* =========================================================
+   S4. TOOLTIP — shows item label when collapsed
+   ========================================================= */
+
+.sidebar-item {
+  position: relative;
+}
+
+.sidebar-item__tooltip {
+  position: absolute;
+  left: calc(var(--sidebar-collapsed) + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--neutral-900);
+  color: var(--neutral-0);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 300;
+  transition: opacity .1s;
+}
+.sidebar-item__tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: var(--neutral-900);
+}
+
+/* Show tooltip only when sidebar is collapsed */
+.site-sidebar:not(:hover):not(.site-sidebar--expanded) .sidebar-item:hover .sidebar-item__tooltip {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   S5. MOBILE — full overlay drawer
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .site-sidebar {
+    width: var(--sidebar-expanded);
+    transform: translateX(-100%);
+    transition: transform var(--sidebar-transition);
+    box-shadow: none;
+  }
+
+  .site-sidebar--mobile-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(36,70,200,.15);
+  }
+
+  /* Labels always visible on mobile */
+  .site-sidebar .sidebar-item__label,
+  .site-sidebar .sidebar-section__label,
+  .site-sidebar .sidebar-item__count {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Content never pushed on mobile */
+  .site-main {
+    margin-left: 0 !important;
+  }
+
+  /* Backdrop when drawer open */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30,30,47,.4);
+    z-index: 99;
+  }
+  .sidebar-backdrop--visible {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar-backdrop { display: none !important; }
+  .sidebar-mobile-toggle { display: none; }
+}

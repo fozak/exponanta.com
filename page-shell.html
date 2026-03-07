@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exponanta</title>
+
+  <!-- 1. Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- 2. Your CSS files in order -->
+  <link href="/brandbook/exponanta.css" rel="stylesheet">
+  <link href="/brandbook/exponanta-editorial.css" rel="stylesheet">
+  <link href="/brandbook/exponanta-sidebar.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════
+       1. NAVBAR — fixed top, full width
+  ═══════════════════════════════════ -->
+  <nav class="site-navbar navbar navbar-option-1 navbar-expand-lg">
+    <div class="container-fluid px-3">
+      <div class="d-flex align-items-center gap-3">
+
+        <!-- hamburger — mobile only (CSS hides on desktop) -->
+        <button class="sidebar-mobile-btn"
+                onclick="toggleMobileSidebar()"
+                aria-label="Open menu">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+
+        <a class="navbar-brand" href="/">
+          <span class="navbar-brand-text">Exponanta</span>
+        </a>
+      </div>
+
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="/blog/">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Calendar</a></li>
+          <li class="nav-item ms-lg-3">
+            <button class="btn btn-sm btn-search">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-primary btn-sm">Host Event</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /NAVBAR -->
+
+
+  <!-- ═══════════════════════════════════
+       2. MOBILE BACKDROP
+       Dark overlay behind open drawer
+  ═══════════════════════════════════ -->
+  <div class="sidebar-backdrop"
+       id="sidebarBackdrop"
+       onclick="toggleMobileSidebar()">
+  </div>
+
+
+  <!-- ═══════════════════════════════════
+       3. SIDEBAR
+  ═══════════════════════════════════ -->
+  <aside class="site-sidebar" id="siteSidebar">
+
+    <!-- Quick links -->
+    <div class="sidebar-section">
+      <span class="sidebar-section__label">Menu</span>
+
+      <a href="/" class="sidebar-item sidebar-item--active">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Home</span>
+        <span class="sidebar-item__tooltip">Home</span>
+      </a>
+
+      <a href="/events/" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8"  y1="2" x2="8"  y2="6"/>
+            <line x1="3"  y1="10" x2="21" y2="10"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Events</span>
+        <span class="sidebar-item__tooltip">Events</span>
+      </a>
+
+      <a href="/community/" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Community</span>
+        <span class="sidebar-item__tooltip">Community</span>
+      </a>
+
+      <a href="/blog/" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Resources</span>
+        <span class="sidebar-item__tooltip">Resources</span>
+      </a>
+
+      <a href="/calendar/" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Calendar</span>
+        <span class="sidebar-item__tooltip">Calendar</span>
+      </a>
+    </div>
+
+    <!-- Content types -->
+    <div class="sidebar-section">
+      <span class="sidebar-section__label">Content</span>
+
+      <a href="/blog/?type=articles" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="8"  y1="6"  x2="21" y2="6"/>
+            <line x1="8"  y1="12" x2="21" y2="12"/>
+            <line x1="8"  y1="18" x2="21" y2="18"/>
+            <line x1="3"  y1="6"  x2="3.01" y2="6"/>
+            <line x1="3"  y1="12" x2="3.01" y2="12"/>
+            <line x1="3"  y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Articles</span>
+        <span class="sidebar-item__count">48</span>
+        <span class="sidebar-item__tooltip">Articles</span>
+      </a>
+
+      <a href="/blog/?type=recaps" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polygon points="23 7 16 12 23 17 23 7"/>
+            <rect x="1" y="5" width="15" height="14" rx="2"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Event Recaps</span>
+        <span class="sidebar-item__count">24</span>
+        <span class="sidebar-item__tooltip">Event Recaps</span>
+      </a>
+
+      <a href="/blog/?type=guides" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Guides</span>
+        <span class="sidebar-item__count">12</span>
+        <span class="sidebar-item__tooltip">Guides</span>
+      </a>
+    </div>
+
+    <!-- Topics -->
+    <div class="sidebar-section">
+      <span class="sidebar-section__label">Topics</span>
+
+      <a href="/blog/?topic=ai" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#4FD1C5;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">AI & Machine Learning</span>
+        <span class="sidebar-item__count">18</span>
+        <span class="sidebar-item__tooltip">AI & ML</span>
+      </a>
+
+      <a href="/blog/?topic=startups" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#FF6F61;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Startups</span>
+        <span class="sidebar-item__count">22</span>
+        <span class="sidebar-item__tooltip">Startups</span>
+      </a>
+
+      <a href="/blog/?topic=leadership" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#82A0FA;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Leadership</span>
+        <span class="sidebar-item__count">15</span>
+        <span class="sidebar-item__tooltip">Leadership</span>
+      </a>
+
+      <a href="/blog/?topic=design" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#C8DFFA;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Design</span>
+        <span class="sidebar-item__count">11</span>
+        <span class="sidebar-item__tooltip">Design</span>
+      </a>
+
+      <a href="/blog/?topic=finance" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#4FD1C5;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Finance</span>
+        <span class="sidebar-item__count">9</span>
+        <span class="sidebar-item__tooltip">Finance</span>
+      </a>
+
+      <a href="/blog/?topic=product" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <span class="sidebar-item__dot" style="background:#82A0FA;"></span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Product</span>
+        <span class="sidebar-item__count">7</span>
+        <span class="sidebar-item__tooltip">Product</span>
+      </a>
+    </div>
+
+    <!-- Saved -->
+    <div class="sidebar-section">
+      <a href="/saved/" class="sidebar-item">
+        <span class="sidebar-item__icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </span>
+        <span class="sidebar-item__label">Saved Items</span>
+        <span class="sidebar-item__tooltip">Saved</span>
+      </a>
+    </div>
+
+  </aside>
+  <!-- /SIDEBAR -->
+
+
+  <!-- ═══════════════════════════════════
+       4. PAGE LAYOUT WRAPPER
+       sidebar pushes site-main via CSS
+  ═══════════════════════════════════ -->
+  <div class="site-layout">
+    <main class="site-main">
+
+      <!-- ▼▼▼ YOUR PAGE CONTENT HERE ▼▼▼ -->
+      <!-- ticker, hero, sections, footer   -->
+      <!-- ▲▲▲ YOUR PAGE CONTENT HERE ▲▲▲ -->
+
+    </main>
+  </div>
+  <!-- /LAYOUT -->
+
+
+  <!-- ═══════════════════════════════════
+       5. SCRIPTS
+  ═══════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/_loader.js" defer></script>
+
+</body>
+</html>
