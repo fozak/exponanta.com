@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Converter | Exponanta Tools</title>
+    <meta name="description" content="Convert SVG files to PNG or JPG format. Free online tool by Exponanta.">
+
+    <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           TOOL-SPECIFIC STYLES — layered on top of exponanta.css
+           ========================================================= */
+
+        /* Page layout */
+        .tool-page {
+            min-height: 100vh;
+            background: var(--neutral-50);
+        }
+
+        /* Top bar */
+        .tool-topbar {
+            background: var(--neutral-0);
+            border-bottom: 1px solid var(--bs-border-color);
+            padding: 14px 0;
+        }
+
+        .tool-topbar .brand-link {
+            font-weight: 700;
+            color: var(--blue-700);
+            text-decoration: none;
+            font-size: var(--text-lg);
+            letter-spacing: -0.02em;
+        }
+
+        .tool-topbar .brand-link span {
+            color: var(--neutral-600, #4B5563);
+            font-weight: 400;
+        }
+
+        .tool-topbar .breadcrumb {
+            margin-bottom: 0;
+            font-size: var(--text-sm);
+        }
+
+        .tool-topbar .breadcrumb-item a {
+            color: var(--blue-700);
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .tool-hero {
+            background: linear-gradient(135deg, var(--blue-700) 0%, #1a35a8 100%);
+            padding: 48px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 280px; height: 280px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .tool-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -40px;
+            width: 220px; height: 220px;
+            background: rgba(130,160,250,0.12);
+            border-radius: 50%;
+        }
+
+        .tool-hero h1 {
+            color: var(--neutral-0);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: var(--leading-tight);
+        }
+
+        .tool-hero p {
+            color: rgba(255,255,255,0.82);
+            font-size: var(--text-lg);
+        }
+
+        .tool-hero .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--neutral-0);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        /* Main tool card */
+        .tool-card {
+            background: var(--neutral-0);
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .tool-card-header {
+            background: var(--neutral-50);
+            border-bottom: 1px solid var(--bs-border-color);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-card-header .step-dot {
+            width: 24px; height: 24px;
+            background: var(--blue-700);
+            color: var(--neutral-0);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .tool-card-header h5 {
+            margin: 0;
+            font-size: var(--text-md);
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .tool-card-body {
+            padding: 24px;
+        }
+
+        /* Drop zone */
+        .drop-zone {
+            border: 2px dashed rgba(36, 70, 200, 0.25);
+            border-radius: var(--radius-lg);
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            position: relative;
+            background: var(--neutral-50);
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: var(--blue-700);
+            background: rgba(36, 70, 200, 0.04);
+        }
+
+        .drop-zone input[type="file"] {
+            position: absolute; inset: 0;
+            opacity: 0; cursor: pointer;
+            width: 100%; height: 100%;
+        }
+
+        .drop-zone-icon {
+            width: 56px; height: 56px;
+            background: var(--blue-100);
+            border-radius: var(--radius-lg);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--blue-700);
+        }
+
+        .drop-zone h6 {
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 6px;
+        }
+
+        .drop-zone p {
+            color: var(--neutral-600, #4B5563);
+            font-size: var(--text-sm);
+            margin: 0;
+        }
+
+        .drop-zone .browse-link {
+            color: var(--blue-700);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Preview area */
+        .preview-area {
+            display: none;
+            background: var(--neutral-50);
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+            min-height: 180px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .preview-area img {
+            max-width: 100%;
+            max-height: 240px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .preview-area .preview-meta {
+            margin-top: 12px;
+            font-size: var(--text-sm);
+            color: var(--neutral-600, #4B5563);
+        }
+
+        .preview-area .preview-meta strong {
+            color: var(--neutral-900);
+        }
+
+        .preview-area .btn-clear {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 28px; height: 28px;
+            background: var(--neutral-0);
+            border: 1px solid var(--bs-border-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--neutral-600, #4B5563);
+            font-size: 14px;
+            transition: all 0.15s;
+        }
+
+        .preview-area .btn-clear:hover {
+            background: var(--accent-coral);
+            color: var(--neutral-0);
+            border-color: var(--accent-coral);
+        }
+
+        /* Settings row */
+        .setting-group label {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .setting-group .hint {
+            font-size: var(--text-xs);
+            color: var(--neutral-600, #4B5563);
+            margin-top: 4px;
+        }
+
+        .form-control, .form-select {
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            color: var(--neutral-900);
+            background: var(--neutral-0);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--blue-700);
+            box-shadow: 0 0 0 3px rgba(36,70,200,0.12);
+        }
+
+        /* Format toggle buttons */
+        .format-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .format-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: 2px solid var(--bs-border-color);
+            border-radius: var(--radius-md);
+            background: var(--neutral-0);
+            color: var(--neutral-600, #4B5563);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-align: center;
+        }
+
+        .format-btn:hover {
+            border-color: var(--blue-300);
+            color: var(--blue-700);
+            background: rgba(36,70,200,0.04);
+        }
+
+        .format-btn.active {
+            border-color: var(--blue-700);
+            background: var(--blue-700);
+            color: var(--neutral-0);
+        }
+
+        .format-btn .fmt-ext {
+            display: block;
+            font-size: var(--text-xs);
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        /* Scale input */
+        .scale-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--neutral-0);
+        }
+
+        .scale-input-wrap button {
+            width: 36px; height: 38px;
+            border: none; background: var(--neutral-50);
+            color: var(--blue-700);
+            font-size: 18px; font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+            flex-shrink: 0;
+        }
+
+        .scale-input-wrap button:hover { background: var(--blue-100); }
+
+        .scale-input-wrap input {
+            flex: 1;
+            border: none;
+            border-left: 1px solid var(--bs-border-color);
+            border-right: 1px solid var(--bs-border-color);
+            padding: 0 8px;
+            height: 38px;
+            text-align: center;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--neutral-900);
+            background: var(--neutral-0);
+            outline: none;
+        }
+
+        /* Quality slider */
+        .quality-slider {
+            -webkit-appearance: none;
+            width: 100%; height: 6px;
+            background: var(--blue-100);
+            border-radius: 3px;
+            outline: none;
+            margin-top: 8px;
+        }
+
+        .quality-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px; height: 18px;
+            background: var(--blue-700);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(36,70,200,0.3);
+        }
+
+        /* Output size display */
+        .size-display {
+            background: var(--neutral-50);
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            font-size: var(--text-sm);
+            color: var(--neutral-600, #4B5563);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .size-display .size-val {
+            font-weight: 700;
+            color: var(--blue-700);
+            font-size: var(--text-md);
+        }
+
+        /* Convert button */
+        .btn-convert {
+            background: var(--blue-700);
+            border: none;
+            color: var(--neutral-0);
+            font-size: var(--text-md);
+            font-weight: 600;
+            padding: 14px 0;
+            border-radius: var(--radius-md);
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-convert:hover:not(:disabled) {
+            background: #1a35a8;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(36,70,200,0.3);
+        }
+
+        .btn-convert:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        /* Download result card */
+        .result-card {
+            display: none;
+            background: var(--neutral-0);
+            border: 2px solid var(--accent-teal);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 6px 20px rgba(79,209,197,0.15);
+            overflow: hidden;
+        }
+
+        .result-card-header {
+            background: linear-gradient(135deg, var(--accent-teal), #38b2ac);
+            padding: 14px 20px;
+            color: var(--neutral-0);
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .result-card-header h6 { margin: 0; font-weight: 600; }
+
+        .result-card-body {
+            padding: 20px;
+            display: flex; align-items: center; gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .result-preview-thumb {
+            width: 80px; height: 80px;
+            object-fit: contain;
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-md);
+            background: var(--neutral-50);
+        }
+
+        .result-info { flex: 1; min-width: 140px; }
+
+        .result-info .filename {
+            font-weight: 600; font-size: var(--text-sm);
+            color: var(--neutral-900);
+            word-break: break-all;
+        }
+
+        .result-info .file-meta {
+            font-size: var(--text-xs);
+            color: var(--neutral-600, #4B5563);
+            margin-top: 4px;
+        }
+
+        .btn-download {
+            background: var(--accent-teal);
+            border: none;
+            color: var(--neutral-0);
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--text-sm);
+            transition: all 0.2s;
+            display: flex; align-items: center; gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            background: #38b2ac;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79,209,197,0.3);
+        }
+
+        /* Error alert */
+        .alert-tool {
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            display: none;
+        }
+
+        /* Info / tips sidebar */
+        .tips-card {
+            background: var(--neutral-0);
+            border: 1px solid var(--bs-border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .tips-card-header {
+            background: var(--blue-100);
+            padding: 14px 20px;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid rgba(36,70,200,0.1);
+        }
+
+        .tips-card-header h6 {
+            margin: 0;
+            color: var(--blue-700);
+            font-weight: 600;
+            font-size: var(--text-sm);
+        }
+
+        .tips-card-body { padding: 16px 20px; }
+
+        .tip-item {
+            display: flex; gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bs-border-color);
+            font-size: var(--text-sm);
+        }
+
+        .tip-item:last-child { border-bottom: none; }
+
+        .tip-icon {
+            width: 28px; height: 28px;
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .tip-icon.blue  { background: var(--blue-100); }
+        .tip-icon.teal  { background: rgba(79,209,197,0.15); }
+        .tip-icon.coral { background: rgba(255,111,97,0.12); }
+
+        .tip-text strong {
+            display: block;
+            color: var(--neutral-900);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .tip-text span { color: var(--neutral-600, #4B5563); }
+
+        /* Format comparison table */
+        .fmt-table th {
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--neutral-600, #4B5563);
+            font-weight: 600;
+            background: var(--neutral-50);
+            border-color: var(--bs-border-color);
+        }
+
+        .fmt-table td {
+            font-size: var(--text-sm);
+            vertical-align: middle;
+            border-color: var(--bs-border-color);
+        }
+
+        .fmt-table .badge-format {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        .tool-footer {
+            background: var(--neutral-900);
+            color: rgba(255,255,255,0.6);
+            padding: 24px 0;
+            margin-top: 60px;
+            font-size: var(--text-sm);
+        }
+
+        .tool-footer a {
+            color: var(--blue-300);
+            text-decoration: none;
+        }
+
+        .tool-footer a:hover { color: var(--neutral-0); }
+
+        /* Spinner */
+        .spinner-border-sm {
+            width: 16px; height: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .tool-hero h1 { font-size: var(--text-2xl); }
+            .tool-card-body { padding: 16px; }
+        }
+    </style>
+</head>
+
+<body class="tool-page">
+
+    <!-- Top Bar -->
+    <div class="tool-topbar">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="https://exponanta.com" class="brand-link">
+                    Exponanta <span>/ Tools</span>
+                </a>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="https://exponanta.com">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/tools/">Tools</a></li>
+                        <li class="breadcrumb-item active">SVG Converter</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="tool-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="hero-badge">
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                        </svg>
+                        Free Browser Tool
+                    </div>
+                    <h1>SVG → PNG / JPG<br>Converter</h1>
+                    <p class="mt-2 mb-0">Convert any SVG file to raster format instantly — no upload, no server, everything runs in your browser.</p>
+                </div>
+                <div class="col-lg-5 mt-4 mt-lg-0">
+                    <div class="d-flex gap-3 justify-content-lg-end">
+                        <div class="text-center">
+                            <div class="h3 fw-bold text-white mb-0">100%</div>
+                            <small style="color:rgba(255,255,255,0.7)">Private</small>
+                        </div>
+                        <div class="vr" style="background:rgba(255,255,255,0.2)"></div>
+                        <div class="text-center">
+                            <div class="h3 fw-bold text-white mb-0">No&nbsp;limit</div>
+                            <small style="color:rgba(255,255,255,0.7)">File size</small>
+                        </div>
+                        <div class="vr" style="background:rgba(255,255,255,0.2)"></div>
+                        <div class="text-center">
+                            <div class="h3 fw-bold text-white mb-0">Free</div>
+                            <small style="color:rgba(255,255,255,0.7)">Always</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row g-4">
+
+            <!-- LEFT: Tool -->
+            <div class="col-lg-8">
+
+                <!-- Step 1: Upload -->
+                <div class="tool-card mb-4">
+                    <div class="tool-card-header">
+                        <div class="step-dot">1</div>
+                        <h5>Select SVG File</h5>
+                    </div>
+                    <div class="tool-card-body">
+
+                        <!-- Drop Zone -->
+                        <div class="drop-zone" id="dropZone">
+                            <input type="file" id="fileInput" accept=".svg,image/svg+xml">
+                            <div class="drop-zone-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.524C3.049 2.64 3.6 1.855 4.406 1.342z"/>
+                                    <path d="M6.646 6.146a.5.5 0 0 1 .708 0L8 6.793l.646-.647a.5.5 0 0 1 .708.708l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 0-.708z"/>
+                                    <path fill-rule="evenodd" d="M8 11a.5.5 0 0 1 .5-.5h.5v-3.793l.146.147a.5.5 0 0 0 .708-.708l-1-1a.5.5 0 0 0-.708 0l-1 1a.5.5 0 1 0 .708.708L7.5 6.707V10.5H8a.5.5 0 0 1-.5.5.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5v-4h-.5a.5.5 0 0 1 0-1h2z"/>
+                                </svg>
+                            </div>
+                            <h6>Drop your SVG file here</h6>
+                            <p><span class="browse-link">Browse</span> or drag &amp; drop · SVG files only</p>
+                        </div>
+
+                        <!-- Preview (hidden until file loaded) -->
+                        <div class="preview-area mt-3" id="previewArea">
+                            <button class="btn-clear" id="btnClear" title="Remove file">✕</button>
+                            <img id="previewImg" src="" alt="SVG Preview">
+                            <div class="preview-meta" id="previewMeta"></div>
+                        </div>
+
+                        <!-- Error -->
+                        <div class="alert alert-danger alert-tool mt-3" id="alertError" role="alert"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Settings -->
+                <div class="tool-card mb-4">
+                    <div class="tool-card-header">
+                        <div class="step-dot">2</div>
+                        <h5>Conversion Settings</h5>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="row g-4">
+
+                            <!-- Format -->
+                            <div class="col-12">
+                                <div class="setting-group">
+                                    <label>Output Format</label>
+                                    <div class="format-toggle">
+                                        <button class="format-btn active" data-format="png" id="btnPNG">
+                                            PNG
+                                            <span class="fmt-ext">Lossless · transparency</span>
+                                        </button>
+                                        <button class="format-btn" data-format="jpg" id="btnJPG">
+                                            JPG
+                                            <span class="fmt-ext">Lossy · smaller size</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scale -->
+                            <div class="col-md-6">
+                                <div class="setting-group">
+                                    <label>Scale Factor</label>
+                                    <div class="scale-input-wrap">
+                                        <button type="button" id="btnScaleDec">−</button>
+                                        <input type="number" id="scaleInput" value="1" min="0.5" max="10" step="0.5">
+                                        <button type="button" id="btnScaleInc">+</button>
+                                    </div>
+                                    <div class="hint">1× = original size · 2× = double resolution</div>
+                                </div>
+                            </div>
+
+                            <!-- Background (PNG only) -->
+                            <div class="col-md-6" id="bgGroup">
+                                <div class="setting-group">
+                                    <label>Background</label>
+                                    <select class="form-select" id="bgSelect">
+                                        <option value="transparent">Transparent (PNG only)</option>
+                                        <option value="white">White</option>
+                                        <option value="black">Black</option>
+                                        <option value="custom">Custom color…</option>
+                                    </select>
+                                    <input type="color" id="bgColorPicker" value="#ffffff"
+                                           class="form-control form-control-sm mt-2"
+                                           style="display:none; height:36px;">
+                                </div>
+                            </div>
+
+                            <!-- Quality (JPG only) -->
+                            <div class="col-12" id="qualityGroup" style="display:none;">
+                                <div class="setting-group">
+                                    <label>JPG Quality — <span id="qualityVal">92</span>%</label>
+                                    <input type="range" class="quality-slider" id="qualitySlider"
+                                           min="10" max="100" value="92">
+                                    <div class="hint">Higher = better quality, larger file · Lower = smaller file, more artifacts</div>
+                                </div>
+                            </div>
+
+                            <!-- Output size preview -->
+                            <div class="col-12" id="sizePreviewWrap" style="display:none;">
+                                <div class="size-display">
+                                    <svg width="16" height="16" fill="var(--blue-700)" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                        <path d="M10.648 6.646a.5.5 0 0 1 .577-.093l4 2a.5.5 0 0 1 0 .894l-4 2a.5.5 0 0 1-.698-.577L11.027 9H5a.5.5 0 0 1 0-1h6.027l-.576-1.677a.5.5 0 0 1 .197-.677z"/>
+                                    </svg>
+                                    Output canvas: <span class="size-val" id="outputSizeLabel">— × —</span> px
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Convert -->
+                <div class="tool-card mb-4">
+                    <div class="tool-card-header">
+                        <div class="step-dot">3</div>
+                        <h5>Convert &amp; Download</h5>
+                    </div>
+                    <div class="tool-card-body">
+                        <button class="btn-convert" id="btnConvert" disabled>
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                            </svg>
+                            <span id="btnConvertLabel">Convert to PNG</span>
+                        </button>
+
+                        <!-- Result card -->
+                        <div class="result-card mt-4" id="resultCard">
+                            <div class="result-card-header">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                </svg>
+                                <h6>Conversion complete!</h6>
+                            </div>
+                            <div class="result-card-body">
+                                <img class="result-preview-thumb" id="resultThumb" src="" alt="Result">
+                                <div class="result-info">
+                                    <div class="filename" id="resultFilename">—</div>
+                                    <div class="file-meta" id="resultMeta">—</div>
+                                </div>
+                                <button class="btn-download" id="btnDownload">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                    </svg>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div><!-- /col-lg-8 -->
+
+            <!-- RIGHT: Tips & Info -->
+            <div class="col-lg-4">
+
+                <!-- Tips -->
+                <div class="tips-card mb-4">
+                    <div class="tips-card-header">
+                        <svg width="16" height="16" fill="var(--blue-700)" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                        <h6>Tips &amp; Notes</h6>
+                    </div>
+                    <div class="tips-card-body">
+                        <div class="tip-item">
+                            <div class="tip-icon blue">🔒</div>
+                            <div class="tip-text">
+                                <strong>100% Private</strong>
+                                <span>Your file never leaves your browser. No server upload.</span>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon teal">📐</div>
+                            <div class="tip-text">
+                                <strong>Use 2× or 3× for Retina</strong>
+                                <span>Scale up for crisp display on high-DPI screens.</span>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon blue">🎨</div>
+                            <div class="tip-text">
+                                <strong>PNG for logos &amp; icons</strong>
+                                <span>Preserves transparency. Best for use on web.</span>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon coral">📸</div>
+                            <div class="tip-text">
+                                <strong>JPG for photos &amp; social</strong>
+                                <span>Smaller file size, no transparency. Good for sharing.</span>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon teal">⚠️</div>
+                            <div class="tip-text">
+                                <strong>SVGs with no width/height</strong>
+                                <span>If the SVG has no explicit dimensions, the canvas uses viewBox or defaults to 300×150.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Format comparison -->
+                <div class="tips-card">
+                    <div class="tips-card-header">
+                        <svg width="16" height="16" fill="var(--blue-700)" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                        </svg>
+                        <h6>Format Comparison</h6>
+                    </div>
+                    <div class="tips-card-body p-0">
+                        <table class="table table-sm fmt-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-3">Format</th>
+                                    <th>Transparency</th>
+                                    <th>Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ps-3"><span class="badge-format" style="background:var(--blue-100);color:var(--blue-700)">PNG</span></td>
+                                    <td><span class="text-success">✓ Yes</span></td>
+                                    <td>Larger</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-3"><span class="badge-format" style="background:rgba(255,111,97,0.12);color:var(--accent-coral)">JPG</span></td>
+                                    <td><span class="text-muted">✗ No</span></td>
+                                    <td>Smaller</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /col-lg-4 -->
+
+        </div><!-- /row -->
+    </div><!-- /container -->
+
+    <!-- Footer -->
+    <footer class="tool-footer">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div>
+                    <a href="https://exponanta.com" class="fw-semibold">Exponanta</a>
+                    <span class="ms-2">Free browser tools for the community.</span>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="/tools/">All Tools</a>
+                    <a href="https://exponanta.com/blog/">Blog</a>
+                    <a href="https://exponanta.com/events/">Events</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    (() => {
+        // ── State ──────────────────────────────────────────────
+        let svgFile = null;
+        let svgText = '';
+        let svgNativeW = 0, svgNativeH = 0;
+        let selectedFormat = 'png';
+        let resultDataURL = '';
+        let resultFilename = '';
+
+        // ── Elements ───────────────────────────────────────────
+        const dropZone       = document.getElementById('dropZone');
+        const fileInput      = document.getElementById('fileInput');
+        const previewArea    = document.getElementById('previewArea');
+        const previewImg     = document.getElementById('previewImg');
+        const previewMeta    = document.getElementById('previewMeta');
+        const btnClear       = document.getElementById('btnClear');
+        const alertError     = document.getElementById('alertError');
+        const btnPNG         = document.getElementById('btnPNG');
+        const btnJPG         = document.getElementById('btnJPG');
+        const scaleInput     = document.getElementById('scaleInput');
+        const btnScaleDec    = document.getElementById('btnScaleDec');
+        const btnScaleInc    = document.getElementById('btnScaleInc');
+        const bgSelect       = document.getElementById('bgSelect');
+        const bgColorPicker  = document.getElementById('bgColorPicker');
+        const qualityGroup   = document.getElementById('qualityGroup');
+        const qualitySlider  = document.getElementById('qualitySlider');
+        const qualityVal     = document.getElementById('qualityVal');
+        const sizePreviewWrap= document.getElementById('sizePreviewWrap');
+        const outputSizeLabel= document.getElementById('outputSizeLabel');
+        const btnConvert     = document.getElementById('btnConvert');
+        const btnConvertLabel= document.getElementById('btnConvertLabel');
+        const resultCard     = document.getElementById('resultCard');
+        const resultThumb    = document.getElementById('resultThumb');
+        const resultFilenameEl = document.getElementById('resultFilename');
+        const resultMetaEl   = document.getElementById('resultMeta');
+        const btnDownload    = document.getElementById('btnDownload');
+
+        // ── Drag & Drop ────────────────────────────────────────
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file) handleFile(file);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files[0]) handleFile(fileInput.files[0]);
+        });
+
+        // ── File handling ──────────────────────────────────────
+        function handleFile(file) {
+            hideError();
+            resultCard.style.display = 'none';
+
+            if (!file.name.toLowerCase().endsWith('.svg') && file.type !== 'image/svg+xml') {
+                showError('Please select a valid SVG file (.svg).');
+                return;
+            }
+
+            svgFile = file;
+            const reader = new FileReader();
+            reader.onload = e => {
+                svgText = e.target.result;
+                parseSVGDimensions(svgText);
+                showPreview(svgText, file.name, file.size);
+                btnConvert.disabled = false;
+                updateOutputSizeLabel();
+            };
+            reader.readAsText(file);
+        }
+
+        function parseSVGDimensions(text) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'image/svg+xml');
+            const svg = doc.documentElement;
+
+            let w = parseFloat(svg.getAttribute('width'));
+            let h = parseFloat(svg.getAttribute('height'));
+
+            if (!w || !h) {
+                const vb = svg.getAttribute('viewBox');
+                if (vb) {
+                    const parts = vb.split(/[\s,]+/);
+                    w = parseFloat(parts[2]) || 300;
+                    h = parseFloat(parts[3]) || 150;
+                } else {
+                    w = 300; h = 150;
+                }
+            }
+            svgNativeW = w;
+            svgNativeH = h;
+        }
+
+        function showPreview(text, name, size) {
+            const blob = new Blob([text], { type: 'image/svg+xml' });
+            const url  = URL.createObjectURL(blob);
+            previewImg.src = url;
+            previewImg.onload = () => URL.revokeObjectURL(url);
+
+            previewMeta.innerHTML =
+                `<strong>${escapeHtml(name)}</strong> &nbsp;·&nbsp; ` +
+                `${(size / 1024).toFixed(1)} KB &nbsp;·&nbsp; ` +
+                `${Math.round(svgNativeW)} × ${Math.round(svgNativeH)} px (native)`;
+
+            previewArea.style.display = 'flex';
+            dropZone.style.display = 'none';
+            sizePreviewWrap.style.display = 'block';
+        }
+
+        btnClear.addEventListener('click', clearFile);
+
+        function clearFile() {
+            svgFile = null; svgText = '';
+            svgNativeW = 0; svgNativeH = 0;
+            fileInput.value = '';
+            previewArea.style.display = 'none';
+            dropZone.style.display = '';
+            sizePreviewWrap.style.display = 'none';
+            resultCard.style.display = 'none';
+            btnConvert.disabled = true;
+            hideError();
+        }
+
+        // ── Format toggle ──────────────────────────────────────
+        [btnPNG, btnJPG].forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedFormat = btn.dataset.format;
+                btnPNG.classList.toggle('active', selectedFormat === 'png');
+                btnJPG.classList.toggle('active', selectedFormat === 'jpg');
+                qualityGroup.style.display = selectedFormat === 'jpg' ? '' : 'none';
+                // transparent bg only for PNG
+                if (selectedFormat === 'jpg' && bgSelect.value === 'transparent') {
+                    bgSelect.value = 'white';
+                }
+                bgSelect.options[0].disabled = selectedFormat === 'jpg';
+                btnConvertLabel.textContent = `Convert to ${selectedFormat.toUpperCase()}`;
+                updateOutputSizeLabel();
+            });
+        });
+
+        // ── Scale ──────────────────────────────────────────────
+        btnScaleDec.addEventListener('click', () => {
+            let v = parseFloat(scaleInput.value) - 0.5;
+            scaleInput.value = Math.max(0.5, v).toFixed(1);
+            updateOutputSizeLabel();
+        });
+        btnScaleInc.addEventListener('click', () => {
+            let v = parseFloat(scaleInput.value) + 0.5;
+            scaleInput.value = Math.min(10, v).toFixed(1);
+            updateOutputSizeLabel();
+        });
+        scaleInput.addEventListener('input', updateOutputSizeLabel);
+
+        function updateOutputSizeLabel() {
+            if (!svgNativeW) return;
+            const s = parseFloat(scaleInput.value) || 1;
+            outputSizeLabel.textContent =
+                `${Math.round(svgNativeW * s)} × ${Math.round(svgNativeH * s)}`;
+        }
+
+        // ── Quality ────────────────────────────────────────────
+        qualitySlider.addEventListener('input', () => {
+            qualityVal.textContent = qualitySlider.value;
+        });
+
+        // ── Background picker ──────────────────────────────────
+        bgSelect.addEventListener('change', () => {
+            bgColorPicker.style.display = bgSelect.value === 'custom' ? '' : 'none';
+        });
+
+        // ── Convert ────────────────────────────────────────────
+        btnConvert.addEventListener('click', convertSVG);
+
+        function convertSVG() {
+            if (!svgText) return;
+            hideError();
+            resultCard.style.display = 'none';
+
+            const scale   = parseFloat(scaleInput.value) || 1;
+            const quality = parseInt(qualitySlider.value) / 100;
+            const fmt     = selectedFormat;
+            const mime    = fmt === 'jpg' ? 'image/jpeg' : 'image/png';
+
+            const w = Math.round(svgNativeW * scale);
+            const h = Math.round(svgNativeH * scale);
+
+            // Ensure SVG has explicit width/height for the canvas render
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(svgText, 'image/svg+xml');
+            const svgEl = doc.documentElement;
+            svgEl.setAttribute('width', w);
+            svgEl.setAttribute('height', h);
+            const modifiedSVG = new XMLSerializer().serializeToString(doc);
+
+            const blob = new Blob([modifiedSVG], { type: 'image/svg+xml' });
+            const url  = URL.createObjectURL(blob);
+            const img  = new Image();
+
+            // Loading spinner
+            btnConvertLabel.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Converting…';
+            btnConvert.disabled = true;
+
+            img.onload = () => {
+                URL.revokeObjectURL(url);
+
+                const canvas = document.createElement('canvas');
+                canvas.width  = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+
+                // Background
+                const bg = bgSelect.value;
+                if (bg === 'transparent' && fmt === 'png') {
+                    // no fill — transparent
+                } else if (bg === 'custom') {
+                    ctx.fillStyle = bgColorPicker.value;
+                    ctx.fillRect(0, 0, w, h);
+                } else {
+                    ctx.fillStyle = bg === 'black' ? '#000000' : '#ffffff';
+                    ctx.fillRect(0, 0, w, h);
+                }
+
+                ctx.drawImage(img, 0, 0, w, h);
+
+                resultDataURL = canvas.toDataURL(mime, quality);
+
+                // Build filename
+                const baseName = (svgFile ? svgFile.name : 'image').replace(/\.svg$/i, '');
+                resultFilename = `${baseName}@${scale}x.${fmt}`;
+
+                // Estimate file size from base64
+                const base64Len = resultDataURL.split(',')[1].length;
+                const fileSizeKB = Math.round((base64Len * 3) / 4 / 1024);
+
+                // Show result
+                resultThumb.src = resultDataURL;
+                resultFilenameEl.textContent = resultFilename;
+                resultMetaEl.textContent = `${w} × ${h} px · ~${fileSizeKB} KB · ${fmt.toUpperCase()}`;
+                resultCard.style.display = 'block';
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Reset button
+                btnConvertLabel.textContent = `Convert to ${fmt.toUpperCase()}`;
+                btnConvert.disabled = false;
+            };
+
+            img.onerror = () => {
+                URL.revokeObjectURL(url);
+                showError('Failed to render SVG. The file may contain unsupported elements or external references.');
+                btnConvertLabel.textContent = `Convert to ${fmt.toUpperCase()}`;
+                btnConvert.disabled = false;
+            };
+
+            img.src = url;
+        }
+
+        // ── Download ───────────────────────────────────────────
+        btnDownload.addEventListener('click', () => {
+            if (!resultDataURL) return;
+            const a = document.createElement('a');
+            a.href = resultDataURL;
+            a.download = resultFilename;
+            a.click();
+        });
+
+        // ── Helpers ────────────────────────────────────────────
+        function showError(msg) {
+            alertError.textContent = msg;
+            alertError.style.display = '';
+        }
+
+        function hideError() {
+            alertError.style.display = 'none';
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        }
+
+    })();
+    </script>
+</body>
+</html>

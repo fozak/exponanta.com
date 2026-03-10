@@ -24,9 +24,17 @@ const ExponantaJournal = {
 
   //============================================================
 
-  trademark: 
+  trademark: {"gptlink":"https://chatgpt.com/c/69af15e0-bd34-832e-bc5a-1d6ec10f698d"},
+  
+  // ============================================================
 
-{"gptlink":"https://chatgpt.com/c/69af15e0-bd34-832e-bc5a-1d6ec10f698d"},
+  social_links: {
+    facebook: "https://facebook.com/exponanta",  //created dennisd
+    twitter: "https://x.com/exponanta",  //created info@exponanta.com
+    linkedin: "https://www.linkedin.com/company/exponanta",
+    youtube: "https://youtube.com/@exponanta"},  //dennis.d.....
+
+  email: {email: "info@exponanta.com "},  //mailgun checked
   
   // ============================================================
   // COMPLETED COMPONENTS
