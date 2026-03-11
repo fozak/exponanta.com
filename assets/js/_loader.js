@@ -1,4 +1,4 @@
-/* Preloader script starts */
+/* _loader.js */
 // Define the variable from the parentlink meta tag
 var parentLinkMeta = document.querySelector('meta[name="parentlink"]');
 /*var parentLink = parentLinkMeta ? parentLinkMeta.getAttribute("content") : null;
