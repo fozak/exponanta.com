@@ -35,7 +35,7 @@ if (parentLink) {
   console.error("No parentlink meta tag found.");
 }*/
 
-// Load components when DOM is ready
+// Load components when DOM is ready __
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", loadComponents);
 } else {
