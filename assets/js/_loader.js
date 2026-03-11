@@ -43,7 +43,7 @@ if (document.readyState === "loading") {
 }
 
 function loadComponents() {
-  // Get all divs with data-loader attribute
+  // Get all divs with data-loader attribute  _
   var loaderDivs = document.querySelectorAll("div[data-loader]");
 
   loaderDivs.forEach(function (div) {
