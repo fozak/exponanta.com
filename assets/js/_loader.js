@@ -63,13 +63,10 @@ function loadComponents() {
         // issue with live server
 
         // Remove live-server injected scripts before inserting
-    const cleaned = data.replace(
-        /<!--\s*Code injected by live-server\s*-->[\s\S]*?<\/script>/gi,
-        ''
-    );
+  const cleaned = data.replace(/<script[\s\S]*?<\/script>/gi, '');
         // Insert the fetched content after the div
 
-        div.innerHTML = data;
+        div.innerHTML = cleaned;
         //div.insertAdjacentHTML("afterend", data);
         // Optionally remove or hide the loader div
         // div.style.display = 'none';
