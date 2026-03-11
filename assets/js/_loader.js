@@ -59,6 +59,14 @@ function loadComponents() {
         return response.text();
       })
       .then((data) => {
+
+        // issue with live server
+
+        // Remove live-server injected scripts before inserting
+    const cleaned = data.replace(
+        /<!--\s*Code injected by live-server\s*-->[\s\S]*?<\/script>/gi,
+        ''
+    );
         // Insert the fetched content after the div
 
         div.innerHTML = data;
