@@ -60,7 +60,9 @@ function loadComponents() {
       })
       .then((data) => {
         // Insert the fetched content after the div
-        div.insertAdjacentHTML("afterend", data);
+
+        div.innerHTML = data;
+        //div.insertAdjacentHTML("afterend", data);
         // Optionally remove or hide the loader div
         // div.style.display = 'none';
       })
