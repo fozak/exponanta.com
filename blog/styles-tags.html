@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Industry Tags & Chips — Style Guide | Exponanta</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   CHOICE 1 — Filled color chips with emoji icons
+   ===================================================== */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.chip-primary {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid transparent;
+}
+.chip-primary:hover {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+}
+.chip-teal {
+  background: rgba(79, 209, 197, 0.15);
+  color: #2a9d8f;
+  border: 1px solid transparent;
+}
+.chip-teal:hover {
+  background: var(--accent-teal);
+  color: var(--neutral-0);
+}
+.chip-coral {
+  background: rgba(255, 111, 97, 0.12);
+  color: #c0392b;
+  border: 1px solid transparent;
+}
+.chip-coral:hover {
+  background: var(--accent-coral);
+  color: var(--neutral-0);
+}
+
+/* =====================================================
+   CHOICE 2 — Outlined chips with dot indicators
+   ===================================================== */
+
+.chip-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  background: var(--neutral-0);
+  color: var(--neutral-900);
+  border: 1.5px solid var(--bs-border-color);
+  white-space: nowrap;
+}
+.chip-outline:hover {
+  border-color: var(--blue-700);
+  color: var(--blue-700);
+  background: var(--blue-100);
+}
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-blue  { background: var(--blue-700); }
+.dot-teal  { background: var(--accent-teal); }
+.dot-coral { background: var(--accent-coral); }
+
+/* =====================================================
+   CHOICE 3 — Grouped section chips with number badges
+   ===================================================== */
+
+.chip-group { margin-bottom: 1.5rem; }
+.chip-group-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+  margin-bottom: 10px;
+  display: block;
+}
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  background: var(--neutral-50);
+  color: var(--neutral-900);
+  border: 1px solid var(--bs-border-color);
+  white-space: nowrap;
+}
+.chip-tag:hover {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+  border-color: var(--blue-700);
+}
+.chip-num {
+  font-size: 11px;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.chip-tag:hover .chip-num {
+  background: rgba(255,255,255,0.2);
+  color: var(--neutral-0);
+}
+
+/* =====================================================
+   SECTION DIVIDERS
+   ===================================================== */
+
+.style-section {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+.style-section:last-child {
+  border-bottom: none;
+}
+.style-label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+  margin-bottom: 0.5rem;
+}
+.subsection-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--neutral-900);
+  opacity: 0.4;
+  margin: 1.25rem 0 0.5rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="navbar" data-loader="../components/navbar.html"></div>
+
+<main id="main-content" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10">
+
+        <article class="article-content">
+          <header>
+            <h1>Industry Tags & Chips — Style Guide</h1>
+            <p class="lead">Three chip patterns for industry taxonomy, roles, and filters — all using Exponanta CSS tokens.</p>
+          </header>
+        </article>
+
+        <!-- =====================================================
+             CHOICE 1 — Filled color chips
+             ===================================================== -->
+        <div class="style-section">
+          <span class="style-label">Choice 1</span>
+          <h2 class="h4 mb-1">Filled Color Chips with Emoji Icons</h2>
+          <p class="text-muted small mb-4">Best for hero sections, landing pages, and prominent entry points. Three color variants using brand tokens.</p>
+
+          <div class="subsection-label">Market Verticals</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip chip-primary">💻 Technology & Software</a>
+            <a href="#" class="chip chip-primary">🏥 Healthcare & Life Sciences</a>
+            <a href="#" class="chip chip-primary">💳 Financial Services</a>
+            <a href="#" class="chip chip-teal">⚡ Energy & Climate</a>
+            <a href="#" class="chip chip-teal">🏭 Industrial & Manufacturing</a>
+            <a href="#" class="chip chip-teal">🏗️ Infrastructure & Real Estate</a>
+            <a href="#" class="chip chip-primary">🚗 Mobility & Automotive</a>
+            <a href="#" class="chip chip-primary">🛒 Consumer & Retail</a>
+            <a href="#" class="chip chip-coral">🎬 Media & Entertainment</a>
+            <a href="#" class="chip chip-coral">✈️ Hospitality & Travel</a>
+            <a href="#" class="chip chip-primary">🏛️ Government & Defense</a>
+            <a href="#" class="chip chip-teal">🎓 Education & Research</a>
+            <a href="#" class="chip chip-coral">🤝 Nonprofit & Associations</a>
+          </div>
+
+          <div class="subsection-label">Cross-Industry Ecosystems</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip chip-coral">💰 Investors & Capital</a>
+            <a href="#" class="chip chip-primary">🧠 Professional Services</a>
+            <a href="#" class="chip chip-teal">📣 Marketing & Events</a>
+            <a href="#" class="chip chip-primary">🔒 Security</a>
+            <a href="#" class="chip chip-teal">⚙️ Corporate Functions</a>
+          </div>
+
+          <div class="subsection-label">Founder Roles</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip chip-primary">🚀 Founder</a>
+            <a href="#" class="chip chip-primary">💻 CTO</a>
+            <a href="#" class="chip chip-coral">💰 Investor</a>
+            <a href="#" class="chip chip-teal">⚙️ Operator</a>
+            <a href="#" class="chip chip-teal">🛠️ Product Builder</a>
+            <a href="#" class="chip chip-primary">📈 Growth Lead</a>
+            <a href="#" class="chip chip-coral">🎯 Advisor</a>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             CHOICE 2 — Outlined chips with dot indicators
+             ===================================================== -->
+        <div class="style-section">
+          <span class="style-label">Choice 2</span>
+          <h2 class="h4 mb-1">Outlined Chips with Dot Indicators</h2>
+          <p class="text-muted small mb-4">Best for filter bars, navigation, and search refinement. Clean and professional with color-coded dots per category.</p>
+
+          <div class="subsection-label">Market Verticals</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Technology & Software</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Healthcare & Life Sciences</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Financial Services</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Energy & Climate</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Industrial & Manufacturing</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Infrastructure & Real Estate</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Mobility & Automotive</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Consumer & Retail</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Media & Entertainment</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Hospitality & Travel</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Government & Defense</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Education & Research</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Nonprofit & Associations</a>
+          </div>
+
+          <div class="subsection-label">Cross-Industry Ecosystems</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Investors & Capital</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Professional Services</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Marketing & Events</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Security</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Corporate Functions</a>
+          </div>
+
+          <div class="subsection-label">Founder Roles</div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Founder</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>CTO</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Investor</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Operator</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-teal"></span>Product Builder</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-blue"></span>Growth Lead</a>
+            <a href="#" class="chip-outline"><span class="chip-dot dot-coral"></span>Advisor</a>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             CHOICE 3 — Grouped section chips with number badges
+             ===================================================== -->
+        <div class="style-section">
+          <span class="style-label">Choice 3</span>
+          <h2 class="h4 mb-1">Grouped Chips with Number Badges</h2>
+          <p class="text-muted small mb-4">Best for taxonomy pages, blog sidebars, and anywhere sub-counts add context. Rectangular radius matches card components.</p>
+
+          <div class="chip-group">
+            <span class="chip-group-label">Market Verticals</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">💻 Technology & Software <span class="chip-num">12</span></a>
+              <a href="#" class="chip-tag">🏥 Healthcare & Life Sciences <span class="chip-num">15</span></a>
+              <a href="#" class="chip-tag">💳 Financial Services <span class="chip-num">8</span></a>
+              <a href="#" class="chip-tag">⚡ Energy & Climate <span class="chip-num">14</span></a>
+              <a href="#" class="chip-tag">🏭 Industrial & Manufacturing <span class="chip-num">11</span></a>
+              <a href="#" class="chip-tag">🏗️ Infrastructure & Real Estate <span class="chip-num">13</span></a>
+              <a href="#" class="chip-tag">🚗 Mobility & Automotive <span class="chip-num">16</span></a>
+              <a href="#" class="chip-tag">🛒 Consumer & Retail <span class="chip-num">17</span></a>
+              <a href="#" class="chip-tag">🎬 Media & Entertainment <span class="chip-num">11</span></a>
+              <a href="#" class="chip-tag">✈️ Hospitality & Travel <span class="chip-num">9</span></a>
+              <a href="#" class="chip-tag">🏛️ Government & Defense <span class="chip-num">8</span></a>
+              <a href="#" class="chip-tag">🎓 Education & Research <span class="chip-num">8</span></a>
+              <a href="#" class="chip-tag">🤝 Nonprofit & Associations <span class="chip-num">6</span></a>
+            </div>
+          </div>
+
+          <div class="chip-group">
+            <span class="chip-group-label">Cross-Industry Ecosystems</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">💰 Investors & Capital <span class="chip-num">7</span></a>
+              <a href="#" class="chip-tag">🧠 Professional Services <span class="chip-num">6</span></a>
+              <a href="#" class="chip-tag">📣 Marketing & Events <span class="chip-num">9</span></a>
+              <a href="#" class="chip-tag">🔒 Security <span class="chip-num">6</span></a>
+              <a href="#" class="chip-tag">⚙️ Corporate Functions <span class="chip-num">7</span></a>
+            </div>
+          </div>
+
+          <div class="chip-group">
+            <span class="chip-group-label">Founder Roles</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">🚀 Founder <span class="chip-num">182</span></a>
+              <a href="#" class="chip-tag">💻 CTO <span class="chip-num">94</span></a>
+              <a href="#" class="chip-tag">💰 Investor <span class="chip-num">67</span></a>
+              <a href="#" class="chip-tag">⚙️ Operator <span class="chip-num">48</span></a>
+              <a href="#" class="chip-tag">🛠️ Product Builder <span class="chip-num">73</span></a>
+              <a href="#" class="chip-tag">📈 Growth Lead <span class="chip-num">31</span></a>
+              <a href="#" class="chip-tag">🎯 Advisor <span class="chip-num">55</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             FULL TAXONOMY — Choice 3 expanded
+             ===================================================== -->
+        <div class="style-section">
+          <span class="style-label">Full Taxonomy</span>
+          <h2 class="h4 mb-1">Complete Industry Classification</h2>
+          <p class="text-muted small mb-4">All 18 verticals and ecosystems — Choice 3 style expanded with all sub-sectors as secondary chips.</p>
+
+          <!-- 1. Technology -->
+          <div class="chip-group">
+            <span class="chip-group-label">1. Technology, Software & Telecommunications</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Enterprise Software <span class="chip-num">SaaS</span></a>
+              <a href="#" class="chip-tag">Cloud & Data Infrastructure</a>
+              <a href="#" class="chip-tag">AI & Machine Learning</a>
+              <a href="#" class="chip-tag">Cybersecurity</a>
+              <a href="#" class="chip-tag">Semiconductors & Hardware</a>
+              <a href="#" class="chip-tag">Developer Tools</a>
+              <a href="#" class="chip-tag">Data & Analytics</a>
+              <a href="#" class="chip-tag">Robotics & Automation</a>
+              <a href="#" class="chip-tag">Web3 & Blockchain</a>
+              <a href="#" class="chip-tag">AR/VR & Spatial Computing</a>
+              <a href="#" class="chip-tag">IoT</a>
+              <a href="#" class="chip-tag">Telecommunications</a>
+            </div>
+          </div>
+
+          <!-- 2. Healthcare -->
+          <div class="chip-group">
+            <span class="chip-group-label">2. Healthcare, Life Sciences & Biopharma</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Hospital Systems</a>
+              <a href="#" class="chip-tag">Medical Devices</a>
+              <a href="#" class="chip-tag">Diagnostics & Imaging</a>
+              <a href="#" class="chip-tag">Digital Health & Telemedicine</a>
+              <a href="#" class="chip-tag">Health IT & EHR</a>
+              <a href="#" class="chip-tag">Biotechnology</a>
+              <a href="#" class="chip-tag">Genomics & Precision Medicine</a>
+              <a href="#" class="chip-tag">Mental Health</a>
+              <a href="#" class="chip-tag">Pharma Manufacturing</a>
+              <a href="#" class="chip-tag">Biologics</a>
+              <a href="#" class="chip-tag">Vaccine Development</a>
+              <a href="#" class="chip-tag">CROs & CDMOs</a>
+              <a href="#" class="chip-tag">Clinical Trials</a>
+              <a href="#" class="chip-tag">Drug Distribution</a>
+            </div>
+          </div>
+
+          <!-- 3. Financial Services -->
+          <div class="chip-group">
+            <span class="chip-group-label">3. Financial Services & FinTech</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Commercial & Retail Banking</a>
+              <a href="#" class="chip-tag">Investment Banking</a>
+              <a href="#" class="chip-tag">Asset & Wealth Management</a>
+              <a href="#" class="chip-tag">Insurance & Reinsurance</a>
+              <a href="#" class="chip-tag">Payments & Card Networks</a>
+              <a href="#" class="chip-tag">FinTech Platforms</a>
+              <a href="#" class="chip-tag">Mortgage & Lending</a>
+              <a href="#" class="chip-tag">Accounting & Audit</a>
+            </div>
+          </div>
+
+          <!-- 4. Energy -->
+          <div class="chip-group">
+            <span class="chip-group-label">4. Energy, Climate & Utilities</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Oil & Gas Upstream</a>
+              <a href="#" class="chip-tag">Oil & Gas Midstream</a>
+              <a href="#" class="chip-tag">Power Generation</a>
+              <a href="#" class="chip-tag">Renewable — Solar</a>
+              <a href="#" class="chip-tag">Renewable — Wind</a>
+              <a href="#" class="chip-tag">Energy Storage</a>
+              <a href="#" class="chip-tag">Nuclear Energy</a>
+              <a href="#" class="chip-tag">Grid Infrastructure</a>
+              <a href="#" class="chip-tag">Climate Tech</a>
+              <a href="#" class="chip-tag">Carbon Markets</a>
+              <a href="#" class="chip-tag">Waste Management</a>
+              <a href="#" class="chip-tag">Water Technology</a>
+              <a href="#" class="chip-tag">ESG Consulting</a>
+            </div>
+          </div>
+
+          <!-- 5. Industrial -->
+          <div class="chip-group">
+            <span class="chip-group-label">5. Industrial, Manufacturing & Supply Chain</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Industrial Machinery</a>
+              <a href="#" class="chip-tag">Advanced Manufacturing</a>
+              <a href="#" class="chip-tag">Factory Automation</a>
+              <a href="#" class="chip-tag">Electronics Manufacturing</a>
+              <a href="#" class="chip-tag">Heavy Equipment</a>
+              <a href="#" class="chip-tag">3D Printing</a>
+              <a href="#" class="chip-tag">Chemicals & Petrochemicals</a>
+              <a href="#" class="chip-tag">Packaging Materials</a>
+              <a href="#" class="chip-tag">Supply Chain Tech</a>
+              <a href="#" class="chip-tag">Warehousing & Fulfillment</a>
+              <a href="#" class="chip-tag">Procurement & Sourcing</a>
+            </div>
+          </div>
+
+          <!-- 6. Infrastructure -->
+          <div class="chip-group">
+            <span class="chip-group-label">6. Infrastructure, Construction & Real Estate</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Civil Engineering</a>
+              <a href="#" class="chip-tag">Transportation Infrastructure</a>
+              <a href="#" class="chip-tag">Smart Cities</a>
+              <a href="#" class="chip-tag">Urban Planning</a>
+              <a href="#" class="chip-tag">Commercial Real Estate</a>
+              <a href="#" class="chip-tag">Residential Real Estate</a>
+              <a href="#" class="chip-tag">Property Management</a>
+              <a href="#" class="chip-tag">Construction Tech</a>
+              <a href="#" class="chip-tag">Architecture</a>
+              <a href="#" class="chip-tag">Building Materials</a>
+            </div>
+          </div>
+
+          <!-- 7. Mobility -->
+          <div class="chip-group">
+            <span class="chip-group-label">7. Mobility, Automotive & Transportation</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Automotive OEMs</a>
+              <a href="#" class="chip-tag">Electric Vehicles</a>
+              <a href="#" class="chip-tag">EV Charging</a>
+              <a href="#" class="chip-tag">Autonomous Driving</a>
+              <a href="#" class="chip-tag">Mobility Platforms</a>
+              <a href="#" class="chip-tag">Fleet Management</a>
+              <a href="#" class="chip-tag">Freight & Shipping</a>
+              <a href="#" class="chip-tag">Rail Logistics</a>
+              <a href="#" class="chip-tag">Air Cargo & Aviation</a>
+              <a href="#" class="chip-tag">Maritime Shipping</a>
+              <a href="#" class="chip-tag">Last-Mile Delivery</a>
+              <a href="#" class="chip-tag">Aerospace & Space</a>
+              <a href="#" class="chip-tag">Drones & UAV</a>
+            </div>
+          </div>
+
+          <!-- 8. Consumer -->
+          <div class="chip-group">
+            <span class="chip-group-label">8. Consumer, Retail & Food</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Mass Retail</a>
+              <a href="#" class="chip-tag">E-commerce</a>
+              <a href="#" class="chip-tag">Grocery & Supermarkets</a>
+              <a href="#" class="chip-tag">Apparel & Fashion</a>
+              <a href="#" class="chip-tag">Consumer Electronics</a>
+              <a href="#" class="chip-tag">Personal Care & Beauty</a>
+              <a href="#" class="chip-tag">Luxury Goods</a>
+              <a href="#" class="chip-tag">DTC Brands</a>
+              <a href="#" class="chip-tag">Retail Tech</a>
+              <a href="#" class="chip-tag">Food Manufacturing</a>
+              <a href="#" class="chip-tag">Beverages</a>
+              <a href="#" class="chip-tag">Restaurant & Foodservice</a>
+              <a href="#" class="chip-tag">Agriculture & Agritech</a>
+            </div>
+          </div>
+
+          <!-- 9. Media -->
+          <div class="chip-group">
+            <span class="chip-group-label">9. Media, Entertainment & Sports</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Film & TV Studios</a>
+              <a href="#" class="chip-tag">Streaming Platforms</a>
+              <a href="#" class="chip-tag">Digital Media</a>
+              <a href="#" class="chip-tag">Gaming Studios</a>
+              <a href="#" class="chip-tag">Music & Distribution</a>
+              <a href="#" class="chip-tag">Live Entertainment</a>
+              <a href="#" class="chip-tag">Professional Sports</a>
+              <a href="#" class="chip-tag">Sports Technology</a>
+              <a href="#" class="chip-tag">Esports</a>
+              <a href="#" class="chip-tag">Fitness & Wellness</a>
+            </div>
+          </div>
+
+          <!-- 10. Hospitality -->
+          <div class="chip-group">
+            <span class="chip-group-label">10. Hospitality & Travel</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Hotel Chains & Resorts</a>
+              <a href="#" class="chip-tag">Short-Term Rentals</a>
+              <a href="#" class="chip-tag">Airlines</a>
+              <a href="#" class="chip-tag">Cruise Lines</a>
+              <a href="#" class="chip-tag">Travel Booking</a>
+              <a href="#" class="chip-tag">Tour Operators</a>
+              <a href="#" class="chip-tag">Business Travel</a>
+              <a href="#" class="chip-tag">Theme Parks</a>
+            </div>
+          </div>
+
+          <!-- 11. Government -->
+          <div class="chip-group">
+            <span class="chip-group-label">11. Government, Defense & Public Sector</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Federal Government</a>
+              <a href="#" class="chip-tag">State & Local Government</a>
+              <a href="#" class="chip-tag">Public Health Agencies</a>
+              <a href="#" class="chip-tag">Defense Contractors</a>
+              <a href="#" class="chip-tag">Military Systems</a>
+              <a href="#" class="chip-tag">Smart Government Tech</a>
+              <a href="#" class="chip-tag">Law Enforcement Tech</a>
+              <a href="#" class="chip-tag">Emergency Response</a>
+            </div>
+          </div>
+
+          <!-- 12. Education -->
+          <div class="chip-group">
+            <span class="chip-group-label">12. Education & Research</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">K-12 Systems</a>
+              <a href="#" class="chip-tag">Higher Education</a>
+              <a href="#" class="chip-tag">Online Education</a>
+              <a href="#" class="chip-tag">EdTech</a>
+              <a href="#" class="chip-tag">Vocational Training</a>
+              <a href="#" class="chip-tag">Research Institutes</a>
+              <a href="#" class="chip-tag">Innovation Hubs & Accelerators</a>
+            </div>
+          </div>
+
+          <!-- 13. Nonprofit -->
+          <div class="chip-group">
+            <span class="chip-group-label">13. Nonprofit & Associations</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Foundations & Grantmakers</a>
+              <a href="#" class="chip-tag">NGOs & International Aid</a>
+              <a href="#" class="chip-tag">Advocacy Organizations</a>
+              <a href="#" class="chip-tag">Trade Associations</a>
+              <a href="#" class="chip-tag">Cultural Institutions</a>
+              <a href="#" class="chip-tag">Membership Organizations</a>
+            </div>
+          </div>
+
+          <!-- 14. Investors -->
+          <div class="chip-group">
+            <span class="chip-group-label">14. Investors & Capital</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Private Equity</a>
+              <a href="#" class="chip-tag">Venture Capital</a>
+              <a href="#" class="chip-tag">Family Offices</a>
+              <a href="#" class="chip-tag">Hedge Funds</a>
+              <a href="#" class="chip-tag">Angel Investors</a>
+              <a href="#" class="chip-tag">Sovereign Wealth Funds</a>
+              <a href="#" class="chip-tag">Corporate Venture</a>
+            </div>
+          </div>
+
+          <!-- 15. Professional Services -->
+          <div class="chip-group">
+            <span class="chip-group-label">15. Professional & Business Services</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Management Consulting</a>
+              <a href="#" class="chip-tag">IT Consulting</a>
+              <a href="#" class="chip-tag">Legal Services</a>
+              <a href="#" class="chip-tag">Executive Search</a>
+              <a href="#" class="chip-tag">Staffing & BPO</a>
+              <a href="#" class="chip-tag">PR & Communications</a>
+            </div>
+          </div>
+
+          <!-- 16. Marketing -->
+          <div class="chip-group">
+            <span class="chip-group-label">16. Marketing, Media & Events</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">AdTech</a>
+              <a href="#" class="chip-tag">MarTech</a>
+              <a href="#" class="chip-tag">Brand & Creative Agencies</a>
+              <a href="#" class="chip-tag">Media Buying</a>
+              <a href="#" class="chip-tag">Event Organizers</a>
+              <a href="#" class="chip-tag">Event Technology</a>
+              <a href="#" class="chip-tag">Experiential Marketing</a>
+              <a href="#" class="chip-tag">Sponsorship & Talent</a>
+              <a href="#" class="chip-tag">Creator Economy</a>
+            </div>
+          </div>
+
+          <!-- 17. Security -->
+          <div class="chip-group">
+            <span class="chip-group-label">17. Security</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">Cybersecurity Software</a>
+              <a href="#" class="chip-tag">Physical Security</a>
+              <a href="#" class="chip-tag">Identity & Access Management</a>
+              <a href="#" class="chip-tag">Surveillance Tech</a>
+              <a href="#" class="chip-tag">Critical Infrastructure Protection</a>
+              <a href="#" class="chip-tag">Fraud Prevention</a>
+            </div>
+          </div>
+
+          <!-- 18. Corporate Functions -->
+          <div class="chip-group">
+            <span class="chip-group-label">18. Corporate Functions & Enterprise Operations</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#" class="chip-tag">HR & Future of Work</a>
+              <a href="#" class="chip-tag">Finance & CFO Office</a>
+              <a href="#" class="chip-tag">Legal & Compliance</a>
+              <a href="#" class="chip-tag">Procurement Leadership</a>
+              <a href="#" class="chip-tag">Operations & Continuity</a>
+              <a href="#" class="chip-tag">DEI</a>
+              <a href="#" class="chip-tag">Sustainability & ESG</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/_loader.js"></script>
+
+</body>
+</html>

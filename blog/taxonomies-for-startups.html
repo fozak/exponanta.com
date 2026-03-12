@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Industry Taxonomy for Startup & Event Platforms | Exponanta Blog</title>
+<meta name="description" content="Why Exponanta uses a two-tier industry taxonomy — 13 market verticals and 5 cross-industry ecosystems — and how it structures URLs, filters, and event discovery.">
+<link rel="canonical" href="https://exponanta.com/blog/taxonomies-for-startups.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="Industry Taxonomy for Startup & Event Platforms">
+<meta property="og:description" content="How Exponanta structures 18 industry categories, 100+ sub-sectors, roles, and ecosystems into a clean URL and filter system.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://exponanta.com/blog/taxonomies-for-startups.html">
+<meta property="og:image" content="https://exponanta.com/assets/images/social/taxonomies-for-startups.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Industry Taxonomy for Startup & Event Platforms",
+  "description": "Why Exponanta uses a two-tier industry taxonomy and how it structures URLs, filters, and event discovery.",
+  "url": "https://exponanta.com/blog/taxonomies-for-startups.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exponanta",
+    "url": "https://exponanta.com"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Exponanta"
+  }
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   CHOICE 3 — Grouped chips with number badges
+   ===================================================== */
+
+.chip-group { margin-bottom: 1.75rem; }
+
+.chip-group-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  background: var(--neutral-50);
+  color: var(--neutral-900);
+  border: 1px solid var(--bs-border-color);
+  white-space: nowrap;
+}
+
+.chip-tag:hover {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+  border-color: var(--blue-700);
+}
+
+.chip-num {
+  font-size: 11px;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.chip-tag:hover .chip-num {
+  background: rgba(255,255,255,0.2);
+  color: var(--neutral-0);
+}
+
+/* Parent vertical chip — slightly more prominent */
+.chip-parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  display: inline-flex;
+}
+
+.chip-parent:hover {
+  background: var(--blue-700);
+  color: var(--neutral-0);
+}
+
+/* URL pattern callout */
+.url-pattern {
+  font-family: monospace;
+  font-size: var(--text-sm);
+  background: var(--neutral-50);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  color: var(--blue-700);
+}
+
+.url-comment {
+  color: var(--neutral-900);
+  opacity: 0.4;
+  font-style: normal;
+}
+
+/* Taxonomy block wrapper */
+.taxonomy-block {
+  border-left: 3px solid var(--blue-100);
+  padding-left: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.taxonomy-block:hover {
+  border-left-color: var(--blue-700);
+}
+
+</style>
+</head>
+
+<body class="blog-taxonomies-startups">
+
+<div id="navbar" data-loader="../components/navbar.html"></div>
+
+<main id="main-content" class="py-5">
+  <section class="c-hero-content c-hero-content-1">
+    <div class="container">
+      <div class="row align-items-start">
+
+        <!-- Article -->
+        <div class="col-lg-8 col-md-12">
+          <article class="article-content">
+
+            <header>
+              <h1>Industry Taxonomy for Startup & Event Platforms</h1>
+              <p class="lead">Why two tiers, three namespaces, and clean URLs make discovery, SEO, and filtering work together.</p>
+            </header>
+
+            <p>
+              Most event and startup platforms use flat tag clouds — a single unstructured list of keywords like "AI", "SaaS", "B2B", "fintech". They're easy to build and immediately feel broken. Tags accumulate, overlap, and lose meaning. A founder building an AI-powered FinTech product doesn't know whether to tag it "AI", "machine learning", "fintech", or "payments". Visitors can't filter meaningfully. Search engines see shallow, duplicated pages.
+            </p>
+
+            <p>
+              Exponanta uses a structured two-tier taxonomy instead: <strong>13 Market Verticals</strong> and <strong>5 Cross-Industry Ecosystems</strong>, each with named sub-sectors. Every vertical and sub-sector maps to a real URL, a real filter, and a real indexable page.
+            </p>
+
+            <h2>Why Two Tiers</h2>
+
+            <p>
+              A flat list of 100+ sub-sectors is unusable as a navigation element. A list of 13 verticals is too coarse for meaningful filtering — "Technology & Software" covers everything from chip design to no-code tools. Two tiers solves both problems: the top level works for navigation and SEO category pages, the second level works for filters, tags, and event matching.
+            </p>
+
+            <p>
+              The split between Market Verticals and Cross-Industry Ecosystems reflects a real structural difference. Verticals are industries — they describe what a company makes or sells. Ecosystems are functions that operate across all industries — investors, professional services, marketing, security, and corporate operations exist inside every vertical. Mixing them in one flat list creates confusion. Separating them into two namespaces keeps the model clean.
+            </p>
+
+            <h2>Why Three Namespaces</h2>
+
+            <p>
+              The URL structure uses three top-level namespaces:
+            </p>
+
+            <div class="url-pattern">
+              /industries/<span class="url-comment">vertical/sub-sector</span><br>
+              /ecosystems/<span class="url-comment">ecosystem/sub-sector</span><br>
+              /roles/<span class="url-comment">role-name</span>
+            </div>
+
+            <p>
+              <strong>/industries/</strong> covers the 13 market verticals and their sub-sectors. Each vertical page aggregates all events, companies, and pitches tagged to that industry. Each sub-sector page narrows further.
+            </p>
+
+            <p>
+              <strong>/ecosystems/</strong> covers the 5 cross-industry groups — investors, professional services, marketing and events, security, and corporate functions. These are separate from industries because an investor or a management consultant is relevant across all 13 verticals, not just one.
+            </p>
+
+            <p>
+              <strong>/roles/</strong> covers participant types — founder, CTO, investor, operator, product builder. Role pages drive onboarding and personalisation. A founder landing on <code>/roles/founder</code> sees a different view than an investor landing on <code>/roles/investor</code>, even if they're browsing the same events.
+            </p>
+
+            <h2>How URLs Work in Practice</h2>
+
+            <div class="url-pattern">
+              <span class="url-comment"># Top-level vertical page</span><br>
+              /industries/technology-software<br><br>
+              <span class="url-comment"># Sub-sector page</span><br>
+              /industries/technology-software/ai-machine-learning<br><br>
+              <span class="url-comment"># Ecosystem page</span><br>
+              /ecosystems/investors-capital<br><br>
+              <span class="url-comment"># Ecosystem sub-sector</span><br>
+              /ecosystems/investors-capital/venture-capital<br><br>
+              <span class="url-comment"># Role page</span><br>
+              /roles/founder<br><br>
+              <span class="url-comment"># Combined filter (query params)</span><br>
+              /events?industry=technology-software&role=founder
+            </div>
+
+            <p>
+              Each URL is independently indexable, meaningful to a human reader, and composable with query parameters for filtered event listings. The slug format is consistent: lowercase, hyphen-separated, no numbers or special characters.
+            </p>
+
+            <h2>Why This Matters for SEO</h2>
+
+            <p>
+              Each vertical and sub-sector page is a real landing page, not a filtered search result. It has a canonical URL, a title, a description, and content specific to that industry. A page like <code>/industries/healthcare-life-sciences/digital-health</code> can rank for "digital health events", "telemedicine conferences", and "health startup pitches" — searches that a flat tag cloud page never could.
+            </p>
+
+            <p>
+              The two-tier structure also creates natural internal linking. Every event page links to its vertical and sub-sector. Every sub-sector links up to its vertical. Every vertical links across to related ecosystems. This creates a dense internal link graph that signals topical authority to search engines.
+            </p>
+
+            <h2>The Full Taxonomy</h2>
+
+            <p>
+              Below is the complete taxonomy with all verticals, ecosystems, and roles — each chip linking to its canonical URL. Sub-sector counts reflect the number of sub-sectors in that vertical, not live event counts.
+            </p>
+
+            <!-- =====================================================
+                 MARKET VERTICALS
+                 ===================================================== -->
+
+            <h3>Market Verticals</h3>
+
+            <!-- 1. Technology -->
+            <div class="taxonomy-block">
+              <a href="/industries/technology-software" class="chip-parent">💻 Technology, Software & Telecommunications</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/technology-software/enterprise-software" class="chip-tag">Enterprise Software <span class="chip-num">SaaS</span></a>
+                  <a href="/industries/technology-software/cloud-data-infrastructure" class="chip-tag">Cloud & Data Infrastructure</a>
+                  <a href="/industries/technology-software/ai-machine-learning" class="chip-tag">AI & Machine Learning</a>
+                  <a href="/industries/technology-software/cybersecurity" class="chip-tag">Cybersecurity</a>
+                  <a href="/industries/technology-software/semiconductors-hardware" class="chip-tag">Semiconductors & Hardware</a>
+                  <a href="/industries/technology-software/developer-tools" class="chip-tag">Developer Tools & Platforms</a>
+                  <a href="/industries/technology-software/data-analytics" class="chip-tag">Data & Analytics</a>
+                  <a href="/industries/technology-software/robotics-automation" class="chip-tag">Robotics & Automation</a>
+                  <a href="/industries/technology-software/web3-blockchain" class="chip-tag">Web3 & Blockchain</a>
+                  <a href="/industries/technology-software/ar-vr-spatial-computing" class="chip-tag">AR/VR & Spatial Computing</a>
+                  <a href="/industries/technology-software/iot" class="chip-tag">Internet of Things</a>
+                  <a href="/industries/technology-software/telecommunications" class="chip-tag">Telecommunications</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Healthcare -->
+            <div class="taxonomy-block">
+              <a href="/industries/healthcare-life-sciences" class="chip-parent">🏥 Healthcare, Life Sciences & Biopharma</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/healthcare-life-sciences/hospital-systems" class="chip-tag">Hospital Systems & Health Networks</a>
+                  <a href="/industries/healthcare-life-sciences/medical-devices" class="chip-tag">Medical Devices & Equipment</a>
+                  <a href="/industries/healthcare-life-sciences/diagnostics-imaging" class="chip-tag">Diagnostics & Imaging</a>
+                  <a href="/industries/healthcare-life-sciences/digital-health-telemedicine" class="chip-tag">Digital Health & Telemedicine</a>
+                  <a href="/industries/healthcare-life-sciences/health-it-ehr" class="chip-tag">Health IT & EHR</a>
+                  <a href="/industries/healthcare-life-sciences/clinical-care" class="chip-tag">Clinical Care Providers</a>
+                  <a href="/industries/healthcare-life-sciences/biotechnology" class="chip-tag">Biotechnology Research</a>
+                  <a href="/industries/healthcare-life-sciences/genomics-precision-medicine" class="chip-tag">Genomics & Precision Medicine</a>
+                  <a href="/industries/healthcare-life-sciences/mental-behavioral-health" class="chip-tag">Mental & Behavioral Health</a>
+                  <a href="/industries/healthcare-life-sciences/pharma-manufacturers" class="chip-tag">Pharma Manufacturers</a>
+                  <a href="/industries/healthcare-life-sciences/biologics-advanced-therapies" class="chip-tag">Biologics & Advanced Therapies</a>
+                  <a href="/industries/healthcare-life-sciences/vaccine-development" class="chip-tag">Vaccine Development</a>
+                  <a href="/industries/healthcare-life-sciences/cros-cdmos" class="chip-tag">CROs & CDMOs</a>
+                  <a href="/industries/healthcare-life-sciences/clinical-trials" class="chip-tag">Clinical Trials & Site Networks</a>
+                  <a href="/industries/healthcare-life-sciences/drug-distribution" class="chip-tag">Drug Distribution & Specialty Pharmacy</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Financial Services -->
+            <div class="taxonomy-block">
+              <a href="/industries/financial-services" class="chip-parent">💳 Financial Services & FinTech</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/financial-services/commercial-retail-banking" class="chip-tag">Commercial & Retail Banking</a>
+                  <a href="/industries/financial-services/investment-banking-capital-markets" class="chip-tag">Investment Banking & Capital Markets</a>
+                  <a href="/industries/financial-services/asset-wealth-management" class="chip-tag">Asset & Wealth Management</a>
+                  <a href="/industries/financial-services/insurance-reinsurance" class="chip-tag">Insurance & Reinsurance</a>
+                  <a href="/industries/financial-services/payments-card-networks" class="chip-tag">Payments & Card Networks</a>
+                  <a href="/industries/financial-services/fintech-platforms" class="chip-tag">FinTech Platforms</a>
+                  <a href="/industries/financial-services/mortgage-lending" class="chip-tag">Mortgage & Lending</a>
+                  <a href="/industries/financial-services/accounting-audit" class="chip-tag">Accounting & Audit Firms</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Energy -->
+            <div class="taxonomy-block">
+              <a href="/industries/energy-climate" class="chip-parent">⚡ Energy, Climate & Utilities</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/energy-climate/oil-gas-upstream" class="chip-tag">Oil & Gas Upstream</a>
+                  <a href="/industries/energy-climate/oil-gas-midstream-downstream" class="chip-tag">Oil & Gas Midstream & Downstream</a>
+                  <a href="/industries/energy-climate/power-generation" class="chip-tag">Power Generation & Electric Utilities</a>
+                  <a href="/industries/energy-climate/natural-gas-utilities" class="chip-tag">Natural Gas Utilities</a>
+                  <a href="/industries/energy-climate/renewable-solar" class="chip-tag">Renewable Energy — Solar</a>
+                  <a href="/industries/energy-climate/renewable-wind" class="chip-tag">Renewable Energy — Wind</a>
+                  <a href="/industries/energy-climate/energy-storage-batteries" class="chip-tag">Energy Storage & Batteries</a>
+                  <a href="/industries/energy-climate/nuclear-energy" class="chip-tag">Nuclear Energy</a>
+                  <a href="/industries/energy-climate/grid-transmission" class="chip-tag">Grid & Transmission Infrastructure</a>
+                  <a href="/industries/energy-climate/climate-tech" class="chip-tag">Climate Tech</a>
+                  <a href="/industries/energy-climate/carbon-markets" class="chip-tag">Carbon Markets & Offsets</a>
+                  <a href="/industries/energy-climate/waste-management" class="chip-tag">Waste Management & Recycling</a>
+                  <a href="/industries/energy-climate/water-wastewater" class="chip-tag">Water & Wastewater Technology</a>
+                  <a href="/industries/energy-climate/esg-sustainability" class="chip-tag">ESG & Sustainability Consulting</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Industrial -->
+            <div class="taxonomy-block">
+              <a href="/industries/industrial-manufacturing" class="chip-parent">🏭 Industrial, Manufacturing & Supply Chain</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/industrial-manufacturing/industrial-machinery" class="chip-tag">Industrial Machinery & Equipment</a>
+                  <a href="/industries/industrial-manufacturing/advanced-manufacturing" class="chip-tag">Advanced Manufacturing</a>
+                  <a href="/industries/industrial-manufacturing/factory-automation" class="chip-tag">Factory Automation</a>
+                  <a href="/industries/industrial-manufacturing/electronics-manufacturing" class="chip-tag">Electronics Manufacturing</a>
+                  <a href="/industries/industrial-manufacturing/heavy-equipment" class="chip-tag">Heavy Equipment</a>
+                  <a href="/industries/industrial-manufacturing/3d-printing" class="chip-tag">3D Printing & Additive Manufacturing</a>
+                  <a href="/industries/industrial-manufacturing/chemicals-petrochemicals" class="chip-tag">Chemicals & Petrochemicals</a>
+                  <a href="/industries/industrial-manufacturing/packaging-materials" class="chip-tag">Packaging Materials</a>
+                  <a href="/industries/industrial-manufacturing/supply-chain-tech" class="chip-tag">Supply Chain Technology</a>
+                  <a href="/industries/industrial-manufacturing/warehousing-fulfillment" class="chip-tag">Warehousing & Fulfillment</a>
+                  <a href="/industries/industrial-manufacturing/procurement-sourcing" class="chip-tag">Procurement & Sourcing</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Infrastructure -->
+            <div class="taxonomy-block">
+              <a href="/industries/infrastructure-real-estate" class="chip-parent">🏗️ Infrastructure, Construction & Real Estate</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/infrastructure-real-estate/civil-engineering" class="chip-tag">Civil Engineering & Public Works</a>
+                  <a href="/industries/infrastructure-real-estate/transportation-infrastructure" class="chip-tag">Transportation Infrastructure</a>
+                  <a href="/industries/infrastructure-real-estate/smart-cities" class="chip-tag">Smart Cities Technology</a>
+                  <a href="/industries/infrastructure-real-estate/urban-planning" class="chip-tag">Urban Planning & Development</a>
+                  <a href="/industries/infrastructure-real-estate/commercial-real-estate" class="chip-tag">Commercial Real Estate</a>
+                  <a href="/industries/infrastructure-real-estate/residential-real-estate" class="chip-tag">Residential Real Estate</a>
+                  <a href="/industries/infrastructure-real-estate/real-estate-development" class="chip-tag">Real Estate Development</a>
+                  <a href="/industries/infrastructure-real-estate/property-management" class="chip-tag">Property Management</a>
+                  <a href="/industries/infrastructure-real-estate/construction-contractors" class="chip-tag">Construction Contractors</a>
+                  <a href="/industries/infrastructure-real-estate/architecture" class="chip-tag">Architecture Firms</a>
+                  <a href="/industries/infrastructure-real-estate/engineering-firms" class="chip-tag">Engineering Firms</a>
+                  <a href="/industries/infrastructure-real-estate/construction-tech" class="chip-tag">Construction Tech (ConTech)</a>
+                  <a href="/industries/infrastructure-real-estate/building-materials" class="chip-tag">Building Materials</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Mobility -->
+            <div class="taxonomy-block">
+              <a href="/industries/mobility-automotive" class="chip-parent">🚗 Mobility, Automotive & Transportation</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/mobility-automotive/automotive-oems" class="chip-tag">Automotive OEMs</a>
+                  <a href="/industries/mobility-automotive/auto-parts-suppliers" class="chip-tag">Auto Parts Suppliers</a>
+                  <a href="/industries/mobility-automotive/electric-vehicles" class="chip-tag">Electric Vehicles (EV)</a>
+                  <a href="/industries/mobility-automotive/ev-charging" class="chip-tag">EV Charging Infrastructure</a>
+                  <a href="/industries/mobility-automotive/autonomous-driving" class="chip-tag">Autonomous Driving Technology</a>
+                  <a href="/industries/mobility-automotive/mobility-platforms" class="chip-tag">Mobility Platforms</a>
+                  <a href="/industries/mobility-automotive/fleet-management" class="chip-tag">Fleet Management</a>
+                  <a href="/industries/mobility-automotive/freight-shipping" class="chip-tag">Freight & Shipping</a>
+                  <a href="/industries/mobility-automotive/trucking-fleet" class="chip-tag">Trucking & Fleet Operations</a>
+                  <a href="/industries/mobility-automotive/rail-logistics" class="chip-tag">Rail Logistics</a>
+                  <a href="/industries/mobility-automotive/air-cargo-aviation" class="chip-tag">Air Cargo & Aviation</a>
+                  <a href="/industries/mobility-automotive/maritime-shipping" class="chip-tag">Maritime Shipping</a>
+                  <a href="/industries/mobility-automotive/last-mile-delivery" class="chip-tag">Last-Mile Delivery</a>
+                  <a href="/industries/mobility-automotive/aerospace-space" class="chip-tag">Aerospace & Space Technology</a>
+                  <a href="/industries/mobility-automotive/drones-uav" class="chip-tag">Drone & Unmanned Systems</a>
+                  <a href="/industries/mobility-automotive/aviation-mro" class="chip-tag">Aviation MRO</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Consumer -->
+            <div class="taxonomy-block">
+              <a href="/industries/consumer-retail-food" class="chip-parent">🛒 Consumer, Retail & Food</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/consumer-retail-food/mass-retailers" class="chip-tag">Mass Retailers & Big Box</a>
+                  <a href="/industries/consumer-retail-food/ecommerce-marketplaces" class="chip-tag">E-commerce Marketplaces</a>
+                  <a href="/industries/consumer-retail-food/grocery-supermarkets" class="chip-tag">Grocery & Supermarket Chains</a>
+                  <a href="/industries/consumer-retail-food/apparel-fashion" class="chip-tag">Apparel & Fashion Brands</a>
+                  <a href="/industries/consumer-retail-food/consumer-electronics" class="chip-tag">Consumer Electronics</a>
+                  <a href="/industries/consumer-retail-food/personal-care-beauty" class="chip-tag">Personal Care & Beauty</a>
+                  <a href="/industries/consumer-retail-food/luxury-goods" class="chip-tag">Luxury Goods</a>
+                  <a href="/industries/consumer-retail-food/dtc-brands" class="chip-tag">Direct-to-Consumer (DTC)</a>
+                  <a href="/industries/consumer-retail-food/retail-tech" class="chip-tag">Retail Tech & POS Systems</a>
+                  <a href="/industries/consumer-retail-food/packaged-food" class="chip-tag">Packaged Food Manufacturers</a>
+                  <a href="/industries/consumer-retail-food/beverages-alcoholic" class="chip-tag">Beverages — Alcoholic</a>
+                  <a href="/industries/consumer-retail-food/beverages-non-alcoholic" class="chip-tag">Beverages — Non-Alcoholic</a>
+                  <a href="/industries/consumer-retail-food/restaurant-foodservice" class="chip-tag">Restaurant Chains & Foodservice</a>
+                  <a href="/industries/consumer-retail-food/food-distribution" class="chip-tag">Food Distribution</a>
+                  <a href="/industries/consumer-retail-food/specialty-organic-food" class="chip-tag">Specialty & Organic Food</a>
+                  <a href="/industries/consumer-retail-food/agriculture-agritech" class="chip-tag">Agriculture & Agritech</a>
+                  <a href="/industries/consumer-retail-food/farm-equipment" class="chip-tag">Farm Equipment & Inputs</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. Media -->
+            <div class="taxonomy-block">
+              <a href="/industries/media-entertainment-sports" class="chip-parent">🎬 Media, Entertainment & Sports</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/media-entertainment-sports/film-tv-studios" class="chip-tag">Film & TV Studios</a>
+                  <a href="/industries/media-entertainment-sports/streaming-platforms" class="chip-tag">Streaming Platforms</a>
+                  <a href="/industries/media-entertainment-sports/digital-media" class="chip-tag">Digital Media Publishers</a>
+                  <a href="/industries/media-entertainment-sports/gaming-studios" class="chip-tag">Gaming Studios</a>
+                  <a href="/industries/media-entertainment-sports/music-distribution" class="chip-tag">Music Labels & Distribution</a>
+                  <a href="/industries/media-entertainment-sports/live-entertainment" class="chip-tag">Live Entertainment Production</a>
+                  <a href="/industries/media-entertainment-sports/professional-sports" class="chip-tag">Professional Sports Leagues & Teams</a>
+                  <a href="/industries/media-entertainment-sports/sports-technology" class="chip-tag">Sports Technology</a>
+                  <a href="/industries/media-entertainment-sports/esports" class="chip-tag">Esports Organizations</a>
+                  <a href="/industries/media-entertainment-sports/sporting-goods" class="chip-tag">Sporting Goods Manufacturers</a>
+                  <a href="/industries/media-entertainment-sports/fitness-wellness" class="chip-tag">Fitness & Wellness Operators</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10. Hospitality -->
+            <div class="taxonomy-block">
+              <a href="/industries/hospitality-travel" class="chip-parent">✈️ Hospitality & Travel</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/hospitality-travel/hotel-chains-resorts" class="chip-tag">Hotel Chains & Resorts</a>
+                  <a href="/industries/hospitality-travel/short-term-rentals" class="chip-tag">Short-Term Rental Platforms</a>
+                  <a href="/industries/hospitality-travel/airlines" class="chip-tag">Airlines</a>
+                  <a href="/industries/hospitality-travel/cruise-lines" class="chip-tag">Cruise Lines</a>
+                  <a href="/industries/hospitality-travel/travel-booking" class="chip-tag">Travel Booking Platforms</a>
+                  <a href="/industries/hospitality-travel/tour-operators" class="chip-tag">Tour Operators</a>
+                  <a href="/industries/hospitality-travel/business-travel" class="chip-tag">Business Travel Management</a>
+                  <a href="/industries/hospitality-travel/restaurant-dining" class="chip-tag">Restaurant & Dining Brands</a>
+                  <a href="/industries/hospitality-travel/theme-parks" class="chip-tag">Theme Parks & Attractions</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 11. Government -->
+            <div class="taxonomy-block">
+              <a href="/industries/government-defense" class="chip-parent">🏛️ Government, Defense & Public Sector</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/government-defense/federal-government" class="chip-tag">Federal Government Agencies</a>
+                  <a href="/industries/government-defense/state-local-government" class="chip-tag">State & Local Government</a>
+                  <a href="/industries/government-defense/public-health-agencies" class="chip-tag">Public Health Agencies</a>
+                  <a href="/industries/government-defense/defense-contractors" class="chip-tag">Defense Contractors</a>
+                  <a href="/industries/government-defense/military-systems" class="chip-tag">Military Systems & Equipment</a>
+                  <a href="/industries/government-defense/smart-government-tech" class="chip-tag">Smart Government Tech</a>
+                  <a href="/industries/government-defense/law-enforcement-tech" class="chip-tag">Law Enforcement Technology</a>
+                  <a href="/industries/government-defense/emergency-response" class="chip-tag">Emergency Response Services</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 12. Education -->
+            <div class="taxonomy-block">
+              <a href="/industries/education-research" class="chip-parent">🎓 Education & Research</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/education-research/k12-systems" class="chip-tag">K-12 School Systems</a>
+                  <a href="/industries/education-research/higher-education" class="chip-tag">Higher Education Institutions</a>
+                  <a href="/industries/education-research/online-education" class="chip-tag">Online Education Platforms</a>
+                  <a href="/industries/education-research/edtech" class="chip-tag">EdTech Providers</a>
+                  <a href="/industries/education-research/vocational-training" class="chip-tag">Vocational Training</a>
+                  <a href="/industries/education-research/education-publishing" class="chip-tag">Education Publishing</a>
+                  <a href="/industries/education-research/research-institutes" class="chip-tag">Research Institutes & National Labs</a>
+                  <a href="/industries/education-research/innovation-hubs-accelerators" class="chip-tag">Innovation Hubs & Accelerators</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 13. Nonprofit -->
+            <div class="taxonomy-block">
+              <a href="/industries/nonprofit-associations" class="chip-parent">🤝 Nonprofit & Associations</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/industries/nonprofit-associations/foundations-grantmakers" class="chip-tag">Foundations & Grantmakers</a>
+                  <a href="/industries/nonprofit-associations/ngos-international-aid" class="chip-tag">NGOs & International Aid</a>
+                  <a href="/industries/nonprofit-associations/advocacy-organizations" class="chip-tag">Advocacy Organizations</a>
+                  <a href="/industries/nonprofit-associations/trade-associations" class="chip-tag">Trade Associations</a>
+                  <a href="/industries/nonprofit-associations/cultural-institutions" class="chip-tag">Cultural Institutions</a>
+                  <a href="/industries/nonprofit-associations/membership-organizations" class="chip-tag">Membership Organizations</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- =====================================================
+                 CROSS-INDUSTRY ECOSYSTEMS
+                 ===================================================== -->
+
+            <h3>Cross-Industry Ecosystems</h3>
+
+            <!-- 14. Investors -->
+            <div class="taxonomy-block">
+              <a href="/ecosystems/investors-capital" class="chip-parent">💰 Investors & Capital</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/ecosystems/investors-capital/private-equity" class="chip-tag">Private Equity</a>
+                  <a href="/ecosystems/investors-capital/venture-capital" class="chip-tag">Venture Capital</a>
+                  <a href="/ecosystems/investors-capital/family-offices" class="chip-tag">Family Offices</a>
+                  <a href="/ecosystems/investors-capital/hedge-funds" class="chip-tag">Hedge Funds</a>
+                  <a href="/ecosystems/investors-capital/angel-investors" class="chip-tag">Angel Investors & Syndicates</a>
+                  <a href="/ecosystems/investors-capital/sovereign-wealth-funds" class="chip-tag">Sovereign Wealth Funds</a>
+                  <a href="/ecosystems/investors-capital/corporate-venture" class="chip-tag">Corporate Venture Arms</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 15. Professional Services -->
+            <div class="taxonomy-block">
+              <a href="/ecosystems/professional-services" class="chip-parent">🧠 Professional & Business Services</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/ecosystems/professional-services/management-consulting" class="chip-tag">Management Consulting</a>
+                  <a href="/ecosystems/professional-services/it-consulting" class="chip-tag">IT Consulting & System Integrators</a>
+                  <a href="/ecosystems/professional-services/legal-services" class="chip-tag">Legal Services</a>
+                  <a href="/ecosystems/professional-services/executive-search" class="chip-tag">Executive Search & Recruiting</a>
+                  <a href="/ecosystems/professional-services/staffing-bpo" class="chip-tag">Staffing & BPO</a>
+                  <a href="/ecosystems/professional-services/outsourcing-managed-services" class="chip-tag">Outsourcing & Managed Services</a>
+                  <a href="/ecosystems/professional-services/pr-communications" class="chip-tag">PR & Communications Firms</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 16. Marketing -->
+            <div class="taxonomy-block">
+              <a href="/ecosystems/marketing-media-events" class="chip-parent">📣 Marketing, Media & Events</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/ecosystems/marketing-media-events/adtech" class="chip-tag">Advertising Technology (AdTech)</a>
+                  <a href="/ecosystems/marketing-media-events/martech" class="chip-tag">Marketing Technology (MarTech)</a>
+                  <a href="/ecosystems/marketing-media-events/brand-creative-agencies" class="chip-tag">Brand & Creative Agencies</a>
+                  <a href="/ecosystems/marketing-media-events/media-buying" class="chip-tag">Media Buying Agencies</a>
+                  <a href="/ecosystems/marketing-media-events/event-organizers" class="chip-tag">Event Organizers & Trade Shows</a>
+                  <a href="/ecosystems/marketing-media-events/event-technology" class="chip-tag">Event Technology Platforms</a>
+                  <a href="/ecosystems/marketing-media-events/experiential-marketing" class="chip-tag">Experiential Marketing</a>
+                  <a href="/ecosystems/marketing-media-events/sponsorship-talent" class="chip-tag">Sponsorship & Talent Agencies</a>
+                  <a href="/ecosystems/marketing-media-events/creator-economy" class="chip-tag">Talent & Creator Economy</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 17. Security -->
+            <div class="taxonomy-block">
+              <a href="/ecosystems/security" class="chip-parent">🔒 Security</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/ecosystems/security/cybersecurity-software" class="chip-tag">Cybersecurity Software & Services</a>
+                  <a href="/ecosystems/security/physical-security" class="chip-tag">Physical Security Systems</a>
+                  <a href="/ecosystems/security/identity-access-management" class="chip-tag">Identity & Access Management</a>
+                  <a href="/ecosystems/security/surveillance-monitoring" class="chip-tag">Surveillance & Monitoring Tech</a>
+                  <a href="/ecosystems/security/critical-infrastructure" class="chip-tag">Critical Infrastructure Protection</a>
+                  <a href="/ecosystems/security/fraud-prevention" class="chip-tag">Fraud Prevention & Risk Management</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 18. Corporate Functions -->
+            <div class="taxonomy-block">
+              <a href="/ecosystems/corporate-functions" class="chip-parent">⚙️ Corporate Functions & Enterprise Operations</a>
+              <div class="chip-group">
+                <span class="chip-group-label">Sub-sectors</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/ecosystems/corporate-functions/hr-future-of-work" class="chip-tag">HR & Future of Work</a>
+                  <a href="/ecosystems/corporate-functions/finance-cfo-office" class="chip-tag">Finance & CFO Office</a>
+                  <a href="/ecosystems/corporate-functions/legal-compliance" class="chip-tag">Legal & Compliance</a>
+                  <a href="/ecosystems/corporate-functions/procurement-supply-chain" class="chip-tag">Procurement & Supply Chain Leadership</a>
+                  <a href="/ecosystems/corporate-functions/operations-continuity" class="chip-tag">Operations & Business Continuity</a>
+                  <a href="/ecosystems/corporate-functions/dei" class="chip-tag">Diversity, Equity & Inclusion</a>
+                  <a href="/ecosystems/corporate-functions/sustainability-esg" class="chip-tag">Sustainability & ESG Leadership</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- =====================================================
+                 ROLES
+                 ===================================================== -->
+
+            <h3>Founder & Participant Roles</h3>
+
+            <div class="taxonomy-block">
+              <div class="chip-group">
+                <span class="chip-group-label">Join as</span>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="/roles/founder" class="chip-tag">🚀 Founder</a>
+                  <a href="/roles/cto" class="chip-tag">💻 CTO</a>
+                  <a href="/roles/investor" class="chip-tag">💰 Investor</a>
+                  <a href="/roles/operator" class="chip-tag">⚙️ Operator</a>
+                  <a href="/roles/product-builder" class="chip-tag">🛠️ Product Builder</a>
+                  <a href="/roles/growth-lead" class="chip-tag">📈 Growth Lead</a>
+                  <a href="/roles/advisor" class="chip-tag">🎯 Advisor</a>
+                </div>
+              </div>
+            </div>
+
+          </article>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 col-md-12 mt-4 mt-lg-0">
+
+          <div class="card mb-4">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">URL STRUCTURE</p>
+              <div class="url-pattern" style="font-size: 12px; padding: 0.75rem 1rem;">
+                /industries/vertical<br>
+                /industries/vertical/sub<br>
+                /ecosystems/name<br>
+                /ecosystems/name/sub<br>
+                /roles/role-name
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">TAXONOMY COUNTS</p>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span>Market Verticals</span><strong>13</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span>Cross-Industry Ecosystems</span><strong>5</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span>Total Sub-sectors</span><strong>120+</strong>
+              </div>
+              <div class="d-flex justify-content-between small">
+                <span>Participant Roles</span><strong>7</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">EXPLORE</p>
+              <div class="d-flex flex-column gap-2">
+                <a href="/industries" class="btn btn-sm btn-outline-primary text-start">All Industries →</a>
+                <a href="/ecosystems" class="btn btn-sm btn-outline-primary text-start">All Ecosystems →</a>
+                <a href="/roles" class="btn btn-sm btn-outline-primary text-start">All Roles →</a>
+                <a href="/events" class="btn btn-sm btn-primary text-start">Browse Events →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/_loader.js"></script>
+
+</body>
+</html>
