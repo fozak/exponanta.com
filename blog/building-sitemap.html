@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Building a Good Sitemap for Static Sites | Exponanta Blog</title>
+<meta name="description" content="Why sitemaps matter for SEO, what makes a good one, and how to generate and verify one automatically with PowerShell for a static HTML site.">
+<link rel="canonical" href="https://exponanta.com/blog/building-sitemap.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="Building a Good Sitemap for Static Sites">
+<meta property="og:description" content="Why sitemaps matter, what to include and exclude, and a PowerShell script to generate and verify one automatically.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://exponanta.com/blog/building-sitemap.html">
+<meta property="og:image" content="https://exponanta.com/assets/images/social/building-sitemap.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Building a Good Sitemap for Static Sites",
+  "description": "Why sitemaps matter for SEO, what makes a good one, and how to generate and verify one automatically with PowerShell.",
+  "url": "https://exponanta.com/blog/building-sitemap.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exponanta",
+    "url": "https://exponanta.com"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Exponanta"
+  }
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+/* Code blocks */
+pre {
+  background: var(--neutral-900);
+  color: #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin: 1.5rem 0;
+}
+
+code {
+  font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
+  font-size: 0.9em;
+}
+
+pre code {
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Syntax highlight — minimal */
+.kw  { color: #93c5fd; } /* keywords — blue */
+.st  { color: #86efac; } /* strings — green */
+.cm  { color: #64748b; } /* comments — muted */
+.va  { color: #fde68a; } /* variables — yellow */
+.fn  { color: #c4b5fd; } /* functions — purple */
+.nu  { color: #fb923c; } /* numbers — orange */
+.op  { color: #94a3b8; } /* operators */
+
+/* Inline code */
+p code, li code {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875em;
+}
+
+/* Callout boxes */
+.callout {
+  border-left: 4px solid var(--blue-700);
+  background: var(--blue-100);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.callout.callout-teal {
+  border-left-color: var(--accent-teal);
+  background: rgba(79, 209, 197, 0.1);
+}
+.callout.callout-coral {
+  border-left-color: var(--accent-coral);
+  background: rgba(255, 111, 97, 0.08);
+}
+.callout-title {
+  font-weight: 700;
+  font-size: var(--text-sm);
+  margin-bottom: 0.25rem;
+  color: var(--neutral-900);
+}
+.callout p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--neutral-900);
+}
+
+/* Output block */
+.output-block {
+  background: #0f172a;
+  color: #94a3b8;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin: 1.5rem 0;
+}
+.output-block .ok   { color: #86efac; }
+.output-block .warn { color: #fde68a; }
+.output-block .err  { color: #fca5a5; }
+.output-block .dim  { color: #475569; }
+</style>
+</head>
+
+<body class="blog-building-sitemap">
+
+<div id="navbar" data-loader="../components/navbar.html"></div>
+
+<main id="main-content" class="py-5">
+  <section class="c-hero-content c-hero-content-1">
+    <div class="container">
+      <div class="row align-items-start">
+
+        <!-- Article -->
+        <div class="col-lg-8 col-md-12">
+          <article class="article-content">
+
+            <header>
+              <h1>Building a Good Sitemap for Static Sites</h1>
+              <p class="lead">Why sitemaps matter more than most developers think, what makes one actually useful, and how to generate and verify one automatically with PowerShell.</p>
+            </header>
+
+            <h2>Why Sitemaps Matter</h2>
+
+            <p>
+              A sitemap is not just an SEO checkbox. It is the document you hand to search engines that says: here is everything I want you to index, here is when it was last updated, and here is how important each page is relative to the others. Without one, crawlers discover your pages by following links — which means pages with few inbound links, recently added pages, and pages buried deep in your navigation may never get indexed at all.
+            </p>
+
+            <p>
+              For a static site like Exponanta — HTML files served directly, no server-side rendering, no dynamic routes — the sitemap is especially important. There is no server generating canonical URLs on the fly. If a page exists as a file but is not in the sitemap and not linked from anywhere prominent, it is effectively invisible to Google.
+            </p>
+
+            <p>
+              Three concrete things a good sitemap does for you. First, it tells Google about pages that exist but are not yet linked from other pages — new blog posts, new industry taxonomy pages, new program pages. Second, it tells Google when pages were last updated via the <code>&lt;lastmod&gt;</code> field, so it knows which pages to re-crawl after you publish changes. Third, it gives you a complete inventory of your own site, which is useful independently of SEO — you can diff it against your navigation to find orphaned pages.
+            </p>
+
+            <h2>What Makes a Good Sitemap</h2>
+
+            <p>
+              A sitemap is an XML file at the root of your domain, listed in <code>robots.txt</code>. The structure is simple — a <code>&lt;urlset&gt;</code> wrapper containing one <code>&lt;url&gt;</code> block per page, each with a <code>&lt;loc&gt;</code> (the canonical URL) and ideally a <code>&lt;lastmod&gt;</code> (the last modified date in ISO format).
+            </p>
+
+            <div class="callout">
+              <div class="callout-title">Sitemap limits</div>
+              <p>A single sitemap file supports up to 50,000 URLs and must be under 50MB uncompressed. For larger sites, use a sitemap index file that references multiple sitemap files.</p>
+            </div>
+
+            <p>
+              What to include: every page you want indexed. For Exponanta that means all HTML pages — blog posts, program pages, event listings, industry taxonomy pages, ecosystem pages, role pages, and the homepage.
+            </p>
+
+            <p>
+              What to exclude: pages you do not want indexed. This includes admin pages, draft pages, style guide and component pages like <code>/blog/styles-tags.html</code>, thank-you pages after form submissions, duplicate content pages, and any page that already has <code>&lt;meta name="robots" content="noindex"&gt;</code> in its head. Including noindex pages in your sitemap sends a contradictory signal to Google and should be avoided.
+            </p>
+
+            <p>
+              URL format matters. Use the canonical form — the one that matches your <code>&lt;link rel="canonical"&gt;</code> tags. For a static site that means trailing slashes should be consistent. If your server redirects <code>/blog/building-sitemap</code> to <code>/blog/building-sitemap.html</code>, the sitemap should list the <code>.html</code> version (or whichever is canonical). Mixing formats creates crawl budget waste.
+            </p>
+
+            <h2>Generating the Sitemap with PowerShell</h2>
+
+            <p>
+              For a static site stored as HTML files, PowerShell is the natural tool on Windows — it can walk the file tree, read last-modified timestamps directly from the filesystem, and write clean XML. No build tool, no Node.js dependency, no configuration file.
+            </p>
+
+            <p>
+              The script below walks your project directory recursively, finds every <code>.html</code> file, constructs a clean canonical URL for each one, reads the file's last modified date from the filesystem, and writes a valid <code>sitemap.xml</code>. It handles <code>index.html</code> files correctly — converting them to their directory URL rather than including the filename.
+            </p>
+
+<pre><code><span class="cm"># Generate sitemap.xml from all HTML files in the current directory tree</span>
+<span class="cm"># Run from your site root: cd C:\Sites\exponanta.com && .\generate-sitemap.ps1</span>
+
+<span class="va">$baseUrl</span>    = <span class="st">"https://exponanta.com"</span>
+<span class="va">$outputFile</span> = <span class="st">".\sitemap.xml"</span>
+
+<span class="cm"># Pages to exclude from the sitemap</span>
+<span class="va">$excludePatterns</span> = <span class="kw">@</span>(
+    <span class="st">'styles-tags\.html$'</span>,
+    <span class="st">'brandbook'</span>,
+    <span class="st">'components'</span>,
+    <span class="st">'assets'</span>,
+    <span class="st">'404\.html$'</span>
+)
+
+<span class="va">$urls</span> = <span class="fn">Get-ChildItem</span> -Recurse -Filter <span class="st">"*.html"</span> | <span class="fn">ForEach-Object</span> {
+    <span class="va">$relativePath</span> = <span class="va">$_</span>.FullName.<span class="fn">Replace</span>((<span class="fn">Get-Location</span>).Path, <span class="st">''</span>).<span class="fn">Replace</span>(<span class="st">'\'</span>, <span class="st">'/'</span>).<span class="fn">TrimStart</span>(<span class="st">'/'</span>)
+    <span class="va">$lastmod</span>      = <span class="va">$_</span>.LastWriteTime.<span class="fn">ToString</span>(<span class="st">"yyyy-MM-dd"</span>)
+
+    <span class="cm"># Skip excluded paths</span>
+    <span class="kw">foreach</span> (<span class="va">$pattern</span> <span class="kw">in</span> <span class="va">$excludePatterns</span>) {
+        <span class="kw">if</span> (<span class="va">$relativePath</span> -match <span class="va">$pattern</span>) { <span class="kw">return</span> }
+    }
+
+    <span class="cm"># Build clean canonical URL</span>
+    <span class="kw">if</span> (<span class="va">$relativePath</span> -match <span class="st">'index\.html$'</span>) {
+        <span class="va">$cleanUrl</span> = <span class="st">"$baseUrl/"</span> + (<span class="va">$relativePath</span> -replace <span class="st">'index\.html$'</span>, <span class="st">''</span>)
+    } <span class="kw">else</span> {
+        <span class="va">$cleanUrl</span> = <span class="st">"$baseUrl/"</span> + (<span class="va">$relativePath</span> -replace <span class="st">'\.html$'</span>, <span class="st">'/'</span>)
+    }
+
+    <span class="cm"># Remove double trailing slashes if any</span>
+    <span class="va">$cleanUrl</span> = <span class="va">$cleanUrl</span> -replace <span class="st">'//$'</span>, <span class="st">'/'</span>
+
+    <span class="st">"  &lt;url&gt;`n    &lt;loc&gt;$cleanUrl&lt;/loc&gt;`n    &lt;lastmod&gt;$lastmod&lt;/lastmod&gt;`n  &lt;/url&gt;"</span>
+}
+
+<span class="va">$sitemap</span> = <span class="kw">@"</span>
+<span class="st">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+$($urls -join "`n")
+&lt;/urlset&gt;</span>
+<span class="kw">"@</span>
+
+<span class="fn">Set-Content</span> -Path <span class="va">$outputFile</span> -Value <span class="va">$sitemap</span> -Encoding UTF8
+<span class="fn">Write-Host</span> <span class="st">"Done: $($urls.Count) URLs written to $outputFile"</span> -ForegroundColor Green</code></pre>
+
+            <p>
+              Save this as <code>generate-sitemap.ps1</code> in your site root. Run it from PowerShell with:
+            </p>
+
+<pre><code><span class="cm"># Navigate to your site root first</span>
+<span class="fn">cd</span> C:\Sites\exponanta.com
+
+<span class="cm"># Run the script</span>
+.\generate-sitemap.ps1</code></pre>
+
+            <h2>Verifying the Output</h2>
+
+            <p>
+              Generating the sitemap is only half the job. Before submitting it to Google Search Console, verify it — check that the URL count is correct, that no excluded pages slipped through, that the XML is well-formed, and that every URL in it actually resolves.
+            </p>
+
+            <p>
+              The verification script below reads the generated <code>sitemap.xml</code>, parses it, and runs four checks: URL count, excluded pattern detection, XML validity, and optionally HTTP status for each URL.
+            </p>
+
+<pre><code><span class="cm"># Verify sitemap.xml after generation</span>
+<span class="va">$sitemapFile</span>     = <span class="st">".\sitemap.xml"</span>
+<span class="va">$excludePatterns</span> = <span class="kw">@</span>(<span class="st">'styles-tags'</span>, <span class="st">'brandbook'</span>, <span class="st">'components'</span>, <span class="st">'assets'</span>)
+<span class="va">$checkHttp</span>       = <span class="kw">$false</span>  <span class="cm"># set $true to verify each URL returns 200</span>
+
+<span class="cm"># 1. Load and parse XML</span>
+<span class="kw">try</span> {
+    [<span class="fn">xml</span>]<span class="va">$xml</span> = <span class="fn">Get-Content</span> <span class="va">$sitemapFile</span> -Encoding UTF8
+    <span class="fn">Write-Host</span> <span class="st">"✓ XML is well-formed"</span> -ForegroundColor Green
+} <span class="kw">catch</span> {
+    <span class="fn">Write-Host</span> <span class="st">"✗ XML parse error: $_"</span> -ForegroundColor Red
+    <span class="kw">exit</span> <span class="nu">1</span>
+}
+
+<span class="cm"># 2. Count URLs</span>
+<span class="va">$urls</span> = <span class="va">$xml</span>.urlset.url
+<span class="fn">Write-Host</span> <span class="st">"✓ Total URLs: $($urls.Count)"</span> -ForegroundColor Green
+
+<span class="cm"># 3. Check for accidentally included excluded pages</span>
+<span class="va">$violations</span> = <span class="va">$urls</span> | <span class="fn">Where-Object</span> {
+    <span class="va">$loc</span> = <span class="va">$_</span>.loc
+    <span class="va">$excludePatterns</span> | <span class="fn">Where-Object</span> { <span class="va">$loc</span> -match <span class="va">$_</span> }
+}
+<span class="kw">if</span> (<span class="va">$violations</span>) {
+    <span class="fn">Write-Host</span> <span class="st">"✗ Excluded pages found in sitemap:"</span> -ForegroundColor Red
+    <span class="va">$violations</span> | <span class="fn">ForEach-Object</span> { <span class="fn">Write-Host</span> <span class="st">"  - $($_.loc)"</span> -ForegroundColor Red }
+} <span class="kw">else</span> {
+    <span class="fn">Write-Host</span> <span class="st">"✓ No excluded pages detected"</span> -ForegroundColor Green
+}
+
+<span class="cm"># 4. Check lastmod dates are valid ISO format</span>
+<span class="va">$badDates</span> = <span class="va">$urls</span> | <span class="fn">Where-Object</span> { <span class="va">$_</span>.lastmod -notmatch <span class="st">'^[0-9]{4}-[0-9]{2}-[0-9]{2}$'</span> }
+<span class="kw">if</span> (<span class="va">$badDates</span>) {
+    <span class="fn">Write-Host</span> <span class="st">"✗ Invalid lastmod dates found:"</span> -ForegroundColor Red
+    <span class="va">$badDates</span> | <span class="fn">ForEach-Object</span> { <span class="fn">Write-Host</span> <span class="st">"  - $($_.loc) → $($_.lastmod)"</span> -ForegroundColor Red }
+} <span class="kw">else</span> {
+    <span class="fn">Write-Host</span> <span class="st">"✓ All lastmod dates are valid"</span> -ForegroundColor Green
+}
+
+<span class="cm"># 5. Optional: HTTP check — verify each URL returns 200</span>
+<span class="kw">if</span> (<span class="va">$checkHttp</span>) {
+    <span class="fn">Write-Host</span> <span class="st">"`nChecking HTTP status for $($urls.Count) URLs..."</span>
+    <span class="va">$errors</span> = <span class="kw">@</span>()
+    <span class="va">$urls</span> | <span class="fn">ForEach-Object</span> {
+        <span class="kw">try</span> {
+            <span class="va">$response</span> = <span class="fn">Invoke-WebRequest</span> -Uri <span class="va">$_</span>.loc -Method Head -TimeoutSec <span class="nu">10</span>
+            <span class="kw">if</span> (<span class="va">$response</span>.StatusCode -ne <span class="nu">200</span>) {
+                <span class="va">$errors</span> += <span class="st">"$($_.loc) → $($response.StatusCode)"</span>
+            }
+        } <span class="kw">catch</span> {
+            <span class="va">$errors</span> += <span class="st">"$($_.loc) → ERROR: $_"</span>
+        }
+    }
+    <span class="kw">if</span> (<span class="va">$errors</span>) {
+        <span class="fn">Write-Host</span> <span class="st">"✗ URLs with issues:"</span> -ForegroundColor Red
+        <span class="va">$errors</span> | <span class="fn">ForEach-Object</span> { <span class="fn">Write-Host</span> <span class="st">"  $_"</span> -ForegroundColor Red }
+    } <span class="kw">else</span> {
+        <span class="fn">Write-Host</span> <span class="st">"✓ All URLs returned 200"</span> -ForegroundColor Green
+    }
+}</code></pre>
+
+            <p>Example output from a clean run:</p>
+
+            <div class="output-block">
+<span class="ok">✓ XML is well-formed</span>
+<span class="ok">✓ Total URLs: 47</span>
+<span class="ok">✓ No excluded pages detected</span>
+<span class="ok">✓ All lastmod dates are valid</span>
+            </div>
+
+            <p>Example output when something is wrong:</p>
+
+            <div class="output-block">
+<span class="ok">✓ XML is well-formed</span>
+<span class="ok">✓ Total URLs: 51</span>
+<span class="err">✗ Excluded pages found in sitemap:</span>
+<span class="err">  - https://exponanta.com/blog/styles-tags/</span>
+<span class="err">  - https://exponanta.com/brandbook/index/</span>
+<span class="ok">✓ All lastmod dates are valid</span>
+            </div>
+
+            <h2>Registering the Sitemap</h2>
+
+            <p>
+              Two places to register your sitemap once it is generated and verified.
+            </p>
+
+            <p>
+              First, add it to <code>robots.txt</code> at your site root. This tells any crawler — not just Google — where to find it:
+            </p>
+
+<pre><code><span class="cm"># robots.txt</span>
+User-agent: *
+Disallow:
+
+Sitemap: https://exponanta.com/sitemap.xml</code></pre>
+
+            <p>
+              Second, submit it directly in Google Search Console under <strong>Indexing → Sitemaps</strong>. Paste the full URL — <code>https://exponanta.com/sitemap.xml</code> — and click Submit. Google will show you how many URLs it found and how many it has indexed. The gap between those two numbers is your indexing backlog.
+            </p>
+
+            <div class="callout callout-teal">
+              <div class="callout-title">Re-submit after major changes</div>
+              <p>Google recrawls your sitemap automatically over time, but after a large batch of new pages — a new taxonomy section, a new blog category — it is worth re-submitting manually in Search Console to speed up discovery.</p>
+            </div>
+
+            <h2>Keeping It Fresh</h2>
+
+            <p>
+              The sitemap is only as useful as it is current. For a static site the simplest approach is to run the generation script every time you deploy. If you are using Git, add it as a pre-commit hook or a step in your deployment script so it never goes stale.
+            </p>
+
+<pre><code><span class="cm"># Add to your deploy script (deploy.ps1)</span>
+
+<span class="cm"># 1. Generate fresh sitemap</span>
+<span class="fn">Write-Host</span> <span class="st">"Generating sitemap..."</span>
+.\generate-sitemap.ps1
+
+<span class="cm"># 2. Verify it</span>
+.\verify-sitemap.ps1
+
+<span class="cm"># 3. Stage and commit</span>
+<span class="fn">git</span> add sitemap.xml
+<span class="fn">git</span> commit -m <span class="st">"chore: update sitemap"</span>
+<span class="fn">git</span> push</code></pre>
+
+            <div class="callout callout-coral">
+              <div class="callout-title">Watch out for component and template files</div>
+              <p>If your site uses dynamically loaded components like <code>navbar.html</code> and <code>footer.html</code> stored in a <code>/components/</code> folder, make sure that folder is in your <code>$excludePatterns</code>. Component files are not pages and should never appear in the sitemap.</p>
+            </div>
+
+            <h2>Summary</h2>
+
+            <p>A good sitemap for a static site is three things: complete (every indexable page), clean (no noindex pages, no components, no drafts), and current (lastmod dates reflecting real file changes). The PowerShell scripts above handle all three automatically — generation reads directly from the filesystem, verification catches exclusion violations and malformed dates before you publish, and the deploy hook keeps everything in sync.</p>
+
+          </article>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 col-md-12 mt-4 mt-lg-0">
+
+          <div class="card mb-4">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">SCRIPTS IN THIS POST</p>
+              <div class="d-flex flex-column gap-2">
+                <div class="small"><strong>generate-sitemap.ps1</strong><br><span class="text-muted">Walks file tree, builds sitemap.xml</span></div>
+                <hr class="my-1">
+                <div class="small"><strong>verify-sitemap.ps1</strong><br><span class="text-muted">Validates XML, checks exclusions, optional HTTP check</span></div>
+                <hr class="my-1">
+                <div class="small"><strong>deploy.ps1</strong><br><span class="text-muted">Generate → verify → commit in one step</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">SITEMAP CHECKLIST</p>
+              <div class="d-flex flex-column gap-2 small">
+                <div>✓ &nbsp;Every indexable page included</div>
+                <div>✓ &nbsp;Noindex pages excluded</div>
+                <div>✓ &nbsp;Components folder excluded</div>
+                <div>✓ &nbsp;Style guide pages excluded</div>
+                <div>✓ &nbsp;URLs match canonical tags</div>
+                <div>✓ &nbsp;lastmod in yyyy-MM-dd format</div>
+                <div>✓ &nbsp;Listed in robots.txt</div>
+                <div>✓ &nbsp;Submitted to Search Console</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-4">
+              <p class="text-muted small fw-semibold mb-3">RELATED</p>
+              <div class="d-flex flex-column gap-2">
+                <a href="/blog/taxonomies-for-startups.html" class="btn btn-sm btn-outline-primary text-start">Industry Taxonomy →</a>
+                <a href="/blog/cta-for-startups.html" class="btn btn-sm btn-outline-primary text-start">Founder Gravity Loop →</a>
+                <a href="/events" class="btn btn-sm btn-primary text-start">Browse Events →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/_loader.js"></script>
+
+</body>
+</html>
