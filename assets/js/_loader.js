@@ -43,14 +43,12 @@ if (document.readyState === "loading") {
 }
 
 function loadComponents() {
-  // Get all divs with data-loader attribute  _
   var loaderDivs = document.querySelectorAll("div[data-loader]");
 
   loaderDivs.forEach(function (div) {
     var url = div.getAttribute("data-loader");
     var id = div.getAttribute("id");
 
-    // Fetch the component
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -59,17 +57,8 @@ function loadComponents() {
         return response.text();
       })
       .then((data) => {
-
-        // issue with live server
-
-        // Remove live-server injected scripts before inserting
-  const cleaned = data.replace(/<script[\s\S]*?<\/script>/gi, '');
-        // Insert the fetched content after the div
-
-        div.innerHTML = cleaned;
-        //div.insertAdjacentHTML("afterend", data);
-        // Optionally remove or hide the loader div
-        // div.style.display = 'none';
+        div.insertAdjacentHTML("afterend", data);
+        div.style.display = "none";
       })
       .catch((error) => {
         console.error("Error loading component for #" + id + ":", error);

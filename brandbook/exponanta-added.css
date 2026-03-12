@@ -346,3 +346,13 @@ css/* =========================================================
 .article-content {
   max-width: 720px;             /* readable line length */
 }
+
+
+/*  navbar NOT flashing*/
+
+/* exponanta-added.css */
+#navbar {
+  min-height: 64px; /* your navbar height */
+  background: var(--neutral-0);
+  border-bottom: 1px solid var(--blue-100);
+}
