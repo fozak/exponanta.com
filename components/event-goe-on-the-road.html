@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOe On the Road: Paving the Way Towards a Delicious Future | Exponanta</title>
+<meta name="description" content="Thursday Gathering at Venture Café Cambridge. Mar 12, 2026, 4:30 PM – 8:00 PM. Food-tech innovation, startup pitches, AI in gastronomy.">
+<link rel="canonical" href="https://exponanta.com/events/goe-on-the-road.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+/* ── Design tokens ── */
+:root {
+  --page-bg:     #F7F5F0;
+  --card-bg:     #FFFFFF;
+  --ink:         #1A1814;
+  --ink-mid:     #5C5750;
+  --ink-light:   #9C968E;
+  --border:      rgba(36,70,200,.10);
+  --accent:      #FF6F61;
+  --accent-dark: #C9392E;
+  --blue:        #2446C8;
+  --blue-light:  #C8DFFA;
+  --teal:        #4FD1C5;
+  --gold:        #C9A84C;
+  --shadow-card: 0 2px 12px rgba(26,24,20,.08), 0 1px 3px rgba(26,24,20,.04);
+  --shadow-hero: 0 8px 40px rgba(26,24,20,.18);
+  --r:           16px;
+  --r-sm:        10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--page-bg);
+  color: var(--ink);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Navbar ── */
+.site-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,245,240,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.site-nav__brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--ink); font-weight: 700; font-size: 20px;
+}
+.site-nav__brand img { height: 30px; width: 30px; }
+.site-nav__links { display: flex; align-items: center; gap: 28px; }
+.site-nav__links a {
+  font-size: 14px; font-weight: 500; color: var(--ink-mid);
+  text-decoration: none; transition: color .15s;
+}
+.site-nav__links a:hover, .site-nav__links a.active { color: var(--blue); }
+.site-nav__join {
+  padding: 8px 20px; border-radius: 8px;
+  background: var(--blue); color: #fff;
+  font-size: 13px; font-weight: 700; border: none; cursor: pointer;
+  transition: opacity .15s;
+}
+.site-nav__join:hover { opacity: .85; }
+
+/* ── Breadcrumb ── */
+.breadcrumb-bar {
+  padding: 18px 0 0;
+  font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; gap: 6px;
+}
+.breadcrumb-bar a { color: var(--ink-light); text-decoration: none; }
+.breadcrumb-bar a:hover { color: var(--blue); }
+.breadcrumb-bar svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+/* ── Hero image ── */
+.event-hero {
+  border-radius: var(--r);
+  overflow: hidden;
+  height: 420px;
+  position: relative;
+  box-shadow: var(--shadow-hero);
+  margin: 20px 0 0;
+}
+.event-hero img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.event-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,24,20,.55) 0%, transparent 50%);
+}
+.event-hero__badge {
+  position: absolute; top: 18px; left: 18px;
+  background: var(--accent); color: #fff;
+  font-size: 11px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 20px;
+}
+.event-hero__date-pill {
+  position: absolute; bottom: 20px; left: 20px;
+  background: rgba(247,245,240,.92); backdrop-filter: blur(8px);
+  border-radius: 10px; padding: 10px 16px;
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+}
+.event-hero__date-pill svg { color: var(--blue); flex-shrink: 0; }
+
+/* ── Page title area ── */
+.event-title-block { padding: 28px 0 24px; }
+.event-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.event-eyebrow::after {
+  content: ''; flex: 1; height: 1px; background: rgba(255,111,97,.3);
+}
+.event-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.15; font-weight: 400;
+  color: var(--ink); margin: 0 0 16px;
+}
+.event-title em { font-style: italic; color: var(--blue); }
+.event-meta-row {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  font-size: 14px; color: var(--ink-mid);
+}
+.event-meta-item {
+  display: flex; align-items: center; gap: 6px;
+}
+.event-meta-item svg { color: var(--blue); flex-shrink: 0; }
+.event-meta-item a { color: var(--blue); text-decoration: none; font-weight: 500; }
+.event-meta-item a:hover { text-decoration: underline; }
+
+/* ── CTA bar ── */
+.event-cta-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 20px 0 28px; border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.btn-register {
+  padding: 12px 28px; border-radius: 10px;
+  background: var(--accent); color: #fff;
+  font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .15s, transform .12s, box-shadow .12s;
+  text-decoration: none;
+}
+.btn-register:hover {
+  background: var(--accent-dark); transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,111,97,.35); color: #fff;
+}
+.btn-add-cal {
+  padding: 12px 22px; border-radius: 10px;
+  border: 1.5px solid var(--blue); color: var(--blue);
+  font-size: 14px; font-weight: 600; background: transparent; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: background .15s, color .15s;
+}
+.btn-add-cal:hover { background: var(--blue); color: #fff; }
+.attendee-count {
+  margin-left: auto; font-size: 13px; color: var(--ink-light); font-weight: 500;
+}
+
+/* ── Main layout: content + sidebar ── */
+.event-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .event-layout { grid-template-columns: 1fr; }
+  .event-sidebar { order: -1; }
+}
+
+/* ── Section headings ── */
+.section-heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; font-weight: 400; color: var(--ink);
+  margin: 0 0 20px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue-light);
+  display: flex; align-items: center; gap: 10px;
+}
+.section-heading span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .6px;
+  text-transform: uppercase; color: var(--ink-light);
+  margin-left: auto;
+}
+
+/* ── Sessions ── */
+.session-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+
+.session-card {
+  display: flex; gap: 0;
+  background: var(--card-bg);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  transition: box-shadow .2s, transform .2s;
+  cursor: pointer;
+}
+.session-card:hover {
+  box-shadow: 0 6px 24px rgba(36,70,200,.12);
+  transform: translateY(-2px);
+}
+.session-card__img {
+  flex: 0 0 100px; width: 100px;
+  overflow: hidden; position: relative; background: #f0ede8;
+}
+.session-card__img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.session-card__body {
+  flex: 1; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 4px; min-width: 0;
+}
+.session-card__time {
+  font-size: 11px; font-weight: 700; letter-spacing: .5px;
+  text-transform: uppercase; color: var(--teal);
+}
+.session-card__title {
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  line-height: 1.3; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.session-card__desc {
+  font-size: 13px; color: var(--ink-mid); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden; margin: 0;
+}
+.session-card__join {
+  flex: 0 0 auto; align-self: center;
+  margin: 0 14px;
+  padding: 8px 16px; border-radius: 8px;
+  background: var(--blue); color: #fff;
+  font-size: 12px; font-weight: 700; border: none; cursor: pointer;
+  white-space: nowrap; transition: opacity .15s;
+}
+.session-card__join:hover { opacity: .82; }
+
+/* ── Location card ── */
+.location-card {
+  background: var(--card-bg);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+.location-map {
+  height: 200px;
+  background: #e8e4dc url('https://a.tile.openstreetmap.org/14/4957/6059.png') center/cover;
+  position: relative;
+  overflow: hidden;
+}
+.location-map iframe {
+  width: 100%; height: 100%; border: none; display: block;
+}
+.location-map__static {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.location-map__pin {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -100%);
+  width: 32px; height: 32px;
+  background: var(--accent); border-radius: 50% 50% 50% 0;
+  transform: translate(-50%, -90%) rotate(-45deg);
+  box-shadow: 0 4px 12px rgba(255,111,97,.5);
+}
+.location-map__pin::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  background: #fff; border-radius: 50%;
+}
+.location-body { padding: 16px 20px; }
+.location-name { font-weight: 700; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+.location-addr { font-size: 13px; color: var(--ink-mid); }
+.location-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--blue); text-decoration: none;
+}
+.location-link:hover { text-decoration: underline; }
+
+/* ── Sidebar ── */
+.event-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+.sidebar-card {
+  background: var(--card-bg);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+.sidebar-card__title {
+  font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.sidebar-card__title::before {
+  content: ''; width: 3px; height: 14px; border-radius: 2px;
+  background: var(--accent); flex-shrink: 0;
+}
+
+/* Quick info rows */
+.info-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.info-row__icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--blue-light); color: var(--blue);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.info-row__label { font-size: 10px; color: var(--ink-light); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+.info-row__value { font-weight: 600; color: var(--ink); line-height: 1.3; }
+
+/* Tags */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag-pill {
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  background: var(--blue-light); color: var(--blue); border: none;
+}
+.tag-pill.coral { background: rgba(255,111,97,.12); color: var(--accent-dark); }
+.tag-pill.teal  { background: rgba(79,209,197,.15); color: #0e7a72; }
+.tag-pill.gold  { background: rgba(201,168,76,.15); color: #7a5e1a; }
+
+/* Organiser */
+.organiser-logo {
+  max-height: 40px; max-width: 100%; object-fit: contain; display: block;
+  margin-bottom: 10px;
+}
+.organiser-name { font-weight: 700; font-size: 14px; color: var(--ink); }
+.organiser-note { font-size: 12px; color: var(--ink-light); margin-top: 3px; }
+
+/* Sticky register CTA */
+.sticky-cta {
+  position: sticky; top: 80px;
+}
+.btn-register-lg {
+  width: 100%; padding: 14px;
+  background: var(--accent); color: #fff;
+  font-size: 15px; font-weight: 800; border: none;
+  border-radius: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background .15s, transform .12s;
+}
+.btn-register-lg:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-cancel {
+  width: 100%; padding: 11px; margin-top: 8px;
+  background: transparent; color: var(--ink-mid);
+  font-size: 13px; font-weight: 600; border: 1.5px solid var(--border);
+  border-radius: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: border-color .15s, color .15s;
+}
+.btn-cancel:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+/* ── Timeline accent on sessions ── */
+.sessions-with-timeline { position: relative; }
+.sessions-with-timeline::before {
+  content: '';
+  position: absolute; left: 49px; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--blue-light), transparent);
+  pointer-events: none;
+}
+
+/* ── Footer ── */
+.page-footer {
+  margin-top: 60px; padding: 32px 0;
+  border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.page-footer a { color: var(--blue); text-decoration: none; }
+.page-footer a:hover { text-decoration: underline; }
+
+/* ── Responsive tweaks ── */
+@media (max-width: 640px) {
+  .event-hero { height: 260px; }
+  .site-nav__links { display: none; }
+  .session-card__desc { display: none; }
+  .session-card__img { flex: 0 0 70px; width: 70px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <span class="navbar-brand-text">Exponanta</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="/events">Events</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/community">Community</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/calendar">Calendar</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/membership">Join</a>
+        </li>
+
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-sm btn-search" href="/search" aria-label="Search">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+            <!-- Code injected by live-server -->
+
+
+</svg>
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-primary btn-sm" href="/programs/host-event">
+            Host Event
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ PAGE ══════════════ -->
+<div class="container" style="max-width:1100px;">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <span class="navbar-brand-text">Exponanta</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="/events.html">Events</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <span>GOe On the Road</span>
+  </div>
+
+  <!-- Hero image -->
+  <div class="event-hero">
+    <img src="https://storage.googleapis.com/gatherus-app/event_images/Screenshot_2026-03-05_at_12.47.50PM.png"
+         alt="GOe On the Road: Paving the Way Towards a Delicious Future">
+    <div class="event-hero__overlay"></div>
+    <div class="event-hero__badge">Thursday Gathering</div>
+    <div class="event-hero__date-pill">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      Thu, Mar 12, 2026 · 4:30 – 8:00 PM
+    </div>
+  </div>
+
+  <!-- Title block -->
+  <div class="event-title-block">
+    <div class="event-eyebrow">Food Tech &amp; Innovation</div>
+    <h1 class="event-title">
+      GOe On the Road: Paving the Way<br>
+      Towards a <em>Delicious Future</em>
+    </h1>
+    <div class="event-meta-row">
+      <div class="event-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        <a href="https://www.google.com/maps/place/Venture+Café+Cambridge/@42.3628339,-71.0864929,17z" target="_blank" rel="noopener">
+          Venture Café, One Broadway, Cambridge MA
+        </a>
+      </div>
+      <div class="event-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        3.5 hours · 7 sessions
+      </div>
+      <div class="event-meta-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Community · In-Person
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA bar -->
+  <div class="event-cta-bar">
+    <a href="#" class="btn-register">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2z"/>
+      </svg>
+      Register Now
+    </a>
+    <button class="btn-add-cal">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/>
+      </svg>
+      Add to Calendar
+    </button>
+    <div class="attendee-count">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Open to all community members
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="event-layout">
+
+    <!-- ── LEFT: Content ── -->
+    <div>
+
+      <!-- Sessions -->
+      <h2 class="section-heading">
+        Event Sessions
+        <span>7 sessions · 4:30–8:00 PM</span>
+      </h2>
+
+      <div class="session-list sessions-with-timeline">
+
+        <!-- Session 1 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_1746450267266.jpg" alt="Connection Collider">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">4:30 PM – 8:00 PM</div>
+            <h3 class="session-card__title">Connection Collider</h3>
+            <p class="session-card__desc">The backbone of Venture Café – come meet the community and make connections with all different kinds of innovators. How will you make your serendipitous moment come true?</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 2 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_av_imagen.jpg" alt="Welcome to OTR Boston">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">5:00 PM – 5:15 PM</div>
+            <h3 class="session-card__title">Welcome to OTR Boston</h3>
+            <p class="session-card__desc">Kick off GOe On the Road Boston with a warm welcome from Raquel Martín (BCC, GOe) and Alex Cheung (Venture Café Cambridge).</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 3 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_97.jpg" alt="GOe: Paving the Way">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">5:15 PM – 5:30 PM</div>
+            <h3 class="session-card__title">GOe: Paving the Way Towards a Delicious Future with Asier Alea</h3>
+            <p class="session-card__desc">How innovation, collaboration, and entrepreneurship are shaping the future of food — chefs, researchers, startups, and investors rethinking the global food system.</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 4 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_at_69.jpg" alt="Roundtable">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">5:30 PM – 5:50 PM</div>
+            <h3 class="session-card__title">Roundtable: Boston's Innovation Ecosystem Agents</h3>
+            <p class="session-card__desc">Featuring: Lauren Abda (Branchfoods), Sofi Aguilera (SVG Ventures), Erica Licht (World Economic Forum), Katie Stebbins (Tufts University).</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 5 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_96_ZfRWxTu.jpg" alt="Startup Pitch Showcase">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">5:50 PM – 6:15 PM</div>
+            <h3 class="session-card__title">Startup Pitch Showcase</h3>
+            <p class="session-card__desc">Four innovative startups with rapid 5-minute pitches at the intersection of gastronomy and technology. See which founders are poised to shape the future of food.</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 6 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_goe-intro.jpg" alt="AI in Gastronomy">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">6:15 PM – 6:45 PM</div>
+            <h3 class="session-card__title">"AI in Gastronomy": Scientific keynote by Eneko Axpe</h3>
+            <p class="session-card__desc">How AI is transforming gastronomy — from predictive flavor creation to kitchen automation — empowering chefs, startups, and innovators to redefine what's possible in food.</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+        <!-- Session 7 -->
+        <div class="session-card">
+          <div class="session-card__img">
+            <img src="https://storage.googleapis.com/gatherus-app/session_images/thumbnails/thumb_at_70.jpg" alt="Pitch Challenge Winner">
+          </div>
+          <div class="session-card__body">
+            <div class="session-card__time">6:45 PM – 7:00 PM</div>
+            <h3 class="session-card__title">Pitch Challenge Winner Announcement</h3>
+            <p class="session-card__desc">Celebrate creativity and entrepreneurial spirit as the Pitch Challenge winners are announced by Alex and Raquel.</p>
+          </div>
+          <button class="session-card__join">Join</button>
+        </div>
+
+      </div><!-- /session-list -->
+
+      <!-- Location -->
+      <h2 class="section-heading">Location</h2>
+      <div class="location-card">
+        <div class="location-map" style="position:relative; background:#ddd6c8;">
+          <!-- Static OpenStreetMap tile centred on Venture Café Cambridge -->
+          <img class="location-map__static"
+               src="https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=800&height=200&center=lonlat:-71.0839,42.3628&zoom=15&marker=lonlat:-71.0839,42.3628;color:%23FF6F61;size:medium&apiKey=no-key-placeholder"
+               alt="Map"
+               onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#ddd6c8,#c8bfb0)'; this.parentNode.innerHTML += '<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#9C968E;gap:8px;\'><svg width=\'20\' height=\'20\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><path d=\'M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z\'/><circle cx=\'12\' cy=\'10\' r=\'3\'/></svg>42.3628° N, 71.0839° W</div>'">
+          <div class="location-map__pin"></div>
+        </div>
+        <div class="location-body">
+          <div class="location-name">Venture Café Cambridge</div>
+          <div class="location-addr">One Broadway, 5th Floor · Cambridge, MA 02142</div>
+          <a class="location-link"
+             href="https://www.google.com/maps/place/Venture+Café+Cambridge/@42.3628339,-71.0864929,17z"
+             target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /left column -->
+
+    <!-- ── RIGHT: Sidebar ── -->
+    <div class="event-sidebar">
+
+      <!-- Sticky register CTA -->
+      <div class="sticky-cta">
+        <div class="sidebar-card">
+          <button class="btn-register-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2z"/>
+            </svg>
+            Register for Event
+          </button>
+          <button class="btn-cancel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+            </svg>
+            Cancel Sign-Up
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick info -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__title">Event Details</div>
+
+        <div class="info-row">
+          <div class="info-row__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <div class="info-row__label">Date &amp; Time</div>
+            <div class="info-row__value">Thu, Mar 12, 2026<br>4:30 PM – 8:00 PM</div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="info-row__label">Venue</div>
+            <div class="info-row__value">Venture Café Cambridge<br>One Broadway, 5th fl.</div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <div class="info-row__label">Duration</div>
+            <div class="info-row__value">3.5 hours · 7 sessions</div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="info-row__label">Price</div>
+            <div class="info-row__value">Free · Community Event</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__title">Topics</div>
+        <div class="tag-cloud">
+          <span class="tag-pill">Community</span>
+          <span class="tag-pill coral">Food Tech</span>
+          <span class="tag-pill teal">AI &amp; Innovation</span>
+          <span class="tag-pill gold">Startup Pitches</span>
+          <span class="tag-pill">In-Person</span>
+          <span class="tag-pill coral">Gastronomy</span>
+          <span class="tag-pill teal">Networking</span>
+        </div>
+      </div>
+
+      <!-- Organiser -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__title">Hosted at</div>
+        <img class="organiser-logo"
+             src="https://storage.googleapis.com/gatherus-app/branding_logos/Venture-Cafe-Cambridge-Logo_Horiz7_OneLine-large.png"
+             alt="Venture Café Cambridge">
+        <div class="organiser-name">Venture Café Cambridge</div>
+        <div class="organiser-note">One Broadway, Cambridge MA · weekly Thursday Gatherings</div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+  </div><!-- /event-layout -->
+
+
+
+
+</div><!-- /container -->
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/_loader.js"></script>
+
+</body>
+</html>

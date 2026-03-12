@@ -1,17 +1,19 @@
 /* =========================================================
-   HORIZONTAL EVENT LIST CARDS
-   Add this AFTER exponanta.css in your <head>
+    exponanta-added.css in your <head>: 
+   HORIZONTAL EVENT LIST CARDS and other
+ 
    All selectors are scoped to .evh to avoid conflicts
-   ========================================================= */
+/* =========================================================
+
 
 /* ── Card shell ── */
 .evh {
   display: flex !important;          /* fight Bootstrap .card flex-direction:column */
   flex-direction: row !important;
-  width: 90%;
+  width: 100%;  /* was 90 */
   min-height: 180px;
   overflow: hidden;
-  /* inherits .card border-radius, shadow, border from exponanta.css §6 */
+  /* inherits .card border-radius, shadow, border from nesen.css §6 */
 }
 
 /* ── Image column ── */
@@ -44,7 +46,7 @@
 .evh--v3 .evh__img-overlay { background: linear-gradient(to right, rgba(36,70,200,.35) 0%, rgba(79,209,197,.12) 100%); }
 
 /* ── Reuse existing .event-card__date — only override position ── */
-/* exponanta.css puts it bottom:12px left:12px — we move it to top-left */
+/* nesen.css puts it bottom:12px left:12px — we move it to top-left */
 .evh .event-card__date {
   top: 14px !important;
   bottom: auto !important;
@@ -52,7 +54,7 @@
   z-index: 2;
 }
 
-/* ── Status pill stays top-right (already correct in exponanta.css) ── */
+/* ── Status pill stays top-right (already correct in nesen.css) ── */
 .evh .event-card__status {
   z-index: 2;
 }
@@ -94,7 +96,7 @@
 }
 
 .evh__title {
-  font-size: 22px !important;        /* override h3 from exponanta.css §4 (30px) */
+  font-size: 22px !important;        /* override h3 from nesen.css §4 (30px) */
   font-weight: 700;
   color: var(--blue-700);
   margin: 0;
@@ -267,6 +269,215 @@
   background: #ff6230;
 }
 
+
+
+/* =========================================================
+   PAST EVENTS GRID
+   2 cards per row, each card = carousel left + content right
+   ========================================================= */
+
+.past-grid__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* ── Card shell ── */
+.past-card {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  background: var(--neutral-0, #fff);
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,.08));
+  min-height: 240px;
+}
+
+/* ── Carousel column ── */
+.past-card__carousel {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: var(--neutral-50, #f5f7fa);
+  flex-shrink: 0;
+}
+
+.past-card__carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Bootstrap carousel fills full height */
+.past-card__carousel .carousel,
+.past-card__carousel .carousel-inner,
+.past-card__carousel .carousel-item {
+  height: 100%;
+}
+
+.past-card__carousel .carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.past-card__carousel .carousel-indicators {
+  margin-bottom: 6px;
+}
+
+.past-card__carousel .carousel-indicators button {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.past-card__carousel .carousel-indicators button.active {
+  opacity: 1;
+}
+
+/* ── Content column ── */
+.past-card__body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.past-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.past-card__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--neutral-900, #1e1e2f);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.past-card__attendees {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-teal, #4fd1c5);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.past-card__meta {
+  font-size: 12px;
+  color: var(--neutral-400, #9ca3af);
+  line-height: 1.4;
+}
+
+.past-card__speakers {
+  font-size: 12px;
+  color: var(--neutral-600, #4b5563);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Section blocks (highlights, materials, connect) ── */
+.past-card__section {
+  margin-top: 2px;
+}
+
+.past-card__section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--neutral-400, #9ca3af);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+
+.past-card__highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.past-card__highlights li {
+  font-size: 12px;
+  color: var(--neutral-600, #4b5563);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.past-card__highlights li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--blue-700, #2446c8);
+  font-weight: 700;
+}
+
+.past-card__materials {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.past-card__materials a {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-700, #2446c8);
+  text-decoration: none;
+}
+
+.past-card__materials a:hover {
+  color: var(--accent-coral, #ff6f61);
+}
+
+.past-card__dot {
+  color: var(--neutral-400, #9ca3af);
+  font-size: 12px;
+}
+
+.past-card__connect a {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-coral, #ff6f61);
+  text-decoration: none;
+}
+
+.past-card__connect a:hover {
+  text-decoration: underline;
+}
+
+/* ── Tablet: 1 card per row, keep carousel left ── */
+@media (max-width: 900px) {
+  .past-grid__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Mobile: carousel stacks above content ── */
+@media (max-width: 640px) {
+  .past-card {
+    grid-template-columns: 1fr;
+  }
+
+  .past-card__carousel {
+    height: 200px;
+  }
+}
+
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .evh {
@@ -300,11 +511,7 @@
 }
 
 
-/* Cards can be used in a list with .evh-list and spacing */
-
-I have enough context. The exponanta.css uses large tokens (--text-3xl: 45px, --text-4xl: 60px) for headings globally, which are great for hero sections but too big for article/blog reading. The fix is a scoped .blog-article (or .article-content) override block.
-Here's what to add to your exponanta.css:
-css/* =========================================================
+/* =========================================================
    BLOG / ARTICLE — Scoped typography scale
    Wrap blog content in <article class="article-content">
    ========================================================= */
@@ -355,4 +562,16 @@ css/* =========================================================
   min-height: 64px; /* your navbar height */
   background: var(--neutral-0);
   border-bottom: 1px solid var(--blue-100);
+}
+
+
+@media print {
+  nav.navbar {
+    position: static !important;   /* make it non-sticky */
+    display: block !important;     /* ensure it is visible */
+    background: #fff;              /* solid background */
+    min-height: 64px;              /* keep your height */
+  }
+
+  .navbar-toggler, .collapse { display: none !important; }
 }
