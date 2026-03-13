@@ -244,7 +244,7 @@
                     <div class="tips-card-body">
                         <div class="tip-item">
                             <div class="tip-icon blue">📄</div>
-                            <div class="tip-text"><strong>Select sitemap.xml</strong><span>Parses all <code>/people/*.html</code> URLs from your sitemap.</span></div>
+                            <div class="tip-text"><strong>Select sitemap.xml</strong><span>Parses all <code>/people/</code> URLs from your sitemap.</span></div>
                         </div>
                         <div class="tip-item">
                             <div class="tip-icon teal">🌐</div>
@@ -316,9 +316,9 @@
                     const xml = new DOMParser().parseFromString(e.target.result, 'text/xml');
                     const locs = [...xml.querySelectorAll('url > loc')]
                         .map(el => el.textContent.trim())
-                        .filter(url => /\/people\/.+\.html/.test(url));
+                        .filter(url => /\/people\//.test(url));
 
-                    if (!locs.length) { showError('No /people/*.html URLs found in this sitemap.'); return; }
+                    if (!locs.length) { showError('No /people/ URLs found in this sitemap.'); return; }
 
                     peopleUrls = locs;
                     peopleCount.textContent = locs.length;
@@ -340,7 +340,7 @@
 
             for (let i = 0; i < peopleUrls.length; i++) {
                 const url = peopleUrls[i];
-                const slug = url.split('/people/')[1].replace('.html', '');
+                const slug = url.split('/people/')[1].replace(/\.html$/, '').replace(/\/$/, '');
                 progressLabel.textContent = `Fetching ${i + 1} / ${peopleUrls.length} — ${slug}`;
                 progressBar.style.width = `${Math.round((i / peopleUrls.length) * 100)}%`;
 
@@ -356,10 +356,13 @@
         });
 
         async function processUrl(pageUrl, slug) {
+            // GitHub Pages serves clean URLs as directories with index.html inside
+            // Ensure we fetch the actual HTML — append index.html if URL ends with /
+            const fetchUrl = pageUrl.endsWith('/') ? pageUrl + 'index.html' : pageUrl;
             const row = { slug, name: slug, pageUrl, imageUrl: `https://exponanta.com/images/${slug}.jpg`, imageExists: false, base64: null, extracted: false, fetchError: false };
 
             try {
-                const res = await fetch(pageUrl);
+                const res = await fetch(fetchUrl);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const html = await res.text();
                 const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -367,9 +370,11 @@
                 const h1 = doc.querySelector('h1');
                 if (h1) row.name = h1.textContent.trim();
 
+                const h1Name = row.name;
                 for (const img of doc.querySelectorAll('img[src]')) {
                     const src = img.getAttribute('src') || '';
-                    if (src.startsWith('data:image') && src.includes('base64,')) {
+                    const alt = img.getAttribute('alt') || '';
+                    if (src.startsWith('data:image') && src.includes('base64,') && alt === h1Name) {
                         row.base64 = src.split('base64,')[1];
                         break;
                     }
