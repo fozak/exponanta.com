@@ -22,7 +22,7 @@
 
 <style>
 /* =====================================================
-   SPONSORS PAGE — only new CSS -- 
+   SPONSORS PAGE — only new CSS
    etag / avatar / btn-ev-* from exponanta-added.css
    ===================================================== */
 
@@ -474,101 +474,98 @@
 
   /* ── render single package card ── */
   function renderPackageCard(pkg, index) {
-    const tierClass  = `sp-card--tier-${(index % 4) + 1}`;
-    const isFeatured = pkg.featured;
+    var tierClass  = "sp-card--tier-" + ((index % 4) + 1);
+    var isFeatured = pkg.featured;
 
-    const perksHtml = (pkg.perks || [])
-      .map(p => {
-        const highlight = typeof p === "object" ? p.highlight : false;
-        const text      = typeof p === "object" ? p.text      : p;
-        return `
-        <li class="sp-card__perk">
-          ${perkIcon(highlight)}
-          <span>${esc(text)}</span>
-        </li>`;
-      }).join("");
+    var perksHtml = (pkg.perks || []).map(function(p) {
+      var highlight = (typeof p === "object") ? p.highlight : false;
+      var text      = (typeof p === "object") ? p.text      : p;
+      return '<li class="sp-card__perk">' + perkIcon(highlight) + '<span>' + esc(text) + '</span></li>';
+    }).join("");
 
-    const tagsHtml = (pkg.tags || [])
-      .map(t => `<span class="etag ${tagClass(t)}" style="font-size:11px;padding:2px 9px;">${esc(t)}</span>`)
-      .join("");
+    var tagsHtml = (pkg.tags || []).map(function(t) {
+      return '<span class="etag ' + tagClass(t) + '" style="font-size:11px;padding:2px 9px;">' + esc(t) + '</span>';
+    }).join("");
 
-    const price = pkg.price === 0
-      ? `<div class="sp-card__price">Free <span>/ event</span></div>`
-      : pkg.price
-        ? `<div class="sp-card__price">$${Number(pkg.price).toLocaleString()} <span>/ ${esc(pkg.priceUnit || "event")}</span></div>`
-        : `<div class="sp-card__price" style="font-size:var(--text-xl);">Custom</div>`;
+    var price;
+    if (pkg.price === 0) {
+      price = '<div class="sp-card__price">Free <span>/ event</span></div>';
+    } else if (pkg.price) {
+      price = '<div class="sp-card__price">$' + Number(pkg.price).toLocaleString() + ' <span>/ ' + esc(pkg.priceUnit || "event") + '</span></div>';
+    } else {
+      price = '<div class="sp-card__price" style="font-size:var(--text-xl);">Custom</div>';
+    }
 
-    const ctaBtn = pkg.ctaUrl
-      ? `<a class="btn-ev-register d-block text-center" href="${esc(pkg.ctaUrl)}"
-            target="${pkg.ctaUrl.startsWith("mailto") ? "_self" : "_blank"}"
-            rel="noopener">${esc(pkg.cta || "Get Started")}</a>`
-      : `<a class="btn-ev-register d-block text-center"
-            href="mailto:sponsors@exponanta.com?subject=${encodeURIComponent("Sponsorship inquiry: " + pkg.name)}">
-            ${esc(pkg.cta || "Get Started")}</a>`;
+    var ctaTarget = (pkg.ctaUrl && pkg.ctaUrl.indexOf("mailto") === 0) ? "_self" : "_blank";
+    var ctaHref   = pkg.ctaUrl
+      ? esc(pkg.ctaUrl)
+      : "mailto:sponsors@exponanta.com?subject=" + encodeURIComponent("Sponsorship inquiry: " + (pkg.name || ""));
+    var ctaBtn = '<a class="btn-ev-register d-block text-center" href="' + ctaHref + '" target="' + ctaTarget + '" rel="noopener">' + esc(pkg.cta || "Get Started") + '</a>';
 
-    const secondaryBtn = pkg.learnMoreUrl
-      ? `<a class="btn-ev-cal d-block text-center" href="${esc(pkg.learnMoreUrl)}">Learn More</a>`
+    var secondaryBtn = pkg.learnMoreUrl
+      ? '<a class="btn-ev-cal d-block text-center" href="' + esc(pkg.learnMoreUrl) + '">Learn More</a>'
       : "";
 
-    return `
-<div class="sp-card ${tierClass}${isFeatured ? " sp-card--featured" : ""}">
-  <div class="sp-card__bar"></div>
-  ${isFeatured ? `<div class="sp-card__badge">Most Popular</div>` : ""}
-  <div class="sp-card__body">
-    <div class="sp-card__tier">${esc(pkg.tier || `Tier ${index + 1}`)}</div>
-    <div class="sp-card__name">${esc(pkg.name)}</div>
-    ${price}
-    <div class="sp-card__tagline">${esc(pkg.tagline || pkg.description || "")}</div>
-    ${tagsHtml ? `<div class="sp-card__tags">${tagsHtml}</div>` : ""}
-    <ul class="sp-card__perks">${perksHtml}</ul>
-  </div>
-  <div class="sp-card__footer">
-    ${ctaBtn}
-    ${secondaryBtn}
-  </div>
-</div>`;
+    var badgeHtml  = isFeatured ? '<div class="sp-card__badge">Most Popular</div>' : "";
+    var tagsBlock  = tagsHtml ? '<div class="sp-card__tags">' + tagsHtml + '</div>' : "";
+
+    return '<div class="sp-card ' + tierClass + (isFeatured ? " sp-card--featured" : "") + '">'
+      + '<div class="sp-card__bar"></div>'
+      + badgeHtml
+      + '<div class="sp-card__body">'
+        + '<div class="sp-card__tier">' + esc(pkg.tier || ("Tier " + (index + 1))) + '</div>'
+        + '<div class="sp-card__name">' + esc(pkg.name) + '</div>'
+        + price
+        + '<div class="sp-card__tagline">' + esc(pkg.tagline || pkg.description || "") + '</div>'
+        + tagsBlock
+        + '<ul class="sp-card__perks">' + perksHtml + '</ul>'
+      + '</div>'
+      + '<div class="sp-card__footer">'
+        + ctaBtn
+        + secondaryBtn
+      + '</div>'
+    + '</div>';
   }
 
-  /* ── render co-hosts strip from packages.json sponsors[] ── */
+  /* ── render co-hosts strip ── */
   function renderSponsors(sponsors) {
-    if (!sponsors?.length) return;
-    const strip = document.getElementById("sp-sponsors-strip");
+    if (!sponsors || !sponsors.length) return;
+    var strip = document.getElementById("sp-sponsors-strip");
     if (!strip) return;
-    strip.innerHTML = sponsors.map(s => `
-      <div class="sp-sponsor-logo">
-        ${s.logo
-          ? `<img src="${esc(s.logo)}" alt="${esc(s.name)}" loading="lazy">`
-          : `<span>${esc(s.name)}</span>`}
-      </div>`).join("") + `
-      <div class="sp-sponsor-logo" style="border:2px dashed var(--bs-border-color);background:var(--neutral-50);">
-        <span style="color:var(--neutral-600);font-size:12px;">Your brand here</span>
-      </div>`;
+    var html = sponsors.map(function(s) {
+      var inner = s.logo
+        ? '<img src="' + esc(s.logo) + '" alt="' + esc(s.name) + '" loading="lazy">'
+        : '<span>' + esc(s.name) + '</span>';
+      return '<div class="sp-sponsor-logo">' + inner + '</div>';
+    }).join("");
+    html += '<div class="sp-sponsor-logo" style="border:2px dashed var(--bs-border-color);background:var(--neutral-50);">'
+      + '<span style="color:var(--neutral-600);font-size:12px;">Your brand here</span>'
+      + '</div>';
+    strip.innerHTML = html;
   }
 
-  /* ── render hero stats if packages.json has an audience block ── */
+  /* ── render hero stats ── */
   function renderStats(audience) {
     if (!audience) return;
-    const el = document.getElementById("sp-hero-stats");
+    var el = document.getElementById("sp-hero-stats");
     if (!el) return;
-    el.innerHTML = audience.map(a => `
-      <div>
-        <div class="sp-hero__stat-val">${esc(a.value)}</div>
-        <div class="sp-hero__stat-label">${esc(a.label)}</div>
-      </div>`).join("");
+    el.innerHTML = audience.map(function(a) {
+      return '<div>'
+        + '<div class="sp-hero__stat-val">' + esc(a.value) + '</div>'
+        + '<div class="sp-hero__stat-label">' + esc(a.label) + '</div>'
+        + '</div>';
+    }).join("");
   }
 
   /* ── main render ── */
   function render(data) {
-    /* packages.json shape:
-       { packages: [...], sponsors: [...], audience: [...] }
-       OR flat array of packages for simplicity */
-    const packages = Array.isArray(data) ? data : (data.packages || []);
-    const sponsors = Array.isArray(data) ? null : data.sponsors;
-    const audience = Array.isArray(data) ? null : data.audience;
+    var packages = Array.isArray(data) ? data : (data.packages || []);
+    var sponsors = Array.isArray(data) ? null : data.sponsors;
+    var audience = Array.isArray(data) ? null : data.audience;
 
-    const grid = document.getElementById("sp-grid");
+    var grid = document.getElementById("sp-grid");
     if (!packages.length) {
-      grid.innerHTML = `<div style="color:var(--neutral-600);font-size:var(--text-sm);">No packages available.</div>`;
+      grid.innerHTML = '<div style="color:var(--neutral-600);font-size:var(--text-sm);">No packages available.</div>';
       return;
     }
 
@@ -580,15 +577,23 @@
   /* ── load ── */
   async function loadPackages() {
     try {
-      const res  = await fetch(PACKAGES_JSON_URL);
-      const data = await res.json();
+      var res  = await fetch(PACKAGES_JSON_URL);
+      var data = await res.json();
       render(data);
     } catch (err) {
       console.error("Packages load error:", err);
       document.getElementById("sp-grid").innerHTML =
-        `<div style="color:var(--neutral-600);font-size:var(--text-sm);">Could not load packages.</div>`;
+        '<div style="color:var(--neutral-600);font-size:var(--text-sm);">Could not load packages.</div>';
     }
   }
 
-  window.__spReady = function (data) { render(data); };
- 
+  window.__spReady = function(data) { render(data); };
+  if (window.__spPackages) { render(window.__spPackages); }
+
+  document.addEventListener("DOMContentLoaded", loadPackages);
+
+})();
+</script>
+
+</body>
+</html>
