@@ -1,0 +1,27 @@
+
+Photo	Name	Expected image	Status	Save
+Charlie Hipwood	Charlie Hipwood	/images/charlie-hipwood.jpg	✓ Image exists	—
+Daphne Zohar	Daphne Zohar	/images/daphne-zohar.jpg	✓ Image exists	—
+David Cancel	David Cancel	/images/david-cancel.jpg	✓ Image exists	—
+
+Dharmesh Shah	Dharmesh Shah	/images/dharmesh-shah.jpg	✓ Image exists	—
+Hemant Taneja	Hemant Taneja	/images/hemant-taneja.jpg	✓ Image exists	—
+Jeffrey Bussgang	Jeffrey Bussgang	/images/jeffrey-bussgang.jpg	✓ Image exists	—
+John Harthorne	John Harthorne	/images/john-harthorne.jpg	✓ Image exists	—
+👤
+
+Jonathan Ortmans	Jonathan Ortmans	/images/jonathanortmans.jpg	✓ Image exists	—
+👤
+
+Lee Hower	Lee Hower	/images/lee-hower.jpg	✓ Image exists	—
+Noubar Afeyan	Noubar Afeyan	/images/noubara-feyan.jpg	✓ Image exists	—
+👤
+
+Rich Miner	Rich Miner	/images/rich-miner.jpg	✓ Image exists	—
+Rudina Seseri	Rudina Seseri	/images/rudina-seseri.jpg	✓ Image exists	—
+Semyon Dukach	Semyon Dukach	/images/semyon-dukach.jpg	✓ Image exists	—
+Stephanie Roulic	Stephanie Roulic	/images/stephanie-roulic.jpg	✓ Image exists	—
+👤
+
+Trae Vassallo	Trae Vassallo	/images/traevas-sallo.jpg	✓ Image exists	—
+Vinit Nijhawan (he/him)	Vinit Nijhawan (he/him)	/images/vinit-nijhawan.jpg	✓ Image exists	
