@@ -1,0 +1,97 @@
+{
+  "audience": [
+    { "value": "500+",  "label": "Community members" },
+    { "value": "40+",   "label": "Events per year" },
+    { "value": "3",     "label": "Cities: Boston, Cambridge, Lenox" }
+  ],
+
+  "sponsors": [
+    { "name": "Venture Café Cambridge", "logo": "" },
+    { "name": "New England Conservatory", "logo": "" },
+    { "name": "SVG Ventures", "logo": "" }
+  ],
+
+  "packages": [
+    {
+      "id": "community",
+      "tier": "Starter",
+      "name": "Community Co-Host",
+      "price": 0,
+      "priceUnit": "event",
+      "tagline": "Show up, meet the community, and get a table at Thursday Gatherings. No cash required — bring value to the room.",
+      "featured": false,
+      "tags": ["Best Value"],
+      "cta": "Apply Now",
+      "ctaUrl": "mailto:sponsors@exponanta.com?subject=Community Co-Host inquiry",
+      "perks": [
+        { "text": "Dedicated table at Thursday Gatherings", "highlight": false },
+        { "text": "Listed as community co-host on event page", "highlight": false },
+        { "text": "Intro to the community at event start", "highlight": false },
+        { "text": "1 social media mention per event", "highlight": false }
+      ]
+    },
+    {
+      "id": "standard",
+      "tier": "Standard",
+      "name": "Event Sponsor",
+      "price": 500,
+      "priceUnit": "event",
+      "tagline": "Brand visibility before, during, and after a single event. Ideal for product launches, hiring campaigns, or market research.",
+      "featured": false,
+      "tags": [],
+      "cta": "Get Started",
+      "ctaUrl": "mailto:sponsors@exponanta.com?subject=Event Sponsor inquiry",
+      "perks": [
+        { "text": "Logo on event page and email blast (500+ subscribers)", "highlight": true },
+        { "text": "Branded table + pull-up banner space at venue", "highlight": false },
+        { "text": "3-minute intro slot at event start", "highlight": false },
+        { "text": "Listed as sponsor on Exponanta community page", "highlight": false },
+        { "text": "3 social media posts (pre, during, post event)", "highlight": false },
+        { "text": "Attendee list (opt-in only)", "highlight": false }
+      ]
+    },
+    {
+      "id": "featured",
+      "tier": "Featured",
+      "name": "Series Sponsor",
+      "price": 1500,
+      "priceUnit": "month",
+      "tagline": "Sustained presence across all events in a month. Best for building brand recognition with a community that attends regularly.",
+      "featured": true,
+      "tags": ["Most Popular"],
+      "cta": "Get Started",
+      "ctaUrl": "mailto:sponsors@exponanta.com?subject=Series Sponsor inquiry",
+      "perks": [
+        { "text": "Logo on all event pages and emails for the month", "highlight": true },
+        { "text": "Branded presence at all Thursday Gatherings (4–5 events)", "highlight": true },
+        { "text": "Featured sponsor slot on community.html member directory", "highlight": false },
+        { "text": "5-minute speaking slot at one featured event", "highlight": false },
+        { "text": "Weekly social media mention across all channels", "highlight": false },
+        { "text": "Full attendee list with opt-in contacts", "highlight": false },
+        { "text": "Post-month impact report (reach, clicks, attendance)", "highlight": false }
+      ]
+    },
+    {
+      "id": "partner",
+      "tier": "Premier",
+      "name": "Strategic Partner",
+      "price": null,
+      "priceUnit": "quarter",
+      "tagline": "A fully custom partnership built around your specific goals — hiring, deal flow, brand building, or research. Let's design it together.",
+      "featured": false,
+      "tags": ["Featured"],
+      "cta": "Let's Talk",
+      "ctaUrl": "mailto:sponsors@exponanta.com?subject=Strategic Partner inquiry",
+      "learnMoreUrl": "/about.html",
+      "perks": [
+        { "text": "Named co-host on all Exponanta events for the quarter", "highlight": true },
+        { "text": "Custom event co-design — your topic, our audience", "highlight": true },
+        { "text": "Homepage logo placement for 3 months", "highlight": false },
+        { "text": "Dedicated community email to 500+ members", "highlight": false },
+        { "text": "Quarterly keynote or panel speaking slot", "highlight": false },
+        { "text": "Access to Exponanta member CRM for opt-in outreach", "highlight": false },
+        { "text": "Quarterly business review + custom impact reporting", "highlight": false }
+      ]
+    }
+  ]
+}

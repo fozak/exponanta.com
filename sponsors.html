@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Become a Co-Host | Exponanta</title>
+<meta name="description" content="Partner with Exponanta to reach Boston and Cambridge's most active community of founders, engineers, and investors. Explore co-host and sponsor packages.">
+<link rel="canonical" href="https://exponanta.com/sponsors.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="Become a Co-Host | Exponanta">
+<meta property="og:description" content="Sponsor or co-host community events in Boston and Cambridge. Reach founders, engineers, and investors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exponanta.com/sponsors.html">
+
+<link rel="icon" type="image/svg+xml" href="/brandbook/favicon.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+/* =====================================================
+   SPONSORS PAGE — only new CSS
+   etag / avatar / btn-ev-* from exponanta-added.css
+   ===================================================== */
+
+/* ── Hero section ── */
+.sp-hero {
+  background: linear-gradient(135deg, var(--blue-700) 0%, #1a35a0 100%);
+  border-radius: var(--radius-lg);
+  padding: 52px 48px;
+  color: var(--neutral-0);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.sp-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.sp-hero__eyebrow {
+  font-size: 12px; font-weight: 800; letter-spacing: .8px;
+  text-transform: uppercase; color: var(--accent-teal);
+  margin-bottom: 10px;
+}
+.sp-hero__title {
+  font-size: clamp(24px, 4vw, 38px); font-weight: 700;
+  line-height: 1.2; margin: 0 0 14px; color: var(--neutral-0);
+}
+.sp-hero__sub {
+  font-size: var(--text-md); color: rgba(255,255,255,.82);
+  line-height: 1.65; max-width: 560px; margin: 0 0 28px;
+}
+.sp-hero__stats {
+  display: flex; flex-wrap: wrap; gap: 32px;
+}
+.sp-hero__stat-val {
+  font-size: 28px; font-weight: 800; color: var(--neutral-0); line-height: 1;
+}
+.sp-hero__stat-label {
+  font-size: 12px; color: rgba(255,255,255,.7); margin-top: 3px;
+}
+
+/* ── Section heading ── */
+.sp-section-heading {
+  font-size: var(--text-xl); font-weight: 700;
+  color: var(--neutral-900); margin: 0 0 6px;
+}
+.sp-section-sub {
+  font-size: var(--text-sm); color: var(--neutral-600);
+  margin: 0 0 28px;
+}
+
+/* ── Package cards grid ── */
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+  align-items: start;
+}
+
+/* ── Package card ── */
+.sp-card {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(36,70,200,.10);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow .2s, transform .15s;
+  position: relative;
+}
+.sp-card:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-3px);
+}
+.sp-card--featured {
+  border-color: var(--blue-700);
+  box-shadow: 0 0 0 2px var(--blue-700), var(--shadow-md);
+}
+.sp-card__badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--blue-700); color: var(--neutral-0);
+  font-size: 10px; font-weight: 800; letter-spacing: .6px;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+}
+.sp-card--featured .sp-card__badge {
+  background: var(--accent-coral);
+}
+
+/* Card colour bar */
+.sp-card__bar {
+  height: 5px; width: 100%;
+  background: var(--blue-100);
+}
+.sp-card--tier-1 .sp-card__bar { background: var(--accent-teal); }
+.sp-card--tier-2 .sp-card__bar { background: var(--blue-700); }
+.sp-card--tier-3 .sp-card__bar { background: var(--accent-coral); }
+.sp-card--tier-4 .sp-card__bar { background: var(--blue-300); }
+
+.sp-card__body { padding: 22px 22px 0; flex: 1; }
+
+.sp-card__tier {
+  font-size: 11px; font-weight: 800; letter-spacing: .7px;
+  text-transform: uppercase; color: var(--neutral-600); margin-bottom: 6px;
+}
+.sp-card__name {
+  font-size: var(--text-xl); font-weight: 700;
+  color: var(--neutral-900); margin: 0 0 4px; line-height: 1.2;
+}
+.sp-card__price {
+  font-size: 28px; font-weight: 800; color: var(--blue-700);
+  line-height: 1; margin-bottom: 4px;
+}
+.sp-card__price span {
+  font-size: var(--text-sm); font-weight: 500; color: var(--neutral-600);
+}
+.sp-card__tagline {
+  font-size: var(--text-sm); color: var(--neutral-600);
+  line-height: 1.5; margin-bottom: 18px;
+}
+
+/* Perks list */
+.sp-card__perks {
+  list-style: none; padding: 0; margin: 0 0 20px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.sp-card__perk {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: var(--text-sm); color: var(--neutral-600); line-height: 1.4;
+}
+.sp-card__perk-icon {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(36,70,200,.08); color: var(--blue-700);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.sp-card__perk-icon--highlight {
+  background: rgba(79,209,197,.15); color: #0e7a72;
+}
+
+/* Tags */
+.sp-card__tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;
+}
+
+/* Card footer */
+.sp-card__footer {
+  padding: 16px 22px 22px;
+  border-top: 1px solid rgba(36,70,200,.07);
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+/* ── Current sponsors strip ── */
+.sp-current-section { margin-bottom: 56px; }
+.sp-sponsors-strip {
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+}
+.sp-sponsor-logo {
+  background: var(--neutral-0);
+  border: 1px solid rgba(36,70,200,.09);
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm);
+  min-width: 140px; min-height: 64px;
+  transition: box-shadow .15s;
+}
+.sp-sponsor-logo:hover { box-shadow: var(--shadow-md); }
+.sp-sponsor-logo img {
+  max-height: 36px; max-width: 120px; object-fit: contain; display: block;
+}
+.sp-sponsor-logo span {
+  font-size: var(--text-sm); font-weight: 600; color: var(--neutral-600);
+}
+
+/* ── Process steps ── */
+.sp-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px; margin-bottom: 56px;
+}
+.sp-step {
+  background: var(--neutral-0);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(36,70,200,.08);
+  box-shadow: var(--shadow-sm);
+  padding: 22px;
+}
+.sp-step__num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--blue-100); color: var(--blue-700);
+  font-size: var(--text-md); font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.sp-step__title {
+  font-size: var(--text-md); font-weight: 700;
+  color: var(--neutral-900); margin-bottom: 6px;
+}
+.sp-step__desc {
+  font-size: var(--text-sm); color: var(--neutral-600); line-height: 1.55;
+}
+
+/* ── CTA band ── */
+.sp-cta-band {
+  background: var(--neutral-50);
+  border: 1px solid rgba(36,70,200,.09);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+  margin-bottom: 48px;
+}
+.sp-cta-band__title {
+  font-size: var(--text-xl); font-weight: 700; color: var(--neutral-900);
+  margin: 0 0 4px;
+}
+.sp-cta-band__sub {
+  font-size: var(--text-sm); color: var(--neutral-600); margin: 0;
+}
+
+/* ── Loading skeleton ── */
+.sp-skeleton {
+  background: linear-gradient(90deg, var(--neutral-50) 25%, var(--blue-100) 50%, var(--neutral-50) 75%);
+  background-size: 200% 100%;
+  animation: sp-shimmer 1.4s infinite;
+  border-radius: var(--radius-md);
+}
+@keyframes sp-shimmer { to { background-position: -200% 0; } }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .sp-hero { padding: 32px 22px; }
+  .sp-cta-band { padding: 24px 20px; }
+}
+</style>
+
+<!-- ── Fetch intercept for packages.json ── -->
+<script>
+(function () {
+  const _fetch = window.fetch.bind(window);
+  window.fetch = function (url, opts) {
+    const p = _fetch(url, opts);
+    if (typeof url === "string" && url.includes("packages.json")) {
+      p.then(r => r.clone().json())
+       .then(data => {
+         window.__spPackages = data;
+         if (typeof window.__spReady === "function") window.__spReady(data);
+       })
+       .catch(() => {});
+    }
+    return p;
+  };
+})();
+</script>
+</head>
+
+<body>
+
+<div id="navbar" data-loader="../components/navbar.html"></div>
+
+<main id="main-content" class="py-5">
+<div class="container">
+
+  <!-- ── Hero ── -->
+  <div class="sp-hero">
+    <div class="sp-hero__eyebrow">Co-Host &amp; Sponsor</div>
+    <h1 class="sp-hero__title">Grow Your Brand With<br>Boston's Innovation Community</h1>
+    <p class="sp-hero__sub">
+      Partner with Exponanta to put your brand in front of the founders, engineers,
+      investors, and operators who are building the future — at the events they
+      actually attend.
+    </p>
+    <div class="sp-hero__stats" id="sp-hero-stats">
+      <!-- filled from packages.json audience block -->
+      <div>
+        <div class="sp-hero__stat-val">500+</div>
+        <div class="sp-hero__stat-label">Community members</div>
+      </div>
+      <div>
+        <div class="sp-hero__stat-val">40+</div>
+        <div class="sp-hero__stat-label">Events per year</div>
+      </div>
+      <div>
+        <div class="sp-hero__stat-val">3</div>
+        <div class="sp-hero__stat-label">Cities: Boston, Cambridge, Lenox</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Packages ── -->
+  <div class="mb-3">
+    <h2 class="sp-section-heading">Co-Host Packages</h2>
+    <p class="sp-section-sub">Choose the level that fits your goals. All packages include brand presence at live events.</p>
+  </div>
+  <div class="sp-grid" id="sp-grid">
+    <!-- skeletons while loading -->
+    <div class="sp-card">
+      <div class="sp-card__bar"></div>
+      <div class="sp-card__body">
+        <div class="sp-skeleton" style="height:13px;width:40%;margin-bottom:8px;"></div>
+        <div class="sp-skeleton" style="height:22px;width:70%;margin-bottom:12px;"></div>
+        <div class="sp-skeleton" style="height:34px;width:50%;margin-bottom:16px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:100%;margin-bottom:6px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:85%;margin-bottom:6px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:90%;"></div>
+      </div>
+      <div class="sp-card__footer">
+        <div class="sp-skeleton" style="height:38px;width:100%;border-radius:var(--radius-md);"></div>
+      </div>
+    </div>
+    <div class="sp-card">
+      <div class="sp-card__bar"></div>
+      <div class="sp-card__body">
+        <div class="sp-skeleton" style="height:13px;width:40%;margin-bottom:8px;"></div>
+        <div class="sp-skeleton" style="height:22px;width:70%;margin-bottom:12px;"></div>
+        <div class="sp-skeleton" style="height:34px;width:50%;margin-bottom:16px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:100%;margin-bottom:6px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:85%;"></div>
+      </div>
+      <div class="sp-card__footer">
+        <div class="sp-skeleton" style="height:38px;width:100%;border-radius:var(--radius-md);"></div>
+      </div>
+    </div>
+    <div class="sp-card">
+      <div class="sp-card__bar"></div>
+      <div class="sp-card__body">
+        <div class="sp-skeleton" style="height:13px;width:40%;margin-bottom:8px;"></div>
+        <div class="sp-skeleton" style="height:22px;width:70%;margin-bottom:12px;"></div>
+        <div class="sp-skeleton" style="height:34px;width:50%;margin-bottom:16px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:100%;margin-bottom:6px;"></div>
+        <div class="sp-skeleton" style="height:13px;width:85%;"></div>
+      </div>
+      <div class="sp-card__footer">
+        <div class="sp-skeleton" style="height:38px;width:100%;border-radius:var(--radius-md);"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── How it works ── -->
+  <div class="mb-3">
+    <h2 class="sp-section-heading">How It Works</h2>
+    <p class="sp-section-sub">From inquiry to your first event in as little as two weeks.</p>
+  </div>
+  <div class="sp-steps">
+    <div class="sp-step">
+      <div class="sp-step__num">1</div>
+      <div class="sp-step__title">Choose a Package</div>
+      <div class="sp-step__desc">Select the tier that fits your budget and goals. Custom packages available for multi-event series.</div>
+    </div>
+    <div class="sp-step">
+      <div class="sp-step__num">2</div>
+      <div class="sp-step__title">Pick Your Events</div>
+      <div class="sp-step__desc">Browse the calendar and choose the Thursday Gatherings, concerts, or special events where you want visibility.</div>
+    </div>
+    <div class="sp-step">
+      <div class="sp-step__num">3</div>
+      <div class="sp-step__title">We Handle the Rest</div>
+      <div class="sp-step__desc">Your logo goes on event pages, email blasts, and on-site signage. We introduce you to the community.</div>
+    </div>
+    <div class="sp-step">
+      <div class="sp-step__num">4</div>
+      <div class="sp-step__title">Meet Your Audience</div>
+      <div class="sp-step__desc">Show up, connect, and build real relationships with the innovators in Boston and Cambridge's most active community.</div>
+    </div>
+  </div>
+
+  <!-- ── Current co-hosts ── -->
+  <div class="sp-current-section">
+    <h2 class="sp-section-heading mb-2">Current Co-Hosts</h2>
+    <p class="sp-section-sub">Organizations already partnering with Exponanta.</p>
+    <div class="sp-sponsors-strip" id="sp-sponsors-strip">
+      <!-- filled from packages.json sponsors[] or static fallback below -->
+      <div class="sp-sponsor-logo">
+        <span>Venture Café Cambridge</span>
+      </div>
+      <div class="sp-sponsor-logo">
+        <span>New England Conservatory</span>
+      </div>
+      <div class="sp-sponsor-logo">
+        <span>SVG Ventures</span>
+      </div>
+      <div class="sp-sponsor-logo" style="border:2px dashed var(--bs-border-color);background:var(--neutral-50);">
+        <span style="color:var(--neutral-600);font-size:12px;">Your brand here</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Bottom CTA ── -->
+  <div class="sp-cta-band">
+    <div>
+      <div class="sp-cta-band__title">Ready to reach Boston's innovators?</div>
+      <p class="sp-cta-band__sub">Get in touch and we'll send you a full media kit within 24 hours.</p>
+    </div>
+    <div class="d-flex gap-3 flex-wrap">
+      <a class="btn-ev-register" href="/cdn-cgi/l/email-protection#4536352a2b362a373605203d352a2b242b31246b262a28">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Contact Us
+      </a>
+      <a class="btn-ev-cal" href="/calendar.html">Browse Events</a>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/_loader.js"></script>
+
+<script>
+/* =====================================================
+   SPONSORS — packages.json renderer
+   Same fetch pattern as community.html / calendar.html
+   ===================================================== */
+(function () {
+
+  const PACKAGES_JSON_URL = "/data/packages.json";
+
+  function esc(str) {
+    return (str ?? "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  /* ── perk icon: checkmark or star for highlights ── */
+  function perkIcon(highlight) {
+    if (highlight) {
+      return '<div class="sp-card__perk-icon sp-card__perk-icon--highlight">'
+        + '<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">'
+        + '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
+        + '</svg></div>';
+    }
+    return '<div class="sp-card__perk-icon">'
+      + '<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">'
+      + '<polyline points="20 6 9 17 4 12"/>'
+      + '</svg></div>';
+  }
+
+  /* ── tag → etag class ── */
+  function tagClass(tag) {
+    if (["Featured","Most Popular"].includes(tag)) return "etag--coral";
+    if (["Best Value","Recommended"].includes(tag)) return "etag--teal";
+    return "etag--blue";
+  }
+
+  /* ── render single package card ── */
+  function renderPackageCard(pkg, index) {
+    const tierClass  = `sp-card--tier-${(index % 4) + 1}`;
+    const isFeatured = pkg.featured;
+
+    const perksHtml = (pkg.perks || [])
+      .map(p => {
+        const highlight = typeof p === "object" ? p.highlight : false;
+        const text      = typeof p === "object" ? p.text      : p;
+        return `
+        <li class="sp-card__perk">
+          ${perkIcon(highlight)}
+          <span>${esc(text)}</span>
+        </li>`;
+      }).join("");
+
+    const tagsHtml = (pkg.tags || [])
+      .map(t => `<span class="etag ${tagClass(t)}" style="font-size:11px;padding:2px 9px;">${esc(t)}</span>`)
+      .join("");
+
+    const price = pkg.price === 0
+      ? `<div class="sp-card__price">Free <span>/ event</span></div>`
+      : pkg.price
+        ? `<div class="sp-card__price">$${Number(pkg.price).toLocaleString()} <span>/ ${esc(pkg.priceUnit || "event")}</span></div>`
+        : `<div class="sp-card__price" style="font-size:var(--text-xl);">Custom</div>`;
+
+    const ctaBtn = pkg.ctaUrl
+      ? `<a class="btn-ev-register d-block text-center" href="${esc(pkg.ctaUrl)}"
+            target="${pkg.ctaUrl.startsWith("mailto") ? "_self" : "_blank"}"
+            rel="noopener">${esc(pkg.cta || "Get Started")}</a>`
+      : `<a class="btn-ev-register d-block text-center"
+            href="mailto:sponsors@exponanta.com?subject=${encodeURIComponent("Sponsorship inquiry: " + pkg.name)}">
+            ${esc(pkg.cta || "Get Started")}</a>`;
+
+    const secondaryBtn = pkg.learnMoreUrl
+      ? `<a class="btn-ev-cal d-block text-center" href="${esc(pkg.learnMoreUrl)}">Learn More</a>`
+      : "";
+
+    return `
+<div class="sp-card ${tierClass}${isFeatured ? " sp-card--featured" : ""}">
+  <div class="sp-card__bar"></div>
+  ${isFeatured ? `<div class="sp-card__badge">Most Popular</div>` : ""}
+  <div class="sp-card__body">
+    <div class="sp-card__tier">${esc(pkg.tier || `Tier ${index + 1}`)}</div>
+    <div class="sp-card__name">${esc(pkg.name)}</div>
+    ${price}
+    <div class="sp-card__tagline">${esc(pkg.tagline || pkg.description || "")}</div>
+    ${tagsHtml ? `<div class="sp-card__tags">${tagsHtml}</div>` : ""}
+    <ul class="sp-card__perks">${perksHtml}</ul>
+  </div>
+  <div class="sp-card__footer">
+    ${ctaBtn}
+    ${secondaryBtn}
+  </div>
+</div>`;
+  }
+
+  /* ── render co-hosts strip from packages.json sponsors[] ── */
+  function renderSponsors(sponsors) {
+    if (!sponsors?.length) return;
+    const strip = document.getElementById("sp-sponsors-strip");
+    if (!strip) return;
+    strip.innerHTML = sponsors.map(s => `
+      <div class="sp-sponsor-logo">
+        ${s.logo
+          ? `<img src="${esc(s.logo)}" alt="${esc(s.name)}" loading="lazy">`
+          : `<span>${esc(s.name)}</span>`}
+      </div>`).join("") + `
+      <div class="sp-sponsor-logo" style="border:2px dashed var(--bs-border-color);background:var(--neutral-50);">
+        <span style="color:var(--neutral-600);font-size:12px;">Your brand here</span>
+      </div>`;
+  }
+
+  /* ── render hero stats if packages.json has an audience block ── */
+  function renderStats(audience) {
+    if (!audience) return;
+    const el = document.getElementById("sp-hero-stats");
+    if (!el) return;
+    el.innerHTML = audience.map(a => `
+      <div>
+        <div class="sp-hero__stat-val">${esc(a.value)}</div>
+        <div class="sp-hero__stat-label">${esc(a.label)}</div>
+      </div>`).join("");
+  }
+
+  /* ── main render ── */
+  function render(data) {
+    /* packages.json shape:
+       { packages: [...], sponsors: [...], audience: [...] }
+       OR flat array of packages for simplicity */
+    const packages = Array.isArray(data) ? data : (data.packages || []);
+    const sponsors = Array.isArray(data) ? null : data.sponsors;
+    const audience = Array.isArray(data) ? null : data.audience;
+
+    const grid = document.getElementById("sp-grid");
+    if (!packages.length) {
+      grid.innerHTML = `<div style="color:var(--neutral-600);font-size:var(--text-sm);">No packages available.</div>`;
+      return;
+    }
+
+    grid.innerHTML = packages.map(renderPackageCard).join("");
+    renderSponsors(sponsors);
+    renderStats(audience);
+  }
+
+  /* ── load ── */
+  async function loadPackages() {
+    try {
+      const res  = await fetch(PACKAGES_JSON_URL);
+      const data = await res.json();
+      render(data);
+    } catch (err) {
+      console.error("Packages load error:", err);
+      document.getElementById("sp-grid").innerHTML =
+        `<div style="color:var(--neutral-600);font-size:var(--text-sm);">Could not load packages.</div>`;
+    }
+  }
+
+  window.__spReady = function (data) { render(data); };
+ 
