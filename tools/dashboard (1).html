@@ -1,0 +1,248 @@
+<body><div id="navbar" data-loader="../../components/navbar.html"></div><div class="dash-wrap"> <div class="container-xl"> <!-- ── Dashboard header ── --> <div class="dash-header"> <div class="container-xl"> <div class="dash-header-inner"> <div class="d-flex align-items-center gap-3 flex-wrap"> <span class="dash-event-badge"> 🚀 Exponanta Demo Day — March 28, 2026 </span> <span class="text-muted small">1:1 Scheduling</span> </div> <div class="dash-user"> <div class="person-avatar" style="background: var(--blue-700); width:36px;height:36px;font-size:13px;">YO</div> <div> <div style="font-size:var(--text-sm);font-weight:600;">You (Alex Chen)</div> <div style="font-size:11px;color:var(--neutral-600);">Founder · AI Startup</div> </div> </div> </div> </div> </div> <!-- ── Stats row ── --> <div class="row g-3 mb-4"> <div class="col-6 col-md-3"> <div class="stat-card"> <div class="stat-icon stat-icon--green">✅</div> <div> <div class="stat-val">3</div> <div class="stat-lbl">Confirmed 1:1s</div> </div> </div> </div> <div class="col-6 col-md-3"> <div class="stat-card"> <div class="stat-icon stat-icon--blue">📤</div> <div> <div class="stat-val">2</div> <div class="stat-lbl">Requests Sent</div> </div> </div> </div> <div class="col-6 col-md-3"> <div class="stat-card"> <div class="stat-icon stat-icon--coral">📥</div> <div> <div class="stat-val">2</div> <div class="stat-lbl">Incoming Requests</div> </div> </div> </div> <div class="col-6 col-md-3"> <div class="stat-card"> <div class="stat-icon stat-icon--teal">🕐</div> <div> <div class="stat-val">4</div> <div class="stat-lbl">Slots Available</div> </div> </div> </div> </div> <div class="row g-4"> <!-- ── LEFT: Schedule table ── --> <div class="col-lg-8"> <!-- Filter bar --> <div class="filter-bar"> <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--neutral-600);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> <input type="text" id="searchInput" placeholder="Search participants by name, role, or company…"> <div class="d-flex gap-2 flex-wrap"> <button class="filter-pill active" data-filter="all">All</button> <button class="filter-pill" data-filter="incoming">📥 Incoming</button> <button class="filter-pill" data-filter="outgoing">📤 Sent</button> <button class="filter-pill" data-filter="confirmed">✅ Confirmed</button> <button class="filter-pill" data-filter="available">Available</button> </div> </div> <!-- Legend --> <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2"> <div class="legend"> <div class="legend-item"><div class="legend-dot ld--empty"></div> Available</div> <div class="legend-item"><div class="legend-dot ld--outgoing"></div> Sent by you</div> <div class="legend-item"><div class="legend-dot ld--incoming"></div> Incoming request</div> <div class="legend-item"><div class="legend-dot ld--confirmed"></div> Confirmed</div> </div> <span class="text-muted small">Click any cell to act</span> </div> <!-- Schedule table --> <div class="sched-wrap"> <table class="sched-table" id="schedTable"> <thead> <tr> <th>Participant</th> <th class="time-col">10:00</th> <th class="time-col">10:15</th> <th class="time-col">10:30</th> <th class="time-col">10:45</th> <th class="time-col">11:00</th> <th class="time-col">11:15</th> <th class="time-col">11:30</th> </tr> </thead> <tbody id="tableBody"> <!-- Rows injected by JS --> </tbody> </table> </div> <div class="text-muted small mt-2 text-end" id="rowCount"></div> </div> <!-- ── RIGHT: Requests panel ── --> <div class="col-lg-4"> <!-- Incoming requests --> <div class="mb-4"> <div class="section-heading">📥 Incoming Requests</div> <div class="d-flex flex-column gap-2" id="incomingList"> <!-- Injected by JS --> </div> </div> <!-- Outgoing requests --> <div class="mb-4"> <div class="section-heading">📤 Sent by You</div> <div class="d-flex flex-column gap-2" id="outgoingList"> <!-- Injected by JS --> </div> </div> <!-- Confirmed --> <div> <div class="section-heading">✅ Confirmed 1:1s</div> <div class="d-flex flex-column gap-2" id="confirmedList"> <!-- Injected by JS --> </div> </div> </div> </div> </div></div><!-- Tooltip popup --><div class="slot-tooltip" id="slotTooltip"> <div class="tooltip-name" id="ttName"></div> <div class="tooltip-time" id="ttTime"></div> <div class="tooltip-actions" id="ttActions"></div></div><div id="footer" data-loader="../../components/footer.html"></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script><script src="../../assets/js/_loader.js"></script><script>
+/* ===================================================== DATA MODEL ===================================================== */
+const ME = 'me';
+const TIMES = ['10:00','10:15','10:30','10:45','11:00','11:15','11:30'];
+const S = { EMPTY: 'empty', OUTGOING: 'outgoing', INCOMING: 'incoming', CONFIRMED: 'confirmed', BLOCKED: 'blocked' };
+const COLORS = ['#2446C8','#4FD1C5','#FF6F61','#7C3AED','#0891B2','#D97706','#059669'];
+
+function getInitials(name) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+function avatarHTML(p, size, fontSize) {
+  size = size || 36;
+  fontSize = fontSize || 13;
+  var style = 'background:' + p.color + ';width:' + size + 'px;height:' + size + 'px;font-size:' + fontSize + 'px;';
+  if (p.avatar) {
+    var fallbackStyle = style.replace(/'/g, "\\'");
+    return '<img src="' + p.avatar + '" class="person-avatar" style="width:' + size + 'px;height:' + size + 'px;object-fit:cover;border-radius:50%;" onerror="this.outerHTML=\'<div class=\\\'person-avatar\\\' style=\\\'' + fallbackStyle + '\\\'>' + p.initials + '</div>\'" alt="' + p.name + '">';
+  }
+  return '<div class="person-avatar" style="' + style + '">' + p.initials + '</div>';
+}
+
+var participants = [];
+var slots = {};
+
+fetch('/data/people.json')
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    participants = data.slice(0, 7).map(function(person, i) {
+      return {
+        id: 'p' + (i + 1),
+        name: person.name,
+        role: person.role + (person.industry && person.industry[0] ? ' · ' + person.industry[0] : ''),
+        company: person.company,
+        initials: getInitials(person.name),
+        color: COLORS[i % COLORS.length],
+        avatar: person.avatar || null,
+      };
+    });
+    slots = {};
+    participants.forEach(function(p) {
+      slots[p.id] = {};
+      TIMES.forEach(function(t) { slots[p.id][t] = S.EMPTY; });
+    });
+    // Seed demo states
+    if (slots['p1']) { slots['p1']['10:00'] = S.CONFIRMED; slots['p1']['10:30'] = S.OUTGOING; }
+    if (slots['p2']) { slots['p2']['10:15'] = S.INCOMING; slots['p2']['10:45'] = S.CONFIRMED; }
+    if (slots['p3']) { slots['p3']['10:00'] = S.CONFIRMED; slots['p3']['11:00'] = S.OUTGOING; }
+    if (slots['p4']) { slots['p4']['10:30'] = S.INCOMING; }
+    if (slots['p7']) { slots['p7']['11:30'] = S.CONFIRMED; }
+    refresh();
+  });
+
+/* ===================================================== SLOT RENDERING ===================================================== */
+function slotIcon(status) { return { empty:'', outgoing:'📤', incoming:'📥', confirmed:'✅', blocked:'—' }[status]; }
+function slotLabel(status) { return { empty:'', outgoing:'Sent', incoming:'Incoming', confirmed:'Booked', blocked:'' }[status]; }
+function slotClass(status) { return 'slot slot--' + status; }
+
+function buildSlotEl(pid, time, status) {
+  var el = document.createElement('div');
+  el.className = slotClass(status);
+  el.dataset.pid = pid;
+  el.dataset.time = time;
+  el.dataset.status = status;
+  el.innerHTML = '<span class="slot-icon">' + slotIcon(status) + '</span><span class="slot-lbl">' + slotLabel(status) + '</span>';
+  el.addEventListener('mouseenter', onSlotHover);
+  el.addEventListener('mouseleave', hideTooltip);
+  el.addEventListener('click', onSlotClick);
+  return el;
+}
+
+/* ===================================================== TABLE RENDERING ===================================================== */
+function renderTable(filter, search) {
+  filter = filter || 'all';
+  search = search || '';
+  var tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  var count = 0;
+  participants.forEach(function(p) {
+    if (search && !(p.name + ' ' + p.role + ' ' + p.company).toLowerCase().includes(search.toLowerCase())) return;
+    if (filter !== 'all') {
+      if (filter === 'available') {
+        if (!TIMES.some(function(t) { return slots[p.id][t] === S.EMPTY; })) return;
+      } else {
+        if (!TIMES.some(function(t) { return slots[p.id][t] === filter; })) return;
+      }
+    }
+    count++;
+    var tr = document.createElement('tr');
+    tr.dataset.pid = p.id;
+    var tdPerson = document.createElement('td');
+    tdPerson.className = 'person-cell';
+    tdPerson.innerHTML = '<div class="person-info">' + avatarHTML(p) + '<div><div class="person-name">' + p.name + '</div><div class="person-role">' + p.role + '</div></div></div>';
+    tr.appendChild(tdPerson);
+    TIMES.forEach(function(time) {
+      var td = document.createElement('td');
+      td.className = 'slot-cell';
+      td.appendChild(buildSlotEl(p.id, time, slots[p.id][time]));
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  document.getElementById('rowCount').textContent = 'Showing ' + count + ' of ' + participants.length + ' participants';
+}
+
+/* ===================================================== SIDE PANELS ===================================================== */
+function renderPanels() {
+  var incoming = [], outgoing = [], confirmed = [];
+  participants.forEach(function(p) {
+    TIMES.forEach(function(t) {
+      var s = slots[p.id][t];
+      if (s === S.INCOMING) incoming.push({ p: p, t: t });
+      if (s === S.OUTGOING) outgoing.push({ p: p, t: t });
+      if (s === S.CONFIRMED) confirmed.push({ p: p, t: t });
+    });
+  });
+  renderRequestList('incomingList', incoming, 'incoming');
+  renderRequestList('outgoingList', outgoing, 'outgoing');
+  renderRequestList('confirmedList', confirmed, 'confirmed');
+}
+
+function renderRequestList(containerId, items, type) {
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  if (!items.length) { el.innerHTML = '<div class="text-muted small p-2">None yet</div>'; return; }
+  items.forEach(function(item) {
+    var p = item.p, t = item.t;
+    var card = document.createElement('div');
+    card.className = 'request-card request-card--' + type;
+    var badgeClass = { incoming: 'rb--incoming', outgoing: 'rb--outgoing', confirmed: 'rb--confirmed' }[type];
+    var badgeText = { incoming: '📥 Incoming', outgoing: '📤 Sent', confirmed: '✅ Confirmed' }[type];
+    var actions = '';
+    if (type === 'incoming') {
+      actions = '<div class="d-flex gap-1 mt-1"><button class="btn-accept" onclick="acceptSlot(\'' + p.id + '\',\'' + t + '\')">Accept</button><button class="btn-decline" onclick="declineSlot(\'' + p.id + '\',\'' + t + '\')">Decline</button></div>';
+    } else if (type === 'outgoing') {
+      actions = '<div class="mt-1"><button class="btn-cancel" onclick="cancelSlot(\'' + p.id + '\',\'' + t + '\')">Cancel</button></div>';
+    }
+    card.innerHTML = avatarHTML(p, 34, 12) + '<div class="request-info"><div class="request-who">' + p.name + '</div><div class="request-when">🕐 ' + t + ' – ' + nextTime(t) + '</div></div><div><span class="request-badge ' + badgeClass + '">' + badgeText + '</span>' + actions + '</div>';
+    el.appendChild(card);
+  });
+}
+
+function nextTime(t) { var idx = TIMES.indexOf(t); return TIMES[idx + 1] || '—'; }
+
+/* ===================================================== TOOLTIP ===================================================== */
+function onSlotHover(e) {
+  var el = e.currentTarget;
+  var pid = el.dataset.pid, time = el.dataset.time, status = el.dataset.status;
+  var p = participants.find(function(x) { return x.id === pid; });
+  if (status === S.EMPTY || status === S.BLOCKED) return;
+  var tt = document.getElementById('slotTooltip');
+  document.getElementById('ttName').textContent = p.name;
+  document.getElementById('ttTime').textContent = '🕐 ' + time + ' – ' + nextTime(time) + ' · 15 min';
+  var actions = document.getElementById('ttActions');
+  actions.innerHTML = '';
+  if (status === S.INCOMING) {
+    actions.innerHTML = '<button class="btn-accept" onclick="acceptSlot(\'' + pid + '\',\'' + time + '\');hideTooltip()">✅ Accept</button><button class="btn-decline" onclick="declineSlot(\'' + pid + '\',\'' + time + '\');hideTooltip()">✗ Decline</button>';
+    tt.style.borderLeftColor = '#f59e0b';
+  } else if (status === S.OUTGOING) {
+    actions.innerHTML = '<button class="btn-cancel" onclick="cancelSlot(\'' + pid + '\',\'' + time + '\');hideTooltip()">Cancel Request</button>';
+    tt.style.borderLeftColor = 'var(--blue-300)';
+  } else if (status === S.CONFIRMED) {
+    actions.innerHTML = '<span style="font-size:12px;color:var(--neutral-600);">✅ Confirmed — join link sent</span>';
+    tt.style.borderLeftColor = '#22c55e';
+  }
+  var rect = el.getBoundingClientRect();
+  tt.style.top = (rect.bottom + 8 + window.scrollY) + 'px';
+  tt.style.left = Math.min(rect.left, window.innerWidth - 300) + 'px';
+  tt.classList.add('visible');
+}
+
+function hideTooltip() {
+  setTimeout(function() { document.getElementById('slotTooltip').classList.remove('visible'); }, 150);
+}
+
+/* ===================================================== ACTIONS ===================================================== */
+function acceptSlot(pid, time) { slots[pid][time] = S.CONFIRMED; refresh(); }
+function declineSlot(pid, time) { slots[pid][time] = S.EMPTY; refresh(); }
+function cancelSlot(pid, time) { slots[pid][time] = S.EMPTY; refresh(); }
+
+function onSlotClick(e) {
+  var el = e.currentTarget;
+  var pid = el.dataset.pid, time = el.dataset.time, status = el.dataset.status;
+  var p = participants.find(function(x) { return x.id === pid; });
+  if (status === S.EMPTY) {
+    slots[pid][time] = S.OUTGOING; refresh();
+    showFlash('Request sent to ' + p.name + ' for ' + time);
+  } else if (status === S.INCOMING) {
+    acceptSlot(pid, time);
+    showFlash('✅ Confirmed with ' + p.name);
+  } else if (status === S.OUTGOING) {
+    cancelSlot(pid, time);
+    showFlash('Request cancelled');
+  }
+}
+
+/* ===================================================== FLASH ===================================================== */
+function showFlash(msg) {
+  var el = document.createElement('div');
+  el.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--neutral-900);color:white;padding:10px 20px;border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;z-index:9999;box-shadow:var(--shadow-md);animation:fadeup .25s ease;';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function() { el.remove(); }, 2500);
+}
+var fadeupStyle = document.createElement('style');
+fadeupStyle.textContent = '@keyframes fadeup{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+document.head.appendChild(fadeupStyle);
+
+/* ===================================================== FILTER + SEARCH ===================================================== */
+var currentFilter = 'all';
+var currentSearch = '';
+document.querySelectorAll('.filter-pill').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-pill').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    refresh();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  currentSearch = e.target.value;
+  refresh();
+});
+
+/* ===================================================== REFRESH ===================================================== */
+function refresh() {
+  renderTable(currentFilter, currentSearch);
+  renderPanels();
+  updateStats();
+}
+
+function updateStats() {
+  var confirmed = 0, outgoing = 0, incoming = 0, empty = 0;
+  participants.forEach(function(p) {
+    TIMES.forEach(function(t) {
+      var s = slots[p.id][t];
+      if (s === S.CONFIRMED) confirmed++;
+      if (s === S.OUTGOING) outgoing++;
+      if (s === S.INCOMING) incoming++;
+      if (s === S.EMPTY) empty++;
+    });
+  });
+  document.querySelectorAll('.stat-val')[0].textContent = confirmed;
+  document.querySelectorAll('.stat-val')[1].textContent = outgoing;
+  document.querySelectorAll('.stat-val')[2].textContent = incoming;
+  document.querySelectorAll('.stat-val')[3].textContent = empty;
+}
+</script>
