@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Image Checker | Exponanta Tools</title>
+    <meta name="description" content="Check and extract profile images from people pages using sitemap.xml.">
+
+    <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/brandbook/exponanta.css" rel="stylesheet">
+
+    <style>
+        .tool-page { min-height: 100vh; background: var(--neutral-50); }
+
+        .tool-topbar { background: var(--neutral-0); border-bottom: 1px solid var(--bs-border-color); padding: 14px 0; }
+        .tool-topbar .brand-link { font-weight: 700; color: var(--blue-700); text-decoration: none; font-size: var(--text-lg); letter-spacing: -0.02em; }
+        .tool-topbar .brand-link span { color: var(--neutral-600, #4B5563); font-weight: 400; }
+        .tool-topbar .breadcrumb { margin-bottom: 0; font-size: var(--text-sm); }
+        .tool-topbar .breadcrumb-item a { color: var(--blue-700); text-decoration: none; }
+
+        .tool-hero { background: linear-gradient(135deg, var(--blue-700) 0%, #1a35a8 100%); padding: 48px 0 40px; position: relative; overflow: hidden; }
+        .tool-hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 280px; height: 280px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+        .tool-hero h1 { color: var(--neutral-0); font-size: var(--text-3xl); font-weight: 700; letter-spacing: -0.03em; }
+        .tool-hero p { color: rgba(255,255,255,0.82); font-size: var(--text-lg); }
+        .tool-hero .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: var(--neutral-0); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+
+        .tool-card { background: var(--neutral-0); border: 1px solid var(--bs-border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+        .tool-card-header { background: var(--neutral-50); border-bottom: 1px solid var(--bs-border-color); padding: 16px 24px; display: flex; align-items: center; gap: 10px; }
+        .tool-card-header .step-dot { width: 24px; height: 24px; background: var(--blue-700); color: var(--neutral-0); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+        .tool-card-header h5 { margin: 0; font-size: var(--text-md); font-weight: 600; color: var(--neutral-900); }
+        .tool-card-body { padding: 24px; }
+
+        .drop-zone { border: 2px dashed rgba(36, 70, 200, 0.25); border-radius: var(--radius-lg); padding: 48px 24px; text-align: center; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease; position: relative; background: var(--neutral-50); }
+        .drop-zone:hover, .drop-zone.drag-over { border-color: var(--blue-700); background: rgba(36, 70, 200, 0.04); }
+        .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+        .drop-zone-icon { width: 56px; height: 56px; background: var(--blue-100); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--blue-700); }
+        .drop-zone h6 { font-weight: 600; color: var(--neutral-900); margin-bottom: 6px; }
+        .drop-zone p { color: var(--neutral-600, #4B5563); font-size: var(--text-sm); margin: 0; }
+        .drop-zone .browse-link { color: var(--blue-700); font-weight: 600; text-decoration: underline; }
+
+        .results-table th { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--neutral-600, #4B5563); font-weight: 600; background: var(--neutral-50); border-color: var(--bs-border-color); white-space: nowrap; }
+        .results-table td { font-size: var(--text-sm); vertical-align: middle; border-color: var(--bs-border-color); }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 5px; font-size: var(--text-xs); font-weight: 600; padding: 3px 9px; border-radius: 12px; white-space: nowrap; }
+        .status-ok      { background: rgba(72,199,142,0.15); color: #1a7a4a; }
+        .status-missing { background: rgba(255,111,97,0.15); color: #c0392b; }
+        .status-error   { background: rgba(255,193,7,0.15); color: #856404; }
+
+        .thumb-cell img { width: 44px; height: 44px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--bs-border-color); }
+        .thumb-cell .no-thumb { width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1px dashed var(--bs-border-color); background: var(--neutral-50); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+        .btn-extract { background: var(--accent-teal, #4FC3C3); border: none; color: var(--neutral-0); font-size: var(--text-xs); font-weight: 600; padding: 5px 12px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+        .btn-extract:hover { background: #38b2ac; }
+        .btn-extract:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-run { background: var(--blue-700); border: none; color: var(--neutral-0); font-size: var(--text-md); font-weight: 600; padding: 12px 24px; border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-run:hover:not(:disabled) { background: #1a35a8; }
+        .btn-run:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-download-all { background: var(--blue-700); border: none; color: var(--neutral-0); font-size: var(--text-sm); font-weight: 600; padding: 10px 20px; border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .btn-download-all:hover:not(:disabled) { background: #1a35a8; }
+        .btn-download-all:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .summary-bar { background: var(--neutral-0); border: 1px solid var(--bs-border-color); border-radius: var(--radius-md); padding: 14px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .summary-stat .val { font-size: var(--text-2xl); font-weight: 700; line-height: 1; }
+        .summary-stat .lbl { font-size: var(--text-xs); color: var(--neutral-600, #4B5563); margin-top: 2px; }
+        .val-total { color: var(--neutral-900); }
+        .val-ok { color: #1a7a4a; }
+        .val-missing { color: #c0392b; }
+        .val-extracted { color: var(--blue-700); }
+
+        .progress-bar-wrap { background: var(--neutral-100, #f3f4f6); border-radius: 4px; height: 6px; overflow: hidden; margin-top: 8px; }
+        .progress-bar-fill { height: 100%; background: var(--blue-700); border-radius: 4px; transition: width 0.3s ease; }
+
+        .tips-card { background: var(--neutral-0); border: 1px solid var(--bs-border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+        .tips-card-header { background: var(--blue-100); padding: 14px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(36,70,200,0.1); }
+        .tips-card-header h6 { margin: 0; color: var(--blue-700); font-weight: 600; font-size: var(--text-sm); }
+        .tips-card-body { padding: 16px 20px; }
+        .tip-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--bs-border-color); font-size: var(--text-sm); }
+        .tip-item:last-child { border-bottom: none; }
+        .tip-icon { width: 28px; height: 28px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .tip-icon.blue { background: var(--blue-100); }
+        .tip-icon.teal { background: rgba(79,209,197,0.15); }
+        .tip-icon.coral { background: rgba(255,111,97,0.12); }
+        .tip-text strong { display: block; color: var(--neutral-900); font-weight: 600; margin-bottom: 2px; }
+        .tip-text span { color: var(--neutral-600, #4B5563); }
+
+        .tool-footer { background: var(--neutral-900); color: rgba(255,255,255,0.6); padding: 24px 0; margin-top: 60px; font-size: var(--text-sm); }
+        .tool-footer a { color: var(--blue-300); text-decoration: none; }
+        .tool-footer a:hover { color: var(--neutral-0); }
+
+        #resultsSection { display: none; }
+        .name-cell { font-weight: 600; color: var(--neutral-900); }
+        .slug-cell { font-family: monospace; font-size: var(--text-xs); color: var(--neutral-500); }
+        code { background: var(--neutral-100, #f3f4f6); padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+    </style>
+</head>
+<body class="tool-page">
+
+    <div class="tool-topbar">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="https://exponanta.com" class="brand-link">Exponanta <span>/ Tools</span></a>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="https://exponanta.com">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/tools/">Tools</a></li>
+                        <li class="breadcrumb-item active">Image Checker</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section class="tool-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="hero-badge">🖼️ People Pages Tool</div>
+                    <h1>Image Checker<br>&amp; Extractor</h1>
+                    <p class="mt-2 mb-0">Select your <code style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;">sitemap.xml</code> — finds all <code style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;">/people/</code> URLs, fetches each page, checks if <code style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;">/images/{slug}.jpg</code> exists, and extracts missing ones from embedded base64.</p>
+                </div>
+                <div class="col-lg-5 mt-4 mt-lg-0">
+                    <div class="d-flex gap-3 justify-content-lg-end">
+                        <div class="text-center"><div class="h3 fw-bold text-white mb-0">Live</div><small style="color:rgba(255,255,255,0.7)">Fetches pages</small></div>
+                        <div class="vr" style="background:rgba(255,255,255,0.2)"></div>
+                        <div class="text-center"><div class="h3 fw-bold text-white mb-0">Batch</div><small style="color:rgba(255,255,255,0.7)">All /people/</small></div>
+                        <div class="vr" style="background:rgba(255,255,255,0.2)"></div>
+                        <div class="text-center"><div class="h3 fw-bold text-white mb-0">Free</div><small style="color:rgba(255,255,255,0.7)">Always</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-8">
+
+                <!-- Step 1 -->
+                <div class="tool-card mb-4">
+                    <div class="tool-card-header">
+                        <div class="step-dot">1</div>
+                        <h5>Select your <code>sitemap.xml</code></h5>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="drop-zone" id="dropZone">
+                            <input type="file" id="fileInput" accept=".xml,text/xml,application/xml">
+                            <div class="drop-zone-icon">
+                                <svg width="26" height="26" fill="currentColor" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1z"/><path d="M3 9h10v1H3zm0 2h10v1H3zm0 2h6v1H3z"/></svg>
+                            </div>
+                            <h6>Drop <code>sitemap.xml</code> here</h6>
+                            <p><span class="browse-link">Browse</span> or drag &amp; drop</p>
+                        </div>
+
+                        <div id="sitemapInfo" class="mt-3" style="display:none;">
+                            <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                                <div>
+                                    <span class="status-badge status-ok">✓ Loaded</span>
+                                    <span class="ms-2" style="font-size:var(--text-sm);color:var(--neutral-700);">
+                                        Found <strong id="peopleCount">0</strong> /people/ URLs
+                                    </span>
+                                </div>
+                                <button class="btn-run" id="btnRun">
+                                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg>
+                                    Run Check
+                                </button>
+                            </div>
+                            <div id="progressWrap" style="display:none;" class="mt-3">
+                                <div style="font-size:var(--text-sm);color:var(--neutral-600);" id="progressLabel">Checking…</div>
+                                <div class="progress-bar-wrap mt-1">
+                                    <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger mt-3" id="alertError" style="display:none;border-radius:var(--radius-md);font-size:var(--text-sm);"></div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="resultsSection">
+                    <div class="tool-card mb-4">
+                        <div class="tool-card-header">
+                            <div class="step-dot">2</div>
+                            <h5>Summary</h5>
+                        </div>
+                        <div class="tool-card-body">
+                            <div class="summary-bar">
+                                <div class="summary-stat"><div class="val val-total" id="statTotal">0</div><div class="lbl">Total</div></div>
+                                <div class="vr"></div>
+                                <div class="summary-stat"><div class="val val-ok" id="statOk">0</div><div class="lbl">Image exists</div></div>
+                                <div class="vr"></div>
+                                <div class="summary-stat"><div class="val val-missing" id="statMissing">0</div><div class="lbl">Missing</div></div>
+                                <div class="vr"></div>
+                                <div class="summary-stat"><div class="val val-extracted" id="statExtracted">0</div><div class="lbl">Extracted</div></div>
+                                <div class="ms-auto">
+                                    <button class="btn-download-all" id="btnDownloadAll" disabled>
+                                        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                                        Download All as ZIP
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <div class="step-dot">3</div>
+                            <h5>Results</h5>
+                        </div>
+                        <div class="tool-card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover results-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-3" style="width:52px;">Photo</th>
+                                            <th>Name</th>
+                                            <th>Expected image</th>
+                                            <th>Status</th>
+                                            <th class="text-end pe-3">Save</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultsBody">
+                                        <tr><td colspan="5" class="text-center py-4" style="color:var(--neutral-400);font-size:var(--text-sm);">Results will appear here after running the check.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="tips-card">
+                    <div class="tips-card-header">
+                        <svg width="16" height="16" fill="var(--blue-700)" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                        <h6>How It Works</h6>
+                    </div>
+                    <div class="tips-card-body">
+                        <div class="tip-item">
+                            <div class="tip-icon blue">📄</div>
+                            <div class="tip-text"><strong>Select sitemap.xml</strong><span>Parses all <code>/people/*.html</code> URLs from your sitemap.</span></div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon teal">🌐</div>
+                            <div class="tip-text"><strong>Fetches each page live</strong><span>Loads the real <code>exponanta.com/people/</code> page from GitHub Pages.</span></div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon blue">🔍</div>
+                            <div class="tip-text"><strong>Checks image existence</strong><span>HEAD request to <code>/images/{slug}.jpg</code> — green if 200, red if 404.</span></div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon teal">🖼️</div>
+                            <div class="tip-text"><strong>Extracts base64</strong><span>Pulls <code>data:image/jpeg;base64,…</code> from the HTML and saves as a proper <code>.jpg</code>.</span></div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-icon coral">💾</div>
+                            <div class="tip-text"><strong>ZIP download</strong><span>All missing-but-extractable images in one <code>people-images.zip</code>, named <code>{slug}.jpg</code>.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="tool-footer">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div><a href="https://exponanta.com" class="fw-semibold">Exponanta</a><span class="ms-2">Free browser tools for the community.</span></div>
+                <div class="d-flex gap-3"><a href="/tools/">All Tools</a><a href="https://exponanta.com/blog/">Blog</a><a href="https://exponanta.com/events/">Events</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script>
+    (() => {
+        const dropZone       = document.getElementById('dropZone');
+        const fileInput      = document.getElementById('fileInput');
+        const sitemapInfo    = document.getElementById('sitemapInfo');
+        const peopleCount    = document.getElementById('peopleCount');
+        const btnRun         = document.getElementById('btnRun');
+        const progressWrap   = document.getElementById('progressWrap');
+        const progressLabel  = document.getElementById('progressLabel');
+        const progressBar    = document.getElementById('progressBar');
+        const alertError     = document.getElementById('alertError');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsBody    = document.getElementById('resultsBody');
+        const statTotal      = document.getElementById('statTotal');
+        const statOk         = document.getElementById('statOk');
+        const statMissing    = document.getElementById('statMissing');
+        const statExtracted  = document.getElementById('statExtracted');
+        const btnDownloadAll = document.getElementById('btnDownloadAll');
+
+        let peopleUrls = [];
+        let rows = [];
+
+        // ── File input ───────────────────────────────────────────
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files[0]) handleXML(e.dataTransfer.files[0]); });
+        fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleXML(fileInput.files[0]); });
+
+        function handleXML(file) {
+            alertError.style.display = 'none';
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const xml = new DOMParser().parseFromString(e.target.result, 'text/xml');
+                    const locs = [...xml.querySelectorAll('url > loc')]
+                        .map(el => el.textContent.trim())
+                        .filter(url => /\/people\/.+\.html/.test(url));
+
+                    if (!locs.length) { showError('No /people/*.html URLs found in this sitemap.'); return; }
+
+                    peopleUrls = locs;
+                    peopleCount.textContent = locs.length;
+                    sitemapInfo.style.display = 'block';
+                } catch(err) {
+                    showError('Could not parse XML: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ── Run ──────────────────────────────────────────────────
+        btnRun.addEventListener('click', async () => {
+            btnRun.disabled = true;
+            progressWrap.style.display = 'block';
+            resultsBody.innerHTML = '';
+            rows = [];
+            resultsSection.style.display = 'block';
+
+            for (let i = 0; i < peopleUrls.length; i++) {
+                const url = peopleUrls[i];
+                const slug = url.split('/people/')[1].replace('.html', '');
+                progressLabel.textContent = `Fetching ${i + 1} / ${peopleUrls.length} — ${slug}`;
+                progressBar.style.width = `${Math.round((i / peopleUrls.length) * 100)}%`;
+
+                const row = await processUrl(url, slug);
+                rows.push(row);
+                appendRow(row, i);
+                updateStats();
+            }
+
+            progressBar.style.width = '100%';
+            progressLabel.textContent = `Done — ${peopleUrls.length} pages checked.`;
+            btnRun.disabled = false;
+        });
+
+        async function processUrl(pageUrl, slug) {
+            const row = { slug, name: slug, pageUrl, imageUrl: `https://exponanta.com/images/${slug}.jpg`, imageExists: false, base64: null, extracted: false, fetchError: false };
+
+            try {
+                const res = await fetch(pageUrl);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const html = await res.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+
+                const h1 = doc.querySelector('h1');
+                if (h1) row.name = h1.textContent.trim();
+
+                for (const img of doc.querySelectorAll('img[src]')) {
+                    const src = img.getAttribute('src') || '';
+                    if (src.startsWith('data:image') && src.includes('base64,')) {
+                        row.base64 = src.split('base64,')[1];
+                        break;
+                    }
+                }
+            } catch { row.fetchError = true; }
+
+            try {
+                const r = await fetch(row.imageUrl, { method: 'HEAD' });
+                row.imageExists = r.ok;
+            } catch { row.imageExists = false; }
+
+            return row;
+        }
+
+        function appendRow(row, i) {
+            const imgPath = `/images/${row.slug}.jpg`;
+
+            const thumb = row.base64
+                ? `<img src="data:image/jpeg;base64,${row.base64}" alt="${row.name}">`
+                : `<div class="no-thumb">👤</div>`;
+
+            let badge;
+            if (row.fetchError)        badge = `<span class="status-badge status-error">⚠ Fetch error</span>`;
+            else if (row.imageExists)  badge = `<span class="status-badge status-ok">✓ Image exists</span>`;
+            else if (row.base64)       badge = `<span class="status-badge status-missing">✗ Missing — extractable</span>`;
+            else                       badge = `<span class="status-badge status-error">✗ Missing — no base64</span>`;
+
+            const action = (!row.imageExists && row.base64)
+                ? `<button class="btn-extract" id="btn-${i}" onclick="extractOne(${i})">⬇ Save .jpg</button>`
+                : `<span style="color:var(--neutral-300);font-size:var(--text-xs);">—</span>`;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="ps-3 thumb-cell">${thumb}</td>
+                <td class="name-cell">${row.name}</td>
+                <td class="slug-cell">${imgPath}</td>
+                <td>${badge}</td>
+                <td class="text-end pe-3">${action}</td>`;
+            resultsBody.appendChild(tr);
+        }
+
+        function updateStats() {
+            statTotal.textContent     = rows.length;
+            statOk.textContent        = rows.filter(r => r.imageExists).length;
+            statMissing.textContent   = rows.filter(r => !r.imageExists && !r.fetchError).length;
+            statExtracted.textContent = rows.filter(r => r.extracted).length;
+            btnDownloadAll.disabled   = !rows.some(r => !r.imageExists && r.base64);
+        }
+
+        // ── Extract single ───────────────────────────────────────
+        window.extractOne = function(i) {
+            const row = rows[i];
+            if (!row?.base64) return;
+            dl64(row.base64, `${row.slug}.jpg`);
+            row.extracted = true;
+            const btn = document.getElementById(`btn-${i}`);
+            if (btn) { btn.textContent = '✓ Saved'; btn.disabled = true; }
+            updateStats();
+        };
+
+        function dl64(b64, name) {
+            const bin = atob(b64), bytes = new Uint8Array(bin.length);
+            for (let j = 0; j < bin.length; j++) bytes[j] = bin.charCodeAt(j);
+            const url = URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' }));
+            Object.assign(document.createElement('a'), { href: url, download: name }).click();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        // ── Download All ZIP ─────────────────────────────────────
+        btnDownloadAll.addEventListener('click', async () => {
+            const list = rows.filter(r => !r.imageExists && r.base64);
+            if (!list.length) return;
+            btnDownloadAll.disabled = true;
+            btnDownloadAll.innerHTML = `<span class="spinner-border spinner-border-sm border-light me-2" role="status"></span>Zipping…`;
+
+            const zip = new JSZip();
+            list.forEach(row => {
+                const bin = atob(row.base64), bytes = new Uint8Array(bin.length);
+                for (let j = 0; j < bin.length; j++) bytes[j] = bin.charCodeAt(j);
+                zip.file(`${row.slug}.jpg`, bytes);
+            });
+
+            const blob = await zip.generateAsync({ type: 'blob' });
+            const url = URL.createObjectURL(blob);
+            Object.assign(document.createElement('a'), { href: url, download: 'people-images.zip' }).click();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+            list.forEach(r => r.extracted = true);
+            updateStats();
+            btnDownloadAll.disabled = false;
+            btnDownloadAll.textContent = '✓ Downloaded';
+        });
+
+        function showError(msg) { alertError.textContent = msg; alertError.style.display = 'block'; }
+    })();
+    </script>
+</body>
+</html>
