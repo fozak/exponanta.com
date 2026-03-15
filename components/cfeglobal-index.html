@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Center for Entrepreneurship | High-Impact Entrepreneurship Programs</title>
   <meta name="description" content="The Center for Entrepreneurship delivers high-impact programs to 354,000+ entrepreneurs across 160+ countries. Startup clubs, acceleration, mentoring, and ecosystem programs.">
-  <meta name="keywords" content="entrepreneurship programs, startup acceleration, mentoring, scaleup, entrepreneurship education, CFE, Center for Entrepreneurship">
+  <meta name="keywords" content="entrepreneurship programs, startup acceleration, mentoring, scaleup, CFE, Center for Entrepreneurship">
   <meta name="author" content="Center for Entrepreneurship">
   <link rel="canonical" href="https://cfeglobal.org/">
   <meta property="og:type" content="website">
@@ -19,8 +19,10 @@
   <meta name="twitter:description" content="354,000+ entrepreneurs engaged across 160+ countries.">
   <meta name="twitter:image" content="https://cfeglobal.org/images/hero3.png">
   <link rel="icon" href="https://cfeglobal.org/images/siteicon.png" type="image/png">
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,235 +32,31 @@
 
   <style>
     /* =========================================================
-       CFE GLOBAL — page-scoped additions only
-       All values use Exponanta tokens exclusively.
-       No hardcoded colors, no custom fonts, no new design system.
+       CFE GLOBAL — page additions only
+       All values from Exponanta tokens. No new design system.
        ========================================================= */
 
-    /* ticker: coral bg for CFE instead of blue */
+    /* Ticker accent: coral for CFE urgency */
     .ed-ticker { background: var(--accent-coral); }
-    .ed-ticker__item:hover { color: var(--neutral-0); opacity: .8; }
+    .ed-ticker__item:hover { opacity: .8; }
 
-    /* ── Masthead bar ── */
-    .cfe-masthead {
+    /* Partners strip */
+    .cfe-partners-strip {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--bs-border-color);
-      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 32px;
     }
-    .cfe-masthead__name {
-      font-size: var(--text-2xl);
-      font-weight: 700;
-      color: var(--blue-700);
-      letter-spacing: -0.5px;
+    .cfe-partners-strip img {
+      height: 36px;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(.45);
+      transition: filter .2s;
     }
-    .cfe-masthead__name span { color: var(--accent-coral); }
-    .cfe-masthead__date {
-      font-size: var(--text-xs);
-      font-weight: 600;
-      color: var(--neutral-400);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .cfe-masthead__tagline {
-      font-size: var(--text-xs);
-      font-style: italic;
-      color: var(--neutral-400);
-    }
-
-    /* ── Hero shell ── */
-    .cfe-hero-section {
-      background: var(--neutral-50);
-      border-bottom: 1px solid var(--bs-border-color);
-      padding-bottom: 40px;
-    }
-
-    /* ── Stats strip ── */
-    .cfe-stats-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--neutral-900);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: 28px;
-    }
-    .cfe-stats-strip__item {
-      padding: 18px 20px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,.07);
-    }
-    .cfe-stats-strip__item:last-child { border-right: none; }
-    .cfe-stats-strip__num {
-      font-size: var(--text-2xl);
-      font-weight: 700;
-      color: var(--accent-coral);
-      display: block;
-      line-height: 1;
-    }
-    .cfe-stats-strip__label {
-      font-size: var(--text-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,.4);
-      display: block;
-      margin-top: 4px;
-    }
-
-    /* ── Hero feature image ── */
-    .cfe-hero-feature {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    .cfe-hero-feature img {
-      width: 100%;
-      height: 360px;
-      object-fit: cover;
-      display: block;
-      transition: transform .4s ease;
-    }
-    .cfe-hero-feature:hover img { transform: scale(1.03); }
-    .cfe-hero-feature__overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(30,30,47,.88) 0%, transparent 65%);
-      padding: 32px 24px 20px;
-    }
-
-    /* ── Sidebar story rows ── */
-    .cfe-story-sm {
-      display: flex;
-      gap: 12px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--bs-border-color);
-      text-decoration: none;
-    }
-    .cfe-story-sm:last-child { border-bottom: none; }
-    .cfe-story-sm__img {
-      flex: 0 0 76px;
-      height: 58px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: var(--blue-100);
-    }
-    .cfe-story-sm__img img { width:100%; height:100%; object-fit:cover; transition: transform .3s; }
-    .cfe-story-sm:hover .cfe-story-sm__img img { transform: scale(1.07); }
-    .cfe-story-sm__cat {
-      font-size: var(--text-xs);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent-coral);
-      display: block;
-      margin-bottom: 3px;
-    }
-    .cfe-story-sm__title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--neutral-900);
-      line-height: 1.35;
-      margin: 0 0 3px;
-    }
-    .cfe-story-sm:hover .cfe-story-sm__title { color: var(--blue-700); }
-    .cfe-story-sm__meta { font-size: var(--text-xs); color: var(--neutral-400); }
-
-    /* ── 3x2 program grid (newspaper columns) ── */
-    .cfe-prog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--bs-border-color);
-      border: 1px solid var(--bs-border-color);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .cfe-prog-cell {
-      background: var(--neutral-0);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: background .15s;
-    }
-    .cfe-prog-cell:hover { background: var(--neutral-50); }
-    .cfe-prog-cell__icon { height: 36px; width: auto; object-fit: contain; object-position: left; margin-bottom: 4px; }
-    .cfe-prog-cell__cat { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-coral); }
-    .cfe-prog-cell__title { font-size: var(--text-md); font-weight: 700; color: var(--blue-700); line-height: var(--leading-tight); margin: 0; }
-    .cfe-prog-cell__desc { font-size: var(--text-sm); color: var(--neutral-600); line-height: 1.55; flex: 1; margin: 0; }
-    .cfe-prog-cell__link {
-      font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
-      color: var(--blue-700); text-decoration: none;
-      display: inline-flex; align-items: center; gap: 5px;
-      padding-top: 10px; border-top: 1px solid var(--bs-border-color); margin-top: auto;
-    }
-    .cfe-prog-cell__link:hover { color: var(--accent-coral); }
-
-    /* ── Impact dark section ── */
-    .cfe-impact {
-      background: var(--neutral-900);
-      padding: 64px 0;
-      position: relative;
-    }
-    .cfe-impact::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gradient-accent);
-    }
-    .cfe-impact__stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      background: rgba(255,255,255,.06);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .cfe-impact__stat { background: rgba(255,255,255,.03); padding: 28px 20px; text-align: center; }
-    .cfe-impact__stat-num { font-size: var(--text-3xl); font-weight: 700; color: var(--accent-teal); display: block; line-height: 1; }
-    .cfe-impact__stat-label { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.38); display: block; margin-top: 6px; }
-    .cfe-impact__stat-sub { font-size: var(--text-xs); color: rgba(255,255,255,.22); font-style: italic; display: block; margin-top: 2px; }
-
-    /* ── Ranked list ── */
-    .cfe-ranked { display: flex; flex-direction: column; }
-    .cfe-ranked__item {
-      display: flex; gap: 14px; align-items: flex-start;
-      padding: 16px 0; border-bottom: 1px solid var(--bs-border-color);
-      text-decoration: none; transition: background .15s;
-    }
-    .cfe-ranked__item:last-child { border-bottom: none; }
-    .cfe-ranked__num { font-size: var(--text-2xl); font-weight: 700; color: var(--blue-100); line-height: 1; flex-shrink: 0; width: 36px; text-align: right; padding-top: 2px; }
-    .cfe-ranked__title { font-size: var(--text-md); font-weight: 700; color: var(--neutral-900); margin: 0 0 3px; line-height: var(--leading-tight); }
-    .cfe-ranked__item:hover .cfe-ranked__title { color: var(--blue-700); }
-    .cfe-ranked__desc { font-size: var(--text-sm); color: var(--neutral-600); margin: 0; }
-
-    /* ── Featured programs logo grid ── */
-    .cfe-feat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--bs-border-color);
-      border: 1px solid var(--bs-border-color);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .cfe-feat-card { background: var(--neutral-0); padding: 24px; display: flex; flex-direction: column; gap: 10px; transition: background .15s; }
-    .cfe-feat-card:hover { background: var(--neutral-50); }
-    .cfe-feat-card__logo { height: 36px; object-fit: contain; object-position: left; }
-    .cfe-feat-card__desc { font-size: var(--text-sm); color: var(--neutral-600); line-height: 1.55; flex: 1; }
-    .cfe-feat-card__link { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--blue-700); text-decoration: none; }
-    .cfe-feat-card__link:hover { color: var(--accent-coral); }
-
-    /* ── Partners strip ── */
-    .cfe-partners-strip { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-    .cfe-partners-strip img { height: 36px; object-fit: contain; filter: grayscale(100%) opacity(.4); transition: filter .2s; }
     .cfe-partners-strip img:hover { filter: grayscale(0%) opacity(1); }
 
-    /* ── People 6-col grid ── */
+    /* People 6-col grid (board) */
     .cfe-people-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -268,108 +66,84 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
     }
-    .cfe-person { background: var(--neutral-0); padding: 22px 10px; text-align: center; text-decoration: none; transition: background .15s; }
+    .cfe-person {
+      background: var(--neutral-0);
+      padding: 22px 10px;
+      text-align: center;
+      text-decoration: none;
+      transition: background .15s;
+    }
     .cfe-person:hover { background: var(--neutral-50); }
     .cfe-person__avatar {
-      width: 60px; height: 60px; border-radius: 50%;
+      width: 60px; height: 60px;
+      border-radius: 50%;
       background: var(--blue-100);
       margin: 0 auto 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: var(--text-md); font-weight: 700; color: var(--blue-700);
       overflow: hidden;
     }
-    .cfe-person__avatar img { width:100%; height:100%; object-fit: cover; }
     .cfe-person__name { font-size: 12px; font-weight: 700; color: var(--neutral-900); margin: 0 0 2px; line-height: 1.3; }
     .cfe-person:hover .cfe-person__name { color: var(--blue-700); }
     .cfe-person__role { font-size: var(--text-xs); color: var(--accent-coral); font-weight: 600; display: block; margin-bottom: 1px; }
     .cfe-person__group { font-size: 10px; color: var(--neutral-400); text-transform: uppercase; letter-spacing: .7px; }
     .cfe-person__li { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
-    .cfe-person__li img { width:14px; height:14px; opacity:.35; transition: opacity .15s; }
+    .cfe-person__li img { width: 14px; height: 14px; opacity: .35; transition: opacity .15s; }
     .cfe-person__li a:hover img { opacity: 1; }
 
-    /* ── CTA strip ── */
-    .cfe-cta-strip { background: var(--gradient-primary); padding: 48px 0; }
-
-    /* ── Footer dark ── */
-    .cfe-footer { background: var(--neutral-900); padding: 56px 0 32px; }
-    .cfe-footer__grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px; padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      margin-bottom: 24px;
-    }
-    .cfe-footer__brand { font-size: var(--text-lg); font-weight: 700; color: var(--neutral-0); margin: 0 0 4px; }
-    .cfe-footer__tagline { font-size: var(--text-sm); font-style: italic; color: rgba(255,255,255,.3); margin: 0 0 14px; }
-    .cfe-footer__body { font-size: var(--text-sm); color: rgba(255,255,255,.48); line-height: 1.65; margin: 0 0 14px; }
-    .cfe-footer__col-title {
-      font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
-      color: var(--neutral-0); border-top: 2px solid var(--accent-coral);
-      padding-top: 10px; margin-bottom: 14px;
-    }
-    .cfe-footer__links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-    .cfe-footer__links a { font-size: var(--text-sm); color: rgba(255,255,255,.48); text-decoration: none; transition: color .15s; }
-    .cfe-footer__links a:hover { color: var(--accent-teal); }
-    .cfe-footer__bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: var(--text-xs); color: rgba(255,255,255,.25); }
-    .cfe-footer__bottom a { color: rgba(255,255,255,.28); text-decoration: none; }
-    .cfe-footer__bottom a:hover { color: var(--accent-teal); }
-
-    /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .cfe-prog-grid   { grid-template-columns: repeat(2, 1fr); }
-      .cfe-feat-grid   { grid-template-columns: repeat(2, 1fr); }
-      .cfe-people-grid { grid-template-columns: repeat(3, 1fr); }
-      .cfe-footer__grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 767px) {
-      .cfe-masthead__tagline { display: none; }
-      .cfe-prog-grid   { grid-template-columns: 1fr; }
-      .cfe-feat-grid   { grid-template-columns: 1fr; }
-      .cfe-people-grid { grid-template-columns: repeat(2, 1fr); }
-      .cfe-footer__grid { grid-template-columns: 1fr; }
-      .cfe-impact__stat-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 1024px) { .cfe-people-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px)  { .cfe-people-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
+
 <body>
 
 <!-- GTM noscript -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<!-- TICKER (ed-ticker from exponanta-added.css §A14) -->
+<!-- =========================================================
+     TICKER  (ed-ticker from exponanta-added.css §A14)
+     Items duplicated for seamless infinite loop
+     ========================================================= -->
 <div class="ed-ticker">
   <span class="ed-ticker__label">CFE News</span>
   <div class="ed-ticker__track">
-    <a href="https://cfeglobal.org/programs/startup-club" class="ed-ticker__item"><svg width="8" height="8" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg> Startup Club — new cohort open for registration</a>
+    <a href="https://cfeglobal.org/programs/startup-club" class="ed-ticker__item">
+      <svg width="8" height="8" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+      Startup Club — new cohort open for registration
+    </a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/startup-huddle" class="ed-ticker__item">Startup Huddle — present your idea, get expert feedback</a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/global-entrepreneurship-week" class="ed-ticker__item">Global Entrepreneurship Week 2025 — join 10M+ entrepreneurs worldwide</a>
-    <span class="ed-ticker__sep">◆</span>
-    <a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance" class="ed-ticker__item">G20 Young Entrepreneurs Alliance — shaping global policy</a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/scaleup-acceleration-program" class="ed-ticker__item">ScaleUp Acceleration Program — applications now open</a>
     <span class="ed-ticker__sep">◆</span>
-    <!-- duplicated for seamless loop -->
-    <a href="https://cfeglobal.org/programs/startup-club" class="ed-ticker__item"><svg width="8" height="8" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg> Startup Club — new cohort open for registration</a>
+    <a href="https://cfeglobal.org/programs/startup-club" class="ed-ticker__item">
+      <svg width="8" height="8" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+      Startup Club — new cohort open for registration
+    </a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/startup-huddle" class="ed-ticker__item">Startup Huddle — present your idea, get expert feedback</a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/global-entrepreneurship-week" class="ed-ticker__item">Global Entrepreneurship Week 2025 — join 10M+ entrepreneurs worldwide</a>
-    <span class="ed-ticker__sep">◆</span>
-    <a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance" class="ed-ticker__item">G20 Young Entrepreneurs Alliance — shaping global policy</a>
     <span class="ed-ticker__sep">◆</span>
     <a href="https://cfeglobal.org/programs/scaleup-acceleration-program" class="ed-ticker__item">ScaleUp Acceleration Program — applications now open</a>
     <span class="ed-ticker__sep">◆</span>
   </div>
 </div>
 
-<!-- NAVBAR (navbar-option-1 from exponanta.css §31) -->
+<!-- =========================================================
+     NAVBAR OPTION 1  (exponanta.css §31)
+     CFE nav links + Connect CTA
+     ========================================================= -->
 <nav class="navbar navbar-option-1 navbar-expand-lg sticky-top" id="navbar">
   <div class="container">
     <a class="navbar-brand" href="https://cfeglobal.org/">
-      <img src="https://cfeglobal.org/assets/images/logo/cfe-long.png" alt="Center for Entrepreneurship" height="30"
-           onerror="this.style.display='none'; document.getElementById('cfe-fallback').style.display='block';">
-      <span class="navbar-brand-text" id="cfe-fallback" style="display:none;">CFE</span>
+      <img src="https://cfeglobal.org/assets/images/logo/cfe-long.png"
+           alt="Center for Entrepreneurship" height="30"
+           onerror="this.style.display='none';document.getElementById('cfe-brand-fb').style.display='block';">
+      <span class="navbar-brand-text" id="cfe-brand-fb" style="display:none;">CFE</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cfeNav">
       <span class="navbar-toggler-icon"></span>
@@ -390,307 +164,1194 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="cfe-hero-section">
-  <div class="container pt-4">
 
-    <div class="cfe-masthead">
-      <div class="cfe-masthead__name">Center for <span>Entrepreneurship</span></div>
-      <div class="cfe-masthead__date" id="heroDate"></div>
-      <div class="cfe-masthead__tagline">Your Growth Community Awaits™</div>
-    </div>
+<section class="hero-variant-1 py-5">
+  <div class="container">
 
-    <div class="cfe-stats-strip">
-      <div class="cfe-stats-strip__item">
-        <span class="cfe-stats-strip__num">354K+</span>
-        <span class="cfe-stats-strip__label">Entrepreneurs Engaged</span>
-      </div>
-      <div class="cfe-stats-strip__item">
-        <span class="cfe-stats-strip__num">160+</span>
-        <span class="cfe-stats-strip__label">Countries</span>
-      </div>
-      <div class="cfe-stats-strip__item">
-        <span class="cfe-stats-strip__num">23,500+</span>
-        <span class="cfe-stats-strip__label">Impacted Projects</span>
+    <!-- Headline row -->
+    <div class="row justify-content-center text-center mb-4">
+      <div class="col-lg-8">
+        <div class="d-inline-flex align-items-center gap-2 bg-primary bg-opacity-10 rounded-pill px-3 py-2 mb-3">
+          <span class="badge bg-primary rounded-circle" style="width:8px;height:8px;"></span>
+          <small class="text-primary fw-semibold">160+ Countries · 23,500+ Projects Impacted</small>
+        </div>
+        <h1 class="display-3 fw-bold mb-3">Your Growth <span class="text-primary">Community</span> Awaits™</h1>
+        <p class="lead text-muted mb-4">Programs that accelerate startups worldwide</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="https://cfeglobal.org/programs" class="btn btn-primary btn-lg px-4">Explore Programs</a>
+          <a href="https://c.cfeglobal.org" class="btn btn-outline-primary btn-lg px-4">Join Free →</a>
+        </div>
       </div>
     </div>
 
-    <!-- ed-featured from exponanta-added.css §A5 -->
-    <div class="ed-featured">
-      <div class="ed-featured__img">
-        <div class="cfe-hero-feature">
-          <img src="https://cfeglobal.org/images/hero3.png" alt="CFE Community"
-               onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&h=500&fit=crop'">
-          <div class="cfe-hero-feature__overlay">
-            <span class="ed-kicker">Featured Program</span>
-            <h1 style="font-size:var(--text-2xl);font-weight:700;color:var(--neutral-0);margin:6px 0 8px;line-height:var(--leading-tight);">
-              High-Impact Entrepreneurship Programs for the Next Generation of Leaders
-            </h1>
-            <p style="font-family:var(--font-sans);font-size:var(--text-sm);color:rgba(255,255,255,.8);margin:0;line-height:var(--leading-normal);">
-              Accelerate your startup, scale your business, and join a robust international network built for growth.
-            </p>
+    <!-- Collage -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10 position-relative">
+
+        <div class="row g-2">
+          <!-- Big photo left -->
+          <div class="col-7">
+            <img src="https://cfeglobal.org/images/hero-big.jpg"
+                 alt="CFE Community"
+                 class="img-fluid rounded-3 shadow w-100"
+                 style="height:420px;object-fit:cover;object-position:center;">
+          </div>
+          <!-- 3 stacked right — (420px - 2×8px gap) / 3 = 134px each -->
+          <div class="col-5 d-flex flex-column gap-2">
+            <img src="../images/hero-small-1.jpg"
+                 alt="CFE Event"
+                 class="img-fluid rounded-3 shadow w-100"
+                 style="height:134px;object-fit:cover;object-position:center;">
+            <img src="https://cfeglobal.org/images/hero-small-2.jpg"
+                 alt="CFE Event"
+                 class="img-fluid rounded-3 shadow w-100"
+                 style="height:134px;object-fit:cover;object-position:center;">
+            <img src="https://cfeglobal.org/images/hero-small-3.jpg"
+                 alt="CFE Event"
+                 class="img-fluid rounded-3 shadow w-100"
+                 style="height:134px;object-fit:cover;object-position:center;">
           </div>
         </div>
-        <div class="d-flex gap-3 flex-wrap mt-3">
-          <a href="https://cfeglobal.org/programs" class="btn btn-primary">Explore Programs</a>
-          <a href="https://c.cfeglobal.org" class="btn btn-outline-primary">Join Free →</a>
+
+        <!-- Floating stats card — bottom center -->
+        <div class="card shadow-lg"
+             style="position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:2;">
+          <div class="card-body py-3 px-4">
+            <div class="d-flex align-items-center gap-4">
+
+              <div class="d-flex align-items-center gap-2">
+                <div class="hero-variant-3__stat-icon">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="fw-bold text-primary">354,000+</div>
+                  <small class="text-muted">Founders engaged</small>
+                </div>
+              </div>
+
+              <div class="vr"></div>
+
+              <div class="d-flex align-items-center gap-2">
+                <div class="hero-variant-3__stat-icon">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="fw-bold text-primary">160+</div>
+                  <small class="text-muted">Countries</small>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Spacer for floating card overflow -->
+    <div style="height:48px;"></div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     HERO VARIANT 3: SPLIT WITH GRADIENT ACCENT  (exponanta.css §35)
+     CFE content: programs, stats, feature list
+     ========================================================= -->
+<section class="hero-variant-3">
+  <div class="container py-5">
+    <div class="row align-items-center g-4">
+
+      <!-- Image column (right on desktop) -->
+      <div class="col-lg-5 order-lg-2">
+        <div class="hero-variant-3__image-wrapper">
+          <div class="hero-variant-3__gradient-blob"></div>
+          <img src="https://cfeglobal.org/images/hero3.png"
+               alt="CFE Community"
+               class="hero-variant-3__image img-fluid"
+               onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&h=600&fit=crop'">
+          <!-- Floating stats card -->
+          <div class="hero-variant-3__stats-card card">
+            <div class="card-body p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="hero-variant-3__stat-icon">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="fw-bold text-primary">354,000+</div>
+                  <small class="text-muted">Entrepreneurs Engaged</small>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="ed-featured__body" style="padding-left:28px;">
-        <div class="ed-section-header" style="margin-bottom:0;">
-          <span class="ed-section-header__title">Latest Programs</span>
-          <a href="https://cfeglobal.org/programs" class="ed-section-header__link">All →</a>
+      <!-- Text column (left on desktop) -->
+      <div class="col-lg-7 order-lg-1">
+        <div class="pe-lg-5">
+          <div class="d-inline-flex align-items-center gap-2 bg-primary bg-opacity-10 rounded-pill px-3 py-2 mb-3">
+            <span class="badge bg-primary rounded-circle" style="width:8px;height:8px;"></span>
+            <small class="text-primary fw-semibold">160+ Countries · 23,500+ Projects Impacted</small>
+          </div>
+
+          <h1 class="display-3 fw-bold mb-4">
+            Your Growth <span class="text-primary">Community</span> Awaits™
+          </h1>
+
+          <p class="lead text-muted mb-4">
+            At the Center for Entrepreneurship, we deliver high-impact programs that accelerate startups, scale enterprises, and build entrepreneurial ecosystems worldwide.
+          </p>
+
+          <ul class="hero-variant-3__features list-unstyled mb-4">
+            <li class="mb-3">
+              <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+              <strong>Expert-led programs</strong> — Startup Club, ScaleUp, Huddle
+            </li>
+            <li class="mb-3">
+              <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+              <strong>Global mentorship network</strong> across 160+ countries
+            </li>
+            <li class="mb-3">
+              <svg width="20" height="20" fill="currentColor" class="text-success me-2" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+              <strong>Best international practices</strong> for real-world growth
+            </li>
+          </ul>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="https://cfeglobal.org/programs" class="btn btn-primary btn-lg px-4">Explore Programs</a>
+            <a href="https://c.cfeglobal.org" class="btn btn-outline-primary btn-lg px-4">Join Free →</a>
+          </div>
+
+          <!-- Trust stats -->
+          <div class="d-flex flex-wrap gap-4 pt-4 mt-2 border-top">
+            <div class="trust-stat"><div class="h5 mb-0 text-primary">354K+</div><small class="text-muted">Entrepreneurs</small></div>
+            <div class="trust-stat"><div class="h5 mb-0 text-primary">160+</div><small class="text-muted">Countries</small></div>
+            <div class="trust-stat"><div class="h5 mb-0 text-primary">23.5K+</div><small class="text-muted">Projects</small></div>
+          </div>
         </div>
-        <a href="https://cfeglobal.org/programs/startup-club" class="cfe-story-sm">
-          <div class="cfe-story-sm__img"><img src="https://cfeglobal.org/images/startup-club-logo.png" alt="" onerror="this.src='https://images.unsplash.com/photo-1552664730-d307ca884978?w=160&h=120&fit=crop'"></div>
-          <div><span class="cfe-story-sm__cat">Startup</span><div class="cfe-story-sm__title">Startup Club — Ideas, Tools & Mentors</div><span class="cfe-story-sm__meta">Open enrollment</span></div>
-        </a>
-        <a href="https://cfeglobal.org/programs/startup-huddle" class="cfe-story-sm">
-          <div class="cfe-story-sm__img"><img src="https://cfeglobal.org/images/startup-huddle-logo.svg" alt="" onerror="this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?w=160&h=120&fit=crop'"></div>
-          <div><span class="cfe-story-sm__cat">Pitch</span><div class="cfe-story-sm__title">Startup Huddle — Present, Feedback, Grow</div><span class="cfe-story-sm__meta">Monthly sessions</span></div>
-        </a>
-        <a href="https://cfeglobal.org/programs/scaleup-acceleration-program" class="cfe-story-sm">
-          <div class="cfe-story-sm__img"><img src="https://cfeglobal.org/images/scaleup-logo.png" alt="" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?w=160&h=120&fit=crop'"></div>
-          <div><span class="cfe-story-sm__cat">Acceleration</span><div class="cfe-story-sm__title">ScaleUp Acceleration Program</div><span class="cfe-story-sm__meta">Applications open</span></div>
-        </a>
-        <a href="https://cfeglobal.org/programs/global-entrepreneurship-week" class="cfe-story-sm">
-          <div class="cfe-story-sm__img"><img src="https://cfeglobal.org/images/global-entrepreneurship-week-logo.png" alt="" onerror="this.src='https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=160&h=120&fit=crop'"></div>
-          <div><span class="cfe-story-sm__cat">Global</span><div class="cfe-story-sm__title">Global Entrepreneurship Week 2025</div><span class="cfe-story-sm__meta">November 2025</span></div>
-        </a>
-        <a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance" class="cfe-story-sm">
-          <div class="cfe-story-sm__img"><img src="https://cfeglobal.org/images/g20-yea-logo.png" alt="" onerror="this.src='https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=160&h=120&fit=crop'"></div>
-          <div><span class="cfe-story-sm__cat">Policy</span><div class="cfe-story-sm__title">G20 Young Entrepreneurs Alliance</div><span class="cfe-story-sm__meta">Global summit</span></div>
-        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COMMUNITY STATS  (exponanta.css §17)
+     CFE global impact numbers
+     ========================================================= -->
+<section class="community-stats section bg-light">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="stat-item">
+          <div class="display-3 fw-bold text-primary mb-2">354K+</div>
+          <div class="h5 mb-0">Entrepreneurs Engaged</div>
+          <small class="text-muted">International network</small>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="stat-item">
+          <div class="display-3 fw-bold text-primary mb-2">160+</div>
+          <div class="h5 mb-0">Countries</div>
+          <small class="text-muted">Global mentorship reach</small>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 mb-md-0">
+        <div class="stat-item">
+          <div class="display-3 fw-bold text-primary mb-2">23.5K+</div>
+          <div class="h5 mb-0">Impacted Projects</div>
+          <small class="text-muted">Startups & scaleups</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="display-3 fw-bold text-primary mb-2">6</div>
+          <div class="h5 mb-0">Program Tracks</div>
+          <small class="text-muted">For every stage</small>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GROWTH PROGRAMS -->
+
+<!-- programs section and speakers section here -->
+
 <section class="section">
   <div class="container">
-    <div class="ed-section-header">
-      <span class="ed-section-header__title">What We Do</span>
-      <a href="https://cfeglobal.org/programs" class="ed-section-header__link">View all →</a>
+
+    <div class="text-center mb-5">
+      <p class="text-muted small text-uppercase fw-semibold mb-2">Featured</p>
+      <h2>Featured Programs</h2>
     </div>
-    <div class="cfe-prog-grid">
-      <div class="cfe-prog-cell">
-        <img src="https://cfeglobal.org/images/growing-icon.png" alt="" class="cfe-prog-cell__icon" onerror="this.style.display='none'">
-        <div class="cfe-prog-cell__cat">High Impact</div>
-        <div class="cfe-prog-cell__title">High-Impact Growth Programs</div>
-        <p class="cfe-prog-cell__desc">Whether you're a burgeoning startup or a seasoned enterprise, CFE offers programs that drive rapid, measurable business growth.</p>
-        <a href="https://cfeglobal.org/programs" class="cfe-prog-cell__link">View programs →</a>
+
+    <div class="row g-4">
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/startup-club-logo.png"
+                 alt="Startup Club" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Get new ideas and business tools from community of mentors.</p>
+            <a href="https://cfeglobal.org/programs/startup-club"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
-      <div class="cfe-prog-cell">
-        <img src="https://cfeglobal.org/images/complement-icon.png" alt="" class="cfe-prog-cell__icon" onerror="this.style.display='none'">
-        <div class="cfe-prog-cell__cat">Mentorship</div>
-        <div class="cfe-prog-cell__title">Experienced Mentors Network</div>
-        <p class="cfe-prog-cell__desc">Growth flourishes with guidance. CFE connects you with top-tier mentors who provide invaluable insights and practical business solutions.</p>
-        <a href="https://cfeglobal.org/programs/mentoring-programs" class="cfe-prog-cell__link">Find a mentor →</a>
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/startup-huddle-logo.svg"
+                 alt="Startup Huddle" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Present your startup, get feedback, and grow your business.</p>
+            <a href="https://cfeglobal.org/programs/startup-huddle"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
-      <div class="cfe-prog-cell">
-        <img src="https://cfeglobal.org/images/analyze-icon.png" alt="" class="cfe-prog-cell__icon" onerror="this.style.display='none'">
-        <div class="cfe-prog-cell__cat">Best Practices</div>
-        <div class="cfe-prog-cell__title">Best International Practices</div>
-        <p class="cfe-prog-cell__desc">CFE offers unparalleled access to proven international strategies, equipping your business with frameworks that actually work globally.</p>
-        <a href="https://cfeglobal.org/programs/best-practices" class="cfe-prog-cell__link">Learn more →</a>
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/scaleup-logo.png"
+                 alt="ScaleUp" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Scale up your business with a knowledgeable and experienced mentor.</p>
+            <a href="https://cfeglobal.org/programs/scaleup-acceleration-program"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
-      <div class="cfe-prog-cell">
-        <img src="https://cfeglobal.org/images/talent-icon.png" alt="" class="cfe-prog-cell__icon" onerror="this.style.display='none'">
-        <div class="cfe-prog-cell__cat">Operations</div>
-        <div class="cfe-prog-cell__title">Dedicated Program Team</div>
-        <p class="cfe-prog-cell__desc">Our dedicated team ensures meticulous program oversight, enabling you to stay focused on your core business strengths.</p>
-        <a href="https://cfeglobal.org/programs/dedicated-team" class="cfe-prog-cell__link">Meet the team →</a>
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/global-entrepreneurship-week-logo.png"
+                 alt="Global Entrepreneurship Week" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Connect to global network of entrepreneurs.</p>
+            <a href="https://cfeglobal.org/programs/global-entrepreneurship-week"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
-      <div class="cfe-prog-cell">
-        <img src="https://cfeglobal.org/images/dynamic-entrepreneurship-classroom.png" alt="" class="cfe-prog-cell__icon" onerror="this.style.display='none'">
-        <div class="cfe-prog-cell__cat">Education</div>
-        <div class="cfe-prog-cell__title">Dynamic Entrepreneurship Classroom</div>
-        <p class="cfe-prog-cell__desc">Implement your high-impact entrepreneurship educational program with our proven classroom methodology and curriculum.</p>
-        <a href="https://cfeglobal.org/programs/dynamic-entrepreneurship-classroom" class="cfe-prog-cell__link">Explore curriculum →</a>
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/g20-yea-logo.png"
+                 alt="G20 Young Entrepreneurs Alliance" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Shape global entrepreneurship for sustainable growth and innovation.</p>
+            <a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
-      <div class="cfe-prog-cell" style="background:var(--neutral-50);">
-        <div class="cfe-prog-cell__cat">Ecosystem</div>
-        <div class="cfe-prog-cell__title">Ecosystem Programs</div>
-        <p class="cfe-prog-cell__desc">Integrate into a thriving ecosystem — expand your network with business organizations and expert communities across 160+ countries.</p>
-        <a href="https://cfeglobal.org/programs/ecosystem-programs" class="cfe-prog-cell__link">Join ecosystem →</a>
+
+      <div class="col-lg-4 text-center">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column align-items-center p-4">
+            <img src="https://cfeglobal.org/images/dynamic-entrepreneurship-classroom.png"
+                 alt="Dynamic Entrepreneurship Classroom" class="img-fluid mb-4"
+                 style="max-height:80px;object-fit:contain;">
+            <p class="card-text flex-grow-1">Implement your high impact entrepreneurship educational program.</p>
+            <a href="https://cfeglobal.org/programs/dynamic-entrepreneurship-classroom"
+               class="btn btn-outline-primary mt-3">Find out more</a>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
+<!-- =========================================================
+     PROGRAM BENEFITS  (exponanta.css §43 benefit-card-new)
+     CFE program categories as benefit cards
+     ========================================================= -->
 
-<!-- IMPACT DARK -->
-<div class="cfe-impact">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <span class="ed-kicker" style="color:var(--accent-teal);">Global Impact</span>
-        <h2 style="font-size:var(--text-3xl);font-weight:700;color:var(--neutral-0);line-height:var(--leading-tight);margin:10px 0 16px;">Grow your business<br>with us</h2>
-        <p style="font-size:var(--text-md);color:rgba(255,255,255,.6);line-height:1.7;margin:0 0 28px;">At the Center for Entrepreneurship, we've spent decades building the world's most accessible entrepreneurship ecosystem. From first-time founders to established enterprises, our programs deliver measurable results at every stage.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="https://c.cfeglobal.org" class="btn btn-accent">Join Free</a>
-          <a href="https://cfeglobal.org/about" class="btn btn-outline-light">Our Mission →</a>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="cfe-impact__stat-grid">
-          <div class="cfe-impact__stat"><span class="cfe-impact__stat-num">354K+</span><span class="cfe-impact__stat-label">Entrepreneurs Engaged</span><span class="cfe-impact__stat-sub">International network</span></div>
-          <div class="cfe-impact__stat"><span class="cfe-impact__stat-num">160+</span><span class="cfe-impact__stat-label">Countries</span><span class="cfe-impact__stat-sub">Global mentorship</span></div>
-          <div class="cfe-impact__stat"><span class="cfe-impact__stat-num">23.5K+</span><span class="cfe-impact__stat-label">Impacted Projects</span><span class="cfe-impact__stat-sub">Startups & scaleups</span></div>
-          <div class="cfe-impact__stat"><span class="cfe-impact__stat-num">6</span><span class="cfe-impact__stat-label">Program Tracks</span><span class="cfe-impact__stat-sub">For every stage</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- PROGRAM CATEGORIES -->
-<section class="section" style="background:var(--neutral-50);">
+     <section class="section">
   <div class="container">
-    <div class="ed-section-header">
-      <span class="ed-section-header__title">Program Categories</span>
-      <a href="https://cfeglobal.org/programs" class="ed-section-header__link">Browse all →</a>
+
+    <div class="text-center mb-5">
+      <p class="text-muted small text-uppercase fw-semibold mb-2">What We Do</p>
+      <h2>Growth Programs</h2>
     </div>
-    <div class="row g-0">
-      <div class="col-lg-6">
-        <div class="cfe-ranked">
-          <a href="https://cfeglobal.org/programs/startup-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">01</span><div><div class="cfe-ranked__title">Startup Programs</div><p class="cfe-ranked__desc">Top-tier programs designed to accelerate from initial idea to market leadership.</p></div></a>
-          <a href="https://cfeglobal.org/programs/acceleration-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">02</span><div><div class="cfe-ranked__title">Acceleration Programs</div><p class="cfe-ranked__desc">Rapid growth programs tailored to optimize operations and scale efficiently.</p></div></a>
-          <a href="https://cfeglobal.org/programs/mentoring-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">03</span><div><div class="cfe-ranked__title">Mentoring Programs</div><p class="cfe-ranked__desc">Essential guidance to enhance strategies and maximize business potential.</p></div></a>
+
+    <div class="row g-4 mb-5">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/startup-programs.jpg" alt="Startup Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--featured">MOST POPULAR</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Startup Programs</h4>
+            <p class="benefit-card-new__description">Join top-tier startup programs designed to accelerate your business from initial idea to market leadership.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/startup-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-lg-6 ps-lg-5">
-        <div class="cfe-ranked">
-          <a href="https://cfeglobal.org/programs/scale-up-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">04</span><div><div class="cfe-ranked__title">Scale-Up Programs</div><p class="cfe-ranked__desc">Comprehensive programs to expand your market presence and capabilities.</p></div></a>
-          <a href="https://cfeglobal.org/programs/educational-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">05</span><div><div class="cfe-ranked__title">Educational Programs</div><p class="cfe-ranked__desc">Vital knowledge and skills designed for practical, real-world application.</p></div></a>
-          <a href="https://cfeglobal.org/programs/ecosystem-programs" class="cfe-ranked__item"><span class="cfe-ranked__num">06</span><div><div class="cfe-ranked__title">Ecosystem Programs</div><p class="cfe-ranked__desc">Integrate into a thriving network of business organizations and communities.</p></div></a>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/acceleration-programs.jpg" alt="Acceleration Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--growth">FAST TRACK</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Acceleration Programs</h4>
+            <p class="benefit-card-new__description">Experience rapid growth with our acceleration programs tailored to optimize operations and scale efficiently.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/acceleration-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/mentoring-programs.jpg" alt="Mentoring Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--insights">MENTORSHIP</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Mentoring Programs</h4>
+            <p class="benefit-card-new__description">Quality mentoring programs offering essential guidance to enhance strategies and maximize business potential.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/mentoring-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/scaleup-programs.jpg" alt="Scale-up Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--premium">SCALE UP</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Scale-up Programs</h4>
+            <p class="benefit-card-new__description">Scale your business seamlessly with our comprehensive scale-up programs, designed to expand your market presence and capabilities.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/scale-up-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/educational-programs.jpg" alt="Educational Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--insights">EDUCATION</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Educational Programs</h4>
+            <p class="benefit-card-new__description">Gain vital knowledge and skills through our educational programs, designed for practical, real-world application.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/educational-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/ecosystem-programs.jpg" alt="Ecosystem Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--growth">ECOSYSTEM</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Ecosystem Programs</h4>
+            <p class="benefit-card-new__description">Integrate into a thriving ecosystem, expanding your network with business organizations and expert communities.</p>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value"><a href="https://cfeglobal.org/programs/ecosystem-programs" class="stretched-link">Find out more →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <div class="text-center">
+      <a href="https://cfeglobal.org/programs" class="btn btn-primary btn-lg px-5">View All Programs</a>
+    </div>
+
   </div>
 </section>
 
-<!-- FEATURED PROGRAMS -->
+<!------>
+
 <section class="section">
   <div class="container">
-    <div class="ed-section-header">
-      <span class="ed-section-header__title">Featured Programs</span>
-      <a href="https://cfeglobal.org/programs" class="ed-section-header__link">All programs →</a>
+
+    <div class="text-center mb-5">
+      <p class="text-muted small text-uppercase fw-semibold mb-2">What We Do</p>
+      <h2>Growth Programs</h2>
     </div>
-    <div class="cfe-feat-grid">
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/startup-club-logo.png" alt="Startup Club" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Get new ideas and business tools from a community of experienced mentors and fellow entrepreneurs.</p><a href="https://cfeglobal.org/programs/startup-club" class="cfe-feat-card__link">Find out more →</a></div>
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/startup-huddle-logo.svg" alt="Startup Huddle" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Present your startup, get actionable feedback, and grow your business with peer and expert support.</p><a href="https://cfeglobal.org/programs/startup-huddle" class="cfe-feat-card__link">Find out more →</a></div>
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/scaleup-logo.png" alt="ScaleUp" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Scale up your business with a knowledgeable mentor in an intensive acceleration program.</p><a href="https://cfeglobal.org/programs/scaleup-acceleration-program" class="cfe-feat-card__link">Find out more →</a></div>
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/global-entrepreneurship-week-logo.png" alt="GEW" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Connect to a global network of entrepreneurs during the world's largest celebration of innovation.</p><a href="https://cfeglobal.org/programs/global-entrepreneurship-week" class="cfe-feat-card__link">Find out more →</a></div>
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/g20-yea-logo.png" alt="G20 YEA" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Shape global entrepreneurship policy for sustainable growth and innovation at the G20 level.</p><a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance" class="cfe-feat-card__link">Find out more →</a></div>
-      <div class="cfe-feat-card"><img src="https://cfeglobal.org/images/dynamic-entrepreneurship-classroom.png" alt="DEC" class="cfe-feat-card__logo" onerror="this.style.display='none'"><p class="cfe-feat-card__desc">Implement your high-impact entrepreneurship educational program with our proven classroom model.</p><a href="https://cfeglobal.org/programs/dynamic-entrepreneurship-classroom" class="cfe-feat-card__link">Find out more →</a></div>
+
+    <div class="row g-4 mb-5">
+
+  <style>
+    .benefit-card-new__image { height: 192px; }
+  </style>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/startup-programs.jpg" alt="Startup Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--featured">MOST POPULAR</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/startup-programs">Startup Programs</a></h4>
+            <p class="benefit-card-new__description">Join top-tier startup programs designed to accelerate your business from initial idea to market leadership.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--blue">Startup Club</span>
+              <span class="benefit-highlight benefit-highlight--teal">Startup Huddle</span>
+              <span class="benefit-highlight benefit-highlight--coral">Peer mentorship</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">354K+</div>
+              <div class="metric-label">Entrepreneurs Reached</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/acceleration-programs.jpg" alt="Acceleration Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--growth">FAST TRACK</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/acceleration-programs">Acceleration Programs</a></h4>
+            <p class="benefit-card-new__description">Experience rapid growth with our acceleration programs tailored to optimize operations and scale efficiently.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--green">ScaleUp Program</span>
+              <span class="benefit-highlight benefit-highlight--purple">Growth strategy</span>
+              <span class="benefit-highlight benefit-highlight--amber">Market expansion</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">23.5K+</div>
+              <div class="metric-label">Projects Supported</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/mentoring-programs.jpg" alt="Mentoring Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--insights">MENTORSHIP</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/mentoring-programs">Mentoring Programs</a></h4>
+            <p class="benefit-card-new__description">Quality mentoring programs offering essential guidance to enhance strategies and maximize business potential.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--blue">Expert mentors</span>
+              <span class="benefit-highlight benefit-highlight--teal">1-on-1 sessions</span>
+              <span class="benefit-highlight benefit-highlight--coral">Business strategy</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">160+</div>
+              <div class="metric-label">Countries Represented</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/scaleup-programs.jpg" alt="Scale-up Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--premium">SCALE UP</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/scale-up-programs">Scale-up Programs</a></h4>
+            <p class="benefit-card-new__description">Scale your business seamlessly with our comprehensive scale-up programs, designed to expand your market presence and capabilities.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--purple">Market expansion</span>
+              <span class="benefit-highlight benefit-highlight--green">Operations</span>
+              <span class="benefit-highlight benefit-highlight--amber">Fundraising</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">6</div>
+              <div class="metric-label">Program Tracks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/educational-programs.jpg" alt="Educational Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--insights">EDUCATION</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/educational-programs">Educational Programs</a></h4>
+            <p class="benefit-card-new__description">Gain vital knowledge and skills through our educational programs, designed for practical, real-world application.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--blue">DEC curriculum</span>
+              <span class="benefit-highlight benefit-highlight--teal">Best practices</span>
+              <span class="benefit-highlight benefit-highlight--coral">Real-world tools</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">30+</div>
+              <div class="metric-label">Universities Reached</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://cfeglobal.org/images/ecosystem-programs.jpg" alt="Ecosystem Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--growth">ECOSYSTEM</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title"><a href="https://cfeglobal.org/programs/ecosystem-programs">Ecosystem Programs</a></h4>
+            <p class="benefit-card-new__description">Integrate into a thriving ecosystem, expanding your network with business organizations and expert communities.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--green">GEN network</span>
+              <span class="benefit-highlight benefit-highlight--purple">AmCham</span>
+              <span class="benefit-highlight benefit-highlight--amber">Kauffman</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">160+</div>
+              <div class="metric-label">Partner Countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <div class="text-center">
+      <a href="https://cfeglobal.org/programs" class="btn btn-primary btn-lg px-5">View All Programs</a>
+    </div>
+
   </div>
 </section>
-
-<!-- PARTNERS -->
-<section class="section" style="background:var(--neutral-50);">
-  <div class="container">
-    <div class="ed-section-header"><span class="ed-section-header__title">Featured Partners</span></div>
-    <div class="cfe-partners-strip">
-      <a href="https://cfeglobal.org/partners/global-entrepreneurship-network"><img src="https://cfeglobal.org/images/global-entrepreneurship-network-logo.png" alt="GEN" onerror="this.style.display='none'"></a>
-      <a href="https://cfeglobal.org/partners/ewing-marion-kauffman-foundation"><img src="https://cfeglobal.org/images/erwing-marion-kauffman-foundation-logo.png" alt="Kauffman" onerror="this.style.display='none'"></a>
-      <a href="https://cfeglobal.org/partners/us-department-of-state"><img src="https://cfeglobal.org/images/us-department-of-state-logo.png" alt="US Dept of State" onerror="this.style.display='none'"></a>
-      <a href="https://cfeglobal.org/partners/young-entrepreneurs-organization"><img src="https://cfeglobal.org/images/young-entrepreneurs-organization-logo.jpg" alt="YEO" onerror="this.style.display='none'"></a>
-      <a href="https://cfeglobal.org/partners/american-chamber-of-commerce"><img src="https://cfeglobal.org/images/american-chamber-of-commerce-logo.png" alt="AmCham" onerror="this.style.display='none'"></a>
-      <a href="https://cfeglobal.org/partners/junior-achievement"><img src="https://cfeglobal.org/images/junior-achievement.png" alt="Junior Achievement" onerror="this.style.display='none'"></a>
-    </div>
-  </div>
-</section>
-
-<!-- PEOPLE -->
+<!----->
 <section class="section">
   <div class="container">
-    <div class="ed-section-header">
-      <span class="ed-section-header__title">Management &amp; Board of Directors</span>
-      <a href="https://cfeglobal.org/about" class="ed-section-header__link">About CFE →</a>
+
+    <div class="text-center mb-5">
+      <h2 class="mb-3">Growth Programs</h2>
+      <p class="lead text-muted">High-impact programs for every stage of your entrepreneurial journey</p>
     </div>
-    <div class="cfe-people-grid">
-      <a href="https://cfeglobal.org/people/denis-didkovskiy.html" class="cfe-person"><div class="cfe-person__avatar">DD</div><div class="cfe-person__name">Denis Didkovskiy</div><span class="cfe-person__role">CEO</span><span class="cfe-person__group">Management</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/dennis-didkovski/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
-      <a href="https://cfeglobal.org/people/peter-charow.html" class="cfe-person"><div class="cfe-person__avatar" style="background:var(--blue-300);">PC</div><div class="cfe-person__name">Peter Charow</div><span class="cfe-person__role">Chairman</span><span class="cfe-person__group">Board of Directors</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/peter-charow/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
-      <a href="https://cfeglobal.org/people/steve-pease.html" class="cfe-person"><div class="cfe-person__avatar" style="background:var(--accent-teal);color:var(--neutral-0);">SP</div><div class="cfe-person__name">Steve Pease</div><span class="cfe-person__role">Board Member</span><span class="cfe-person__group">Board of Directors</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/steven-l-pease-72848743/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
-      <a href="https://cfeglobal.org/people/karen-horn.html" class="cfe-person"><div class="cfe-person__avatar" style="background:var(--blue-700);color:var(--neutral-0);">KH</div><div class="cfe-person__name">Karen Horn</div><span class="cfe-person__role">Board Member</span><span class="cfe-person__group">Board of Directors</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/karen-horn/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
-      <a href="https://cfeglobal.org/people/charlie-ryan.html" class="cfe-person"><div class="cfe-person__avatar" style="background:var(--accent-coral);color:var(--neutral-0);">CR</div><div class="cfe-person__name">Charlie Ryan</div><span class="cfe-person__role">Board Member</span><span class="cfe-person__group">Board of Directors</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/charles-ryan-62a62765/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
-      <a href="https://cfeglobal.org/people/jonathan-ortmans.html" class="cfe-person"><div class="cfe-person__avatar" style="background:var(--neutral-600);color:var(--neutral-0);">JO</div><div class="cfe-person__name">Jonathan Ortmans</div><span class="cfe-person__role">Board Member</span><span class="cfe-person__group">Board of Directors</span><div class="cfe-person__li"><a href="https://www.linkedin.com/in/jonathanortmans/" target="_blank" rel="noopener"><img src="https://cfeglobal.org/images/linkedin-icon.png" alt="LinkedIn"></a></div></a>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop" alt="Startup Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--featured">MOST POPULAR</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Startup Programs</h4>
+            <p class="benefit-card-new__description">Top-tier programs designed to accelerate your business from initial idea to market leadership.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--blue">Startup Club</span>
+              <span class="benefit-highlight benefit-highlight--teal">Startup Huddle</span>
+              <span class="benefit-highlight benefit-highlight--coral">Peer mentorship</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">354K+</div>
+              <div class="metric-label">Entrepreneurs Reached</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=250&fit=crop" alt="Acceleration">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--growth">FAST TRACK</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">ScaleUp Acceleration</h4>
+            <p class="benefit-card-new__description">Scale your business with a knowledgeable mentor in an intensive acceleration program.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--green">Expert mentors</span>
+              <span class="benefit-highlight benefit-highlight--purple">Growth strategy</span>
+              <span class="benefit-highlight benefit-highlight--amber">Market expansion</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">23.5K+</div>
+              <div class="metric-label">Projects Supported</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&h=250&fit=crop" alt="Global Programs">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--premium">GLOBAL</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Global Ecosystem</h4>
+            <p class="benefit-card-new__description">Connect to a worldwide network during Global Entrepreneurship Week and the G20 YEA summit.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--blue">GEW 2025</span>
+              <span class="benefit-highlight benefit-highlight--teal">G20 Alliance</span>
+              <span class="benefit-highlight benefit-highlight--coral">160+ countries</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">160+</div>
+              <div class="metric-label">Countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="benefit-card-new">
+          <div class="benefit-card-new__image">
+            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=250&fit=crop" alt="Education">
+            <div class="benefit-card-new__overlay"></div>
+            <div class="benefit-card-new__badge benefit-card-new__badge--insights">EDUCATION</div>
+          </div>
+          <div class="benefit-card-new__body">
+            <h4 class="benefit-card-new__title">Educational Programs</h4>
+            <p class="benefit-card-new__description">Implement high-impact entrepreneurship education with our Dynamic Entrepreneurship Classroom.</p>
+            <div class="benefit-card-new__highlights">
+              <span class="benefit-highlight benefit-highlight--purple">DEC curriculum</span>
+              <span class="benefit-highlight benefit-highlight--green">Best practices</span>
+              <span class="benefit-highlight benefit-highlight--amber">Real-world tools</span>
+            </div>
+            <div class="benefit-card-new__metric">
+              <div class="metric-value">6</div>
+              <div class="metric-label">Program Tracks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="https://cfeglobal.org/programs" class="btn btn-primary btn-lg px-5">View All Programs</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section--hero text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h3 class="display-5 fw-bold mb-3">Grow your business with us!</h3>
+        <p class="lead mb-4">We'll customize a program for you.</p>
+        <a href="https://c.cfeglobal.org" class="btn btn-light btn-lg px-5">Join Free</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA STRIP -->
-<div class="cfe-cta-strip">
+
+
+<!-- =========================================================
+     FEATURED SPEAKERS  (exponanta.css §18)
+     CFE board members as featured people
+     ========================================================= -->
+<section class="speakers section py-5">
   <div class="container">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-4">
-      <div>
-        <h3 style="font-size:var(--text-2xl);font-weight:700;color:var(--neutral-0);margin:0 0 6px;">Grow your business with us!</h3>
-        <p style="font-size:var(--text-sm);color:rgba(255,255,255,.8);margin:0;">We'll customize a program for you. Join free — no commitment required.</p>
+
+    <div class="text-center mb-5">
+      <p class="text-muted small text-uppercase fw-semibold letter-spacing-1 mb-2">People behind Center for Entrepreneurship</p>
+      <h2>Management and Board of Directors</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Denis Didkovskiy -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/denis-didkovskiy.jpg"
+                 alt="Denis Didkovskiy"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--blue-700);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">DD</div>
+            <h5 class="card-title mb-1">Denis Didkovskiy</h5>
+            <p class="text-muted small mb-0">CEO</p>
+            <p class="text-muted small mb-3">Management</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/denis-didkovskiy.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/dennis-didkovski/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <a href="https://c.cfeglobal.org" class="btn btn-light" style="color:var(--blue-700);font-weight:700;white-space:nowrap;">Join Free →</a>
+
+      <!-- Peter Charow -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/peter-charow.jpg"
+                 alt="Peter Charow"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--blue-300);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">PC</div>
+            <h5 class="card-title mb-1">Peter Charow</h5>
+            <p class="text-muted small mb-0">Chairman of the Board</p>
+            <p class="text-muted small mb-3">Board of Directors</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/peter-charow.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/peter-charow/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steve Pease -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/steve-pease.jpg"
+                 alt="Steve Pease"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--accent-teal);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">SP</div>
+            <h5 class="card-title mb-1">Steve Pease</h5>
+            <p class="text-muted small mb-0">Board Member</p>
+            <p class="text-muted small mb-3">Board of Directors</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/steve-pease.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/steven-l-pease-72848743/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Karen Horn -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/karen-horn.jpg"
+                 alt="Karen Horn"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--blue-700);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">KH</div>
+            <h5 class="card-title mb-1">Karen Horn</h5>
+            <p class="text-muted small mb-0">Board Member</p>
+            <p class="text-muted small mb-3">Board of Directors</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/karen-horn.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/karen-horn/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charlie Ryan -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/charlie-ryan.jpg"
+                 alt="Charlie Ryan"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--accent-coral);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">CR</div>
+            <h5 class="card-title mb-1">Charlie Ryan</h5>
+            <p class="text-muted small mb-0">Board Member</p>
+            <p class="text-muted small mb-3">Board of Directors</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/charlie-ryan.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/charles-ryan-62a62765/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jonathan Ortmans -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <img src="https://cfeglobal.org/images/jonathan-ortmans.jpg"
+                 alt="Jonathan Ortmans"
+                 class="rounded-circle mb-3"
+                 width="120" height="120"
+                 style="object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="rounded-circle mb-3 mx-auto"
+                 style="display:none;width:120px;height:120px;background:var(--neutral-600);color:var(--neutral-0);font-size:var(--text-xl);font-weight:700;align-items:center;justify-content:center;">JO</div>
+            <h5 class="card-title mb-1">Jonathan Ortmans</h5>
+            <p class="text-muted small mb-0">Board Member</p>
+            <p class="text-muted small mb-3">Board of Directors</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <a href="https://cfeglobal.org/people/jonathan-ortmans.html"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <img src="https://cfeglobal.org/images/siteicon.png" alt="CFE" width="14" height="14" style="object-fit:contain;">
+              </a>
+              <a href="https://www.linkedin.com/in/jonathanortmans/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary rounded-circle"
+                 style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
-<footer class="cfe-footer">
+<!-- =========================================================
+     TESTIMONIALS  (exponanta.css §16)
+     CFE partner / entrepreneur quotes
+     ========================================================= -->
+<section class="testimonials section">
   <div class="container">
-    <div class="cfe-footer__grid">
-      <div>
-        <div class="cfe-footer__brand">Center for Entrepreneurship</div>
-        <p class="cfe-footer__tagline">High impact entrepreneurship programs.</p>
-        <p class="cfe-footer__body">Building the world's most accessible entrepreneurship ecosystem — connecting founders, mentors, and organizations across 160+ countries.</p>
-        <img src="https://cfeglobal.org/assets/images/logo/cfe-long-4.png" alt="CFE" height="22" style="opacity:.22;" onerror="this.style.display='none'">
+
+    <div class="text-center mb-5">
+      <h2>What Entrepreneurs Say</h2>
+      <p class="text-muted">Hear from our global community members</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="mb-3"><span class="text-warning">★★★★★</span></div>
+            <p class="card-text">"The ScaleUp program gave us the strategic framework and the right mentors at exactly the right time. We doubled revenue within 18 months."</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="avatar" style="width:48px;height:48px;background:var(--blue-300);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;">AK</div>
+              <div>
+                <div class="fw-semibold">Aleksei Kovalev</div>
+                <small class="text-muted">Founder & CEO, TechScale</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div class="cfe-footer__col-title">Goals</div>
-        <ul class="cfe-footer__links">
-          <li><a href="https://cfeglobal.org/programs/grow-existing-business.html">Grow Existing Business</a></li>
-          <li><a href="https://cfeglobal.org/programs/launch-startup">Launch a Startup</a></li>
-          <li><a href="https://cfeglobal.org/programs/learn-entrepreneurship">Learn Entrepreneurship</a></li>
-          <li><a href="https://cfeglobal.org/programs/support-entrepreneurship">Support Entrepreneurship</a></li>
-        </ul>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="mb-3"><span class="text-warning">★★★★★</span></div>
+            <p class="card-text">"Startup Huddle is the best monthly ritual for any founder. You get brutal honesty and real connections in one room. I've found two co-founders through it."</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="avatar" style="width:48px;height:48px;background:var(--accent-teal);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;">MP</div>
+              <div>
+                <div class="fw-semibold">Maria Petrova</div>
+                <small class="text-muted">Co-founder, InnovateLab</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div class="cfe-footer__col-title">Programs</div>
-        <ul class="cfe-footer__links">
-          <li><a href="https://cfeglobal.org/programs/acceleration-programs">ScaleUp Accelerator</a></li>
-          <li><a href="https://cfeglobal.org/programs/startup-programs">Startup Programs</a></li>
-          <li><a href="https://cfeglobal.org/programs/educational-programs">Educational Programs</a></li>
-          <li><a href="https://cfeglobal.org/programs/ecosystem-programs">Ecosystem Programs</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="cfe-footer__col-title">About</div>
-        <ul class="cfe-footer__links">
-          <li><a href="https://cfeglobal.org/about">About CFE</a></li>
-          <li><a href="https://cfeglobal.org/blog">News</a></li>
-          <li><a href="https://cfeglobal.org/programs/volunteer">Volunteer</a></li>
-          <li><a href="https://cfeglobal.org/contact">Contact Us</a></li>
-        </ul>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="mb-3"><span class="text-warning">★★★★★</span></div>
+            <p class="card-text">"CFE's Global Entrepreneurship Week connected our university program to a worldwide network overnight. The international reach is unmatched."</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="avatar" style="width:48px;height:48px;background:var(--accent-coral);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;">JO</div>
+              <div>
+                <div class="fw-semibold">James Okafor</div>
+                <small class="text-muted">Director, University Ventures</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="cfe-footer__bottom">
-      <span>Copyright © CFE 2025. All rights reserved.</span>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;">
-        <a href="https://cfeglobal.org/privacypolicy">Privacy Policy</a>
-        <a href="https://cfeglobal.org/sitemap">Sitemap</a>
+  </div>
+</section>
+
+<!-- =========================================================
+     PARTNERS  (partner-logo from exponanta.css §41)
+     ========================================================= -->
+<section class="section bg-light">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2>Featured Partners</h2>
+      <p class="text-muted">Organizations shaping the global entrepreneurship ecosystem</p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/global-entrepreneurship-network"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/global-entrepreneurship-network-logo.png"
+               alt="Global Entrepreneurship Network"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">Global Entrepreneurship Network</span>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/ewing-marion-kauffman-foundation"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/erwing-marion-kauffman-foundation-logo.png"
+               alt="Kauffman Foundation"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">Ewing Marion Kauffman Foundation</span>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/us-department-of-state"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/us-department-of-state-logo.png"
+               alt="US Department of State"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">US Department of State</span>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/young-entrepreneurs-organization"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/young-entrepreneurs-organization-logo.jpg"
+               alt="Young Entrepreneurs Organization"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">Young Entrepreneurs Organization</span>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/american-chamber-of-commerce"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/american-chamber-of-commerce-logo.png"
+               alt="American Chamber of Commerce"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">American Chamber of Commerce</span>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="https://cfeglobal.org/partners/junior-achievement"
+           class="partner-logo d-flex flex-column align-items-center justify-content-center text-decoration-none"
+           style="min-height:160px;background:var(--neutral-0);border-radius:var(--radius-lg);padding:32px 24px;transition:all .2s;">
+          <img src="https://cfeglobal.org/images/junior-achievement.png"
+               alt="Junior Achievement"
+               style="max-height:72px;max-width:100%;object-fit:contain;filter:none;opacity:1;"
+               onerror="this.style.display='none'">
+          <span style="font-size:var(--text-sm);font-weight:600;color:var(--blue-700);margin-top:12px;text-align:center;">Junior Achievement</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer-option-3">
+  <div class="container py-5">
+    <div class="row g-4 pb-4">
+
+      <!-- Brand -->
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <h5 class="mb-3 fw-bold text-white">Center for Entrepreneurship</h5>
+        <p class="mb-4 text-white-50">High-impact entrepreneurship programs. Building the world's most accessible entrepreneurship ecosystem since 1998.</p>
+        <img src="https://cfeglobal.org/assets/images/logo/cfe-long-4.png" alt="CFE" height="22"
+             style="opacity:.22;margin-bottom:16px;display:block;" onerror="this.style.display='none'">
+
+        <div class="d-flex gap-2 mb-4">
+          <a href="https://www.linkedin.com/company/cfeglobal/" target="_blank" rel="noopener" class="social-icon-gradient" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          </a>
+          <a href="https://x.com/cfeglobal_org" target="_blank" rel="noopener" class="social-icon-gradient" aria-label="X / Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/cfeglobal.org/" target="_blank" rel="noopener" class="social-icon-gradient" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+          </a>
+        </div>
+
+        <a href="https://c.cfeglobal.org" class="btn btn-light btn-sm">Join Free →</a>
+      </div>
+
+      <!-- 2 rows × 3 cols of CFE links -->
+      <div class="col-lg-8">
+        <div class="row g-4 mb-4">
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">Goals</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/programs/grow-existing-business.html">Grow Existing Business</a></li>
+              <li><a href="https://cfeglobal.org/programs/launch-startup">Launch a Startup</a></li>
+              <li><a href="https://cfeglobal.org/programs/learn-entrepreneurship">Learn Entrepreneurship</a></li>
+              <li><a href="https://cfeglobal.org/programs/support-entrepreneurship">Support Entrepreneurship</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">Programs</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/programs/acceleration-programs">ScaleUp Accelerator</a></li>
+              <li><a href="https://cfeglobal.org/programs/startup-programs">Startup Programs</a></li>
+              <li><a href="https://cfeglobal.org/programs/mentoring-programs">Mentoring Programs</a></li>
+              <li><a href="https://cfeglobal.org/programs/educational-programs">Educational Programs</a></li>
+              <li><a href="https://cfeglobal.org/programs/ecosystem-programs">Ecosystem Programs</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">Featured</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/programs/startup-club">Startup Club</a></li>
+              <li><a href="https://cfeglobal.org/programs/startup-huddle">Startup Huddle</a></li>
+              <li><a href="https://cfeglobal.org/programs/scaleup-acceleration-program">ScaleUp Program</a></li>
+              <li><a href="https://cfeglobal.org/programs/global-entrepreneurship-week">GEW 2025</a></li>
+              <li><a href="https://cfeglobal.org/programs/g20-young-entrepreneurs-alliance">G20 YEA</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">About</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/about">About CFE</a></li>
+              <li><a href="https://cfeglobal.org/blog">News</a></li>
+              <li><a href="https://cfeglobal.org/programs/volunteer">Volunteer</a></li>
+              <li><a href="https://cfeglobal.org/contact">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">Industries</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/industries">All Industries</a></li>
+              <li><a href="https://cfeglobal.org/programs">All Programs</a></li>
+              <li><a href="https://cfeglobal.org/goals">Goals</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h6 class="mb-3 fw-semibold footer-heading-gradient">Legal</h6>
+            <ul class="list-unstyled footer-links-gradient">
+              <li><a href="https://cfeglobal.org/privacypolicy">Privacy Policy</a></li>
+              <li><a href="https://cfeglobal.org/sitemap">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom-gradient pt-4 mt-4">
+      <div class="row align-items-center">
+        <div class="col-12 text-center text-md-start">
+          <small class="text-white-50">Copyright © CFE 2025. All rights reserved.</small>
+        </div>
       </div>
     </div>
+
   </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  document.getElementById('heroDate').textContent = new Date().toLocaleDateString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-  window.addEventListener('scroll', function () {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
-  });
-</script>
 </body>
 </html>
