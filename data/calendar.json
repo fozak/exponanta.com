@@ -1,0 +1,21 @@
+{
+  "slots": [
+    { "date": "2025-04-02", "time": "10:00", "vertical": "Technology & Software", "available": true, "spots": 3 },
+    { "date": "2025-04-02", "time": "14:00", "vertical": "Healthcare & Life Sciences", "available": true, "spots": 2 },
+    { "date": "2025-04-03", "time": "11:00", "vertical": "Financial Services", "available": true, "spots": 5 },
+    { "date": "2025-04-07", "time": "10:00", "vertical": "Technology & Software", "available": true, "spots": 1 },
+    { "date": "2025-04-07", "time": "15:00", "vertical": "Energy & Climate", "available": true, "spots": 4 },
+    { "date": "2025-04-09", "time": "09:00", "vertical": "Industrial & Manufacturing", "available": false, "spots": 0 },
+    { "date": "2025-04-10", "time": "13:00", "vertical": "Technology & Software", "available": true, "spots": 2 },
+    { "date": "2025-04-14", "time": "10:00", "vertical": "Consumer & Retail", "available": true, "spots": 3 },
+    { "date": "2025-04-14", "time": "16:00", "vertical": "Education & Research", "available": true, "spots": 2 },
+    { "date": "2025-04-16", "time": "11:00", "vertical": "Technology & Software", "available": true, "spots": 1 },
+    { "date": "2025-04-17", "time": "14:00", "vertical": "Government & Defense", "available": true, "spots": 4 },
+    { "date": "2025-04-21", "time": "10:00", "vertical": "Financial Services", "available": false, "spots": 0 },
+    { "date": "2025-04-23", "time": "09:00", "vertical": "Technology & Software", "available": true, "spots": 2 },
+    { "date": "2025-04-24", "time": "15:00", "vertical": "Healthcare & Life Sciences", "available": true, "spots": 3 },
+    { "date": "2025-04-28", "time": "10:00", "vertical": "Technology & Software", "available": true, "spots": 1 },
+    { "date": "2025-04-28", "time": "14:00", "vertical": "Energy & Climate", "available": true, "spots": 2 },
+    { "date": "2025-04-30", "time": "11:00", "vertical": "Consumer & Retail", "available": true, "spots": 5 }
+  ]
+}
