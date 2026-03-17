@@ -30,25 +30,6 @@ if (parentLink) {
   console.error("No parentlink meta tag found.");
 }*/
 
-// ─── Audience resolution ─────────────────────────────────────────────────────
-
-var audience = document.querySelector('meta[name="audience"]')
-  ?.getAttribute("content") || "default";
-
-function resolveAudience(root) {
-  var variants = root.querySelectorAll("[data-audience]");
-  if (!variants.length) return;
-
-  var hasMatch = Array.from(variants)
-    .some(function (el) { return el.dataset.audience === audience; });
-
-  variants.forEach(function (el) {
-    var show = el.dataset.audience === audience
-      || (el.dataset.audience === "default" && !hasMatch);
-    el.style.display = show ? "" : "none";
-  });
-}
-
 // ─── Component loader ────────────────────────────────────────────────────────
 
 if (document.readyState === "loading") {
@@ -78,7 +59,6 @@ function loadOne(el) {
       var inserted = temp.firstElementChild;
       el.replaceWith(inserted);
       if (props) resolveProps(inserted, props);
-      resolveAudience(inserted);
     })
     .catch(function (err) {
       console.warn("Component load failed:", err.message);
