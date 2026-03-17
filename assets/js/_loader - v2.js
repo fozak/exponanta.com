@@ -1,21 +1,25 @@
 /* _loader.js */
-
 // Define the variable from the parentlink meta tag
 var parentLinkMeta = document.querySelector('meta[name="parentlink"]');
 /*var parentLink = parentLinkMeta ? parentLinkMeta.getAttribute("content") : null;
 
 if (parentLink) {
+  // Construct the URL for the additional content
   var linkParts = parentLink.split("/");
   var lastPart = linkParts.pop();
   var additionalContentUrl =
     linkParts.join("/") + "/" + lastPart + "-about.html";
 
+  // Fetch the additional content
   fetch(additionalContentUrl)
     .then((response) => {
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
       return response.text();
     })
     .then((data) => {
+      // Append the fetched content to #additional-content
       var additionalContent = document.getElementById("additional-content");
       if (additionalContent) {
         additionalContent.innerHTML = data;
@@ -25,13 +29,13 @@ if (parentLink) {
     })
     .catch((error) => {
       console.error("Error loading additional content:", error);
+      // Optionally handle error cases, e.g., display a message or fallback content
     });
 } else {
   console.error("No parentlink meta tag found.");
 }*/
 
-// ─── Component loader ────────────────────────────────────────────────────────
-
+// Load components when DOM is ready __
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", loadComponents);
 } else {
@@ -39,67 +43,39 @@ if (document.readyState === "loading") {
 }
 
 function loadComponents() {
-  var loaders = document.querySelectorAll("[data-loader]");
-  var promises = Array.from(loaders).map(loadOne);
-  Promise.all(promises).then(hydrateStats);
-}
+  var loaderDivs = document.querySelectorAll("div[data-loader]");
 
-function loadOne(el) {
-  var url = el.getAttribute("data-loader");
-  var props = el.dataset.props ? JSON.parse(el.dataset.props) : null;
+  loaderDivs.forEach(function (div) {
+    var url = div.getAttribute("data-loader");
+    var id = div.getAttribute("id");
 
-  return fetch(url)
-    .then(function (response) {
-      if (!response.ok) throw new Error("Failed to load: " + url);
-      return response.text();
-    })
-    .then(function (html) {
-      var temp = document.createElement("div");
-      temp.innerHTML = html;
-      var inserted = temp.firstElementChild;
-      el.replaceWith(inserted);
-      if (props) resolveProps(inserted, props);
-    })
-    .catch(function (err) {
-      console.warn("Component load failed:", err.message);
-    });
-}
-
-function resolveProps(root, props) {
-  root.querySelectorAll("[data-prop]").forEach(function (node) {
-    var val = props[node.dataset.prop];
-    if (val !== undefined) node.textContent = val;
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to load: " + url);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        div.insertAdjacentHTML("afterend", data);
+        div.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Error loading component for #" + id + ":", error);
+      });
   });
 }
 
-// ─── Stats hydration (runs after all components inserted) ────────────────────
-
-function hydrateStats() {
-  var stats = document.querySelectorAll("[data-stat]");
-  if (!stats.length) return;
-
-  fetch("/data/stats.json")
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      stats.forEach(function (el) {
-        var key = el.dataset.stat;
-        if (data[key] !== undefined) el.textContent = data[key];
-      });
-    })
-    .catch(function (err) { console.warn("Stats fetch failed:", err); });
-}
-
-// ─── Navbar toggler ──────────────────────────────────────────────────────────
-
+/* navbar toggler script for header starts */
 function navbartoggle(x) {
   x.classList.toggle("change");
 }
+/* navbar toggler script for header ends */
 
-// ─── Number counter animation ────────────────────────────────────────────────
-
+/* number counter animation */
 document
   .querySelectorAll(
-    ".number-counter .number-counter__number-counter-column_counter-count .count"
+    ".number-counter .number-counter__number-counter-column_counter-count .count",
   )
   .forEach(function (element) {
     const target = parseFloat(element.textContent);
@@ -109,41 +85,57 @@ document
     function updateCounter(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
+
+      // easeInOutQuad (similar to jQuery's 'swing')
       const easing =
         progress < 0.5
           ? 2 * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      element.textContent = Math.ceil(easing * target);
-      if (progress < 1) requestAnimationFrame(updateCounter);
+
+      const current = easing * target;
+      element.textContent = Math.ceil(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
     }
 
     requestAnimationFrame(updateCounter);
   });
 
-// ─── Bootstrap collapse (mobile nav) ─────────────────────────────────────────
-
+/* Bootstrap collapse functionality for mobile nav - using event delegation */
 document.addEventListener("click", function (e) {
   const toggleButton = e.target.closest('[data-toggle="collapse"]');
+
   if (toggleButton) {
     const targetId = toggleButton.getAttribute("data-target");
     const targetElement = document.querySelector(targetId);
+
     if (targetElement) {
       const isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
+
+      // Toggle aria-expanded
       toggleButton.setAttribute("aria-expanded", !isExpanded);
+
+      // Toggle collapse class
       targetElement.classList.toggle("show");
+
+      // Toggle icon animation
       navbartoggle(toggleButton);
     }
   }
 });
 
-// ─── Blog sidebar image ───────────────────────────────────────────────────────
+/* End of mobile menue script */
 
 function loadSidebarImage() {
   const currentUrl = window.location.pathname;
+
   if (!currentUrl.includes("/blog/")) return;
 
   const urlParts = currentUrl.split("/");
   let slug = urlParts[urlParts.length - 1].replace(/\.html$/, "");
+
   if (!slug) slug = "home";
 
   const svgPath = `/images/${slug}.svg`;
@@ -154,37 +146,47 @@ function loadSidebarImage() {
     const sidebar = document.createElement("div");
     sidebar.id = "sidebar-image";
     sidebar.innerHTML = `<img src="${img.src}" alt="">`;
-    document.getElementById("main-content")
-      .insertAdjacentElement("afterbegin", sidebar);
+
+    const mainContent = document.getElementById("main-content");
+    mainContent.insertAdjacentElement("afterbegin", sidebar); // Inside main-content
+
+    /*mainContent.style.marginLeft = '30%';*/
   };
+
   img.onerror = function () {
     const pngImg = new Image();
     pngImg.onload = function () {
       const sidebar = document.createElement("div");
       sidebar.id = "sidebar-image";
       sidebar.innerHTML = `<img src="${pngPath}" alt="">`;
-      document.getElementById("main-content")
-        .insertAdjacentElement("afterbegin", sidebar);
+
+      const mainContent = document.getElementById("main-content");
+      mainContent.insertAdjacentElement("afterbegin", sidebar); // Inside main-content
+
+      /*mainContent.style.marginLeft = '30%';*/
     };
     pngImg.src = pngPath;
   };
+
   img.src = svgPath;
 }
 
 document.addEventListener("DOMContentLoaded", loadSidebarImage);
 
-// ─── Scrolling text custom element ───────────────────────────────────────────
+//scrolling
 
 if (typeof ScrollingText !== "function") {
   class ScrollingText extends HTMLElement {
     constructor() {
       super();
 
+      // Get dimensions helper
       const getWidth = (element) => {
         const rect = element.getBoundingClientRect();
         return rect.right - rect.left;
       };
 
+      // Main scrolling controller
       class ScrollingController {
         constructor(box, speed) {
           const innerElement = box.children?.[0];
@@ -215,39 +217,49 @@ if (typeof ScrollingText !== "function") {
         setupChildren() {
           const qty = this.calculateNumElements();
           const currentChildren = this.box.children.length;
+
           if (qty > currentChildren) {
-            for (let i = currentChildren; i < qty; i++)
+            for (let i = currentChildren; i < qty; i++) {
               this.box.appendChild(this.innerElement.cloneNode(true));
+            }
           } else if (qty < currentChildren) {
-            for (let i = qty; i < currentChildren; i++)
+            for (let i = qty; i < currentChildren; i++) {
               this.box.removeChild(this.box.lastChild);
+            }
           }
         }
 
         nextFrame(delta, direction) {
           this.refreshWidths();
           this.setupChildren();
+
           Array.from(this.box.children).forEach((el) => {
-            el.style.transform = `translateX(${
-              direction === "rtl" ? this.position : -this.position
-            }px)`;
+            const translateValue =
+              direction === "rtl" ? this.position : -this.position;
+            el.style.transform = `translateX(${translateValue}px)`;
           });
+
           this.position += (this.speed * delta) / 1000;
-          if (this.position >= this.innerElementWidth)
+
+          if (this.position >= this.innerElementWidth) {
             this.position = this.position % this.innerElementWidth;
+          }
         }
 
         start(direction) {
           this._running = true;
           let lastTime = null;
+
           const loop = () => {
             if (!this._running) return;
+
             const now = Date.now();
             const delta = lastTime === null ? 0 : now - lastTime;
             this.nextFrame(delta, direction);
             lastTime = now;
             window.requestAnimationFrame(loop);
           };
+
           window.requestAnimationFrame(loop);
         }
 
@@ -256,6 +268,7 @@ if (typeof ScrollingText !== "function") {
         }
       }
 
+      // Initialize
       const speed =
         window.innerWidth > 768
           ? parseInt(this.dataset.scrollingSpeed)
@@ -264,21 +277,31 @@ if (typeof ScrollingText !== "function") {
       const direction = this.dataset.scrollingDirection || "ltr";
       const scrollingText = new ScrollingController(this, speed);
 
+      // Pause on hover functionality
       if (this.dataset.pauseOnHover === "true") {
         let windowInFocus = true;
+
+        const handleMouseOver = () => {
+          if (windowInFocus) scrollingText.stop();
+        };
+
+        const handleMouseOut = () => {
+          if (windowInFocus) scrollingText.start(direction);
+        };
+
         window.addEventListener("blur", () => (windowInFocus = false));
         window.addEventListener("focus", () => (windowInFocus = true));
-        this.addEventListener("mouseover", () => {
-          if (windowInFocus) scrollingText.stop();
-        });
-        this.addEventListener("mouseout", () => {
-          if (windowInFocus) scrollingText.start(direction);
-        });
+        this.addEventListener("mouseover", handleMouseOver);
+        this.addEventListener("mouseout", handleMouseOut);
       }
 
+      // Start/stop based on visibility
       new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) scrollingText.start(direction);
-        else scrollingText.stop();
+        if (entries[0].isIntersecting) {
+          scrollingText.start(direction);
+        } else {
+          scrollingText.stop();
+        }
       }).observe(this);
     }
   }
@@ -288,8 +311,7 @@ if (typeof ScrollingText !== "function") {
   }
 }
 
-// ─── Sidebar mobile toggle ────────────────────────────────────────────────────
-
+// Sidebar mobile toggle — add to _loader.js or inline before </body>
 function toggleMobileSidebar() {
   const sidebar = document.getElementById("siteSidebar");
   const backdrop = document.getElementById("sidebarBackdrop");
