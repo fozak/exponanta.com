@@ -343,6 +343,40 @@ function loadDb() {
     .catch(function(err) { console.warn('db.json failed:', err); return []; });
 }
 
+// ─── Doc lookup helpers ───────────────────────────────────────────────────────
+
+function getDoc(doctype, name) {
+  return (_db || []).find(function(d) {
+    return d.doctype === doctype && d.name === name;
+  });
+}
+
+function getDocByPageName(pageName) {
+  return (_db || []).find(function(d) {
+    return d.page_name === pageName;
+  });
+}
+
+// ─── Name generator ───────────────────────────────────────────────────────────
+
+function generateName(doctype) {
+  var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var random = '';
+  for (var i = 0; i < 8; i++) {
+    random += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return doctype + random;
+}
+
+// ─── Image fallback ───────────────────────────────────────────────────────────
+
+function buildImgTag(item, alt) {
+  var primary   = item.image || ('/images/' + item.page_name + '.jpg');
+  var secondary = '/images/' + (item.content_category || 'default') + '.jpg';
+  return '<img src="' + primary + '" alt="' + (alt || '') + '" '
+       + 'onerror="this.src=\'' + secondary + '\';this.onerror=null;">';
+}
+
 // ─── Load more — state per section ───────────────────────────────────────────
 
 var _loadMoreState = {
@@ -437,7 +471,7 @@ function buildBlogCard(post) {
   return [
     '<div class="ed-card" data-category="' + (post.audience || 'default') + '">',
       '<a href="' + post.url + '" class="ed-card__img ed-img ed-img--16-9">',
-        '<img src="' + (post.image || '') + '" alt="' + post.title + '">',
+        buildImgTag(post, post.title),
       '</a>',
       '<div class="ed-card__body">',
         '<span class="ed-kicker">' + (post.kicker || '') + '</span>',
@@ -459,7 +493,7 @@ function buildEventCard(event) {
   return [
     '<div class="ed-card" data-category="' + (event.audience || 'default') + '">',
       '<a href="' + event.url + '" class="ed-card__img ed-img ed-img--16-9">',
-        '<img src="' + (event.image || '') + '" alt="' + event.title + '">',
+        buildImgTag(event, event.title),
       '</a>',
       '<div class="ed-card__body">',
         '<span class="ed-kicker">' + (event.kicker || '') + '</span>',
@@ -479,7 +513,7 @@ function buildPeopleCard(person) {
   return [
     '<div class="ed-card" data-category="' + (person.audience || 'default') + '">',
       '<a href="' + person.url + '" class="ed-card__img ed-img ed-img--1-1">',
-        '<img src="' + (person.image || '') + '" alt="' + person.title + '">',
+        buildImgTag(person, person.title),
       '</a>',
       '<div class="ed-card__body">',
         '<span class="ed-kicker">' + (person.kicker || '') + '</span>',
@@ -494,7 +528,7 @@ function buildProgramCard(program) {
   return [
     '<div class="ed-card" data-category="' + (program.audience || 'default') + '">',
       '<a href="' + program.url + '" class="ed-card__img ed-img ed-img--16-9">',
-        '<img src="' + (program.image || '') + '" alt="' + program.title + '">',
+        buildImgTag(program, program.title),
       '</a>',
       '<div class="ed-card__body">',
         '<span class="ed-kicker">' + (program.kicker || '') + '</span>',
@@ -554,9 +588,9 @@ function initChipFilter() {
 
 function getSection(card) {
   var href = card.querySelector('a')?.getAttribute('href') || '';
-  if (href.includes('/blog/'))    return 'blog';
-  if (href.includes('/events/'))  return 'event';
-  if (href.includes('/people/'))  return 'people';
+  if (href.includes('/blog/'))     return 'blog';
+  if (href.includes('/events/'))   return 'event';
+  if (href.includes('/people/'))   return 'people';
   if (href.includes('/programs/')) return 'program';
   return 'other';
 }
