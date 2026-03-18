@@ -327,3 +327,243 @@ window.addEventListener("resize", () => {
     document.body.style.overflow = "";
   }
 });
+
+
+//--loader for categories ---
+
+// ─── db.json cache ────────────────────────────────────────────────────────────
+
+var _db = null;
+
+function loadDb() {
+  if (_db) return Promise.resolve(_db);
+  return fetch('/data/db.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) { _db = data; return data; })
+    .catch(function(err) { console.warn('db.json failed:', err); return []; });
+}
+
+// ─── Load more — state per section ───────────────────────────────────────────
+
+var _loadMoreState = {
+  blog:    { page: 0, hardcoded: 4, batchSize: 6 },
+  event:   { page: 0, hardcoded: 3, batchSize: 6 },
+  people:  { page: 0, hardcoded: 0, batchSize: 9 },
+  program: { page: 0, hardcoded: 0, batchSize: 6 }
+};
+
+function resetLoadMore() {
+  Object.keys(_loadMoreState).forEach(function(key) {
+    _loadMoreState[key].page = 0;
+  });
+  document.querySelectorAll('.btn-more').forEach(function(btn) {
+    btn.style.display = '';
+    btn.disabled = false;
+    var section = btn.dataset.section;
+    btn.textContent = 'Load more ' + (section || 'items') + 's \u2192';
+  });
+}
+
+function initLoadMore() {
+  document.querySelectorAll('.btn-more').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var self = this;
+      var section = self.dataset.section;
+      var state = _loadMoreState[section];
+      if (!state) return;
+
+      self.textContent = 'Loading\u2026';
+      self.disabled = true;
+
+      loadDb().then(function(db) {
+        var activeFilter = document.querySelector('[data-filter].ed-topic-pill--active')
+          ?.dataset.filter || 'all';
+
+        var items = db.filter(function(d) {
+          return d.docstatus === 1 &&
+                 d.category === section &&
+                 (activeFilter === 'all' || d.content_category === activeFilter);
+        });
+
+        items.sort(function(a, b) {
+          return new Date(b.date) - new Date(a.date);
+        });
+
+        var start = state.hardcoded + (state.page * state.batchSize);
+        var batch = items.slice(start, start + state.batchSize);
+
+        if (batch.length === 0) {
+          self.style.display = 'none';
+          return;
+        }
+
+        var grid = self.closest('.ed-section').querySelector('.ed-grid-3');
+        batch.forEach(function(item) {
+          grid.insertAdjacentHTML('beforeend', buildCard(item, section));
+        });
+
+        state.page++;
+
+        var nextStart = state.hardcoded + (state.page * state.batchSize);
+        if (nextStart >= items.length) {
+          self.style.display = 'none';
+        } else {
+          self.textContent = 'Load more ' + section + 's \u2192';
+          self.disabled = false;
+        }
+      });
+    });
+  });
+}
+
+// ─── Card builders ────────────────────────────────────────────────────────────
+
+function buildCard(item, section) {
+  switch (section) {
+    case 'blog':    return buildBlogCard(item);
+    case 'event':   return buildEventCard(item);
+    case 'people':  return buildPeopleCard(item);
+    case 'program': return buildProgramCard(item);
+    default:        return buildBlogCard(item);
+  }
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function buildBlogCard(post) {
+  return [
+    '<div class="ed-card" data-category="' + (post.audience || 'default') + '">',
+      '<a href="' + post.url + '" class="ed-card__img ed-img ed-img--16-9">',
+        '<img src="' + (post.image || '') + '" alt="' + post.title + '">',
+      '</a>',
+      '<div class="ed-card__body">',
+        '<span class="ed-kicker">' + (post.kicker || '') + '</span>',
+        '<h3 class="ed-title"><a href="' + post.url + '">' + post.title + '</a></h3>',
+        '<p class="ed-deck" style="font-size:15px;">' + (post.deck || '') + '</p>',
+        '<div class="ed-byline">',
+          '<strong>' + formatDate(post.date) + '</strong>',
+          '<span class="ed-byline__dot">\u00b7</span>',
+          (post.content_category || ''),
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+
+function buildEventCard(event) {
+  var going = event.going ? event.going + ' going' : '';
+  var price = event.price === 0 ? 'Free' : (event.price ? '$' + event.price : '');
+  return [
+    '<div class="ed-card" data-category="' + (event.audience || 'default') + '">',
+      '<a href="' + event.url + '" class="ed-card__img ed-img ed-img--16-9">',
+        '<img src="' + (event.image || '') + '" alt="' + event.title + '">',
+      '</a>',
+      '<div class="ed-card__body">',
+        '<span class="ed-kicker">' + (event.kicker || '') + '</span>',
+        '<h3 class="ed-title"><a href="' + event.url + '">' + event.title + '</a></h3>',
+        '<p class="ed-deck" style="font-size:15px;">' + (event.deck || '') + '</p>',
+        '<div class="ed-byline">',
+          '<strong>' + formatDate(event.date) + '</strong>',
+          going ? '<span class="ed-byline__dot">\u00b7</span>' + going : '',
+          price ? '<span class="ed-byline__dot">\u00b7</span>' + price : '',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+
+function buildPeopleCard(person) {
+  return [
+    '<div class="ed-card" data-category="' + (person.audience || 'default') + '">',
+      '<a href="' + person.url + '" class="ed-card__img ed-img ed-img--1-1">',
+        '<img src="' + (person.image || '') + '" alt="' + person.title + '">',
+      '</a>',
+      '<div class="ed-card__body">',
+        '<span class="ed-kicker">' + (person.kicker || '') + '</span>',
+        '<h3 class="ed-title"><a href="' + person.url + '">' + person.title + '</a></h3>',
+        '<p class="ed-deck" style="font-size:15px;">' + (person.deck || '') + '</p>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+
+function buildProgramCard(program) {
+  return [
+    '<div class="ed-card" data-category="' + (program.audience || 'default') + '">',
+      '<a href="' + program.url + '" class="ed-card__img ed-img ed-img--16-9">',
+        '<img src="' + (program.image || '') + '" alt="' + program.title + '">',
+      '</a>',
+      '<div class="ed-card__body">',
+        '<span class="ed-kicker">' + (program.kicker || '') + '</span>',
+        '<h3 class="ed-title"><a href="' + program.url + '">' + program.title + '</a></h3>',
+        '<p class="ed-deck" style="font-size:15px;">' + (program.deck || '') + '</p>',
+        '<div class="ed-byline">',
+          formatDate(program.date),
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join('');
+}
+
+// ─── Chip filter ──────────────────────────────────────────────────────────────
+
+function initChipFilter() {
+  document.querySelectorAll('[data-filter].ed-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('[data-filter].ed-topic-pill')
+        .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
+      this.classList.add('ed-topic-pill--active');
+
+      var activeFilter = this.dataset.filter;
+      var activeSection = document.querySelector('[data-section].ed-topic-pill--active')
+        ?.dataset.section || 'all';
+
+      document.querySelectorAll('.ed-card, .ed-featured').forEach(function(card) {
+        var sectionMatch = activeSection === 'all' || getSection(card) === activeSection;
+        var categoryMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
+        card.style.display = (sectionMatch && categoryMatch) ? '' : 'none';
+      });
+
+      resetLoadMore();
+    });
+  });
+
+  document.querySelectorAll('[data-section].ed-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('[data-section].ed-topic-pill')
+        .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
+      this.classList.add('ed-topic-pill--active');
+
+      var activeSection = this.dataset.section;
+      var activeFilter = document.querySelector('[data-filter].ed-topic-pill--active')
+        ?.dataset.filter || 'all';
+
+      document.querySelectorAll('.ed-card, .ed-featured').forEach(function(card) {
+        var sectionMatch = activeSection === 'all' || getSection(card) === activeSection;
+        var categoryMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
+        card.style.display = (sectionMatch && categoryMatch) ? '' : 'none';
+      });
+
+      resetLoadMore();
+    });
+  });
+}
+
+function getSection(card) {
+  var href = card.querySelector('a')?.getAttribute('href') || '';
+  if (href.includes('/blog/'))    return 'blog';
+  if (href.includes('/events/'))  return 'event';
+  if (href.includes('/people/'))  return 'people';
+  if (href.includes('/programs/')) return 'program';
+  return 'other';
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', function() {
+  initLoadMore();
+  initChipFilter();
+});
