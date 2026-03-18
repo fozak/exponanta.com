@@ -1,35 +1,5 @@
 /* _loader.js */
 
-// Define the variable from the parentlink meta tag
-var parentLinkMeta = document.querySelector('meta[name="parentlink"]');
-/*var parentLink = parentLinkMeta ? parentLinkMeta.getAttribute("content") : null;
-
-if (parentLink) {
-  var linkParts = parentLink.split("/");
-  var lastPart = linkParts.pop();
-  var additionalContentUrl =
-    linkParts.join("/") + "/" + lastPart + "-about.html";
-
-  fetch(additionalContentUrl)
-    .then((response) => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.text();
-    })
-    .then((data) => {
-      var additionalContent = document.getElementById("additional-content");
-      if (additionalContent) {
-        additionalContent.innerHTML = data;
-      } else {
-        console.error("#additional-content element not found.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error loading additional content:", error);
-    });
-} else {
-  console.error("No parentlink meta tag found.");
-}*/
-
 // ─── Audience resolution ─────────────────────────────────────────────────────
 
 var audience = document.querySelector('meta[name="audience"]')
@@ -92,7 +62,7 @@ function resolveProps(root, props) {
   });
 }
 
-// ─── Stats hydration (runs after all components inserted) ────────────────────
+// ─── Stats hydration ─────────────────────────────────────────────────────────
 
 function hydrateStats() {
   var stats = document.querySelectorAll("[data-stat]");
@@ -328,9 +298,6 @@ window.addEventListener("resize", () => {
   }
 });
 
-
-//--loader for categories ---
-
 // ─── db.json cache ────────────────────────────────────────────────────────────
 
 var _db = null;
@@ -370,8 +337,7 @@ function generateName(doctype) {
 
 // ─── Image fallback ───────────────────────────────────────────────────────────
 // Cascade: item.image → {page_name}.png → {page_name}.jpg
-//        → {content_category}.png → {content_category}.jpg → empty (stop)
-// data-img-step tracks position so onerror never loops
+//        → {content_category}.png → {content_category}.jpg → stop
 
 function buildImgTag(item, alt) {
   var base      = '/images/' + item.page_name;
@@ -393,8 +359,6 @@ function buildImgTag(item, alt) {
 // ─── Sort helpers ─────────────────────────────────────────────────────────────
 
 function parseEventSlot(slot) {
-  // "20260409T220000Z" → Date
-  // handles event_slot "20260409T220000Z/20260410T000000Z" — takes start
   var start = (slot || '').split('/')[0];
   return new Date(
     start.replace(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/,
@@ -404,13 +368,11 @@ function parseEventSlot(slot) {
 
 function sortItems(items, section) {
   if (section === 'event') {
-    // ascending — nearest event first, future events lower
     return items.slice().sort(function(a, b) {
       return parseEventSlot(a.data && a.data.event_slot)
            - parseEventSlot(b.data && b.data.event_slot);
     });
   }
-  // descending — newest published first for blog, people, program
   return items.slice().sort(function(a, b) {
     return new Date(b.published_date) - new Date(a.published_date);
   });
@@ -488,6 +450,8 @@ function initLoadMore() {
 }
 
 // ─── Card builders ────────────────────────────────────────────────────────────
+// All cards use data-content-category for chip filter matching
+// data-audience is separate — used only for CTA personalization
 
 function buildCard(item, section) {
   switch (section) {
@@ -516,7 +480,9 @@ function formatEventSlot(slot) {
 
 function buildBlogCard(post) {
   return [
-    '<div class="ed-card" data-category="' + (post.audience || 'default') + '">',
+    '<div class="ed-card"',
+    ' data-content-category="' + (post.content_category || '') + '"',
+    ' data-audience="' + (post.audience || 'default') + '">',
       '<a href="' + post.url + '" class="ed-card__img ed-img ed-img--16-9">',
         buildImgTag(post, post.title),
       '</a>',
@@ -538,13 +504,15 @@ function buildBlogCard(post) {
 }
 
 function buildEventCard(event) {
-  var slot    = event.data && event.data.event_slot ? formatEventSlot(event.data.event_slot) : '';
-  var going   = event.data && event.data.going ? event.data.going + ' going' : '';
-  var price   = event.data && event.data.price === 0 ? 'Free'
-              : event.data && event.data.price ? '$' + event.data.price : '';
-  var city    = event.data && event.data.city ? event.data.city : '';
+  var slot  = event.data && event.data.event_slot ? formatEventSlot(event.data.event_slot) : '';
+  var going = event.data && event.data.going ? event.data.going + ' going' : '';
+  var price = event.data && event.data.price === 0 ? 'Free'
+            : event.data && event.data.price ? '$' + event.data.price : '';
+  var city  = event.data && event.data.city ? event.data.city : '';
   return [
-    '<div class="ed-card" data-category="' + (event.audience || 'default') + '">',
+    '<div class="ed-card"',
+    ' data-content-category="' + (event.content_category || '') + '"',
+    ' data-audience="' + (event.audience || 'default') + '">',
       '<a href="' + event.url + '" class="ed-card__img ed-img ed-img--16-9">',
         buildImgTag(event, event.title),
       '</a>',
@@ -553,8 +521,8 @@ function buildEventCard(event) {
         '<h3 class="ed-title"><a href="' + event.url + '">' + event.title + '</a></h3>',
         '<p class="ed-deck" style="font-size:15px;">' + (event.deck || '') + '</p>',
         '<div class="ed-byline">',
-          slot ? '<strong>' + slot + '</strong>' : '',
-          city ? '<span class="ed-byline__dot">\u00b7</span>' + city : '',
+          slot  ? '<strong>' + slot + '</strong>' : '',
+          city  ? '<span class="ed-byline__dot">\u00b7</span>' + city : '',
           going ? '<span class="ed-byline__dot">\u00b7</span>' + going : '',
           price ? '<span class="ed-byline__dot">\u00b7</span>' + price : '',
         '</div>',
@@ -564,10 +532,12 @@ function buildEventCard(event) {
 }
 
 function buildPeopleCard(person) {
-  var role    = person.data && person.data.role ? person.data.role : '';
+  var role    = person.data && person.data.role    ? person.data.role    : '';
   var company = person.data && person.data.company ? person.data.company : '';
   return [
-    '<div class="ed-card" data-category="' + (person.audience || 'default') + '">',
+    '<div class="ed-card"',
+    ' data-content-category="' + (person.content_category || '') + '"',
+    ' data-audience="' + (person.audience || 'default') + '">',
       '<a href="' + person.url + '" class="ed-card__img ed-img ed-img--1-1">',
         buildImgTag(person, person.title),
       '</a>',
@@ -577,7 +547,7 @@ function buildPeopleCard(person) {
         role || company
           ? '<p class="ed-deck" style="font-size:15px;">'
               + (role ? role : '')
-              + (role && company ? ' · ' : '')
+              + (role && company ? ' \u00b7 ' : '')
               + (company ? company : '')
             + '</p>'
           : '',
@@ -588,7 +558,9 @@ function buildPeopleCard(person) {
 
 function buildProgramCard(program) {
   return [
-    '<div class="ed-card" data-category="' + (program.audience || 'default') + '">',
+    '<div class="ed-card"',
+    ' data-content-category="' + (program.content_category || '') + '"',
+    ' data-audience="' + (program.audience || 'default') + '">',
       '<a href="' + program.url + '" class="ed-card__img ed-img ed-img--16-9">',
         buildImgTag(program, program.title),
       '</a>',
@@ -605,46 +577,31 @@ function buildProgramCard(program) {
 }
 
 // ─── Chip filter ──────────────────────────────────────────────────────────────
+// Event delegation on document — one listener covers all pages
+// Matches on data-content-category (taxonomy value)
+// Covers .ed-card, .ed-featured, .ed-event-card
 
 function initChipFilter() {
-  document.querySelectorAll('[data-filter].ed-topic-pill').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      document.querySelectorAll('[data-filter].ed-topic-pill')
-        .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
-      this.classList.add('ed-topic-pill--active');
+  document.addEventListener('click', function(e) {
+    var pill = e.target.closest('[data-filter].ed-topic-pill');
+    if (!pill) return;
+     
 
-      var activeFilter = this.dataset.filter;
-      var activeSection = document.querySelector('[data-section].ed-topic-pill--active')
-        ?.dataset.section || 'all';
+    e.preventDefault();
 
-      document.querySelectorAll('.ed-card, .ed-featured').forEach(function(card) {
-        var sectionMatch = activeSection === 'all' || getSection(card) === activeSection;
-        var categoryMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
-        card.style.display = (sectionMatch && categoryMatch) ? '' : 'none';
+    document.querySelectorAll('[data-filter].ed-topic-pill')
+      .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
+    pill.classList.add('ed-topic-pill--active');
+
+    var filter = pill.getAttribute('data-filter');
+
+    document.querySelectorAll('.ed-card, .ed-featured, .ed-event-card')
+      .forEach(function(card) {
+        var cat = card.getAttribute('data-content-category');
+        card.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
       });
 
-      resetLoadMore();
-    });
-  });
-
-  document.querySelectorAll('[data-section].ed-topic-pill').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      document.querySelectorAll('[data-section].ed-topic-pill')
-        .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
-      this.classList.add('ed-topic-pill--active');
-
-      var activeSection = this.dataset.section;
-      var activeFilter = document.querySelector('[data-filter].ed-topic-pill--active')
-        ?.dataset.filter || 'all';
-
-      document.querySelectorAll('.ed-card, .ed-featured').forEach(function(card) {
-        var sectionMatch = activeSection === 'all' || getSection(card) === activeSection;
-        var categoryMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
-        card.style.display = (sectionMatch && categoryMatch) ? '' : 'none';
-      });
-
-      resetLoadMore();
-    });
+    resetLoadMore();
   });
 }
 
@@ -663,3 +620,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initLoadMore();
   initChipFilter();
 });
+
+  /* pre-fill grids that have no hardcoded cards
+  document.querySelectorAll('.btn-more').forEach(function(btn) {
+    var section = btn.dataset.section;
+    var state = _loadMoreState[section];
+    if (!state || state.hardcoded > 0) return;
+    btn.click();
+  });*/
