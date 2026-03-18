@@ -371,11 +371,19 @@ function generateName(doctype) {
 // ─── Image fallback ───────────────────────────────────────────────────────────
 
 function buildImgTag(item, alt) {
-  var primary   = item.image || ('/images/' + item.page_name + '.jpg');
-  var secondary = '/images/' + (item.content_category || 'default') + '.jpg';
+  var base      = '/images/' + item.page_name;
+  var primary   = item.image || (base + '.png');
+  var fallback1 = base + '.jpg';
+  var fallback2 = '/images/' + (item.content_category || 'default') + '.png';
+
   return '<img src="' + primary + '" alt="' + (alt || '') + '" '
-       + 'onerror="this.src=\'' + secondary + '\';this.onerror=null;">';
+       + 'onerror="'
+       +   'if(this.src.endsWith(\'.jpg\')){this.src=\'' + fallback1 + '\'}'
+       +   'else if(this.src.endsWith(\'.png\')){this.src=\'' + fallback2 + '\'}'
+       +   'else{this.onerror=null}'
+       + '">';
 }
+
 
 // ─── Load more — state per section ───────────────────────────────────────────
 
