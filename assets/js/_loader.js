@@ -369,21 +369,26 @@ function generateName(doctype) {
 }
 
 // ─── Image fallback ───────────────────────────────────────────────────────────
+// Cascade: item.image → {page_name}.png → {page_name}.jpg
+//        → {content_category}.png → {content_category}.jpg → empty (stop)
+// data-img-step tracks position so onerror never loops
 
 function buildImgTag(item, alt) {
   var base      = '/images/' + item.page_name;
   var primary   = item.image || (base + '.png');
   var fallback1 = base + '.jpg';
   var fallback2 = '/images/' + (item.content_category || 'default') + '.png';
+  var fallback3 = '/images/' + (item.content_category || 'default') + '.jpg';
 
-  return '<img src="' + primary + '" alt="' + (alt || '') + '" '
+  return '<img src="' + primary + '" alt="' + (alt || '') + '" data-img-step="0" '
        + 'onerror="'
-       +   'if(this.src.endsWith(\'.jpg\')){this.src=\'' + fallback1 + '\'}'
-       +   'else if(this.src.endsWith(\'.png\')){this.src=\'' + fallback2 + '\'}'
-       +   'else{this.onerror=null}'
+       +   'var s=parseInt(this.dataset.imgStep||0);'
+       +   'if(s===0){this.src=\'' + fallback1 + '\';this.dataset.imgStep=1;}'
+       +   'else if(s===1){this.src=\'' + fallback2 + '\';this.dataset.imgStep=2;}'
+       +   'else if(s===2){this.src=\'' + fallback3 + '\';this.dataset.imgStep=3;}'
+       +   'else{this.onerror=null;this.src=\'\';}'
        + '">';
 }
-
 
 // ─── Load more — state per section ───────────────────────────────────────────
 
