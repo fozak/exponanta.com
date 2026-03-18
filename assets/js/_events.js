@@ -41,11 +41,6 @@ function formatSlotDay(slot) {
   };
 }
 
-function isUpcoming(slot) {
-  var d = parseSlot(slot);
-  return d && d.getTime() >= Date.now();
-}
-
 function tagClass(tag) {
   if (tag === 'Free') return 'etag--free';
   if (tag === 'Paid') return 'etag--coral';
@@ -100,10 +95,12 @@ function renderEventCard(ev) {
     : '';
 
   return [
-    '<div class="ed-event-card evh evh--v1 mb-3" data-content-category="' + (ev.content_category || '') + '" data-audience="' + (ev.audience || '') + '">',
+    '<div class="ed-event-card evh evh--v1 mb-3"',
+    ' data-content-category="' + esc(ev.content_category || '') + '"',
+    ' data-audience="' + esc(ev.audience || '') + '">',
       '<div class="evh__img">',
-        '<img src="' + esc(ev.image || '') + '" alt="' + esc(ev.title) + '" ',
-          'onerror="var s=parseInt(this.dataset.imgStep||0);',
+        '<img src="' + esc(ev.image || '') + '" alt="' + esc(ev.title) + '"',
+          ' onerror="var s=parseInt(this.dataset.imgStep||0);',
             'if(s===0){this.src=\'/images/' + ev.page_name + '.jpg\';this.dataset.imgStep=1;}',
             'else if(s===1){this.src=\'/images/' + (ev.content_category||'default') + '.png\';this.dataset.imgStep=2;}',
             'else{this.onerror=null;this.src=\'\';}" data-img-step="0">',
@@ -144,8 +141,7 @@ function renderEventCard(ev) {
 
 function renderPastCard(ev, index) {
   var d = ev.data || {};
-  var slot = d.event_slot;
-  var start = parseSlot(slot);
+  var start = parseSlot(d.event_slot);
   var dateStr = start ? start.toLocaleDateString('en-US', {
     timeZone: 'America/New_York',
     weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
@@ -184,7 +180,7 @@ function renderPastCard(ev, index) {
   }).join('');
 
   var matHtml = '';
-  if (d.materials && (d.materials.video || d.materials.slides || d.materials.recording_url || d.materials.slides_url)) {
+  if (d.materials && (d.materials.recording_url || d.materials.video || d.materials.slides_url || d.materials.slides)) {
     var links = [];
     if (d.materials.recording_url || d.materials.video)
       links.push('<a href="' + esc(d.materials.recording_url || d.materials.video) + '" target="_blank" rel="noopener">Watch</a>');
@@ -227,25 +223,6 @@ function renderPastGrid(events) {
   return rows.join('');
 }
 
-// ─── Chip filter ──────────────────────────────────────────────────────────────
-
-function initEventChips() {
-  document.querySelectorAll('[data-filter].ed-topic-pill').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      document.querySelectorAll('[data-filter].ed-topic-pill')
-        .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
-      this.classList.add('ed-topic-pill--active');
-      var filter = this.dataset.filter;
-      document.querySelectorAll('.ed-event-card').forEach(function(card) {
-        var match = filter === 'all'
-          || card.dataset.contentCategory === filter
-          || card.dataset.audience === filter;
-        card.style.display = match ? '' : 'none';
-      });
-    });
-  });
-}
-
 // ─── Load + render ────────────────────────────────────────────────────────────
 
 function loadEvents() {
@@ -285,8 +262,6 @@ function loadEvents() {
           ? renderPastGrid(past)
           : '<div class="text-muted py-4">No past events yet.</div>';
       }
-
-      initEventChips();
     })
     .catch(function(err) {
       console.error('Events load error:', err);
@@ -294,5 +269,29 @@ function loadEvents() {
       if (el) el.innerHTML = '<div class="text-muted">Events unavailable.</div>';
     });
 }
+
+// ─── Chip filter — event delegation on document ───────────────────────────────
+// Attached once at script parse time — immune to DOM changes from _loader.js
+// Queries cards at click time so cards always exist when filter runs
+
+document.addEventListener('click', function(e) {
+  var pill = e.target.closest('[data-filter].ed-topic-pill');
+  if (!pill) return;
+
+  e.preventDefault();
+
+  document.querySelectorAll('[data-filter].ed-topic-pill')
+    .forEach(function(p) { p.classList.remove('ed-topic-pill--active'); });
+  pill.classList.add('ed-topic-pill--active');
+
+  var filter = pill.getAttribute('data-filter');
+
+  document.querySelectorAll('.ed-event-card').forEach(function(card) {
+    var cat = card.getAttribute('data-content-category');
+    card.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+  });
+});
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', loadEvents);
