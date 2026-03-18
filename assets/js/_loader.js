@@ -390,6 +390,32 @@ function buildImgTag(item, alt) {
        + '">';
 }
 
+// ─── Sort helpers ─────────────────────────────────────────────────────────────
+
+function parseEventSlot(slot) {
+  // "20260409T220000Z" → Date
+  // handles event_slot "20260409T220000Z/20260410T000000Z" — takes start
+  var start = (slot || '').split('/')[0];
+  return new Date(
+    start.replace(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/,
+    '$1-$2-$3T$4:$5:$6Z')
+  );
+}
+
+function sortItems(items, section) {
+  if (section === 'event') {
+    // ascending — nearest event first, future events lower
+    return items.slice().sort(function(a, b) {
+      return parseEventSlot(a.data && a.data.event_slot)
+           - parseEventSlot(b.data && b.data.event_slot);
+    });
+  }
+  // descending — newest published first for blog, people, program
+  return items.slice().sort(function(a, b) {
+    return new Date(b.published_date) - new Date(a.published_date);
+  });
+}
+
 // ─── Load more — state per section ───────────────────────────────────────────
 
 var _loadMoreState = {
@@ -432,9 +458,7 @@ function initLoadMore() {
                  (activeFilter === 'all' || d.content_category === activeFilter);
         });
 
-        items.sort(function(a, b) {
-          return new Date(b.date) - new Date(a.date);
-        });
+        items = sortItems(items, section);
 
         var start = state.hardcoded + (state.page * state.batchSize);
         var batch = items.slice(start, start + state.batchSize);
@@ -480,6 +504,16 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
+function formatEventSlot(slot) {
+  if (!slot) return '';
+  var d = parseEventSlot(slot);
+  return d.toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
+    month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit'
+  });
+}
+
 function buildBlogCard(post) {
   return [
     '<div class="ed-card" data-category="' + (post.audience || 'default') + '">',
@@ -491,9 +525,12 @@ function buildBlogCard(post) {
         '<h3 class="ed-title"><a href="' + post.url + '">' + post.title + '</a></h3>',
         '<p class="ed-deck" style="font-size:15px;">' + (post.deck || '') + '</p>',
         '<div class="ed-byline">',
-          '<strong>' + formatDate(post.date) + '</strong>',
+          '<strong>' + formatDate(post.published_date) + '</strong>',
           '<span class="ed-byline__dot">\u00b7</span>',
           (post.content_category || ''),
+          post.data && post.data.read_time_minutes
+            ? '<span class="ed-byline__dot">\u00b7</span>' + post.data.read_time_minutes + ' min read'
+            : '',
         '</div>',
       '</div>',
     '</div>'
@@ -501,8 +538,11 @@ function buildBlogCard(post) {
 }
 
 function buildEventCard(event) {
-  var going = event.going ? event.going + ' going' : '';
-  var price = event.price === 0 ? 'Free' : (event.price ? '$' + event.price : '');
+  var slot    = event.data && event.data.event_slot ? formatEventSlot(event.data.event_slot) : '';
+  var going   = event.data && event.data.going ? event.data.going + ' going' : '';
+  var price   = event.data && event.data.price === 0 ? 'Free'
+              : event.data && event.data.price ? '$' + event.data.price : '';
+  var city    = event.data && event.data.city ? event.data.city : '';
   return [
     '<div class="ed-card" data-category="' + (event.audience || 'default') + '">',
       '<a href="' + event.url + '" class="ed-card__img ed-img ed-img--16-9">',
@@ -513,7 +553,8 @@ function buildEventCard(event) {
         '<h3 class="ed-title"><a href="' + event.url + '">' + event.title + '</a></h3>',
         '<p class="ed-deck" style="font-size:15px;">' + (event.deck || '') + '</p>',
         '<div class="ed-byline">',
-          '<strong>' + formatDate(event.date) + '</strong>',
+          slot ? '<strong>' + slot + '</strong>' : '',
+          city ? '<span class="ed-byline__dot">\u00b7</span>' + city : '',
           going ? '<span class="ed-byline__dot">\u00b7</span>' + going : '',
           price ? '<span class="ed-byline__dot">\u00b7</span>' + price : '',
         '</div>',
@@ -523,6 +564,8 @@ function buildEventCard(event) {
 }
 
 function buildPeopleCard(person) {
+  var role    = person.data && person.data.role ? person.data.role : '';
+  var company = person.data && person.data.company ? person.data.company : '';
   return [
     '<div class="ed-card" data-category="' + (person.audience || 'default') + '">',
       '<a href="' + person.url + '" class="ed-card__img ed-img ed-img--1-1">',
@@ -531,7 +574,13 @@ function buildPeopleCard(person) {
       '<div class="ed-card__body">',
         '<span class="ed-kicker">' + (person.kicker || '') + '</span>',
         '<h3 class="ed-title"><a href="' + person.url + '">' + person.title + '</a></h3>',
-        '<p class="ed-deck" style="font-size:15px;">' + (person.deck || '') + '</p>',
+        role || company
+          ? '<p class="ed-deck" style="font-size:15px;">'
+              + (role ? role : '')
+              + (role && company ? ' · ' : '')
+              + (company ? company : '')
+            + '</p>'
+          : '',
       '</div>',
     '</div>'
   ].join('');
@@ -548,7 +597,7 @@ function buildProgramCard(program) {
         '<h3 class="ed-title"><a href="' + program.url + '">' + program.title + '</a></h3>',
         '<p class="ed-deck" style="font-size:15px;">' + (program.deck || '') + '</p>',
         '<div class="ed-byline">',
-          formatDate(program.date),
+          formatDate(program.published_date),
         '</div>',
       '</div>',
     '</div>'
