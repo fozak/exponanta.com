@@ -85,20 +85,150 @@
           <!-- ═══════════════════════════════════════════
      TOPIC NAV
 ═══════════════════════════════════════════ -->
-          <div class="container">
-            <nav class="ed-topic-nav" style="margin-top:20px;">
-              <a href="#" class="ed-topic-pill ed-topic-pill--active">All</a>
-              <a href="#" class="ed-topic-pill">Technology</a>
-              <a href="#" class="ed-topic-pill">Leadership</a>
-              <a href="#" class="ed-topic-pill">Startups</a>
-              <a href="#" class="ed-topic-pill">AI & Machine Learning</a>
-              <a href="#" class="ed-topic-pill">Design</a>
-              <a href="#" class="ed-topic-pill">Finance</a>
-              <a href="#" class="ed-topic-pill">Marketing</a>
-              <a href="#" class="ed-topic-pill">Sustainability</a>
-              <a href="#" class="ed-topic-pill">Product</a>
-            </nav>
+<div class="container">
+  <nav class="ed-topic-nav" style="margin-top:20px;">
+    <a href="#" class="ed-topic-pill ed-topic-pill--active" data-filter="all">All</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-technical">Technology</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-operator">Leadership</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-marketing">Startups</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-technical">AI &amp; Machine Learning</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-technical">Product</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-fundraising">Finance</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-marketing">Marketing</a>
+    <a href="#" class="ed-topic-pill" data-filter="founders-marketing">Growth</a>
+  </nav>
+</div>
+
+
+
+<!--BLOG-->
+
+<div class="ed-section">
+  <div class="container">
+    <div class="ed-section-header">
+      <h2 class="ed-section-header__title">Featured</h2>
+      <a href="/blog/" class="ed-section-header__link">See all posts →</a>
+    </div>
+
+    <!-- Featured article -->
+    <div class="ed-featured" data-category="founders-marketing">
+      <div class="ed-featured__img">
+        <a href="/blog/global-entrepreneurship-week-2026.html" class="ed-img" style="height:100%;min-height:360px;padding-top:0;position:relative;">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop" alt="Global Entrepreneurship Week 2026">
+        </a>
+      </div>
+      <div class="ed-featured__body">
+        <span class="ed-kicker">Startups · Boston</span>
+        <h2 class="ed-headline">
+          <a href="/blog/global-entrepreneurship-week-2026.html">Global Entrepreneurship Week 2026 — Seven Days, Seven Verticals, One Week in Boston</a>
+        </h2>
+        <p class="ed-deck">Exponanta and the Center for Entrepreneurship are organizing GEW Boston for the 18th year running. Preliminary program announced: dedicated days for AI, FinTech, Climate, Health, Robotics, GTM, and a closing Demo Day.</p>
+        <div class="ed-byline" style="margin-bottom:16px;">
+          <strong>Nov 16–22, 2026</strong>
+          <span class="ed-byline__dot">·</span>
+          Boston / Cambridge
+          <span class="ed-byline__dot">·</span>
+          <span class="ed-readtime">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            7 min read
+          </span>
+        </div>
+        <div class="ed-pullquote">
+          <p class="ed-pullquote__text">"The most deliberately structured GEW program we've built in 18 years of organizing."</p>
+          <div class="ed-pullquote__attribution">— Exponanta + Center for Entrepreneurship</div>
+        </div>
+        <div class="ed-featured__sponsor">Co-organized with CFE Global · cfeglobal.org</div>
+      </div>
+    </div>
+
+    <!-- 3-card grid -->
+    <div class="ed-grid-3">
+
+      <div class="ed-card" data-category="founders-technical">
+        <a href="/blog/oss-products-for-startups.html" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=340&fit=crop" alt="OSS Alternatives">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Technology · Analysis</span>
+          <h3 class="ed-title">
+            <a href="/blog/oss-products-for-startups.html">OSS Alternatives to SaaS: What Technical Founders Are Actually Shipping</a>
+          </h3>
+          <p class="ed-deck" style="font-size:15px;">18,900 GitHub stars. A breakdown of the most-watched open-source SaaS alternatives and where the real gaps still are.</p>
+          <div class="ed-byline">
+            <strong>Mar 17</strong>
+            <span class="ed-byline__dot">·</span>
+            <span class="ed-readtime">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              8 min read
+            </span>
+            <span class="ed-byline__dot">·</span>Technology
           </div>
+        </div>
+      </div>
+
+      <div class="ed-card" data-category="founders-marketing">
+        <a href="/blog/trending-producthunt-categories-for-startups.html" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1553484771-047a44eee27b?w=600&h=340&fit=crop" alt="Product Hunt Categories">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Marketing · Growth</span>
+          <h3 class="ed-title">
+            <a href="/blog/trending-producthunt-categories-for-startups.html">What's Actually Trending on Product Hunt in 2025–2026</a>
+          </h3>
+          <p class="ed-deck" style="font-size:15px;">AI dominates the leaderboard at 70–80% — but vertical AI is where the real opportunity is hiding.</p>
+          <div class="ed-byline">
+            <strong>Mar 17</strong>
+            <span class="ed-byline__dot">·</span>
+            <span class="ed-readtime">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              6 min read
+            </span>
+            <span class="ed-byline__dot">·</span>Marketing
+          </div>
+        </div>
+      </div>
+
+      <div class="ed-card" data-category="founders-technical">
+        <a href="/blog/audience-adaptive-cta-static-sites.html" class="ed-card__img ed-img ed-img--16-9">
+          <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&h=340&fit=crop" alt="Audience Adaptive CTA">
+        </a>
+        <div class="ed-card__body">
+          <span class="ed-kicker">Product · Technology</span>
+          <h3 class="ed-title">
+            <a href="/blog/audience-adaptive-cta-static-sites.html">Audience-Adaptive CTAs Without a Backend</a>
+          </h3>
+          <p class="ed-deck" style="font-size:15px;">One meta tag. Zero infrastructure. How to personalize every CTA on a static site using a priority chain.</p>
+          <div class="ed-byline">
+            <strong>Mar 17</strong>
+            <span class="ed-byline__dot">·</span>
+            <span class="ed-readtime">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              7 min read
+            </span>
+            <span class="ed-byline__dot">·</span>Product
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:28px;">
+      <button class="btn-more">Load more posts →</button>
+    </div>
+  </div>
+</div>
 
           <!-- ═══════════════════════════════════════════
      SECTION 1 — FEATURED STORY
