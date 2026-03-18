@@ -1,0 +1,448 @@
+{
+  "taxonomies": {
+    "content_category": {
+      "label": "Content Category",
+      "description": "What the content is about — drives chip filtering",
+      "values": [
+        { "id": "leadership", "label": "Leadership", "covers": ["Managing yourself", "Managing others", "Org design", "Scaling teams"] },
+        { "id": "technology", "label": "Technology", "covers": ["Innovation", "Dev tools", "Infrastructure", "OSS"] },
+        { "id": "ai-machine-learning", "label": "AI", "covers": ["AI agents", "ML platforms", "Vertical AI", "Horizontal AI"] },
+        { "id": "finance-investment", "label": "Finance & Investment", "covers": ["CFO office", "Fundraising", "Capital markets", "Investor lens"] },
+        { "id": "product", "label": "Product", "covers": ["Product management", "UX", "Roadmap", "Build decisions"] },
+        { "id": "marketing-growth", "label": "Marketing & Growth", "covers": ["GTM", "Distribution", "Brand", "Growth loops"] },
+        { "id": "startups", "label": "Startups", "covers": ["Founder journey", "Pitch", "Ecosystem", "Demo Day", "GEW"] },
+        { "id": "small-business-growth", "label": "Small Business Growth", "covers": ["Operations", "Local growth", "Independent owner", "Cash flow"] }
+      ]
+    },
+
+    "audience": {
+      "label": "Audience",
+      "description": "Who the content is for — drives CTA personalization",
+      "values": [
+        { "id": "corp-executive", "label": "Corporate Executive", "covers": ["C-suite", "VP", "Director", "Established company"] },
+        { "id": "corp-supplier", "label": "Corporate Supplier", "covers": ["Vendors", "Solution providers", "Selling to enterprise"] },
+        { "id": "startup-founder", "label": "Startup Founder", "covers": ["Early stage", "Growth stage", "VC-backable trajectory"] },
+        { "id": "small-business-owner", "label": "Small Business Owner", "covers": ["Operating business", "Revenue-generating", "Independent"] },
+        { "id": "investor", "label": "Investor", "covers": ["VC", "PE", "Angel", "Family office", "CVC"] },
+        { "id": "industry-professional", "label": "Industry Professional", "covers": ["Practitioner", "Manager", "Individual contributor"] },
+        { "id": "default", "label": "General", "covers": ["Mixed room", "Community", "Untagged"] }
+      ]
+    },
+
+    "doctype": {
+      "label": "Document Type",
+      "description": "What kind of record this is",
+      "values": [
+        { "id": "webpage", "label": "Web Page" }
+      ]
+    },
+
+    "category": {
+      "label": "Page Category",
+      "description": "Section of the site — drives section filter",
+      "values": [
+        { "id": "blog", "label": "Blog" },
+        { "id": "event", "label": "Event" },
+        { "id": "people", "label": "People" },
+        { "id": "program", "label": "Program" },
+        { "id": "sponsor", "label": "Sponsor" }
+      ]
+    },
+
+    "docstatus": {
+      "label": "Document Status",
+      "description": "Frappe-compatible lifecycle status",
+      "values": [
+        { "id": 0, "label": "Draft" },
+        { "id": 1, "label": "Published" },
+        { "id": 2, "label": "Cancelled" }
+      ]
+    },
+
+    "event_format": {
+      "label": "Event Format",
+      "description": "How the event is delivered",
+      "values": [
+        { "id": "in-person", "label": "In Person" },
+        { "id": "online", "label": "Online" },
+        { "id": "hybrid", "label": "Hybrid" }
+      ]
+    },
+
+    "event_type": {
+      "label": "Event Type",
+      "description": "What kind of event it is",
+      "values": [
+        { "id": "meetup", "label": "Meetup" },
+        { "id": "conference", "label": "Conference" },
+        { "id": "workshop", "label": "Workshop" },
+        { "id": "pitch-night", "label": "Pitch Night" },
+        { "id": "demo-day", "label": "Demo Day" },
+        { "id": "hackathon", "label": "Hackathon" },
+        { "id": "webinar", "label": "Webinar" },
+        { "id": "panel", "label": "Panel" },
+        { "id": "networking", "label": "Networking" }
+      ]
+    },
+
+    "session_format": {
+      "label": "Session Format",
+      "description": "Format of an individual session within an event",
+      "values": [
+        { "id": "keynote", "label": "Keynote" },
+        { "id": "talk", "label": "Talk" },
+        { "id": "panel", "label": "Panel" },
+        { "id": "workshop", "label": "Workshop" },
+        { "id": "demo", "label": "Demo" },
+        { "id": "fireside", "label": "Fireside Chat" },
+        { "id": "lightning", "label": "Lightning Talk" },
+        { "id": "qa", "label": "Q&A" }
+      ]
+    },
+
+    "sponsor_tier": {
+      "label": "Sponsor Tier",
+      "description": "Sponsorship level — ordered for display",
+      "values": [
+        { "id": "title", "label": "Title", "order": 1 },
+        { "id": "gold", "label": "Gold", "order": 2 },
+        { "id": "silver", "label": "Silver", "order": 3 },
+        { "id": "bronze", "label": "Bronze", "order": 4 },
+        { "id": "community", "label": "Community", "order": 5 },
+        { "id": "media", "label": "Media Partner", "order": 6 }
+      ]
+    },
+
+    "attendee_role": {
+      "label": "Attendee Role",
+      "description": "Role of a person at a specific event",
+      "values": [
+        { "id": "organizer", "label": "Organizer" },
+        { "id": "speaker", "label": "Speaker" },
+        { "id": "sponsor-rep", "label": "Sponsor Representative" },
+        { "id": "investor", "label": "Investor" },
+        { "id": "founder", "label": "Founder" },
+        { "id": "attendee", "label": "Attendee" },
+        { "id": "volunteer", "label": "Volunteer" },
+        { "id": "media", "label": "Media" }
+      ]
+    },
+
+    "industry": {
+      "label": "Market Vertical",
+      "description": "Industry sector the content relates to",
+      "values": [
+        {
+          "id": "technology",
+          "label": "Technology, Software & Telecommunications",
+          "order": 1,
+          "sub": [
+            { "id": "enterprise-software", "label": "Enterprise Software (SaaS, ERP, CRM)" },
+            { "id": "cloud-infrastructure", "label": "Cloud Computing & Data Infrastructure" },
+            { "id": "ai-ml", "label": "Artificial Intelligence & Machine Learning" },
+            { "id": "cybersecurity", "label": "Cybersecurity" },
+            { "id": "semiconductors", "label": "Semiconductors & Hardware" },
+            { "id": "developer-tools", "label": "Developer Tools & Platforms" },
+            { "id": "data-analytics", "label": "Data & Analytics Platforms" },
+            { "id": "robotics-automation", "label": "Robotics & Automation" },
+            { "id": "web3-blockchain", "label": "Web3 & Blockchain" },
+            { "id": "ar-vr", "label": "AR/VR & Spatial Computing" },
+            { "id": "iot", "label": "Internet of Things (IoT)" },
+            { "id": "telecommunications", "label": "Telecommunications" }
+          ]
+        },
+        {
+          "id": "healthcare",
+          "label": "Healthcare, Life Sciences & Biopharma",
+          "order": 2,
+          "sub": [
+            { "id": "hospital-systems", "label": "Hospital Systems & Health Networks" },
+            { "id": "medical-devices", "label": "Medical Devices & Equipment" },
+            { "id": "diagnostics", "label": "Diagnostics & Imaging" },
+            { "id": "digital-health", "label": "Digital Health & Telemedicine" },
+            { "id": "health-it", "label": "Health IT & EHR Systems" },
+            { "id": "clinical-care", "label": "Clinical Care Providers" },
+            { "id": "biotech", "label": "Biotechnology Research" },
+            { "id": "genomics", "label": "Genomics & Precision Medicine" },
+            { "id": "mental-health", "label": "Mental & Behavioral Health" },
+            { "id": "pharma", "label": "Branded & Generic Drug Manufacturers" },
+            { "id": "biologics", "label": "Biologics & Advanced Therapies" },
+            { "id": "vaccines", "label": "Vaccine Development" },
+            { "id": "cro-cdmo", "label": "CROs & CDMOs" },
+            { "id": "clinical-trials", "label": "Clinical Trials & Site Networks" },
+            { "id": "drug-distribution", "label": "Drug Distribution & Specialty Pharmacy" }
+          ]
+        },
+        {
+          "id": "financial-services",
+          "label": "Financial Services & FinTech",
+          "order": 3,
+          "sub": [
+            { "id": "banking", "label": "Commercial & Retail Banking" },
+            { "id": "investment-banking", "label": "Investment Banking & Capital Markets" },
+            { "id": "asset-management", "label": "Asset & Wealth Management" },
+            { "id": "insurance", "label": "Insurance & Reinsurance" },
+            { "id": "payments", "label": "Payments & Card Networks" },
+            { "id": "fintech", "label": "FinTech Platforms" },
+            { "id": "lending", "label": "Mortgage & Lending Platforms" },
+            { "id": "accounting", "label": "Accounting & Audit Firms" }
+          ]
+        },
+        {
+          "id": "energy-climate",
+          "label": "Energy, Climate & Utilities",
+          "order": 4,
+          "sub": [
+            { "id": "oil-gas-upstream", "label": "Oil & Gas Upstream" },
+            { "id": "oil-gas-downstream", "label": "Oil & Gas Midstream & Downstream" },
+            { "id": "power-generation", "label": "Power Generation & Electric Utilities" },
+            { "id": "natural-gas", "label": "Natural Gas Utilities" },
+            { "id": "solar", "label": "Renewable Energy — Solar" },
+            { "id": "wind", "label": "Renewable Energy — Wind" },
+            { "id": "energy-storage", "label": "Energy Storage & Batteries" },
+            { "id": "nuclear", "label": "Nuclear Energy" },
+            { "id": "grid", "label": "Grid & Transmission Infrastructure" },
+            { "id": "climate-tech", "label": "Climate Tech" },
+            { "id": "carbon-markets", "label": "Carbon Markets & Offsets" },
+            { "id": "waste-management", "label": "Waste Management & Recycling" },
+            { "id": "water-tech", "label": "Water & Wastewater Technology" },
+            { "id": "esg-consulting", "label": "ESG & Sustainability Consulting" }
+          ]
+        },
+        {
+          "id": "industrial",
+          "label": "Industrial, Manufacturing & Supply Chain",
+          "order": 5,
+          "sub": [
+            { "id": "industrial-machinery", "label": "Industrial Machinery & Equipment" },
+            { "id": "advanced-manufacturing", "label": "Advanced Manufacturing" },
+            { "id": "factory-automation", "label": "Factory Automation" },
+            { "id": "electronics-manufacturing", "label": "Electronics Manufacturing" },
+            { "id": "heavy-equipment", "label": "Heavy Equipment" },
+            { "id": "3d-printing", "label": "3D Printing & Additive Manufacturing" },
+            { "id": "chemicals", "label": "Chemicals & Petrochemicals" },
+            { "id": "packaging", "label": "Packaging Materials" },
+            { "id": "supply-chain-tech", "label": "Supply Chain Technology" },
+            { "id": "warehousing", "label": "Warehousing & Fulfillment" },
+            { "id": "procurement", "label": "Procurement & Sourcing" }
+          ]
+        },
+        {
+          "id": "infrastructure-real-estate",
+          "label": "Infrastructure, Construction & Real Estate",
+          "order": 6,
+          "sub": [
+            { "id": "civil-engineering", "label": "Civil Engineering & Public Works" },
+            { "id": "transport-infrastructure", "label": "Transportation Infrastructure" },
+            { "id": "smart-cities", "label": "Smart Cities Technology" },
+            { "id": "urban-planning", "label": "Urban Planning & Development" },
+            { "id": "commercial-real-estate", "label": "Commercial Real Estate" },
+            { "id": "residential-real-estate", "label": "Residential Real Estate" },
+            { "id": "real-estate-dev", "label": "Real Estate Development" },
+            { "id": "property-management", "label": "Property Management" },
+            { "id": "construction", "label": "Construction Contractors" },
+            { "id": "architecture", "label": "Architecture Firms" },
+            { "id": "engineering-firms", "label": "Engineering Firms" },
+            { "id": "contech", "label": "Construction Tech (ConTech)" },
+            { "id": "building-materials", "label": "Building Materials" }
+          ]
+        },
+        {
+          "id": "mobility-automotive",
+          "label": "Mobility, Automotive & Transportation",
+          "order": 7,
+          "sub": [
+            { "id": "automotive-oem", "label": "Automotive OEMs" },
+            { "id": "auto-parts", "label": "Auto Parts Suppliers" },
+            { "id": "ev", "label": "Electric Vehicles (EV)" },
+            { "id": "ev-charging", "label": "EV Charging Infrastructure" },
+            { "id": "autonomous-driving", "label": "Autonomous Driving Technology" },
+            { "id": "mobility-platforms", "label": "Mobility Platforms" },
+            { "id": "fleet-management", "label": "Fleet Management" },
+            { "id": "freight-shipping", "label": "Freight & Shipping" },
+            { "id": "trucking", "label": "Trucking & Fleet Operations" },
+            { "id": "rail", "label": "Rail Logistics" },
+            { "id": "air-cargo", "label": "Air Cargo & Aviation" },
+            { "id": "maritime", "label": "Maritime Shipping" },
+            { "id": "last-mile", "label": "Last-Mile Delivery" },
+            { "id": "aerospace", "label": "Aerospace & Space Technology" },
+            { "id": "drones", "label": "Drone & Unmanned Systems" },
+            { "id": "aviation-mro", "label": "Aviation MRO" }
+          ]
+        },
+        {
+          "id": "consumer-retail",
+          "label": "Consumer, Retail & Food",
+          "order": 8,
+          "sub": [
+            { "id": "mass-retail", "label": "Mass Retailers & Big Box Chains" },
+            { "id": "ecommerce", "label": "E-commerce Marketplaces" },
+            { "id": "grocery", "label": "Grocery & Supermarket Chains" },
+            { "id": "apparel", "label": "Apparel & Fashion Brands" },
+            { "id": "consumer-electronics", "label": "Consumer Electronics Brands" },
+            { "id": "personal-care", "label": "Personal Care & Beauty Brands" },
+            { "id": "luxury", "label": "Luxury Goods" },
+            { "id": "dtc", "label": "Direct-to-Consumer (DTC) Brands" },
+            { "id": "retail-tech", "label": "Retail Tech & POS Systems" },
+            { "id": "packaged-food", "label": "Packaged Food Manufacturers" },
+            { "id": "beverages-alcoholic", "label": "Beverage Manufacturers — Alcoholic" },
+            { "id": "beverages-non-alcoholic", "label": "Beverage Manufacturers — Non-Alcoholic" },
+            { "id": "restaurants", "label": "Restaurant Chains & Foodservice" },
+            { "id": "food-distribution", "label": "Food Distribution" },
+            { "id": "specialty-food", "label": "Specialty & Organic Food Producers" },
+            { "id": "agritech", "label": "Agriculture & Agritech" },
+            { "id": "farm-equipment", "label": "Farm Equipment & Inputs" }
+          ]
+        },
+        {
+          "id": "media-entertainment",
+          "label": "Media, Entertainment & Sports",
+          "order": 9,
+          "sub": [
+            { "id": "film-tv", "label": "Film & TV Studios" },
+            { "id": "streaming", "label": "Streaming Platforms" },
+            { "id": "digital-media", "label": "Digital Media Publishers" },
+            { "id": "gaming", "label": "Gaming Studios" },
+            { "id": "music", "label": "Music Labels & Distribution" },
+            { "id": "live-entertainment", "label": "Live Entertainment Production" },
+            { "id": "sports-leagues", "label": "Professional Sports Leagues & Teams" },
+            { "id": "sports-tech", "label": "Sports Technology" },
+            { "id": "esports", "label": "Esports Organizations" },
+            { "id": "sporting-goods", "label": "Sporting Goods Manufacturers" },
+            { "id": "fitness-wellness", "label": "Fitness & Wellness Operators" }
+          ]
+        },
+        {
+          "id": "hospitality-travel",
+          "label": "Hospitality & Travel",
+          "order": 10,
+          "sub": [
+            { "id": "hotels", "label": "Hotel Chains & Resorts" },
+            { "id": "short-term-rental", "label": "Short-Term Rental Platforms" },
+            { "id": "airlines", "label": "Airlines" },
+            { "id": "cruise", "label": "Cruise Lines" },
+            { "id": "travel-booking", "label": "Travel Booking Platforms" },
+            { "id": "tour-operators", "label": "Tour Operators" },
+            { "id": "business-travel", "label": "Business Travel Management" },
+            { "id": "dining", "label": "Restaurant & Dining Brands" },
+            { "id": "theme-parks", "label": "Theme Parks & Attractions" }
+          ]
+        },
+        {
+          "id": "government-defense",
+          "label": "Government, Defense & Public Sector",
+          "order": 11,
+          "sub": [
+            { "id": "federal-gov", "label": "Federal Government Agencies" },
+            { "id": "state-local-gov", "label": "State & Local Government" },
+            { "id": "public-health", "label": "Public Health Agencies" },
+            { "id": "defense-contractors", "label": "Defense Contractors" },
+            { "id": "military-systems", "label": "Military Systems & Equipment" },
+            { "id": "smart-gov", "label": "Smart Government Tech" },
+            { "id": "law-enforcement-tech", "label": "Law Enforcement Technology" },
+            { "id": "emergency-response", "label": "Emergency Response Services" }
+          ]
+        },
+        {
+          "id": "education-research",
+          "label": "Education & Research",
+          "order": 12,
+          "sub": [
+            { "id": "k12", "label": "K-12 School Systems" },
+            { "id": "higher-education", "label": "Higher Education Institutions" },
+            { "id": "online-education", "label": "Online Education Platforms" },
+            { "id": "edtech", "label": "EdTech Providers" },
+            { "id": "vocational", "label": "Vocational Training" },
+            { "id": "education-publishing", "label": "Education Publishing" },
+            { "id": "research-institutes", "label": "Research Institutes & National Labs" },
+            { "id": "accelerators", "label": "Innovation Hubs & Accelerators" }
+          ]
+        },
+        {
+          "id": "nonprofit",
+          "label": "Nonprofit & Associations",
+          "order": 13,
+          "sub": [
+            { "id": "foundations", "label": "Foundations & Grantmakers" },
+            { "id": "ngos", "label": "NGOs & International Aid" },
+            { "id": "advocacy", "label": "Advocacy Organizations" },
+            { "id": "trade-associations", "label": "Trade Associations" },
+            { "id": "cultural-institutions", "label": "Cultural Institutions" },
+            { "id": "membership-orgs", "label": "Membership Organizations" }
+          ]
+        },
+        {
+          "id": "investors-capital",
+          "label": "Investors & Capital",
+          "order": 14,
+          "sub": [
+            { "id": "private-equity", "label": "Private Equity" },
+            { "id": "venture-capital", "label": "Venture Capital" },
+            { "id": "family-offices", "label": "Family Offices" },
+            { "id": "hedge-funds", "label": "Hedge Funds" },
+            { "id": "angel-investors", "label": "Angel Investors & Syndicates" },
+            { "id": "sovereign-wealth", "label": "Sovereign Wealth Funds" },
+            { "id": "cvc", "label": "Corporate Venture Arms" }
+          ]
+        },
+        {
+          "id": "professional-services",
+          "label": "Professional & Business Services",
+          "order": 15,
+          "sub": [
+            { "id": "management-consulting", "label": "Management Consulting" },
+            { "id": "it-consulting", "label": "IT Consulting & System Integrators" },
+            { "id": "legal", "label": "Legal Services" },
+            { "id": "executive-search", "label": "Executive Search & Recruiting" },
+            { "id": "staffing", "label": "Staffing & BPO" },
+            { "id": "outsourcing", "label": "Outsourcing & Managed Services" },
+            { "id": "pr-comms", "label": "PR & Communications Firms" }
+          ]
+        },
+        {
+          "id": "marketing-media-events",
+          "label": "Marketing, Media & Events",
+          "order": 16,
+          "sub": [
+            { "id": "adtech", "label": "Advertising Technology (AdTech)" },
+            { "id": "martech", "label": "Marketing Technology (MarTech)" },
+            { "id": "creative-agencies", "label": "Brand & Creative Agencies" },
+            { "id": "media-buying", "label": "Media Buying Agencies" },
+            { "id": "event-organizers", "label": "Event Organizers & Trade Show Producers" },
+            { "id": "event-tech", "label": "Event Technology Platforms" },
+            { "id": "experiential", "label": "Experiential Marketing Agencies" },
+            { "id": "sponsorship", "label": "Sponsorship & Talent Agencies" },
+            { "id": "creator-economy", "label": "Talent & Creator Economy" }
+          ]
+        },
+        {
+          "id": "security",
+          "label": "Security",
+          "order": 17,
+          "sub": [
+            { "id": "cybersecurity-services", "label": "Cybersecurity Software & Services" },
+            { "id": "physical-security", "label": "Physical Security Systems" },
+            { "id": "identity-access", "label": "Identity & Access Management" },
+            { "id": "surveillance", "label": "Surveillance & Monitoring Tech" },
+            { "id": "critical-infrastructure", "label": "Critical Infrastructure Protection" },
+            { "id": "fraud-prevention", "label": "Fraud Prevention & Risk Management" }
+          ]
+        },
+        {
+          "id": "corporate-functions",
+          "label": "Corporate Functions & Enterprise Operations",
+          "order": 18,
+          "sub": [
+            { "id": "hr-future-of-work", "label": "HR & Future of Work" },
+            { "id": "finance-cfo", "label": "Finance & CFO Office" },
+            { "id": "legal-compliance", "label": "Legal & Compliance" },
+            { "id": "procurement-leadership", "label": "Procurement & Supply Chain Leadership" },
+            { "id": "operations", "label": "Operations & Business Continuity" },
+            { "id": "dei", "label": "Diversity, Equity & Inclusion (DEI)" },
+            { "id": "sustainability-esg", "label": "Sustainability & ESG Leadership" }
+          ]
+        }
+      ]
+    }
+  }
+}
