@@ -1,108 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Primary Meta Tags -->
-    <title>Contact | Exponanta: Empowering Entrepreneurship</title>
-    <meta name="description"
-        content="Contact Exponanta to learn how to get involved, support youth development programs, volunteer, or collaborate as a partner. Everyone can find a meaningful role in empowering students.">
-    <meta name="keywords"
-        content="YourSA, Contact, Volunteer, Donor, Mentor, Corporate partner, Education partner, Youth Development, Student Programs">
-    
-    <meta name="robots" content="index, follow">
+<title>Blog | Exponanta</title>
+<meta name="description" content="Insights, guides, and builder intelligence for founders, operators, and investors in the Boston-Cambridge ecosystem.">
+<link rel="canonical" href="https://exponanta.com/blog/">
+<meta name="robots" content="index, follow">
 
-    <!-- Structured Data for Google -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Exponanta",
-        "url": "https://exponanta.com/blog",
-        "logo": "https://exponanta.com/assets/images/logo/siteicon.png",
-        "sameAs": [
-            "https://www.facebook.com/exponanta.com"
-        ],
-        "description": "Contact Exponanta to explore ways to support American students through donations, volunteering, mentorship, partnerships, and educational initiatives."
-    }
-    </script>
+<meta property="og:title" content="Blog | Exponanta">
+<meta property="og:description" content="Insights, guides, and builder intelligence for founders, operators, and investors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exponanta.com/blog/">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/exponanta-logo.svg">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&family=Poppins:wght@100;400;600&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/main.css">
-    <!-- DO NOT USE PATRIOTIC, just main <link rel="stylesheet" href="/assets/patriotic.css"> -->
-    <link rel="stylesheet" href="assets/css/lib/fontawesome/all.css">
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLH4990V1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-NSLH4990V1');
-    </script>
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
 </head>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/gh/fozak/yoursa.org@main/assets/js/posts.js"></script>
+<body>
 
-<body class="Home">
-    <!-- Header -->
-    <div id="1" data-loader="../components/header.html"></div>
+<!-- Navbar -->
+<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
-    <div id="1" data-loader="../components/header.html"></div>
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
 
-    <!-- Hero Section -->
-    <div class="blog-post-1">
-        <div class="c-spacer" style="height:15px;"></div>
+      <div x-data="blogApp()" x-init="init()">
 
-        <!-- Trending Posts -->
-        <section class="c-trending-posts">
-            <div class="container">
-                <h2 class="c-trending-posts__title">Trending</h2>
-                <div class="row" id="trending-posts">
-                    <!-- Posts loaded by JS -->
-                </div>
+        <!-- Page header -->
+        <div class="page-header mb-4">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1 class="page-title">Blog</h1>
+              <div class="text-muted">Builder intelligence for founders, operators, and investors</div>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <!-- Latest Posts -->
-        <section class="c-latest-blog">
-            <div class="container">
-                <h2 class="c-latest-blog__title">Latest</h2>
-                <div class="row" id="latest-posts">
-                    <!-- Posts loaded by JS -->
-                </div>
-                <div class="text-center">
-                    <a class="btn button-standard" href="blog#" id="next-page">Next</a>
-                </div>
+        <!-- Zone 1: Full-width search + filters -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              <input type="search" class="form-control" placeholder="Search articles…" x-model="search">
             </div>
-        </section>
+          </div>
+          <div class="col-lg-8 col-md-6">
+            <div class="d-flex flex-wrap gap-2 align-items-center h-100">
+              <button class="btn btn-sm" :class="activeFilter==='all'?'btn-primary':'btn-outline-secondary'" @click="activeFilter='all'">All</button>
+              <template x-for="cat in allCategories" :key="cat">
+                <button class="btn btn-sm"
+                        :class="activeFilter===cat?'btn-primary':'btn-outline-secondary'"
+                        @click="activeFilter=cat"
+                        x-text="formatCategory(cat)"></button>
+              </template>
+              <span class="text-muted small ms-auto" x-text="filteredPosts.length + ' articles'"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zone 2: Cards + Sidebar -->
+        <div class="row g-4 align-items-start">
+
+          <!-- Blog cards -->
+          <div class="col-lg-8 col-md-12">
+
+            <!-- Loading skeletons -->
+            <div x-show="loading" class="row g-3">
+              <template x-for="i in 4" :key="i">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="placeholder" style="height:180px;"></div>
+                    <div class="card-body">
+                      <div class="placeholder col-4 mb-2"></div>
+                      <div class="placeholder col-10 mb-1"></div>
+                      <div class="placeholder col-8 mb-3"></div>
+                      <div class="placeholder col-12 mb-1"></div>
+                      <div class="placeholder col-10"></div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <!-- Posts grid -->
+            <div x-show="!loading" class="row g-3">
+              <template x-for="post in filteredPosts" :key="post.name">
+                <div class="col-sm-6">
+                  <div class="card h-100">
+
+                    <!-- Image top -->
+                    <a :href="post.url" class="d-block overflow-hidden" style="height:180px;">
+                      <template x-if="post.image || post.data.hero_image">
+                        <img :src="post.image || post.data.hero_image"
+                             :alt="post.title"
+                             class="w-100 h-100 object-fit-cover"
+                             loading="lazy">
+                      </template>
+                      <template x-if="!post.image && !post.data.hero_image">
+                        <div class="w-100 h-100 bg-blue-lt d-flex align-items-center justify-content-center p-3">
+                          <div class="text-blue fw-semibold text-center" style="font-size:0.8rem;" x-text="post.kicker"></div>
+                        </div>
+                      </template>
+                    </a>
+
+                    <div class="card-body d-flex flex-column">
+
+                      <!-- Kicker + date -->
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-blue-lt text-blue" x-text="post.kicker"></span>
+                        <span class="text-muted small" x-text="formatDate(post.published_date)"></span>
+                      </div>
+
+                      <!-- Title -->
+                      <h3 class="card-title mb-2">
+                        <a :href="post.url" class="text-reset text-decoration-none" x-text="post.title"></a>
+                      </h3>
+
+                      <!-- Deck -->
+                      <p class="text-muted small mb-3 flex-fill"
+                         style="-webkit-line-clamp:3;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden;"
+                         x-text="post.deck"></p>
+
+                      <!-- Footer -->
+                      <div class="d-flex align-items-center justify-content-between pt-2 border-top mt-auto">
+                        <span class="text-muted small" x-show="post.data.read_time_minutes">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                          <span x-text="post.data.read_time_minutes + ' min'"></span>
+                        </span>
+                        <a :href="post.url" class="btn btn-sm btn-outline-primary">Read →</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <!-- Empty state -->
+              <div x-show="filteredPosts.length===0 && !loading" class="col-12">
+                <div class="empty">
+                  <div class="empty-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                  </div>
+                  <p class="empty-title">No articles found</p>
+                  <p class="empty-subtitle text-muted">Try a different search or category.</p>
+                  <div class="empty-action">
+                    <button class="btn btn-primary" @click="activeFilter='all'; search=''">Show all articles</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4 col-md-12 sidebar-sticky">
+            <div x-data x-init="fetch('../components/cta-sidebar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+            <div x-data x-init="fetch('../components/stats-card.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+            <div x-data x-init="fetch('../components/industry-sidebar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-    
+  </div>
+</div>
 
-    <div id="3" data-loader="../components/services-stats.html"></div>
-    <div id="4" data-loader="../components/faces.html"></div>
-    <div id="5" data-loader="../components/services-types.html"></div>
-    <div id="6" data-loader="../components/portfolio.html"></div>
-    <div id="7" data-loader="../components/call-to-action.html"></div>
-    <div id="7" data-loader="../components/footer.html"></div>
+<!-- Footer -->
+<div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/gh/fozak/yoursa.org@main/assets/js/_loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+function blogApp() {
+  return {
+    posts: [],
+    loading: true,
+    activeFilter: 'all',
+    search: '',
+
+    async init() {
+      try {
+        const res = await fetch('../data/db.json');
+        const data = await res.json();
+        const raw = Array.isArray(data) ? data : [];
+        this.posts = raw
+          .filter(p => p.category === 'blog' && p.docstatus === 1)
+          .sort((a, b) => new Date(b.published_date) - new Date(a.published_date));
+      } catch (err) {
+        console.error('Blog load error:', err);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    get allCategories() {
+      const set = new Set();
+      this.posts.forEach(p => { if (p.content_category) set.add(p.content_category); });
+      return [...set].sort();
+    },
+
+    get filteredPosts() {
+      return this.posts.filter(p => {
+        const matchCat = this.activeFilter === 'all' || p.content_category === this.activeFilter;
+        if (!matchCat) return false;
+        if (!this.search) return true;
+        const q = this.search.toLowerCase();
+        return (
+          (p.title || '').toLowerCase().includes(q) ||
+          (p.deck || '').toLowerCase().includes(q) ||
+          (p.kicker || '').toLowerCase().includes(q)
+        );
+      });
+    },
+
+    formatCategory(cat) {
+      if (!cat) return '';
+      return cat.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    },
+
+    formatDate(d) {
+      if (!d) return '';
+      return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+  };
+}
+</script>
 
 </body>
-
 </html>
