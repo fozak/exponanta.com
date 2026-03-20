@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events Calendar | Exponanta</title>
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
+
+<style>
+  /* ── FullCalendar → Tabler overrides ─────────────────────── */
+  .fc {
+    font-family: var(--tblr-font-sans-serif);
+    font-size: 0.875rem;
+  }
+  .fc .fc-toolbar-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--tblr-body-color);
+  }
+  .fc .fc-button {
+    background: transparent;
+    border: 1px solid var(--tblr-border-color);
+    color: var(--tblr-body-color);
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--tblr-border-radius);
+    box-shadow: none;
+    text-transform: none;
+  }
+  .fc .fc-button:hover {
+    background: var(--tblr-light);
+    border-color: var(--tblr-border-color-dark);
+    color: var(--tblr-body-color);
+  }
+  .fc .fc-button-primary:not(:disabled).fc-button-active,
+  .fc .fc-button-primary:not(:disabled):active {
+    background: var(--tblr-primary);
+    border-color: var(--tblr-primary);
+    color: #fff;
+  }
+  .fc .fc-button-group .fc-button {
+    border-radius: 0;
+  }
+  .fc .fc-button-group .fc-button:first-child { border-radius: var(--tblr-border-radius) 0 0 var(--tblr-border-radius); }
+  .fc .fc-button-group .fc-button:last-child  { border-radius: 0 var(--tblr-border-radius) var(--tblr-border-radius) 0; }
+  .fc .fc-col-header-cell-cushion {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--tblr-secondary);
+    text-decoration: none;
+    padding: 6px 4px;
+  }
+  .fc .fc-timegrid-slot-label-cushion {
+    font-size: 0.75rem;
+    color: var(--tblr-secondary);
+  }
+  .fc .fc-timegrid-now-indicator-line {
+    border-color: var(--tblr-danger);
+  }
+  .fc-theme-standard td, .fc-theme-standard th {
+    border-color: var(--tblr-border-color);
+  }
+  .fc-theme-standard .fc-scrollgrid {
+    border-color: var(--tblr-border-color);
+  }
+
+  /* ── Event pill ──────────────────────────────────────────── */
+  .fc-event {
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 2px 6px !important;
+    cursor: pointer;
+  }
+  .fc-event .fc-event-title {
+    font-weight: 500;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fc-event .fc-event-time {
+    font-size: 0.7rem;
+    opacity: 0.85;
+  }
+
+  /* ── Tag dot (reused from events.html) ──────────────────── */
+  .tag-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Event detail popover ────────────────────────────────── */
+  #ev-popover {
+    position: fixed;
+    z-index: 1080;
+    width: 320px;
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius-lg);
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    display: none;
+  }
+  #ev-popover.visible { display: block; }
+  #ev-popover .pop-header {
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid var(--tblr-border-color);
+  }
+  #ev-popover .pop-body  { padding: 10px 14px 14px; }
+  #ev-popover .pop-close {
+    position: absolute;
+    top: 8px; right: 10px;
+    background: none; border: none;
+    font-size: 1.1rem; cursor: pointer;
+    color: var(--tblr-secondary);
+    line-height: 1;
+  }
+
+  /* ── View toggle ─────────────────────────────────────────── */
+  .view-toggle .btn { font-size: 0.8125rem; }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
+
+      <div x-data="calendarApp()" x-init="init()">
+
+        <!-- Page header -->
+        <div class="page-header mb-4">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1 class="page-title">Events Calendar</h1>
+              <div class="text-muted">Boston · Cambridge innovation community</div>
+            </div>
+            <div class="col-auto d-flex gap-2 align-items-center">
+              <!-- View toggle -->
+              <div class="btn-group view-toggle">
+                <a href="events.html" class="btn btn-outline-secondary">
+                  <i class="ti ti-list me-1"></i>List
+                </a>
+                <button class="btn btn-primary" disabled>
+                  <i class="ti ti-calendar me-1"></i>Calendar
+                </button>
+              </div>
+              <a href="/programs/host-event" class="btn btn-primary">Submit Your Pitch</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading state -->
+        <div x-show="loading" class="text-center py-5 text-muted">
+          <div class="spinner-border spinner-border-sm me-2"></div>Loading events…
+        </div>
+
+        <!-- Calendar card -->
+        <div x-show="!loading" class="card">
+          <div class="card-body p-3">
+            <div id="calendar"></div>
+          </div>
+        </div>
+
+      </div><!-- /calendarApp -->
+
+      <!-- Event detail popover -->
+      <div id="ev-popover">
+        <div class="pop-header">
+          <button class="pop-close" onclick="closePopover()"><i class="ti ti-x"></i></button>
+          <div class="fw-bold" id="pop-title" style="font-size:.95rem;padding-right:20px;"></div>
+          <div class="text-muted small mt-1" id="pop-time"></div>
+        </div>
+        <div class="pop-body">
+          <div id="pop-location" class="d-flex align-items-center gap-1 text-muted small mb-2"></div>
+          <div id="pop-deck" class="small text-muted mb-3"></div>
+          <div id="pop-tags" class="d-flex flex-wrap gap-1 mb-3"></div>
+          <div class="d-flex gap-2">
+            <a id="pop-register" href="#" class="btn btn-sm btn-primary flex-fill">Register</a>
+            <a id="pop-calendar" href="#" target="_blank" class="btn btn-sm btn-outline-secondary">
+              <i class="ti ti-calendar-plus"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<script>
+// ── Popover helpers (outside Alpine — called from FC event click) ──
+let _popoverData = {};
+
+function closePopover() {
+  document.getElementById('ev-popover').classList.remove('visible');
+}
+
+function openPopover(info, categories) {
+  const ev   = info.event;
+  const data = ev.extendedProps;
+  const rect = info.el.getBoundingClientRect();
+  const pop  = document.getElementById('ev-popover');
+
+  document.getElementById('pop-title').textContent = ev.title;
+  document.getElementById('pop-deck').textContent  = data.deck || '';
+
+  // Time
+  const fmt = { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' };
+  const start = ev.start ? ev.start.toLocaleTimeString('en-US', fmt) : '';
+  const end   = ev.end   ? ev.end.toLocaleTimeString('en-US', fmt)   : '';
+  document.getElementById('pop-time').textContent =
+    ev.start
+      ? ev.start.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', timeZone:'America/New_York' })
+        + (start ? ' · ' + start + (end ? '–' + end : '') : '')
+      : '';
+
+  // Location
+  const locEl = document.getElementById('pop-location');
+  locEl.innerHTML = data.location
+    ? `<i class="ti ti-map-pin" style="font-size:.85rem;"></i> ${data.location}`
+    : '';
+
+  // Taxonomy tags only
+  const tagsEl = document.getElementById('pop-tags');
+  tagsEl.innerHTML = '';
+  const labelMap = {};
+  categories.forEach(c => { labelMap[c.label.toLowerCase()] = c; });
+  const tagIds = new Set();
+  (data.tags || []).forEach(t => { const c = labelMap[t.toLowerCase()]; if (c) tagIds.add(c.id); });
+  (data.solution_categories || []).forEach(id => tagIds.add(id));
+  tagIds.forEach(id => {
+    const cat = categories.find(c => c.id === id);
+    if (!cat) return;
+    const span = document.createElement('span');
+    span.className = 'badge bg-secondary-lt d-inline-flex align-items-center gap-1';
+    span.innerHTML = `<span class="tag-dot" style="background:${cat.color}"></span>${cat.label}`;
+    tagsEl.appendChild(span);
+  });
+
+  // Legacy tags (not in taxonomy)
+  (data.tags || []).filter(t => !labelMap[t.toLowerCase()]).forEach(t => {
+    const span = document.createElement('span');
+    span.className = 'badge bg-blue-lt text-blue';
+    span.textContent = t;
+    tagsEl.appendChild(span);
+  });
+
+  // Links
+  document.getElementById('pop-register').href =
+    `/events/event-detail.html?slug=${data.page_name}`;
+  document.getElementById('pop-calendar').href =
+    data.calendar_google || '#';
+
+  // Position — flip left if too close to right edge
+  const vw = window.innerWidth;
+  const pw = 320;
+  let left = rect.right + 8;
+  if (left + pw > vw - 12) left = rect.left - pw - 8;
+  let top = Math.min(rect.top, window.innerHeight - 320);
+  pop.style.left = Math.max(8, left) + 'px';
+  pop.style.top  = Math.max(8, top)  + 'px';
+  pop.classList.add('visible');
+}
+
+// ── Alpine app ─────────────────────────────────────────────────────
+function calendarApp() {
+  return {
+    loading:    true,
+    categories: [],
+    _loaded:    false,
+
+    async init() {
+      if (this._loaded) return;
+      this._loaded = true;
+
+      try {
+        const [evRes, taxRes] = await Promise.all([
+          fetch('../data/db.json'),
+          fetch('../data/taxonomies.json')
+        ]);
+        const evData  = await evRes.json();
+        const taxData = await taxRes.json();
+
+        const raw  = Array.isArray(evData) ? evData : (evData.events || []);
+        const evts = raw.filter(e => e.category === 'event' && e.docstatus === 1);
+        this.categories = taxData.solution_categories || [];
+
+        const cats = this.categories; // capture for closure
+
+        // ── Map db.json events → FullCalendar event objects ──
+        const fcEvents = evts.map(ev => {
+          const slot  = (ev.data?.event_slot || '');
+          const parts = slot.split('/');
+          const start = parseSlot(parts[0]);
+          const end   = parts[1] ? parseSlot(parts[1]) : null;
+
+          // Pick pill color from first taxonomy tag found
+          const labelMap = {};
+          cats.forEach(c => { labelMap[c.label.toLowerCase()] = c; });
+          let color = '#378ADD'; // default blue
+          for (const t of (ev.tags || [])) {
+            const c = labelMap[t.toLowerCase()];
+            if (c) { color = c.color; break; }
+          }
+          if ((ev.data?.solution_categories || []).length) {
+            const c = cats.find(c => c.id === ev.data.solution_categories[0]);
+            if (c) color = c.color;
+          }
+
+          return {
+            id:    ev.name,
+            title: ev.title,
+            start, end,
+            backgroundColor: color,
+            borderColor:     color,
+            extendedProps: {
+              deck:                 ev.deck,
+              page_name:            ev.page_name,
+              location:             ev.data?.location,
+              tags:                 ev.tags || [],
+              solution_categories:  ev.data?.solution_categories || [],
+              calendar_google:      ev.data?.calendar?.google,
+            }
+          };
+        }).filter(e => e.start); // drop events with no parseable date
+
+        this.loading = false;
+        await this.$nextTick();
+        this._initCalendar(fcEvents, cats);
+
+      } catch (err) {
+        console.error('Calendar load error:', err);
+        this.loading = false;
+      }
+    },
+
+    _initCalendar(fcEvents, cats) {
+      const el = document.getElementById('calendar');
+      if (!el) return;
+
+      const calendar = new FullCalendar.Calendar(el, {
+        initialView:  'timeGridWeek',
+        headerToolbar: {
+          left:   'prev,next today',
+          center: 'title',
+          right:  'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        buttonText: {
+          today:    'Today',
+          month:    'Month',
+          week:     'Week',
+          day:      'Day',
+          list:     'List'
+        },
+        height:       'auto',
+        nowIndicator: true,
+        scrollTime:   '08:00:00',
+        slotMinTime:  '07:00:00',
+        slotMaxTime:  '22:00:00',
+        slotDuration: '00:30:00',
+        expandRows:   true,
+        timeZone:     'America/New_York',
+        events:       fcEvents,
+
+        // ── Render taxonomy dot in pill ──────────────────────
+        eventContent(arg) {
+          const labelMap = {};
+          cats.forEach(c => { labelMap[c.label.toLowerCase()] = c; });
+          const tagIds = new Set();
+          (arg.event.extendedProps.tags || []).forEach(t => {
+            const c = labelMap[t.toLowerCase()]; if (c) tagIds.add(c.id);
+          });
+          (arg.event.extendedProps.solution_categories || []).forEach(id => tagIds.add(id));
+
+          const firstCat = cats.find(c => tagIds.has(c.id));
+          const dot = firstCat
+            ? `<span style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:.8;flex-shrink:0;display:inline-block;margin-right:4px;"></span>`
+            : '';
+
+          return {
+            html: `<div class="fc-event-main-frame" style="display:flex;align-items:center;overflow:hidden;">
+                     ${dot}
+                     <div style="overflow:hidden;">
+                       <div class="fc-event-time" style="font-size:.68rem;opacity:.85;">${arg.timeText}</div>
+                       <div class="fc-event-title" style="font-size:.78rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${arg.event.title}</div>
+                     </div>
+                   </div>`
+          };
+        },
+
+        // ── Click → popover ──────────────────────────────────
+        eventClick(info) {
+          info.jsEvent.preventDefault();
+          openPopover(info, cats);
+        },
+
+        // ── Close popover on background click ────────────────
+        dateClick() { closePopover(); },
+      });
+
+      calendar.render();
+
+      // Close popover on outside click
+      document.addEventListener('click', e => {
+        const pop = document.getElementById('ev-popover');
+        if (!pop.contains(e.target) && !e.target.closest('.fc-event')) {
+          closePopover();
+        }
+      });
+    }
+  };
+}
+
+// ── Parse "20260328T1400" → ISO string ────────────────────────────
+function parseSlot(s) {
+  if (!s || s.length < 8) return null;
+  try {
+    const date = s.slice(0, 8);
+    const time = s.length >= 13 ? s.slice(9, 13) : '0000';
+    return `${date.slice(0,4)}-${date.slice(4,6)}-${date.slice(6,8)}T${time.slice(0,2)}:${time.slice(2,4)}:00`;
+  } catch { return null; }
+}
+</script>
+
+</body>
+</html>
