@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Events | Exponanta</title>
+<meta name="description" content="Browse upcoming events in the Boston-Cambridge innovation community.">
+<link rel="canonical" href="https://exponanta.com/events/">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
+
+<style>
+  /* ── Event image column ── */
+  .evh-img {
+    width: 200px;
+    flex: 0 0 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .evh-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .evh-date {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(36,70,200,0.92);
+    color: #fff;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 6px;
+    line-height: 1.2;
+    min-width: 44px;
+  }
+  .evh-date-day  { display: block; font-size: 1.25rem; font-weight: 700; }
+  .evh-date-mon  { display: block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .evh-img { width: 100%; flex: none; height: 180px; }
+    .card.evh { flex-direction: column !important; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-option-1 sticky-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="/"><span class="navbar-brand-text">Exponanta</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link active" href="/events/">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+        <li class="nav-item ms-2"><a class="btn btn-primary btn-sm" href="/programs/host-event">Submit Pitch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page -->
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
+
+      <!-- Page header -->
+      <div class="page-header mb-4">
+        <div class="row align-items-center">
+          <div class="col">
+            <h1 class="page-title">Upcoming Events</h1>
+            <div class="text-muted">Boston · Cambridge innovation community</div>
+          </div>
+          <div class="col-auto">
+            <a href="/programs/host-event" class="btn btn-primary">Submit Your Pitch</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alpine app -->
+      <div x-data="eventsApp()" x-init="init()">
+
+        <!-- Filter pills -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-sm"
+                  :class="activeTag === 'all' ? 'btn-primary' : 'btn-outline-secondary'"
+                  @click="activeTag = 'all'">All</button>
+          <template x-for="tag in allTags" :key="tag">
+            <button class="btn btn-sm"
+                    :class="activeTag === tag ? 'btn-primary' : 'btn-outline-secondary'"
+                    @click="activeTag = tag"
+                    x-text="tag"></button>
+          </template>
+        </div>
+
+        <!-- Result count -->
+        <div class="text-muted small mb-3" x-text="filteredEvents.length + ' events'"></div>
+
+        <!-- Event cards -->
+        <div class="space-y">
+          <template x-for="ev in filteredEvents" :key="ev.name">
+            <div class="card evh d-flex flex-row g-0 overflow-hidden mb-3">
+
+              <!-- Image -->
+              <div class="evh-img">
+                <img :src="ev.image" :alt="ev.title" loading="lazy"
+                     @error="$event.target.src='https://placehold.co/200x140/e8edf8/2446C8?text=Event'">
+                <div class="evh-date">
+                  <span class="evh-date-day" x-text="getDay(ev.data.event_slot)"></span>
+                  <span class="evh-date-mon" x-text="getMon(ev.data.event_slot)"></span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="card-body d-flex flex-column">
+
+                <!-- Title row -->
+                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                  <h3 class="mb-0 fs-4">
+                    <a :href="ev.url" class="text-reset text-decoration-none" x-text="ev.title"></a>
+                  </h3>
+                  <div class="d-flex flex-wrap gap-1 flex-shrink-0">
+                    <template x-for="tag in ev.tags" :key="tag">
+                      <span class="badge"
+                            :class="tagClass(tag)"
+                            x-text="tag"></span>
+                    </template>
+                  </div>
+                </div>
+
+                <!-- Deck -->
+                <p class="text-muted small mb-2" x-text="ev.deck"></p>
+
+                <!-- Meta -->
+                <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <span x-text="formatSlot(ev.data.event_slot)"></span>
+                  </span>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg>
+                    <span x-text="ev.data.location"></span>
+                  </span>
+                </div>
+
+                <!-- Footer: avatars + buttons -->
+                <div class="d-flex justify-content-between align-items-center mt-auto flex-wrap gap-2">
+
+                  <!-- Avatar stack -->
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-list avatar-list-stacked">
+                      <template x-for="(av, i) in ev.data.avatars.slice(0,4)" :key="i">
+                        <span class="avatar avatar-sm">
+                          <template x-if="isImgPath(av)">
+                            <img :src="av" :alt="av"
+                                 @error="$event.target.parentNode.textContent = getInitials(av)">
+                          </template>
+                          <template x-if="!isImgPath(av)">
+                            <span x-text="av"></span>
+                          </template>
+                        </span>
+                      </template>
+                    </div>
+                    <span class="text-muted small" x-text="ev.data.going + ' going'"></span>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="d-flex gap-2 flex-wrap">
+                    <a :href="ev.data.calendar.google" target="_blank" rel="noopener"
+                       class="btn btn-sm btn-outline-secondary">Add to Calendar</a>
+                    <a :href="ev.data.registerUrl" target="_blank" rel="noopener"
+                       class="btn btn-sm btn-outline-primary">Register</a>
+                    <a :href="ev.data.connectUrl" target="_blank" rel="noopener"
+                       class="btn btn-sm btn-primary">Connect</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- Empty state -->
+          <div x-show="filteredEvents.length === 0" class="empty">
+            <div class="empty-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <p class="empty-title">No events found</p>
+            <p class="empty-subtitle text-muted">Try a different filter.</p>
+            <div class="empty-action">
+              <button class="btn btn-primary" @click="activeTag = 'all'">Show all events</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="py-5 text-white" style="background: linear-gradient(135deg, #1a3596 0%, #2446C8 50%, #0d1f5c 100%); position: relative; margin-left: -50vw; margin-right: -50vw; left: 50%; width: 100vw;">
+  <div class="container-xl">
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="fw-bold">Exponanta</div>
+        <div class="text-white-50 small">Boston · Cambridge innovation community</div>
+      </div>
+      <div class="col-auto">
+        <small class="text-white-50">© 2026 Exponanta Technologies. All rights reserved.</small>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+function eventsApp() {
+  return {
+    events: [],
+    activeTag: 'all',
+
+    async init() {
+      const res = await fetch('../data/db.json');
+      const data = await res.json();
+      // Support both array and {events:[]} shapes
+      const raw = Array.isArray(data) ? data : (data.events || []);
+      // Only event category records
+      this.events = raw.filter(e => e.category === 'event' && e.docstatus === 1);
+    },
+
+    get allTags() {
+      const set = new Set();
+      this.events.forEach(e => (e.tags || []).forEach(t => set.add(t)));
+      return [...set].sort();
+    },
+
+    get filteredEvents() {
+      if (this.activeTag === 'all') return this.events;
+      return this.events.filter(e => (e.tags || []).includes(this.activeTag));
+    },
+
+    // Parse ISO slot "20260326T220000Z/..." → day and month
+    getDay(slot) {
+      if (!slot) return '';
+      const d = slot.split('/')[0];
+      return d.slice(6, 8);
+    },
+    getMon(slot) {
+      if (!slot) return '';
+      const d = slot.split('/')[0];
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      return months[parseInt(d.slice(4, 6)) - 1];
+    },
+    formatSlot(slot) {
+      if (!slot) return '';
+      try {
+        const start = slot.split('/')[0];
+        const dt = new Date(
+          start.slice(0,4) + '-' + start.slice(4,6) + '-' + start.slice(6,8) + 'T' +
+          start.slice(9,11) + ':' + start.slice(11,13) + ':00Z'
+        );
+        return dt.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZone:'America/New_York' });
+      } catch { return slot; }
+    },
+
+    tagClass(tag) {
+      const map = {
+        'Free':      'bg-green-lt text-green',
+        'Community': 'bg-blue-lt text-blue',
+        'In-Person': 'bg-teal-lt text-teal',
+        'Online':    'bg-azure-lt text-azure',
+        'Concert':   'bg-purple-lt text-purple',
+        'Outdoor':   'bg-lime-lt text-lime',
+      };
+      return map[tag] || 'bg-secondary-lt text-secondary';
+    },
+
+    isImgPath(v) {
+      return v && /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(v);
+    },
+    getInitials(v) {
+      if (!v) return '?';
+      if (v.length <= 3 && !v.includes('/')) return v.toUpperCase();
+      const file = v.split('/').pop().split('.')[0];
+      return file.split(/[-_ ]+/).map(p => p[0]?.toUpperCase()).slice(0,2).join('') || '?';
+    }
+  }
+}
+</script>
+
+</body>
+</html>
