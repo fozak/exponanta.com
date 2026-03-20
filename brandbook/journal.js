@@ -1,3 +1,5 @@
+/* TODO http://127.0.0.1:8080/events.html - add CTA and make 2 columns and add tagging by industry
+
 /*event confirm http://127.0.0.1:8080/events/event-confirm.html?slug=thursday-gathering-march-19-2026
 
 

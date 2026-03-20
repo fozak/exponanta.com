@@ -444,5 +444,23 @@
         }
       ]
     }
-  }
+  },
+  "solution_categories": [
+  { "id": "ai-productivity", "label": "AI Productivity & Tools", "group": "tech",     "color": "#378ADD" },
+  { "id": "saas-enterprise", "label": "SaaS / Enterprise",        "group": "tech",     "color": "#378ADD" },
+  { "id": "cybersecurity",   "label": "Cybersecurity",            "group": "tech",     "color": "#888780" },
+  { "id": "deeptech",        "label": "DeepTech / Hardware",      "group": "tech",     "color": "#D4537E" },
+  { "id": "ai-verticals",    "label": "AI for Verticals",         "group": "vertical", "color": "#7F77DD" },
+  { "id": "healthtech",      "label": "HealthTech",               "group": "vertical", "color": "#1D9E75" },
+  { "id": "fintech",         "label": "FinTech",                  "group": "vertical", "color": "#BA7517" },
+  { "id": "ecommerce",       "label": "eCommerce & Consumer",     "group": "vertical", "color": "#D85A30" },
+  { "id": "edtech",          "label": "EdTech",                   "group": "vertical", "color": "#639922" },
+  { "id": "govtech",         "label": "GovTech",                  "group": "vertical", "color": "#BA7517" },
+  { "id": "food-beverage",   "label": "Food & Beverage",          "group": "vertical", "color": "#D85A30" },
+  { "id": "pro-services",    "label": "Professional Services",    "group": "vertical", "color": "#BA7517" },
+  { "id": "health-wellness", "label": "Health & Wellness",        "group": "vertical", "color": "#1D9E75" },
+  { "id": "construction",    "label": "Construction & Trades",    "group": "vertical", "color": "#639922" },
+  { "id": "creative-media",  "label": "Creative & Media",         "group": "vertical", "color": "#D4537E" },
+  { "id": "other",           "label": "Other",                    "group": "vertical", "color": "#888780" }
+]
 }

@@ -45,34 +45,6 @@
   .evh-date-day { display: block; font-size: 1.25rem; font-weight: 700; }
   .evh-date-mon { display: block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
 
-  /* Option C tag dot */
-  .tag-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* Filter group divider label */
-  .filter-group-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--tblr-muted);
-    align-self: center;
-    padding: 0 2px;
-    white-space: nowrap;
-  }
-
-  .filter-divider {
-    width: 1px;
-    height: 20px;
-    background: var(--tblr-border-color);
-    align-self: center;
-  }
-
   @media (max-width: 640px) {
     .evh-img { width: 100%; flex: none; height: 180px; }
     .card.evh { flex-direction: column !important; }
@@ -83,10 +55,7 @@
 <body>
 
 <!-- Navbar -->
-<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
-
-<!-- Sidebar -->
-<div x-data x-init="fetch('../components/sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <div class="page-wrapper">
   <div class="page-body">
@@ -109,41 +78,16 @@
       <div x-data="eventsApp()" x-init="init()">
 
         <!-- Filter pills -->
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
-
-          <!-- All button -->
-          <button class="btn btn-sm d-inline-flex align-items-center gap-2"
-                  :class="activeTag === 'all' ? 'btn-outline-primary' : 'btn-outline-secondary'"
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-sm"
+                  :class="activeTag === 'all' ? 'btn-primary' : 'btn-outline-secondary'"
                   @click="activeTag = 'all'">All</button>
-
-          <!-- Tech group -->
-          <template x-if="techCategories.length > 0">
-            <span class="filter-group-label">Tech</span>
+          <template x-for="tag in allTags" :key="tag">
+            <button class="btn btn-sm"
+                    :class="activeTag === tag ? 'btn-primary' : 'btn-outline-secondary'"
+                    @click="activeTag = tag"
+                    x-text="tag"></button>
           </template>
-          <template x-for="cat in techCategories" :key="cat.id">
-            <button class="btn btn-sm d-inline-flex align-items-center gap-2"
-                    :class="activeTag === cat.id ? 'btn-outline-primary' : 'btn-outline-secondary'"
-                    @click="activeTag = cat.id">
-              <span class="tag-dot" :style="{ background: cat.color }"></span>
-              <span x-text="cat.label"></span>
-            </button>
-          </template>
-
-          <div class="filter-divider"></div>
-
-          <!-- Verticals group -->
-          <template x-if="verticalCategories.length > 0">
-            <span class="filter-group-label">Verticals</span>
-          </template>
-          <template x-for="cat in verticalCategories" :key="cat.id">
-            <button class="btn btn-sm d-inline-flex align-items-center gap-2"
-                    :class="activeTag === cat.id ? 'btn-outline-primary' : 'btn-outline-secondary'"
-                    @click="activeTag = cat.id">
-              <span class="tag-dot" :style="{ background: cat.color }"></span>
-              <span x-text="cat.label"></span>
-            </button>
-          </template>
-
         </div>
 
         <!-- Result count -->
@@ -170,26 +114,14 @@
               <!-- Body -->
               <div class="card-body d-flex flex-column">
 
-                <!-- Title + solution category dots -->
+                <!-- Title + tags -->
                 <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
                   <h3 class="mb-0 fs-4">
-                    <a :href="'/events/event-detail.html?slug=' + ev.page_name"
-                       class="text-reset text-decoration-none"
-                       x-text="ev.title"></a>
+                    <a :href="'/events/event-detail.html?slug=' + ev.page_name" class="text-reset text-decoration-none" x-text="ev.title"></a>
                   </h3>
                   <div class="d-flex flex-wrap gap-1 flex-shrink-0">
-                    <!-- legacy tag badges -->
                     <template x-for="tag in ev.tags" :key="tag">
                       <span class="badge" :class="tagClass(tag)" x-text="tag"></span>
-                    </template>
-                    <!-- solution_category dots from taxonomy -->
-                    <template x-for="catId in (ev.data.solution_categories || [])" :key="catId">
-                      <template x-if="categoryById(catId)">
-                        <span class="badge bg-secondary-lt d-inline-flex align-items-center gap-1">
-                          <span class="tag-dot" :style="{ background: categoryById(catId).color }"></span>
-                          <span x-text="categoryById(catId).label"></span>
-                        </span>
-                      </template>
                     </template>
                   </div>
                 </div>
@@ -234,8 +166,7 @@
                   <div class="d-flex gap-2 flex-wrap">
                     <a :href="ev.data.calendar.google" target="_blank" rel="noopener"
                        class="btn btn-sm btn-outline-secondary">Add to Calendar</a>
-                    <a :href="'/events/event-detail.html?slug=' + ev.page_name"
-                       class="btn btn-sm btn-outline-primary">Register</a>
+                    <a :href="'/events/event-detail.html?slug=' + ev.page_name" class="btn btn-sm btn-outline-primary">Register</a>
                     <a :href="ev.data.connectUrl" target="_blank" rel="noopener"
                        class="btn btn-sm btn-primary">Connect</a>
                   </div>
@@ -262,14 +193,10 @@
 
     </div>
   </div>
-
-  <!-- Bottom CTA -->
-  <div x-data x-init="fetch('../components/bottom-cta.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
-
-  <!-- Footer -->
-  <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
-
 </div>
+
+<!-- Footer -->
+<div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -277,56 +204,42 @@
 function eventsApp() {
   return {
     events: [],
-    categories: [],   // solution_categories from taxonomies.json
     loading: true,
     activeTag: 'all',
 
     async init() {
       try {
-        const [evRes, taxRes] = await Promise.all([
-          fetch('../data/db.json'),
-          fetch('../data/taxonomies.json')
-        ]);
-        const evData  = await evRes.json();
-        const taxData = await taxRes.json();
-
-        const raw = Array.isArray(evData) ? evData : (evData.events || []);
+        const res = await fetch('../data/db.json');
+        const data = await res.json();
+        const raw = Array.isArray(data) ? data : (data.events || []);
         this.events = raw.filter(e => e.category === 'event' && e.docstatus === 1);
-        this.categories = taxData.solution_categories || [];
       } catch (err) {
-        console.error('Load error:', err);
+        console.error('Events load error:', err);
       } finally {
         this.loading = false;
       }
     },
 
-    // ── Category helpers ──────────────────────────────────────────
-    get techCategories() {
-      return this.categories.filter(c => c.group === 'tech');
-    },
-    get verticalCategories() {
-      return this.categories.filter(c => c.group === 'vertical');
-    },
-    categoryById(id) {
-      return this.categories.find(c => c.id === id) || null;
+    get allTags() {
+      const set = new Set();
+      this.events.forEach(e => (e.tags || []).forEach(t => set.add(t)));
+      return [...set].sort();
     },
 
-    // ── Filtering ─────────────────────────────────────────────────
-    // activeTag holds a category id (or 'all')
     get filteredEvents() {
       if (this.activeTag === 'all') return this.events;
-      return this.events.filter(e =>
-        (e.data?.solution_categories || []).includes(this.activeTag)
-      );
+      return this.events.filter(e => (e.tags || []).includes(this.activeTag));
     },
 
-    // ── Image cascade ─────────────────────────────────────────────
+    // ── Image cascade: item.image → {page_name}.png → {page_name}.jpg
+    //                  → {content_category}.png → {content_category}.jpg
     imgSrc(ev) {
       return ev.image || `/images/${ev.page_name}.png`;
     },
+
     imgError(e, ev) {
       const step = parseInt(e.target.dataset.imgStep || 0);
-      const cat  = ev.content_category || 'default';
+      const cat = ev.content_category || 'default';
       const fallbacks = [
         `/images/${ev.page_name}.jpg`,
         `/images/${cat}.png`,
@@ -341,20 +254,21 @@ function eventsApp() {
       }
     },
 
-    // ── Date helpers ──────────────────────────────────────────────
     getDay(slot) {
       if (!slot) return '';
       return slot.split('/')[0].slice(6, 8);
     },
+
     getMon(slot) {
       if (!slot) return '';
       const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
       return months[parseInt(slot.split('/')[0].slice(4, 6)) - 1];
     },
+
     formatSlot(slot) {
       if (!slot) return '';
       try {
-        const s  = slot.split('/')[0];
+        const s = slot.split('/')[0];
         const dt = new Date(
           `${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}T${s.slice(9,11)}:${s.slice(11,13)}:00Z`
         );
@@ -366,7 +280,6 @@ function eventsApp() {
       } catch { return slot; }
     },
 
-    // ── Legacy badge tags (Free, Community, In-Person …) ──────────
     tagClass(tag) {
       const map = {
         'Free':      'bg-green-lt text-green',
@@ -379,10 +292,10 @@ function eventsApp() {
       return map[tag] || 'bg-secondary-lt text-secondary';
     },
 
-    // ── Avatar helpers ────────────────────────────────────────────
     isImgPath(v) {
       return v && /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(v);
     },
+
     getInitials(v) {
       if (!v) return '?';
       if (v.length <= 3 && !v.includes('/')) return v.toUpperCase();
