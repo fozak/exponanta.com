@@ -40,6 +40,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link rel="stylesheet" href="brandbook/tabler_added.css">
+<style>
+  article { font-size: 1.0625rem; }
+</style>
 </head>
 
 <body>
@@ -54,7 +57,9 @@
         <div class="row g-4 align-items-start">
 
           <!-- Main content -->
+
           <div class="col-lg-8 col-md-12">
+            <article>     
 
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -317,7 +322,9 @@
             <!-- CTA -->
             <div x-data x-init="fetch('components/bottom-cta.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
+            </article>
           </div>
+
 
           <!-- Sidebar -->
           <div class="col-lg-4 col-md-12 sidebar-sticky">

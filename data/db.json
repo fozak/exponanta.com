@@ -1,4 +1,49 @@
-[{
+[
+  {
+  "name": "webpageonl7v2k4mw",
+  "page_name": "online-events",
+  "doctype": "webpage",
+  "docstatus": 1,
+  "category": "root",
+  "content_category": "community",
+  "audience": "startup-founder",
+  "audience_secondary": [
+    "industry-professional",
+    "small-business-owner",
+    "investors"
+  ],
+  "industry": null,
+  "url": "/online-events.html",
+  "title": "Online Events & Networking",
+  "deck": "Online events never really left after COVID — they got better. Here's why the demand is structural, and how Exponanta combines live online events with real networking that compounds over time.",
+  "image": "",
+  "kicker": "Online Events · Community",
+  "featured": false,
+  "lang": "en",
+  "tags": ["Online Events", "Networking", "Community", "Founders"],
+  "related": ["networking", "networking-for-startups"],
+  "canonical_url": "https://exponanta.com/online-events.html",
+  "meta_title": "Online Events & Networking | Exponanta",
+  "meta_description": "In-person networking came back after COVID — but online events never really left. Here's why the demand for online is structural, and how Exponanta combines online events with real networking.",
+  "og_image": "https://exponanta.com/images/online-events.jpg",
+  "noindex": false,
+  "expires": null,
+  "sort_order": null,
+  "owner": "exponanta",
+  "modified_by": "exponanta",
+  "creation": "2026-03-20T10:00:00Z",
+  "published_date": "2026-03-20T10:00:00Z",
+  "modified": "2026-03-20T10:00:00Z",
+  "data": {
+    "read_time_minutes": 9,
+    "author": "exponanta",
+    "series": null,
+    "series_order": null,
+    "hero_image": "",
+    "subtitle": "Online events are efficient, accessible, and increasingly preferred — here's why the demand is structural, not residual."
+  }
+},
+  {
   "name": "webpagenet9r3x7pq",
   "page_name": "networking",
   "doctype": "webpage",
