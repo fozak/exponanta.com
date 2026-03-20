@@ -129,7 +129,7 @@
 
         <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
           <button class="btn btn-sm"
-                  :class="activeTag === 'all' ? 'btn-primary' : 'btn-outline-secondary'"
+                  :class="activeTag === 'all' ? 'btn-outline-primary' : 'btn-outline-secondary'"
                   @click="activeTag = 'all'">All</button>
 
           <template x-if="activeTechCategories.length > 0">
@@ -140,7 +140,7 @@
           </template>
           <template x-for="cat in activeTechCategories" :key="cat.id">
             <button class="btn btn-sm d-inline-flex align-items-center gap-2"
-                    :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'"
+                    :class="activeTag === cat.id ? 'btn-outline-primary' : 'btn-outline-secondary'"
                     @click="activeTag = cat.id">
               <span class="tag-dot" :style="{ background: cat.color }"></span>
               <span x-text="cat.label"></span>
@@ -155,7 +155,7 @@
           </template>
           <template x-for="cat in activeVerticalCategories" :key="cat.id">
             <button class="btn btn-sm d-inline-flex align-items-center gap-2"
-                    :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'"
+                    :class="activeTag === cat.id ? 'btn-outline-primary' : 'btn-outline-secondary'"
                     @click="activeTag = cat.id">
               <span class="tag-dot" :style="{ background: cat.color }"></span>
               <span x-text="cat.label"></span>
@@ -322,9 +322,6 @@ function eventsApp() {
     search:     '',
 
     async init() {
-      const param = new URLSearchParams(window.location.search).get('solution_categories');
-      if (param) this.activeTag = param;
-
       try {
         const [evRes, taxRes] = await Promise.all([
           fetch('../data/db.json'),

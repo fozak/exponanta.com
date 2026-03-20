@@ -322,9 +322,6 @@ function eventsApp() {
     search:     '',
 
     async init() {
-      const param = new URLSearchParams(window.location.search).get('solution_categories');
-      if (param) this.activeTag = param;
-
       try {
         const [evRes, taxRes] = await Promise.all([
           fetch('../data/db.json'),
