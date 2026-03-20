@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Community | Exponanta</title>
+<meta name="description" content="Connect with founders, engineers, investors, and innovators in the Boston and Cambridge community.">
+<link rel="canonical" href="https://exponanta.com/community.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="Community | Exponanta">
+<meta property="og:description" content="Find and connect with Boston & Cambridge innovators, founders, and professionals.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exponanta.com/community.html">
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-option-1 sticky-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="/"><span class="navbar-brand-text">Exponanta</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="/events/">Events</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/community.html">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+        <li class="nav-item ms-2"><a class="btn btn-primary btn-sm" href="/programs/host-event">Submit Pitch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page -->
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
+
+      <!-- Page header -->
+      <div class="page-header mb-4">
+        <div class="row align-items-center">
+          <div class="col">
+            <h1 class="page-title">Community</h1>
+            <div class="text-muted">Find and connect with founders, engineers, investors, and innovators · Boston &amp; Cambridge</div>
+          </div>
+          <div class="col-auto">
+            <a href="/events/" class="btn btn-primary">Browse Events</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alpine app -->
+      <div x-data="communityApp()" x-init="init()">
+
+        <!-- Search + filters -->
+        <div class="row g-3 mb-4">
+
+          <!-- Search -->
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              <input type="search" class="form-control" placeholder="Search by name, role, or company…"
+                     x-model="search" @input="search = $event.target.value">
+            </div>
+          </div>
+
+          <!-- Filter pills -->
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'all' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'all'">All</button>
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'Founder' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'Founder'">Founders</button>
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'Investor' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'Investor'">Investors</button>
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'Engineer' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'Engineer'">Engineers</button>
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'Cambridge' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'Cambridge'">Cambridge</button>
+              <button class="btn btn-sm"
+                      :class="activeFilter === 'Boston' ? 'btn-primary' : 'btn-outline-secondary'"
+                      @click="activeFilter = 'Boston'">Boston</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result count -->
+        <div class="text-muted small mb-3" x-text="filteredPeople.length + ' members'"></div>
+
+        <!-- Loading skeletons -->
+        <div x-show="loading" class="row row-cards g-3">
+          <template x-for="i in 6" :key="i">
+            <div class="col-sm-6 col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="avatar avatar-lg placeholder"></span>
+                    <div class="flex-fill">
+                      <div class="placeholder col-8 mb-1"></div>
+                      <div class="placeholder col-6"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder col-12 mb-1"></div>
+                  <div class="placeholder col-10"></div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Member grid -->
+        <div x-show="!loading" class="row row-cards g-3">
+          <template x-for="p in filteredPeople" :key="p.name">
+            <div class="col-sm-6 col-lg-4">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+
+                  <!-- Header: avatar + name + role -->
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="avatar avatar-lg"
+                          :style="isImgPath(p.data.avatar) ? 'background-image: url(' + p.data.avatar + ')' : ''">
+                      <template x-if="!isImgPath(p.data.avatar)">
+                        <span x-text="p.data.avatar_fallback || getInitials(p.title)"></span>
+                      </template>
+                    </span>
+                    <div class="flex-fill" style="min-width: 0;">
+                      <div class="fw-bold text-truncate" x-text="p.title"></div>
+                      <div class="text-muted small text-truncate" x-text="p.data.role"></div>
+                      <div class="text-primary small fw-semibold text-truncate" x-show="p.data.company" x-text="p.data.company"></div>
+                    </div>
+                  </div>
+
+                  <!-- Tags -->
+                  <div class="d-flex flex-wrap gap-1 mb-2" x-show="p.tags && p.tags.length">
+                    <template x-for="tag in p.tags.slice(0,3)" :key="tag">
+                      <span class="badge" :class="tagClass(tag)" x-text="tag"></span>
+                    </template>
+                    <template x-for="ind in (p.data.industry || []).slice(0,2)" :key="ind">
+                      <span class="badge bg-secondary-lt text-secondary" x-text="ind"></span>
+                    </template>
+                  </div>
+
+                  <!-- Bio -->
+                  <p class="text-muted small mb-3 flex-fill"
+                     style="-webkit-line-clamp:3;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden;"
+                     x-text="p.data.bio"></p>
+
+                  <!-- Footer: city + connect -->
+                  <div class="d-flex align-items-center justify-content-between pt-2 border-top mt-auto">
+                    <div class="text-muted small d-flex align-items-center gap-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <span x-text="p.data.city || 'Boston'"></span>
+                    </div>
+                    <a :href="p.data.linkedin || p.data.connectUrl || '#'"
+                       target="_blank" rel="noopener"
+                       class="btn btn-sm btn-primary">Connect</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- Empty state -->
+          <div x-show="filteredPeople.length === 0 && !loading" class="col-12">
+            <div class="empty">
+              <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+              </div>
+              <p class="empty-title">No members found</p>
+              <p class="empty-subtitle text-muted">Try a different search or filter.</p>
+              <div class="empty-action">
+                <button class="btn btn-primary" @click="activeFilter = 'all'; search = ''">Show all members</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="py-5 text-white" style="background: linear-gradient(135deg, #1a3596 0%, #2446C8 50%, #0d1f5c 100%); position: relative; margin-left: -50vw; margin-right: -50vw; left: 50%; width: 100vw;">
+  <div class="container-xl">
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="fw-bold">Exponanta</div>
+        <div class="text-white-50 small">Boston · Cambridge innovation community</div>
+      </div>
+      <div class="col-auto">
+        <small class="text-white-50">© 2026 Exponanta Technologies. All rights reserved.</small>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+function communityApp() {
+  return {
+    people: [],
+    loading: true,
+    activeFilter: 'all',
+    search: '',
+
+    async init() {
+      try {
+        const res = await fetch('../data/db.json');
+        const data = await res.json();
+        const raw = Array.isArray(data) ? data : (data.people || data.events || []);
+        this.people = raw.filter(p => p.category === 'people' && p.docstatus === 1);
+      } catch (err) {
+        console.error('Community load error:', err);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    get filteredPeople() {
+      return this.people.filter(p => {
+        const matchFilter =
+          this.activeFilter === 'all' ||
+          (p.tags || []).includes(this.activeFilter) ||
+          (p.data?.city || '') === this.activeFilter;
+
+        if (!matchFilter) return false;
+
+        if (!this.search) return true;
+
+        const q = this.search.toLowerCase();
+        return (
+          (p.title || '').toLowerCase().includes(q) ||
+          (p.data?.role || '').toLowerCase().includes(q) ||
+          (p.data?.company || '').toLowerCase().includes(q) ||
+          (p.data?.bio || '').toLowerCase().includes(q)
+        );
+      });
+    },
+
+    tagClass(tag) {
+      const map = {
+        'Founder':   'bg-blue-lt text-blue',
+        'Operator':  'bg-blue-lt text-blue',
+        'Advisor':   'bg-blue-lt text-blue',
+        'Investor':  'bg-orange-lt text-orange',
+        'VC':        'bg-orange-lt text-orange',
+        'Angel':     'bg-orange-lt text-orange',
+        'Engineer':  'bg-teal-lt text-teal',
+        'Builder':   'bg-teal-lt text-teal',
+        'Developer': 'bg-teal-lt text-teal',
+      };
+      return map[tag] || 'bg-secondary-lt text-secondary';
+    },
+
+    isImgPath(v) {
+      return v && /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(v);
+    },
+
+    getInitials(v) {
+      if (!v) return '?';
+      return v.split(' ').map(w => w[0]?.toUpperCase()).slice(0, 2).join('') || '?';
+    }
+  };
+}
+</script>
+
+</body>
+</html>

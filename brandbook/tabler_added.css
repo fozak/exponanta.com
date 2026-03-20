@@ -9,3 +9,9 @@
 
 
 html { overflow-x: hidden; }
+
+.sidebar-sticky {
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
