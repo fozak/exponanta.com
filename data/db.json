@@ -1,4 +1,47 @@
-[
+[{
+  "name": "webpagenet9r3x7pq",
+  "page_name": "networking",
+  "doctype": "webpage",
+  "docstatus": 1,
+  "category": "root",
+  "content_category": "community",
+  "audience": "startup-founder",
+  "audience_secondary": [
+    "small-business-owner",
+    "industry-professional",
+    "investors"
+  ],
+  "industry": null,
+  "url": "/networking.html",
+  "title": "Networking for Founders",
+  "deck": "In-person networking is powerful but limited. Exponanta runs weekly online events by industry vertical — where founders pitch free, investors discover early deal flow, and real relationships form over time.",
+  "image": "",
+  "kicker": "Community · Networking",
+  "featured": false,
+  "lang": "en",
+  "tags": ["Community", "Networking", "Founders", "Online Events"],
+  "related": ["networking-for-startups"],
+  "canonical_url": "https://exponanta.com/networking.html",
+  "meta_title": "Networking for Founders | Exponanta",
+  "meta_description": "Weekly online events by industry vertical. Free founder pitches. Investors, operators, and builders in the same room — every week. Networking that works regardless of where you are.",
+  "og_image": "https://exponanta.com/images/networking-exponanta.jpg",
+  "noindex": false,
+  "expires": null,
+  "sort_order": null,
+  "owner": "exponanta",
+  "modified_by": "exponanta",
+  "creation": "2026-03-20T10:00:00Z",
+  "published_date": "2026-03-20T10:00:00Z",
+  "modified": "2026-03-20T10:00:00Z",
+  "data": {
+    "read_time_minutes": 9,
+    "author": "exponanta",
+    "series": null,
+    "series_order": null,
+    "hero_image": "",
+    "subtitle": "Weekly online events by industry vertical — free founder pitches, active investors, relationships that compound."
+  }
+},
     {
     "name": "webpage32fi4kcq",
     "page_name": "audience-adaptive-cta-static-sites",
