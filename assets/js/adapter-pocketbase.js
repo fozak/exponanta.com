@@ -1,3 +1,5 @@
+
+// ==== version 40 of adapter-pocketbase.js ====
 // adapter-pocketbase.js
 // Dev/browser form of adapter-pocketbase.json
 // Load BEFORE this file: <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
