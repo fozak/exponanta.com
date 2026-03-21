@@ -1,3 +1,19 @@
+/* what was done */
+
+What Was Built Today
+Infrastructure
+Started from zero — created a fresh Ubuntu 24.04 droplet on DigitalOcean, installed PocketBase as a single binary, configured it as a systemd service so it auto-restarts on crash and survives reboots. Set up NGINX as a reverse proxy, pointed pb.exponanta.com DNS, got a free Let's Encrypt SSL certificate via Certbot. Configured Mailgun SMTP for transactional email — hit the DigitalOcean port blocking wall, solved it with port 2525. Enabled rate limiting. Total infrastructure cost: $6/month.
+PocketBase Configuration
+Created the item collection — the universal document store for the Coworker framework — with fields name, doctype, docstatus, data (JSON), _allowed, _allowed_read, owner. Created the rolesystemmanag role record. Configured Application name, Application URL, trusted proxy headers.
+Auth Module
+Built auth.js — a complete auth layer on top of PocketBase covering user provisioning, login, logout, session restore, token refresh, and avatar generation. Key decisions: user ID generated deterministically from email via generateId('User', email), every user gets a mirror record in item with RBAC set correctly (empty owner, System Manager in _allowed, self in _allowed_read). Profile cached in localStorage keyed by user ID with pre-computed initials and deterministic avatar color.
+Registration Flow
+Built register.html — Alpine.js form with validation, inline field errors, show/hide password, spinner on submit button. On success: auto-login via authRegister(), session stored, verification email sent via Mailgun. Form stays visible on error, switches to success section on completion.
+Navbar
+Rebuilt the navbar on Tabler standards with full Alpine auth integration. Three states: logged out shows Sign in button, logged in unverified shows avatar with warning badge and resend option in dropdown, logged in verified shows clean avatar with profile/dashboard/settings/logout. Avatar uses image if available, falls back to colored initials circle with color derived deterministically from user ID.
+Three Trickiest Parts
+DigitalOcean blocks SMTP ports 25, 465, and 587 — solved with Mailgun port 2525. The Application URL needed to be pb.exponanta.com not exponanta.com so verification links point to the PocketBase UI. Alpine's defer timing meant scripts had to load synchronously before Alpine to avoid generateId is not defined on init.
+
 <a href="/events.html?solution_categories=ai-productivity "industry=fintech" class="btn btn-outline-primary w-100">FinTech</a>ai-productivity
 
 /* TODO http://127.0.0.1:8080/events.html - add CTA and make 2 columns and add tagging by industry

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Exponanta</title>
+
+  <!-- version 40 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <!-- Load order: pb → adapter → utils → auth → Alpine -->
+  <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+  <script src="/assets/js/adapter-pocketbase.js"></script>
+  <script src="/assets/js/CW-utils.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="antialiased">
+
+  <div x-data x-init="fetch('/components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div x-data="registerForm()" class="card card-md">
+      <div class="card-body">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <a href="/" class="fw-bold fs-3 text-decoration-none text-dark">Exponanta</a>
+          <p class="text-muted mt-1 mb-0">Create your account</p>
+        </div>
+
+        <!-- ===== FORM (idle) ===== -->
+        <div x-show="status === 'idle'">
+
+          <div x-show="error" class="alert alert-danger mb-3">
+            <i class="ti ti-alert-circle me-2"></i>
+            <span x-text="error"></span>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label required">Full name</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.name}"
+              x-model="form.name" placeholder="Jane Smith" autocomplete="name">
+            <div class="invalid-feedback" x-text="errors.name"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label required">Email address</label>
+            <input type="email" class="form-control" :class="{'is-invalid': errors.email}"
+              x-model="form.email" placeholder="you@example.com" autocomplete="email">
+            <div class="invalid-feedback" x-text="errors.email"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label required">Password</label>
+            <div class="input-group input-group-flat">
+              <input :type="showPassword ? 'text' : 'password'" class="form-control"
+                :class="{'is-invalid': errors.password}"
+                x-model="form.password" placeholder="At least 8 characters" autocomplete="new-password">
+              <span class="input-group-text">
+                <a href="#" @click.prevent="showPassword = !showPassword" class="link-secondary">
+                  <i :class="showPassword ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
+                </a>
+              </span>
+            </div>
+            <div class="invalid-feedback" x-text="errors.password"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label required">Confirm password</label>
+            <input type="password" class="form-control" :class="{'is-invalid': errors.passwordConfirm}"
+              x-model="form.passwordConfirm" placeholder="Repeat your password" autocomplete="new-password">
+            <div class="invalid-feedback" x-text="errors.passwordConfirm"></div>
+          </div>
+
+          <div class="form-footer">
+            <button type="button" class="btn btn-primary w-100" @click="submit()" :disabled="loading">
+              <span x-show="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span x-text="loading ? 'Creating account…' : 'Create account'"></span>
+            </button>
+          </div>
+
+          <div class="text-center text-muted mt-3">
+            Already have an account? <a href="/login.html">Sign in</a>
+          </div>
+
+        </div>
+        <!-- ===== END FORM ===== -->
+
+        <!-- ===== SUCCESS ===== -->
+        <div x-show="status === 'success'" class="text-center py-2">
+          <div class="mb-3 text-success" style="font-size:3rem;">
+            <i class="ti ti-circle-check"></i>
+          </div>
+          <h3 class="mb-1">Account created!</h3>
+          <p class="text-muted mb-4">
+            We sent a verification email to<br>
+            <strong x-text="form.email"></strong>
+          </p>
+          <div class="alert alert-info text-start">
+            <i class="ti ti-info-circle me-2"></i>
+            Please verify your email — you can use the app now but some features require verification.
+          </div>
+          <a href="/dashboard.html" class="btn btn-primary w-100 mt-2">Go to dashboard</a>
+          <button type="button" class="btn btn-link text-muted mt-2 w-100"
+            @click="resendVerification()" :disabled="resendLoading">
+            <span x-show="resendLoading" class="spinner-border spinner-border-sm me-1"></span>
+            Resend verification email
+          </button>
+        </div>
+        <!-- ===== END SUCCESS ===== -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js"></script>
+<script>
+function registerForm() {
+  return {
+    status: 'idle',
+    loading: false,
+    resendLoading: false,
+    showPassword: false,
+    error: null,
+    form: { name: '', email: '', password: '', passwordConfirm: '' },
+    errors: { name: '', email: '', password: '', passwordConfirm: '' },
+
+    validate() {
+      let ok = true;
+      this.errors = { name: '', email: '', password: '', passwordConfirm: '' };
+      if (!this.form.name.trim())
+        { this.errors.name = 'Full name is required'; ok = false; }
+      if (!this.form.email.trim())
+        { this.errors.email = 'Email is required'; ok = false; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email))
+        { this.errors.email = 'Enter a valid email address'; ok = false; }
+      if (!this.form.password)
+        { this.errors.password = 'Password is required'; ok = false; }
+      else if (this.form.password.length < 8)
+        { this.errors.password = 'Minimum 8 characters'; ok = false; }
+      if (!this.form.passwordConfirm)
+        { this.errors.passwordConfirm = 'Please confirm your password'; ok = false; }
+      else if (this.form.password !== this.form.passwordConfirm)
+        { this.errors.passwordConfirm = 'Passwords do not match'; ok = false; }
+      return ok;
+    },
+
+    async submit() {
+      this.error = null;
+      if (!this.validate()) return;
+      this.loading = true;
+      try {
+        await authRegister(
+          this.form.email.trim().toLowerCase(),
+          this.form.password,
+          this.form.name.trim()
+        );
+        this.status = 'success';
+      } catch (err) {
+        console.error(err);
+        const data = err?.response?.data || err?.data || {};
+        if (data.email?.message)
+          this.errors.email = data.email.message.includes('unique')
+            ? 'This email is already registered.' : data.email.message;
+        else if (data.id?.message?.includes('unique'))
+          this.errors.email = 'This email is already registered.';
+        else if (data.password?.message)
+          this.errors.password = data.password.message;
+        else
+          this.error = err?.message || 'Something went wrong. Please try again.';
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async resendVerification() {
+      this.resendLoading = true;
+      try { await pb.collection('users').requestVerification(this.form.email); }
+      catch (e) { console.warn(e); }
+      finally { this.resendLoading = false; }
+    }
+  };
+}
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 globalThis.Adapter = globalThis.Adapter || {};
 
 const _config = {
-  url: "http://143.198.29.88:8090/",
+  url: "https://pb.exponanta.com/",
   autoCancellation: false,
   defaultCollection: "item"
 };

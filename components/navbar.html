@@ -1,47 +1,135 @@
-<nav class="navbar navbar-option-1 navbar-expand-lg sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <span class="navbar-brand-text">Exponanta</span>
+<header class="navbar navbar-expand-lg navbar-light sticky-top" style="background: #fff; border-bottom: 1px solid #e6e7e9; z-index: 1030;">
+  <div class="container-xl" x-data x-init="
+    Alpine.store('auth') || Alpine.store('auth', authStoreDefaults());
+    authRestore();
+  ">
+
+    <!-- Brand -->
+    <a href="/" class="navbar-brand pe-4 me-2" style="border-right: 1px solid #e6e7e9;">
+      <span class="fw-bold" style="font-size: 1.15rem; letter-spacing: -0.02em;">Exponanta</span>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <!-- Mobile toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
-
+    <!-- Nav links -->
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav me-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link active" href="/events">Events</a>
+          <a class="nav-link" href="/events.html">Events</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/community">Community</a>
+          <a class="nav-link" href="/community.html">Community</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/calendar">Calendar</a>
+          <a class="nav-link" href="/calendar.html">Calendar</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/membership">Join</a>
+          <a class="nav-link" href="/membership.html">Join</a>
         </li>
+      </ul>
 
-        <li class="nav-item ms-lg-3">
-          <a class="btn btn-sm btn-search" href="/search" aria-label="Search">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-            </svg>
+      <!-- Right side -->
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+
+        <!-- Search -->
+        <li class="nav-item">
+          <a class="nav-link px-2" href="/search.html" aria-label="Search">
+            <i class="ti ti-search" style="font-size: 1.1rem;"></i>
           </a>
         </li>
 
-        <li class="nav-item ms-lg-2">
-          <a class="btn btn-primary btn-sm" href="/programs/host-event">
-            Host Event
+        <!-- Host Event -->
+        <li class="nav-item">
+          <a class="btn btn-primary btn-sm" href="/programs/host-event.html">
+            <i class="ti ti-plus me-1"></i>Host Event
           </a>
+        </li>
+
+        <!-- Unverified warning badge (logged in but not verified) -->
+        <li class="nav-item" x-show="$store.auth.isValid && !$store.auth.verified">
+          <a href="/auth/verify-reminder.html" class="nav-link px-2 text-warning" title="Please verify your email">
+            <i class="ti ti-mail-exclamation" style="font-size: 1.1rem;"></i>
+          </a>
+        </li>
+
+        <!-- LOGGED OUT: Sign in -->
+        <li class="nav-item" x-show="!$store.auth.isValid">
+          <a class="btn btn-outline-primary btn-sm" href="/login.html">Sign in</a>
+        </li>
+
+        <!-- LOGGED IN: Avatar dropdown -->
+        <li class="nav-item dropdown" x-show="$store.auth.isValid">
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+
+            <!-- Avatar with image -->
+            <template x-if="$store.auth.avatar">
+              <span class="avatar avatar-sm"
+                :style="`background-image: url(${$store.auth.avatar})`">
+              </span>
+            </template>
+
+            <!-- Avatar with initials -->
+            <template x-if="!$store.auth.avatar">
+              <span class="avatar avatar-sm"
+                :style="`background-color: ${$store.auth.avatarColor}; color: #fff;`"
+                x-text="$store.auth.initials">
+              </span>
+            </template>
+
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 220px;">
+
+            <!-- User info header -->
+            <div class="dropdown-header">
+              <div class="fw-semibold" x-text="$store.auth.name"></div>
+              <div class="text-muted small" x-text="$store.auth.email"></div>
+              <div x-show="!$store.auth.verified" class="mt-1">
+                <span class="badge bg-warning-lt text-warning">
+                  <i class="ti ti-mail me-1"></i>Email not verified
+                </span>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="/profile.html">
+              <i class="ti ti-user me-2"></i>Profile
+            </a>
+            <a class="dropdown-item" href="/dashboard.html">
+              <i class="ti ti-layout-dashboard me-2"></i>Dashboard
+            </a>
+            <a class="dropdown-item" href="/settings.html">
+              <i class="ti ti-settings me-2"></i>Settings
+            </a>
+
+            <!-- Resend verification (only if unverified) -->
+            <template x-if="!$store.auth.verified">
+              <div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-warning" href="#"
+                  @click.prevent="pb.collection('users').requestVerification($store.auth.email).then(() => alert('Verification email sent!'))">
+                  <i class="ti ti-mail-forward me-2"></i>Resend verification
+                </a>
+              </div>
+            </template>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item text-danger" href="#"
+              @click.prevent="authLogout(); window.location.href='/login.html'">
+              <i class="ti ti-logout me-2"></i>Sign out
+            </a>
+
+          </div>
         </li>
 
       </ul>
     </div>
+
   </div>
-</nav>
+</header>

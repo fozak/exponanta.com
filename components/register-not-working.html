@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Exponanta</title>
+
+  <!-- version 40 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css">
+
+  <!-- PocketBase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+<!-- Your adapter -->
+<script src="/assets/js/adapter-pocketbase.js"></script>
+<script src="/assets/js/CW-utils.js"></script>
+
+<!-- Alpine MUST load AFTER your scripts -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</head>
+
+<body class="antialiased">
+
+<div class="page page-center">
+  <div class="container container-tight py-4">
+
+    <div x-data="registerForm()" class="card card-md">
+      <div class="card-body">
+
+        <!-- Logo / Header -->
+        <div class="text-center mb-4">
+          <a href="/" class="navbar-brand navbar-brand-autodark">
+            <span class="fw-bold fs-3">Exponanta</span>
+          </a>
+          <p class="text-muted mt-1 mb-0">Create your account</p>
+        </div>
+
+        <!-- ===== FORM SECTION ===== -->
+        <div x-show="status === 'idle'" x-transition>
+
+          <!-- Error alert -->
+          <div x-show="error" class="alert alert-danger mb-3" role="alert">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div x-text="error"></div>
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label required">Full name</label>
+            <input
+              type="text"
+              class="form-control"
+              :class="{'is-invalid': errors.name}"
+              x-model="form.name"
+              placeholder="Jane Smith"
+              autocomplete="name"
+            >
+            <div class="invalid-feedback" x-text="errors.name"></div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label required">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              :class="{'is-invalid': errors.email}"
+              x-model="form.email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            >
+            <div class="invalid-feedback" x-text="errors.email"></div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label class="form-label required">Password</label>
+            <div class="input-group input-group-flat">
+              <input
+                :type="showPassword ? 'text' : 'password'"
+                class="form-control"
+                :class="{'is-invalid': errors.password}"
+                x-model="form.password"
+                placeholder="At least 8 characters"
+                autocomplete="new-password"
+              >
+              <span class="input-group-text">
+                <a href="#" @click.prevent="showPassword = !showPassword" class="link-secondary" :title="showPassword ? 'Hide password' : 'Show password'">
+                  <svg x-show="!showPassword" xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2"/><path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7"/></svg>
+                  <svg x-show="showPassword" xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="3" y1="3" x2="21" y2="21"/><path d="M10.584 10.587a2 2 0 0 0 2.828 2.83"/><path d="M9.363 5.365a9.466 9.466 0 0 1 2.637-.365c4 0 7.333 2.333 10 7c-.778 1.361-1.612 2.524-2.503 3.488m-1.938 1.24c-1.422.86-2.957 1.272-4.559 1.272c-4 0-7.333-2.333-10-7c1.347-2.365 2.894-4.138 4.641-5.322"/></svg>
+                </a>
+              </span>
+            </div>
+            <div class="invalid-feedback" x-text="errors.password"></div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="mb-3">
+            <label class="form-label required">Confirm password</label>
+            <input
+              type="password"
+              class="form-control"
+              :class="{'is-invalid': errors.passwordConfirm}"
+              x-model="form.passwordConfirm"
+              placeholder="Repeat your password"
+              autocomplete="new-password"
+            >
+            <div class="invalid-feedback" x-text="errors.passwordConfirm"></div>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-footer">
+            <button
+              type="button"
+              class="btn btn-primary w-100"
+              @click="submit()"
+              :disabled="loading"
+            >
+              <span x-show="loading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+              <span x-text="loading ? 'Creating account…' : 'Create account'"></span>
+            </button>
+          </div>
+
+          <div class="text-center text-muted mt-3">
+            Already have an account? <a href="/login.html">Sign in</a>
+          </div>
+
+        </div>
+        <!-- ===== END FORM SECTION ===== -->
+
+        <!-- ===== LOADING SECTION ===== -->
+        <div x-show="status === 'loading'" x-transition class="text-center py-4">
+          <div class="mb-3">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+          <p class="text-muted" x-text="loadingMessage"></p>
+        </div>
+        <!-- ===== END LOADING SECTION ===== -->
+
+        <!-- ===== SUCCESS SECTION ===== -->
+        <div x-show="status === 'success'" x-transition class="text-center py-2">
+          <div class="mb-3">
+            <span class="avatar avatar-xl bg-green-lt text-green" style="font-size:2rem;">✓</span>
+          </div>
+          <h3 class="mb-1">Account created!</h3>
+          <p class="text-muted mb-4">
+            We sent a verification email to<br>
+            <strong x-text="form.email"></strong>
+          </p>
+          <div class="alert alert-info text-start">
+            <div class="d-flex">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                Please check your inbox and click the verification link before signing in.
+              </div>
+            </div>
+          </div>
+          <a href="/login.html" class="btn btn-primary w-100 mt-2">Go to sign in</a>
+          <button
+            type="button"
+            class="btn btn-link text-muted mt-2"
+            @click="resendVerification()"
+            :disabled="resendLoading"
+          >
+            <span x-show="resendLoading" class="spinner-border spinner-border-sm me-1"></span>
+            Resend verification email
+          </button>
+        </div>
+        <!-- ===== END SUCCESS SECTION ===== -->
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js"></script>
+
+<script>
+const SYSTEM_MANAGER_ROLE_ID = 'rolesystemmanag';
+
+async function provisionUser(email, password, name) {
+  const userId = generateId('User', email);
+  console.log('Provisioning user:', userId);
+
+  // Step 1: Create auth user
+  await pb.collection('users').create({
+    id: userId,
+    email,
+    password,
+    passwordConfirm: password,
+    name,
+    emailVisibility: true
+  });
+
+  // Step 2: Create item record
+  await pb.collection('item').create({
+    id: userId,
+    name: userId,
+    doctype: 'User',
+    docstatus: 0,
+    data: { id: userId, email, name, doctype: 'User', docstatus: 0 }
+  });
+
+  // Step 3: Set RBAC
+  await pb.collection('item').update(userId, {
+    owner: '',
+    _allowed: [SYSTEM_MANAGER_ROLE_ID],
+    _allowed_read: [userId]
+  });
+
+  // Step 4: Send verification email
+  await pb.collection('users').requestVerification(email);
+
+  return userId;
+}
+
+function registerForm() {
+  return {
+    status: 'idle',      // idle | loading | success
+    loading: false,
+    resendLoading: false,
+    showPassword: false,
+    error: null,
+    loadingMessage: 'Creating your account…',
+
+    form: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: ''
+    },
+
+    errors: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: ''
+    },
+
+    validate() {
+      let valid = true;
+      this.errors = { name: '', email: '', password: '', passwordConfirm: '' };
+
+      if (!this.form.name.trim()) {
+        this.errors.name = 'Full name is required';
+        valid = false;
+      }
+
+      if (!this.form.email.trim()) {
+        this.errors.email = 'Email is required';
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email)) {
+        this.errors.email = 'Enter a valid email address';
+        valid = false;
+      }
+
+      if (!this.form.password) {
+        this.errors.password = 'Password is required';
+        valid = false;
+      } else if (this.form.password.length < 8) {
+        this.errors.password = 'Password must be at least 8 characters';
+        valid = false;
+      }
+
+      if (!this.form.passwordConfirm) {
+        this.errors.passwordConfirm = 'Please confirm your password';
+        valid = false;
+      } else if (this.form.password !== this.form.passwordConfirm) {
+        this.errors.passwordConfirm = 'Passwords do not match';
+        valid = false;
+      }
+
+      return valid;
+    },
+
+    async submit() {
+      this.error = null;
+      if (!this.validate()) return;
+
+      this.loading = true;
+      this.loadingMessage = 'Creating your account…';
+
+      try {
+        this.status = 'loading';
+        await provisionUser(
+          this.form.email.trim().toLowerCase(),
+          this.form.password,
+          this.form.name.trim()
+        );
+        this.status = 'success';
+      } catch (err) {
+        this.status = 'idle';
+        console.error('Registration error:', err);
+
+        // Parse PocketBase error messages
+        if (err?.response?.data) {
+          const data = err.response.data;
+          if (data.email?.message) {
+            this.errors.email = data.email.message;
+          } else if (data.password?.message) {
+            this.errors.password = data.password.message;
+          } else {
+            this.error = 'Registration failed. Please try again.';
+          }
+        } else if (err?.message?.includes('Failed to create')) {
+          this.error = 'This email is already registered. Try signing in.';
+        } else {
+          this.error = err?.message || 'Something went wrong. Please try again.';
+        }
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async resendVerification() {
+      this.resendLoading = true;
+      try {
+        await pb.collection('users').requestVerification(this.form.email);
+      } catch (e) {
+        console.warn('Resend failed:', e);
+      } finally {
+        this.resendLoading = false;
+      }
+    }
+  };
+}
+</script>
+
+</body>
+</html>
