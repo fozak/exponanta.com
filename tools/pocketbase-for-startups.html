@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="audience" content="founders-technical">
+
+<title>PocketBase for Startups: Why We Chose It for Exponanta | Exponanta Blog</title>
+<meta name="description" content="PocketBase is an open-source backend in a single file. Here's why it's a perfect fit for early-stage startups — and exactly how Exponanta set it up in production with HTTPS, NGINX, and Mailgun.">
+<link rel="canonical" href="https://exponanta.com/tools/pocketbase-for-startups.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="PocketBase for Startups: Why We Chose It for Exponanta">
+<meta property="og:description" content="PocketBase is an open-source backend in a single file. Here's why it's a perfect fit for early-stage startups — and exactly how Exponanta set it up in production.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://exponanta.com/tools/pocketbase-for-startups.html">
+<meta property="og:image" content="https://exponanta.com/images/pocketbase-for-startups.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PocketBase for Startups: Why We Chose It for Exponanta",
+  "description": "PocketBase is an open-source backend in a single file. Here's why it's a perfect fit for early-stage startups — and exactly how Exponanta set it up in production with HTTPS, NGINX, and Mailgun.",
+  "url": "https://exponanta.com/tools/pocketbase-for-startups.html",
+  "datePublished": "2026-03-21",
+  "dateModified": "2026-03-21",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exponanta",
+    "url": "https://exponanta.com"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Exponanta"
+  }
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
+<style>
+  article { font-size: 1.0625rem; }
+
+  /* Code blocks */
+  pre {
+    background: #1e2433;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin: 1.25rem 0;
+  }
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.875em;
+  }
+  p code, li code {
+    background: #e8edf3;
+    color: #2c5282;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  /* Step numbers */
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--tblr-primary);
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  /* Gotcha callout */
+  .gotcha {
+    border-left: 4px solid #f59e0b;
+    background: #fffbeb;
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+  }
+  .gotcha-title {
+    font-weight: 700;
+    color: #92400e;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+
+<main id="main-content">
+  <div class="page-wrapper">
+    <div class="page-body">
+      <div class="container-xl py-4">
+        <div class="row g-4 align-items-start">
+
+          <!-- Article -->
+          <div class="col-lg-8 col-md-12">
+            <article>
+
+              <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/tools/">Tools</a></li>
+                <li class="breadcrumb-item active">PocketBase for Startups</li>
+              </ol>
+
+              <header class="mb-4">
+                <div class="mb-2">
+                  <span class="badge bg-blue-lt text-blue me-1">Backend</span>
+                  <span class="badge bg-teal-lt text-teal me-1">Infrastructure</span>
+                  <span class="badge bg-orange-lt text-orange">Startups</span>
+                </div>
+                <h1 class="display-5 fw-bold mb-3">PocketBase for Startups: Why We Chose It for Exponanta</h1>
+                <p class="lead text-muted">
+                  Your backend shouldn't cost $500/month before you have a single paying customer. PocketBase is a complete backend in one binary file — authentication, database, file storage, real-time, and admin UI included. Here's why we use it at Exponanta and exactly how to set it up in production.
+                </p>
+                <div class="d-flex align-items-center gap-3 mt-3 pt-3 border-bottom pb-3">
+                  <span class="avatar">E</span>
+                  <div>
+                    <div class="fw-semibold">Exponanta</div>
+                    <div class="text-muted small">Mar 21, 2026 · 12 min read</div>
+                  </div>
+                </div>
+              </header>
+
+              <!-- Why PocketBase -->
+              <h2 class="mt-5 mb-3">Why PocketBase is a great fit for startups</h2>
+
+              <p>Early-stage startups face a brutal infrastructure dilemma. Firebase is expensive at scale and creates vendor lock-in. Supabase is excellent but complex to self-host. Building your own backend from scratch takes months. And managed services like AWS Amplify or Heroku erode your runway before you've validated anything.</p>
+
+              <p>PocketBase sits in a different category entirely. It's a single executable file — no Docker, no Kubernetes, no external dependencies. You drop it on a $6/month server and you have a production-grade backend running in under 10 minutes.</p>
+
+              <div class="card mb-4">
+                <div class="card-body p-0">
+                  <div class="divide-y">
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">⚡</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">Zero dependencies, truly portable</div>
+                        <p class="text-muted small mb-0">No Node.js runtime, no database server, no Redis, no message queue. One binary, one folder. Copy it to any Linux server and it runs. This means your deployment story is <code>rsync</code> and <code>systemctl start</code>.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🗄️</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">SQLite — fast enough for most startups</div>
+                        <p class="text-muted small mb-0">SQLite handles thousands of requests per second on a single-core VPS. You won't need Postgres until you're well past product-market fit. And when you do, PocketBase's architecture makes migration straightforward.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🔐</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">Auth, files, realtime — all included</div>
+                        <p class="text-muted small mb-0">Email/password auth, OAuth2, JWT tokens, file uploads with S3-compatible storage, real-time subscriptions via SSE — all built in. You're not stitching together five services from day one.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🧩</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">Admin UI out of the box</div>
+                        <p class="text-muted small mb-0">The built-in dashboard lets non-technical co-founders manage data, configure collections, and see logs without touching the terminal. This matters more than most engineers expect.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">💸</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">$6/month total infrastructure cost</div>
+                        <p class="text-muted small mb-0">A DigitalOcean Basic droplet at $6/month runs PocketBase comfortably for hundreds of concurrent users. Compare that to a typical Firebase bill at the same traffic, or the cost of a managed Postgres instance plus auth service plus storage.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🔓</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">Open source, no vendor lock-in</div>
+                        <p class="text-muted small mb-0">MIT licensed. Your data lives in a SQLite file you own completely. If PocketBase disappears tomorrow, you have your data and a standard database format. No export fees, no migration hell.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card bg-blue-lt border-0 mb-4">
+                <div class="card-body p-4">
+                  <div class="row align-items-start g-3">
+                    <div class="col-auto d-none d-md-block" style="font-size:2rem;">🏗️</div>
+                    <div class="col">
+                      <p class="mb-0 fw-semibold" style="font-size:1.1rem;line-height:1.5;">"Exponanta runs its entire backend on PocketBase — user auth, participant directories, event data, and scheduling — on a single $6/month droplet. We went from zero to production HTTPS in under an hour."</p>
+                      <p class="text-muted small mt-2 mb-0">— Exponanta engineering team, March 2026</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Setup Guide -->
+              <h2 class="mt-5 mb-3">Production setup: step by step</h2>
+
+              <p>The following is exactly how Exponanta deployed PocketBase to production at <code>pb.exponanta.com</code>. This runs on Ubuntu 24.04 LTS on a DigitalOcean Basic droplet ($6/month). Every command is copy-pasteable.</p>
+
+              <!-- Step 1 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">1</span>
+                <h3 class="mb-0">Provision a server</h3>
+              </div>
+
+              <p>Create a new Ubuntu 24.04 LTS droplet on DigitalOcean (or any VPS provider). During setup, add your SSH public key so you can connect without a password.</p>
+
+              <p>Get your public key on Windows:</p>
+              <pre><code>type $env:USERPROFILE\.ssh\id_ed25519.pub</code></pre>
+
+              <p>If you don't have an SSH key yet, generate one first:</p>
+              <pre><code>ssh-keygen -t ed25519 -C "you@example.com"</code></pre>
+
+              <p>Once the droplet is running, connect via the DigitalOcean browser console or SSH. Update the system first:</p>
+              <pre><code>apt update && apt upgrade -y</code></pre>
+
+              <!-- Step 2 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">2</span>
+                <h3 class="mb-0">Download and install PocketBase</h3>
+              </div>
+
+              <p>PocketBase needs only <code>unzip</code> and <code>curl</code>. That's it.</p>
+
+              <pre><code>apt install -y unzip curl
+
+mkdir -p /root/pb/pb_migrations /root/pb/pb_hooks
+cd /root/pb
+
+curl -L https://github.com/pocketbase/pocketbase/releases/download/v0.26.6/pocketbase_0.26.6_linux_amd64.zip \
+  -o pocketbase.zip
+
+unzip pocketbase.zip
+rm pocketbase.zip
+chmod +x pocketbase</code></pre>
+
+              <p>Check the <a href="https://github.com/pocketbase/pocketbase/releases" target="_blank" rel="noopener">PocketBase releases page</a> for the latest version and update the URL accordingly.</p>
+
+              <!-- Step 3 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">3</span>
+                <h3 class="mb-0">Create a systemd service</h3>
+              </div>
+
+              <p>Running PocketBase as a systemd service means it starts automatically on boot, restarts on crash, and runs in the background without you needing to stay connected.</p>
+
+              <pre><code>cat > /lib/systemd/system/pocketbase.service << 'EOF'
+[Unit]
+Description=pocketbase
+
+[Service]
+Type=simple
+User=root
+Group=root
+LimitNOFILE=4096
+Restart=always
+RestartSec=5s
+StandardOutput=append:/root/pb/std.log
+StandardError=append:/root/pb/std.log
+WorkingDirectory=/root/pb
+ExecStart=/root/pb/pocketbase serve --http=0.0.0.0:8090
+
+[Install]
+WantedBy=multi-user.target
+EOF</code></pre>
+
+              <p>Enable and start the service:</p>
+
+              <pre><code>systemctl enable pocketbase.service
+systemctl start pocketbase
+systemctl status pocketbase</code></pre>
+
+              <p>You should see <code>Active: active (running)</code>. PocketBase is now live on port 8090.</p>
+
+              <!-- Step 4 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">4</span>
+                <h3 class="mb-0">Create your superuser account</h3>
+              </div>
+
+              <pre><code>/root/pb/pocketbase superuser create your@email.com yourpassword</code></pre>
+
+              <!-- Step 5 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">5</span>
+                <h3 class="mb-0">Set up NGINX as a reverse proxy</h3>
+              </div>
+
+              <p>PocketBase runs on port 8090 internally. NGINX sits in front of it on port 80 (and later 443 for HTTPS), handling SSL termination and giving you a clean URL.</p>
+
+              <pre><code>apt install -y nginx</code></pre>
+
+              <pre><code>cat > /etc/nginx/sites-available/pocketbase << 'EOF'
+server {
+    listen 80;
+    server_name pb.yourdomain.com;
+    client_max_body_size 10M;
+
+    location / {
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        proxy_read_timeout 360s;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_pass http://127.0.0.1:8090;
+    }
+}
+EOF</code></pre>
+
+              <pre><code>ln -s /etc/nginx/sites-available/pocketbase /etc/nginx/sites-enabled/
+rm /etc/nginx/sites-enabled/default
+nginx -t
+systemctl restart nginx
+ufw allow 80
+ufw allow 22
+ufw enable</code></pre>
+
+              <!-- Step 6 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">6</span>
+                <h3 class="mb-0">Point your domain and enable HTTPS</h3>
+              </div>
+
+              <p>Add an A record in your DNS provider pointing your subdomain to the server IP:</p>
+
+              <div class="card mb-3">
+                <div class="table-responsive">
+                  <table class="table table-vcenter card-table">
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>TTL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>A</code></td>
+                        <td><code>pb</code></td>
+                        <td><code>YOUR_SERVER_IP</code></td>
+                        <td>3600</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <p>Once DNS propagates (verify with <code>ping pb.yourdomain.com</code>), install Certbot and get a free Let's Encrypt certificate:</p>
+
+              <pre><code>apt install -y certbot python3-certbot-nginx
+certbot --nginx -d pb.yourdomain.com</code></pre>
+
+              <p>Certbot will ask for your email, accept terms, then automatically configure NGINX for HTTPS and set up auto-renewal.</p>
+
+              <pre><code>ufw allow 443</code></pre>
+
+              <p>Your PocketBase admin UI is now at <code>https://pb.yourdomain.com/_/</code></p>
+
+              <!-- Step 7 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">7</span>
+                <h3 class="mb-0">Configure transactional email with Mailgun</h3>
+              </div>
+
+              <p>PocketBase sends emails for verification, password reset, and auth alerts. By default it uses the server's <code>sendmail</code> — which will be marked as spam by every major mail provider. Set up Mailgun SMTP instead.</p>
+
+              <div class="gotcha">
+                <div class="gotcha-title">⚠️ DigitalOcean gotcha</div>
+                <p class="mb-0 small">DigitalOcean blocks outbound SMTP on ports 25, 465, and 587 on new accounts to prevent spam. The workaround is port <strong>2525</strong> — Mailgun supports it and DigitalOcean doesn't block it. This took us an hour to figure out.</p>
+              </div>
+
+              <p>In the PocketBase dashboard, go to <strong>Settings → Mail settings</strong> and fill in:</p>
+
+              <div class="card mb-3">
+                <div class="table-responsive">
+                  <table class="table table-vcenter card-table">
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Sender name</td><td>Your App Name</td></tr>
+                      <tr><td>Sender address</td><td>noreply@yourdomain.com</td></tr>
+                      <tr><td>SMTP host</td><td>smtp.mailgun.org</td></tr>
+                      <tr><td>Port</td><td><strong>2525</strong></td></tr>
+                      <tr><td>Username</td><td>Your Mailgun SMTP username</td></tr>
+                      <tr><td>Password</td><td>Your Mailgun SMTP password</td></tr>
+                      <tr><td>TLS</td><td>Auto (StartTLS)</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <p>Click <strong>Send test email</strong> to verify delivery before going live.</p>
+
+              <!-- Step 8 -->
+              <div class="d-flex align-items-center gap-3 mt-5 mb-3">
+                <span class="step-number">8</span>
+                <h3 class="mb-0">Enable rate limiting</h3>
+              </div>
+
+              <p>Go to <strong>Settings → Application</strong> and enable rate limiting. The defaults are sensible and protect against brute-force auth attacks immediately:</p>
+
+              <div class="card mb-4">
+                <div class="table-responsive">
+                  <table class="table table-vcenter card-table">
+                    <thead>
+                      <tr>
+                        <th>Rule</th>
+                        <th>Max requests</th>
+                        <th>Interval</th>
+                        <th>Protects against</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td><code>*:auth</code></td><td>2</td><td>3s</td><td>Brute force login</td></tr>
+                      <tr><td><code>*:create</code></td><td>20</td><td>5s</td><td>Spam signups</td></tr>
+                      <tr><td><code>/api/batch</code></td><td>3</td><td>1s</td><td>Batch API abuse</td></tr>
+                      <tr><td><code>/api/</code></td><td>300</td><td>10s</td><td>General scraping</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Useful commands -->
+              <h2 class="mt-5 mb-3">Day-to-day commands</h2>
+
+              <p>Once running, you rarely need to touch the server. These are the commands you'll use:</p>
+
+              <pre><code># Check if PocketBase is running
+systemctl status pocketbase
+
+# Restart after config changes
+systemctl restart pocketbase
+
+# Watch live logs
+tail -f /root/pb/std.log
+
+# Restart NGINX
+systemctl restart nginx</code></pre>
+
+              <!-- The 3 Gotchas -->
+              <h2 class="mt-5 mb-3">The 3 things that will trip you up</h2>
+
+              <p>We hit all three of these. Save yourself the time.</p>
+
+              <div class="card mb-4">
+                <div class="card-body p-0">
+                  <div class="divide-y">
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🔒</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">Certbot fails if NGINX server_name is an IP</div>
+                        <p class="text-muted small mb-0">If you initially set up NGINX with your server IP in <code>server_name</code> and then try to run Certbot, it will issue the certificate but fail to install it. Make sure <code>server_name</code> is your actual domain name before running Certbot. Fix: <code>sed -i 's/server_name YOUR_IP;/server_name pb.yourdomain.com;/' /etc/nginx/sites-available/pocketbase</code> then <code>certbot install --cert-name pb.yourdomain.com --nginx</code>.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">📧</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">DigitalOcean blocks SMTP — use port 2525</div>
+                        <p class="text-muted small mb-0">Ports 25, 465, and 587 are blocked by default on all new DigitalOcean accounts. DO will not unblock them for new accounts. The solution is Mailgun's alternative port <strong>2525</strong>, which works identically to 587 with STARTTLS. No ticket needed, no waiting — just change the port.</p>
+                      </div>
+                    </div>
+                    <div class="row px-4 py-3 align-items-start g-3">
+                      <div class="col-auto" style="font-size:1.5rem;">🖥️</div>
+                      <div class="col">
+                        <div class="fw-semibold mb-1">VS Code Remote SSH is unreliable for server setup</div>
+                        <p class="text-muted small mb-0">VS Code's Remote SSH extension drops connections, corrupts its own server process, and can leave your droplet in a state where SSH itself stops responding. For server administration, use the DigitalOcean browser console directly — it always works, requires no local configuration, and doesn't add a fragile layer between you and the server.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Summary -->
+              <h2 class="mt-5 mb-3">What you get at the end</h2>
+
+              <div class="card bg-teal-lt border-0 mb-4">
+                <div class="card-body p-4">
+                  <div class="row g-2">
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>PocketBase running as a systemd service — auto-restarts on crash, survives reboots</span></div></div>
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>NGINX reverse proxy on port 80/443</span></div></div>
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>HTTPS with auto-renewing Let's Encrypt certificate</span></div></div>
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>Transactional email via Mailgun (verification, password reset, auth alerts)</span></div></div>
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>Rate limiting enabled against brute force and abuse</span></div></div>
+                    <div class="col-12"><div class="d-flex align-items-center gap-2"><span style="color:#0f766e;">✅</span> <span>Admin UI at <code>https://pb.yourdomain.com/_/</code></span></div></div>
+                    <div class="col-12 mt-2"><div class="fw-semibold">Total monthly cost: $6 (droplet) + $0 Mailgun free tier = <span class="text-success">$6/month</span></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <p>For Exponanta, PocketBase handles everything from participant auth to the event scheduling data powering our Demo Day 1:1 dashboard. It's not a toy — it's a serious backend that scales far beyond where most startups need it, at a cost that preserves runway for what actually matters.</p>
+
+              <!-- Bottom CTA -->
+              <div x-data x-init="fetch('../components/bottom-cta.html').then(r=>r.text()).then(h=>$el.innerHTML=h)" class="mt-4"></div>
+
+            </article>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4 col-md-12 sidebar-sticky">
+            <div x-data x-init="fetch('../components/cta-sidebar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+            <div x-data x-init="fetch('../components/stats-card.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+            <div x-data x-init="fetch('../components/industry-sidebar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+</body>
+</html>
