@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Record — Exponanta</title>
+
+  <!-- Tabler CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css">
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- PocketBase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+  <!-- Your adapter -->
+  <script src="/assets/js/adapter-pocketbase.js"></script>
+
+  <style>
+    :root {
+      --exp-blue:   #1a6fdb;
+      --exp-teal:   #0db8a0;
+      --exp-coral:  #f05a3a;
+      --exp-dark:   #0f1923;
+      --exp-surface:#f4f6fb;
+    }
+
+    body {
+      background: var(--exp-surface);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .page-header {
+      border-bottom: 2px solid var(--exp-blue);
+      background: #fff;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--exp-dark);
+      letter-spacing: -.02em;
+    }
+    .brand-mark span {
+      color: var(--exp-blue);
+    }
+
+    .card-form {
+      border: 1px solid #e0e7ef;
+      border-top: 3px solid var(--exp-blue);
+      box-shadow: 0 2px 12px rgba(26,111,219,.07);
+    }
+
+    .btn-primary-exp {
+      background: var(--exp-blue);
+      border-color: var(--exp-blue);
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+    .btn-primary-exp:hover {
+      background: #155dba;
+      border-color: #155dba;
+    }
+
+    .field-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #6b7a99;
+      margin-bottom: .3rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .status-pill.success { background: #d4f5ee; color: #0a7a63; }
+    .status-pill.error   { background: #fde8e2; color: #b03010; }
+    .status-pill.loading { background: #deeafc; color: #1a5cb0; }
+
+    .result-box {
+      background: var(--exp-dark);
+      color: #a8d8a8;
+      font-family: 'Courier New', monospace;
+      font-size: .78rem;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .divider-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #aab4c8;
+    }
+
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="navbar navbar-expand-md page-header py-2 mb-4">
+  <div class="container-xl">
+    <a href="/" class="brand-mark text-decoration-none">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect width="22" height="22" rx="5" fill="#1a6fdb"/>
+        <path d="M5 11h12M11 5l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Expon<span>anta</span>
+    </a>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <span class="text-muted small">PocketBase</span>
+      <span class="badge bg-teal-lt">connected</span>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<div class="container-xl" x-data="recordForm()" x-cloak>
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+
+      <!-- Page title -->
+      <div class="mb-4">
+        <h2 class="fw-bold mb-1" style="color:var(--exp-dark)">New Record</h2>
+        <p class="text-muted mb-0">Creates a document in PocketBase <code>item</code> collection via the adapter.</p>
+      </div>
+
+      <!-- Form card -->
+      <div class="card card-form mb-4">
+        <div class="card-body p-4">
+
+          <!-- Doctype -->
+          <div class="mb-3">
+            <div class="field-label">Doctype <span class="text-danger">*</span></div>
+            <input
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': errors.doctype }"
+              x-model="form.doctype"
+              placeholder="e.g. Contact, Event, Note"
+            >
+            <div class="invalid-feedback" x-text="errors.doctype"></div>
+          </div>
+
+          <!-- Name (optional) -->
+          <div class="mb-3">
+            <div class="field-label">Name <span class="text-muted fw-normal">(optional — auto-generated if blank)</span></div>
+            <input
+              type="text"
+              class="form-control"
+              x-model="form.name"
+              placeholder="leave blank to auto-generate"
+            >
+          </div>
+
+          <hr class="my-4">
+          <div class="divider-label mb-3">Additional fields</div>
+
+          <!-- Dynamic fields -->
+          <template x-for="(field, index) in extraFields" :key="index">
+            <div class="row g-2 mb-2 align-items-center">
+              <div class="col-5">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  x-model="field.key"
+                  placeholder="field name"
+                >
+              </div>
+              <div class="col-6">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  x-model="field.value"
+                  placeholder="value"
+                >
+              </div>
+              <div class="col-1 text-end">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-ghost-danger px-2"
+                  @click="removeField(index)"
+                  title="Remove">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+          </template>
+
+          <button type="button" class="btn btn-sm btn-ghost-primary mt-1" @click="addField">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add field
+          </button>
+
+          <hr class="my-4">
+
+          <!-- Preview -->
+          <div class="mb-4">
+            <div class="field-label mb-2">Payload preview</div>
+            <div class="result-box" x-text="JSON.stringify(buildPayload(), null, 2)"></div>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex align-items-center gap-3">
+            <button
+              type="button"
+              class="btn btn-primary-exp btn-primary px-4"
+              @click="submit"
+              :disabled="loading">
+              <span x-show="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span x-text="loading ? 'Saving…' : 'Save to PocketBase'"></span>
+            </button>
+            <button type="button" class="btn btn-ghost-secondary" @click="reset">Reset</button>
+
+            <template x-if="status">
+              <span class="status-pill ms-auto" :class="status.type" x-text="status.message"></span>
+            </template>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Result -->
+      <template x-if="result">
+        <div class="card mb-4" x-transition>
+          <div class="card-header d-flex align-items-center justify-content-between py-2">
+            <span class="fw-bold small" style="color:var(--exp-dark)">Response</span>
+            <button class="btn btn-sm btn-ghost-secondary py-0" @click="result = null">dismiss</button>
+          </div>
+          <div class="card-body p-0">
+            <div class="result-box rounded-0 rounded-bottom" style="color:#7dd3c8" x-text="JSON.stringify(result, null, 2)"></div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function recordForm() {
+  return {
+    form: { doctype: '', name: '' },
+    extraFields: [],
+    loading: false,
+    status: null,
+    result: null,
+    errors: {},
+
+    addField() {
+      this.extraFields.push({ key: '', value: '' });
+    },
+
+    removeField(index) {
+      this.extraFields.splice(index, 1);
+    },
+
+    buildPayload() {
+      const payload = { doctype: this.form.doctype };
+      if (this.form.name.trim()) payload.name = this.form.name.trim();
+      for (const f of this.extraFields) {
+        if (f.key.trim()) payload[f.key.trim()] = f.value;
+      }
+      return payload;
+    },
+
+    validate() {
+      this.errors = {};
+      if (!this.form.doctype.trim()) {
+        this.errors.doctype = 'Doctype is required';
+        return false;
+      }
+      return true;
+    },
+
+    async submit() {
+      if (!this.validate()) return;
+
+      this.loading = true;
+      this.status = { type: 'loading', message: 'Saving…' };
+      this.result = null;
+
+      try {
+        const adapter = globalThis.Adapter?.pocketbase;
+        if (!adapter) throw new Error('Adapter not loaded — check adapter-pocketbase.js');
+
+        // Build the adapter doc reference (what run_doc.target.data[0] expects)
+        const adapterDoc = { config: adapter.config };
+
+        const run_doc = {
+          target: { data: [adapterDoc] },
+          input: this.buildPayload()
+        };
+
+        await adapter.insert(run_doc);
+
+        this.result = run_doc.output;
+        this.status = { type: 'success', message: '✓ Record created' };
+
+      } catch (err) {
+        console.error(err);
+        this.result = { error: err.message };
+        this.status = { type: 'error', message: err.message };
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    reset() {
+      this.form = { doctype: '', name: '' };
+      this.extraFields = [];
+      this.errors = {};
+      this.status = null;
+      this.result = null;
+    }
+  };
+}
+</script>
+
+</body>
+</html>
