@@ -79,7 +79,7 @@
 <body>
 
 <!-- Navbar -->
-<div x-data x-init="fetch('../components/navbar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+<div x-data x-init="fetch('/components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <div class="page-wrapper">
   <div class="page-body">
@@ -312,6 +312,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+
+<!-- added auth-->
+
+  <script src="/assets/js/auth.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script>
 function eventsApp() {
