@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in — Exponanta</title>
+
+  <!-- version 40 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+  <script src="/assets/js/adapter-pocketbase.js"></script>
+  <script src="/assets/js/CW-utils.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="antialiased">
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div x-data="loginForm()" class="card card-md">
+      <div class="card-body">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <a href="/" class="fw-bold fs-3 text-decoration-none text-dark">Exponanta</a>
+          <p class="text-muted mt-1 mb-0">Sign in to your account</p>
+        </div>
+
+        <!-- ===== FORM (idle) ===== -->
+        <div x-show="status === 'idle'">
+
+          <!-- General error -->
+          <div x-show="error" class="alert alert-danger mb-3">
+            <i class="ti ti-alert-circle me-2"></i>
+            <span x-text="error"></span>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label required">Email address</label>
+            <input type="email" class="form-control" :class="{'is-invalid': errors.email}"
+              x-model="form.email" placeholder="you@example.com"
+              autocomplete="email" @keydown.enter="submit()">
+            <div class="invalid-feedback" x-text="errors.email"></div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label class="form-label required">
+              Password
+              <span class="form-label-description">
+                <a href="#" @click.prevent="forgotPassword()">Forgot password?</a>
+              </span>
+            </label>
+            <div class="input-group input-group-flat">
+              <input :type="showPassword ? 'text' : 'password'" class="form-control"
+                :class="{'is-invalid': errors.password}"
+                x-model="form.password" placeholder="Your password"
+                autocomplete="current-password" @keydown.enter="submit()">
+              <span class="input-group-text">
+                <a href="#" @click.prevent="showPassword = !showPassword" class="link-secondary">
+                  <i :class="showPassword ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
+                </a>
+              </span>
+            </div>
+            <div class="invalid-feedback" x-text="errors.password"></div>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-footer">
+            <button type="button" class="btn btn-primary w-100"
+              @click="submit()" :disabled="loading">
+              <span x-show="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span x-text="loading ? 'Signing in…' : 'Sign in'"></span>
+            </button>
+          </div>
+
+          <div class="text-center text-muted mt-3">
+            Don't have an account? <a href="/register.html">Create one</a>
+          </div>
+
+        </div>
+        <!-- ===== END FORM ===== -->
+
+        <!-- ===== FORGOT PASSWORD SENT ===== -->
+        <div x-show="status === 'forgot-sent'" class="text-center py-2">
+          <div class="mb-3 text-blue" style="font-size:3rem;">
+            <i class="ti ti-mail"></i>
+          </div>
+          <h3 class="mb-1">Check your inbox</h3>
+          <p class="text-muted mb-4">
+            We sent a password reset link to<br>
+            <strong x-text="form.email"></strong>
+          </p>
+          <button type="button" class="btn btn-outline-secondary w-100"
+            @click="status = 'idle'">Back to sign in</button>
+        </div>
+        <!-- ===== END FORGOT ===== -->
+
+        <!-- ===== SUCCESS ===== -->
+        <div x-show="status === 'success'" class="text-center py-2">
+          <div class="mb-3 text-success" style="font-size:3rem;">
+            <i class="ti ti-circle-check"></i>
+          </div>
+          <h3 class="mb-1">Welcome back!</h3>
+          <p class="text-muted">Redirecting you now…</p>
+          <div class="progress mt-3" style="height:3px;">
+            <div class="progress-bar progress-bar-indeterminate"></div>
+          </div>
+        </div>
+        <!-- ===== END SUCCESS ===== -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js"></script>
+<script>
+function loginForm() {
+  return {
+    status: 'idle',       // idle | success | forgot-sent
+    loading: false,
+    showPassword: false,
+    error: null,
+    form: { email: '', password: '' },
+    errors: { email: '', password: '' },
+
+    validate() {
+      let ok = true;
+      this.errors = { email: '', password: '' };
+      if (!this.form.email.trim())
+        { this.errors.email = 'Email is required'; ok = false; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email))
+        { this.errors.email = 'Enter a valid email address'; ok = false; }
+      if (!this.form.password)
+        { this.errors.password = 'Password is required'; ok = false; }
+      return ok;
+    },
+
+    async submit() {
+      this.error = null;
+      if (!this.validate()) return;
+      this.loading = true;
+      try {
+        await authLogin(
+          this.form.email.trim().toLowerCase(),
+          this.form.password
+        );
+        this.status = 'success';
+        setTimeout(() => { window.location.href = '/dashboard.html'; }, 1200);
+      } catch (err) {
+        console.error(err);
+        const status = err?.status || err?.response?.status;
+        if (status === 400) {
+          this.error = 'Invalid email or password.';
+        } else if (status === 403) {
+          this.error = 'Account not verified. Check your email for the verification link.';
+        } else {
+          this.error = err?.message || 'Something went wrong. Please try again.';
+        }
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async forgotPassword() {
+      this.error = null;
+      this.errors = { email: '', password: '' };
+      if (!this.form.email.trim()) {
+        this.errors.email = 'Enter your email address first';
+        return;
+      }
+      this.loading = true;
+      try {
+        await pb.collection('users').requestPasswordReset(this.form.email.trim().toLowerCase());
+        this.status = 'forgot-sent';
+      } catch (err) {
+        // Don't reveal if email exists or not — always show success
+        this.status = 'forgot-sent';
+      } finally {
+        this.loading = false;
+      }
+    }
+  };
+}
+</script>
+</body>
+</html>

@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/calendar.html">Calendar</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/membership.html">Join</a>
+        </li>
       </ul>
 
       <!-- Right side -->
@@ -52,13 +55,10 @@
           </a>
         </li>
 
-        <!-- LOGGED OUT: Sign in + Sign up -->
-        <template x-if="!$store.auth.isValid">
-          <div class="d-flex align-items-center gap-2">
-            <a class="btn btn-outline-secondary btn-sm" href="/login.html">Sign in</a>
-            <a class="btn btn-primary btn-sm" href="/register.html">Sign up</a>
-          </div>
-        </template>
+        <!-- LOGGED OUT: Sign in -->
+        <li class="nav-item" x-show="!$store.auth.isValid">
+          <a class="btn btn-outline-primary btn-sm" href="/login.html">Sign in</a>
+        </li>
 
         <!-- LOGGED IN: Avatar dropdown -->
         <li class="nav-item dropdown" x-show="$store.auth.isValid">
