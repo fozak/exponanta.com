@@ -7,8 +7,8 @@
 
 <meta name="audience" content="startup-founder">
 
-<title>Online Events for Entrepreneurs and Founders, As They Should Be | Exponanta</title>
-<meta name="description" content="Exponanta brings online vertical pitch events to entrepreneurs and founders the way they should be — structured, free, and built on 20+ years of startup event experience with CFE Global.">
+<title>Online Pitch Events for Startup Founders | Exponanta</title>
+<meta name="description" content="Online vertical pitch events are rare, hard to find, and even harder to run well. Exponanta and CFE close the gap with 20+ years of startup event experience — bringing Startup Huddle and Startup Club online, free for founders.">
 <link rel="canonical" href="https://exponanta.com/online-events.html">
 <meta name="robots" content="index, follow">
 
@@ -97,18 +97,15 @@
     flex: 1;
     padding-left: 12px;
     padding-bottom: 4px;
-    display: flex;
-    flex-direction: column;
   }
   .timeline-pill {
     display: inline-flex;
-    align-items: flex-start;
-    padding: 10px 14px;
+    align-items: center;
+    padding: 6px 14px;
     border-radius: 6px;
     font-size: 0.8125rem;
     font-weight: 500;
     width: 100%;
-    flex: 1;
   }
   .timeline-pill-pitch {
     background: rgba(var(--tblr-teal-rgb), 0.1);
@@ -139,14 +136,11 @@
     margin-left: 8px;
   }
 
-  /* Scale: 1 min = 11px — pills must FILL this height */
-  .timeline-content { display: flex; flex-direction: column; }
-  .timeline-pill    { flex: 1; align-items: flex-start; padding-top: 10px; }
-
-  .h-pitch    { height: 66px;  }   /* 6 min  × 11px */
-  .h-feedback { height: 154px; }   /* 14 min × 11px */
-  .h-break    { height: 55px;  }   /* 5 min  × 11px */
-  .h-net      { height: 165px; }   /* 15 min × 11px */
+  /* Scale: 1 min = 5px for visual height */
+  .h-pitch    { min-height: 30px; }   /* 6 min */
+  .h-feedback { min-height: 70px; }   /* 14 min */
+  .h-break    { min-height: 25px; }   /* 5 min */
+  .h-net      { min-height: 75px; }   /* 15 min */
 
   .timeline-dot-pitch      { background: var(--tblr-teal) !important; }
   .timeline-dot-feedback   { background: var(--tblr-purple) !important; }
@@ -180,9 +174,9 @@
                   <span class="badge bg-teal-lt text-teal me-1">Pitching</span>
                   <span class="badge bg-orange-lt text-orange">Networking</span>
                 </div>
-                <h1 class="display-5 fw-bold mb-3">Online Events for Entrepreneurs and Founders, As They Should Be</h1>
+                <h1 class="display-5 fw-bold mb-3">Online Vertical Events Are Rare — and That Is a Problem for Founders</h1>
                 <p class="lead text-muted">
-                  Exponanta brings vertical pitch events and startup networking online — structured, free, and built on more than 20 years of experience running the events that early-stage founders actually need. No geography. No gatekeeping. Just the room that moves your company forward.
+                  Participating in vertical pitch events and startup networking is one of the highest-return activities an early-stage founder can do. It builds the investor relationships, industry connections, and early customer pipeline that determine whether a company survives its first two years. It is also not easy — and the scarcity of quality online events makes it harder than it should be for founders outside the major startup hubs.
                 </p>
               </div>
 
@@ -553,11 +547,7 @@
 <div x-data x-init="fetch('components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
-<script src="/assets/js/adapter-pocketbase.js"></script>
-<script src="/assets/js/CW-utils.js"></script>
-<script src="/assets/js/auth.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 </body>
 </html>
