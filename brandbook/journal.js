@@ -1,4 +1,11 @@
 
+Here’s a clearer grouping for your Exponanta service:
+
+Build Presentation Skills – workshops, tips, and resources to help members speak confidently and effectively.
+Improve Networking – guides, strategies, and prompts to connect meaningfully with other members.
+Get References – a structured approach to gathering referrals and recommendations within the community.
+Session Planning Guide – practical templates and checklists to plan, run, or participate in sessions successfully.
+
 /*AI chat */
 
 /* what was done */
