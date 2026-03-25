@@ -1,4 +1,104 @@
 
+That's the full consolidated timeline. The richest primary source is the "Decode to timeline text" chat here: https://claude.ai/chat/8aa1b23c-858a-4cf3-b325-54c7c011d5a9 — which includes the actual board meeting minutes and financial charts. Want me to now spin off the Exponanta and YourSA versions from this base? And if so — blog post format, "About" narrative, or something else?remove all financial details at the end put table with program KPIs over the year in cumulative11:33 AMHere's the cleaned timeline with a cumulative KPI table at the end:
+
+CFE & Delta — Complete History Timeline (1991–2025)
+1991
+Patricia Cloherty appointed by President George H.W. Bush as Chairman of an Investment Advisory Council to revamp the Small Business Investment Company program at the U.S. Small Business Administration.
+
+1993–1994
+Congress creates two predecessor enterprise funds: the Russian American Enterprise Fund (RAEF, $340M) and the Fund for Large Enterprises (FLER, $100M).
+
+1995
+January — TUSRIF established by merging RAEF and FLER. Endowed with $328.9M in U.S. government capital — the largest of all ten Enterprise Funds. Managed by Delta Capital Management.
+May — President Clinton appoints Patricia Cloherty to the TUSRIF board. W. Michael Blumenthal (former U.S. Treasury Secretary) elected Chairman. Austin Beutner named President & CEO.
+Delta Private Equity Partners established — one of only two PE firms operating in Russia at the time.
+
+1998
+Patricia Cloherty elected Chairman of the TUSRIF Board. Delta Leasing established — pioneering asset-based financing.
+
+1999–2001
+TUSRIF establishes Delta Bank — one of the first to offer consumer credit cards; pioneers private mortgage lending. Steven Pease joins as TUSRIF/USRF Chairman.
+
+2002
+TUSRIF creates the U.S.-Russia Center for Entrepreneurship with offices in Moscow, Nizhny Novgorod, and St. Petersburg. Victor Sedov appointed Executive Director/President. Founding board includes Patricia Cloherty (ex-officio), Jenne Britell (Audit Chair), Raymond Smilor (FED/Beyster Institute), Ronald Bernstein (CFO), Eric Hansen (Deputy Director). TUSRIF commits $27M+ in grants over 12 years. FastTrac curriculum introduced as first training methodology.
+
+2004
+Delta Russia Fund (DRF) formed as private follow-on vehicle. Patricia Cloherty named CEO of Delta Private Equity Partners. Named Businessperson of the Year by the American Chamber of Commerce in Russia.
+
+2005
+CFE opens St. Petersburg and Nizhny Novgorod offices — expanding to 3 permanent cities.
+
+2006
+Richard Turner becomes CFE Chairman. Dynamic Entrepreneurship Classroom (DEC) program architected by Raymond Smilor — training university faculty to integrate entrepreneurship across all disciplines.
+
+2007
+March — CFE launches matching funding grant program.
+November — CFE begins hosting annual Global Entrepreneurship Week in Russia.
+Milestone: Over 20,000 people have attended CFE-organized events.
+
+2008
+January — CFE launches Russian Association of Entrepreneurship Education.
+June — CFE organizes Second Russia–U.S. Entrepreneurial Forum with U.S. Department of Commerce and Kauffman Foundation. First grant to Junior Achievement Russia.
+USRF founded as TUSRIF's legacy endowment organization to continue funding CFE. Russian President Putin awards Patricia Cloherty the Order of Friendship.
+
+2009
+May — Russian government signs SME support law that CFE helped formulate.
+July — CFE sponsors Russian faculty at entrepreneurship colloquium at Harvard University.
+October — CFE launches first education program in Kazan.
+
+2010
+May — CFE conducts its first Annual Forum.
+June — CFE represents Russia at G20 Young Entrepreneurs Summit in Toronto. CFE provides $815,000+ in matching funding to 30 projects with total budgets of $3.7M.
+July — Russian government signs microfinance law that CFE helped formulate.
+October — CFE launches mentoring program.
+Milestone: Over 40,000 people have attended CFE events. Karen Horn becomes Chairperson.
+
+2011
+Peter Charow becomes CFE Chairman. Anna Belova joins as Deputy Chairman.
+
+2013
+Jonathan Ortmans joins as Director. CFE hosts G20 Young Entrepreneurs' Alliance Summit in Moscow — 500 young entrepreneurs from G20 nations at Skolkovo.
+
+2014
+Global Entrepreneurship Congress held in Moscow — CFE is host organization. Leadership transition begins. Fiscal year changed to calendar year effective January 1, 2015.
+
+2015
+DEC completed at Far East Federal University, Vladivostok — first DEC outside the three founding cities. ABC Projects piloted — 36 teams from 7 universities. Citi Foundation grant for Impact Hub Moscow. DEC cumulative: 62 faculty, 30+ universities, 11 cities, 80 new programs. ScaleUp methodology research commissioned.
+
+2016
+Metro Strategy formally adopted. ScaleUp accelerator development begins. 103 DEC faculty trained. Tribute to Sergey Vykhodtsev.
+
+2017
+Startup Huddle formally approved as metro program. First ScaleUp cohort results: 50 entrepreneurs · 110 jobs created · 84% revenue growth · 57% achieving 25%+ growth — across 5 cities. Cohort 2 running in 8 cities.
+
+2018
+St. Petersburg and Nizhny Novgorod offices closed after 13 years. Competency center / metro-partner model adopted for regional reach. Victor Sedov transitions to consulting role.
+
+2019
+Denis Didkovskiy appointed General Director — first Russian-national CEO. ScaleUp reaches commercial scale.
+
+2020
+(Best commercial year in CFE history despite COVID restrictions)
+Club Program: 22 cities · 3,060 participants · 109 sessions · 47 new businesses opened.
+ScaleUp: 9 cohorts · 175 participants · 5 companies scaled to 20+ employees · mentors/partners in 33 cities.
+Startup Huddle: 61 events · 5 cities · 300+ startups supported · 13 startups to 5+ employees.
+Global Entrepreneurship Week: 270+ events across 56 of 85 regions.
+University Program: First proprietary curriculum — independent of American partners for the first time in 18 years.
+New partnerships: Delovaya Rossiya · ASI · RVC.
+
+2022
+Patricia Cloherty passes away on September 23 in Miami — CFE's founding patron and the architect of TUSRIF.
+
+2025
+YourSA spun off as a dedicated non-profit for student entrepreneurship — incubators, accelerators, hackathons, mentorship, and seed grants across all majors. CFE continues flagship programs: ScaleUp, Startup Club, ScaleUp Acceleration Program.
+
+Cumulative Program KPIs
+MetricValueNotesEntrepreneurs engaged354,000+Cumulative through 2020Countries reached160+Global network via GEW, G20, GECProjects impacted23,500+Grants, accelerations, competitionsEvents organized/supported800+Through 2014 alonePeople at CFE events20,000+ / 40,000+Milestone checkpoints: 2007 / 2010Matching grants disbursed$815,000+To 30 projects totaling $3.7M (2010)TUSRIF grant funding to CFE$27M+Over 12 years (2002–2014)DEC faculty trained62+Across 30+ universities, 11 cities (through 2015)DEC new university programs80+Through 2015ScaleUp cohort 1 results50 entrepreneurs · 110 jobs · 84% revenue growth2017, 5 citiesScaleUp 2020 (peak year)9 cohorts · 175 participants · 33-city mentor networkBest year on recordClub Program 20203,060 participants · 109 sessions · 47 new businesses22 citiesStartup Huddle 202061 events · 300+ startups · 13 scaled to 5+ employees5 citiesGEW 2020270+ events · 56 of 85 regionsNational coverageG20 YEA Summit 2013500 young entrepreneursG20 nations, Skolkovo
+
+Want me to now draft the Exponanta and YourSA spinoff narratives from this base?
+
+
+
 /cfe history timeline
 
 https://claude.ai/chat/8aa1b23c-858a-4cf3-b325-54c7c011d5a9
