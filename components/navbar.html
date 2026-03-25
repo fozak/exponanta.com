@@ -67,14 +67,14 @@
 
             <!-- Avatar with image -->
             <template x-if="$store.auth.avatar">
-              <span class="avatar avatar-sm"
+              <span class="avatar avatar-sm rounded-circle"
                 :style="`background-image: url(${$store.auth.avatar})`">
               </span>
             </template>
 
             <!-- Avatar with initials -->
             <template x-if="!$store.auth.avatar">
-              <span class="avatar avatar-sm"
+              <span class="avatar avatar-sm rounded-circle"
                 :style="`background-color: ${$store.auth.avatarColor}; color: #fff;`"
                 x-text="$store.auth.initials">
               </span>

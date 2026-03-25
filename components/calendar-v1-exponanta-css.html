@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Events Calendar | Exponanta</title>
+<meta name="description" content="Browse upcoming and past community events in Boston and Cambridge. Networking gatherings, concerts, workshops and more.">
+<link rel="canonical" href="https://exponanta.com/calendar.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="Events Calendar | Exponanta">
+<meta property="og:description" content="Upcoming and past community events in Boston and Cambridge.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exponanta.com/calendar.html">
+
+<link rel="icon" type="image/svg+xml" href="/brandbook/favicon.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/brandbook/exponanta.css" rel="stylesheet">
+<link href="/brandbook/exponanta-added.css" rel="stylesheet">
+
+<style>
+/* =====================================================
+   CALENDAR GRID — only new CSS not in exponanta-added.css
+   All evh / etag / avatar / btn-ev-* come from there.
+   ===================================================== */
+
+/* View toggle */
+.view-toggle {
+  display: inline-flex;
+  background: var(--neutral-50);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+.view-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 6px;
+  font-size: var(--text-sm); font-weight: 600;
+  border: none; background: transparent;
+  color: var(--neutral-600); cursor: pointer; transition: all .15s;
+}
+.view-btn.active {
+  background: var(--neutral-0); color: var(--blue-700);
+  box-shadow: 0 1px 4px rgba(36,70,200,.12);
+}
+
+/* Month nav */
+.cal-month-nav {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.cal-month-title {
+  font-size: var(--text-xl); font-weight: 700;
+  color: var(--neutral-900); min-width: 200px; text-align: center;
+}
+.cal-nav-btn {
+  width: 34px; height: 34px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--bs-border-color); background: var(--neutral-0);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s; color: var(--neutral-600); flex-shrink: 0;
+}
+.cal-nav-btn:hover { border-color: var(--blue-700); color: var(--blue-700); background: var(--blue-100); }
+.cal-today-btn {
+  padding: 5px 14px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--bs-border-color); background: var(--neutral-0);
+  font-size: var(--text-sm); font-weight: 600; color: var(--neutral-600);
+  cursor: pointer; transition: all .15s;
+}
+.cal-today-btn:hover { border-color: var(--blue-700); color: var(--blue-700); }
+
+/* Grid */
+.cal-grid-wrap {
+  background: var(--neutral-0); border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-sm); margin-bottom: 2rem;
+}
+.cal-dow-row {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  border-bottom: 2px solid var(--bs-border-color); background: var(--neutral-50);
+}
+.cal-dow {
+  padding: 10px 0; text-align: center;
+  font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--neutral-600); border-right: 1px solid var(--bs-border-color);
+}
+.cal-dow:last-child { border-right: none; }
+
+.cal-body-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.cal-cell {
+  min-height: 96px; border-right: 1px solid var(--bs-border-color);
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: 6px 5px 4px; background: var(--neutral-0); box-sizing: border-box;
+}
+.cal-cell:nth-child(7n) { border-right: none; }
+.cal-cell--other  { background: var(--neutral-50); }
+.cal-cell--today  { background: rgba(36,70,200,.03); }
+
+.cal-day-num {
+  font-size: 13px; font-weight: 600; color: var(--neutral-600);
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 3px;
+}
+.cal-cell--today .cal-day-num { background: var(--blue-700); color: var(--neutral-0); }
+.cal-cell--other .cal-day-num { color: #c8d0dc; }
+
+/* Pills — colour-coded by first matching tag */
+.cal-pill {
+  display: block; width: 100%; padding: 2px 5px;
+  border-radius: 4px; font-size: 11px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 2px; cursor: pointer; transition: opacity .12s;
+  border: none; text-align: left; line-height: 1.6;
+}
+.cal-pill:hover { opacity: .75; }
+.cal-pill--Community { background: rgba(36,70,200,.1);  color: var(--blue-700); }
+.cal-pill--Concert   { background: rgba(79,209,197,.18);color: #0e7a72; }
+.cal-pill--Workshop  { background: rgba(255,111,97,.14); color: #b33325; }
+.cal-pill--Conference{ background: rgba(36,70,200,.1);  color: var(--blue-700); }
+.cal-pill--default   { background: var(--neutral-50); color: var(--neutral-600); border: 1px solid var(--bs-border-color); }
+
+.cal-pill-more {
+  font-size: 11px; color: var(--blue-700); font-weight: 600;
+  cursor: pointer; padding-left: 2px; display: block;
+  border: none; background: none; text-align: left;
+}
+
+/* Popup */
+.cal-popup {
+  display: none; position: fixed; z-index: 9999;
+  background: var(--neutral-0); border: 1px solid var(--bs-border-color);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  width: 310px; padding: 16px 18px;
+}
+.cal-popup.show { display: block; }
+.cal-popup-close {
+  position: absolute; top: 10px; right: 12px;
+  background: none; border: none; font-size: 18px;
+  color: var(--neutral-600); cursor: pointer; line-height: 1; padding: 2px 6px;
+}
+
+/* Legend */
+.cal-legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-size: 12px; color: var(--neutral-600); align-items: center;
+}
+.cal-legend-item { display: flex; align-items: center; gap: 5px; }
+.cal-legend-dot  { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+</style>
+
+<!-- =====================================================
+     FETCH INTERCEPT — must run BEFORE events.js
+     Captures the same JSON events.js fetches, feeds
+     the calendar grid. Zero changes to events.js.
+     ===================================================== -->
+<script>
+(function () {
+  const _fetch = window.fetch.bind(window);
+  window.fetch = function (url, opts) {
+    const promise = _fetch(url, opts);
+    if (typeof url === "string" && url.includes("events.json")) {
+      promise
+        .then(r => r.clone().json())
+        .then(data => {
+          // store globally so calendarInit() can read it
+          window.__calEvents = data;
+          if (typeof window.__calReady === "function") window.__calReady(data);
+        })
+        .catch(() => {});
+    }
+    return promise;
+  };
+})();
+</script>
+
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ NAVBAR ═══════════════════════════════════ -->
+<div id="navbar" data-loader="../components/navbar.html"></div>
+
+<!-- ═══════════════════════════════════ MAIN CONTENT ═══════════════════════════════════ -->
+<main id="main-content" class="container py-5">
+
+  <!-- Page title + view toggle -->
+  <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-4">
+    <div>
+      <h1 class="mb-1" style="font-size:var(--text-2xl);font-weight:700;color:var(--neutral-900);">Events Calendar</h1>
+      <p class="text-muted mb-0" style="font-size:var(--text-sm);">Upcoming and past community events · Boston &amp; Cambridge</p>
+    </div>
+    <div class="view-toggle" role="group" aria-label="View mode">
+      <button class="view-btn active" data-view="calendar">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Calendar
+      </button>
+      <button class="view-btn" data-view="list">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        List
+      </button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       CALENDAR VIEW — month grid (new)
+       ════════════════════════════════════ -->
+  <div id="view-calendar">
+
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+      <div class="cal-month-nav">
+        <button class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="cal-month-title" id="cal-month-title"></div>
+        <button class="cal-nav-btn" id="cal-next" aria-label="Next month">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="cal-today-btn" id="cal-today">Today</button>
+      </div>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(36,70,200,.12)"></div>Community</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(79,209,197,.22)"></div>Concert</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,111,97,.18)"></div>Workshop</div>
+      </div>
+    </div>
+
+    <div class="cal-grid-wrap">
+      <div class="cal-dow-row">
+        <div class="cal-dow">Sun</div>
+        <div class="cal-dow">Mon</div>
+        <div class="cal-dow">Tue</div>
+        <div class="cal-dow">Wed</div>
+        <div class="cal-dow">Thu</div>
+        <div class="cal-dow">Fri</div>
+        <div class="cal-dow">Sat</div>
+      </div>
+      <div class="cal-body-grid" id="cal-body"></div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════
+       LIST VIEW — your exact existing HTML
+       events.js fills these containers
+       ════════════════════════════════════ -->
+  <div id="view-list" style="display:none;">
+
+    <!-- Upcoming Events -->
+    <article>
+      <section data-semantic="blog-section" class="mb-5">
+        <h2 data-semantic="blog-subtitle" class="mb-4">Upcoming Events</h2>
+        <div id="events-container"></div>
+      </section>
+    </article>
+
+    <!-- Past Events -->
+    <section class="past-events section py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2>Recent Events</h2>
+        </div>
+        <div id="past-events-container"></div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+
+<!-- Event detail popup -->
+<div class="cal-popup" id="cal-popup" role="dialog" aria-modal="true">
+  <button class="cal-popup-close" id="cal-popup-close" aria-label="Close">×</button>
+  <div id="cal-popup-tag"   style="margin-bottom:8px;"></div>
+  <div id="cal-popup-title" style="font-weight:700;font-size:var(--text-md);margin-bottom:6px;margin-right:20px;line-height:1.3;"></div>
+  <div id="cal-popup-date"  style="font-size:12px;color:var(--neutral-600);margin-bottom:3px;display:flex;align-items:center;gap:5px;"></div>
+  <div id="cal-popup-loc"   style="font-size:12px;color:var(--neutral-600);margin-bottom:10px;display:flex;align-items:center;gap:5px;"></div>
+  <div id="cal-popup-desc"  style="font-size:13px;color:var(--neutral-600);line-height:1.5;margin-bottom:12px;"></div>
+  <div id="cal-popup-btns"  style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+</div>
+
+<div id="footer" data-loader="../components/footer.html"></div>
+
+<!-- ═══════════════════════════════════ SCRIPTS ═══════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/_loader.js"></script>
+
+<!-- Your existing events.js — unchanged.
+     Fills #events-container and #past-events-container.
+     Also exposes parseEventId(), esc(), MONTHS globally. -->
+<script src="/assets/js/events.js"></script>
+
+<!-- Calendar grid — runs after events.js so parseEventId() is available -->
+<script>
+(function () {
+
+  const MONTHS_LONG = ["January","February","March","April","May","June",
+                       "July","August","September","October","November","December"];
+
+  let calYear  = new Date().getFullYear();
+  let calMonth = new Date().getMonth();
+  let events   = [];
+
+  /* ── tag → pill class ── */
+  function pillClass(tags) {
+    if (!tags) return "cal-pill--default";
+    const order = ["Community","Concert","Workshop","Conference","Meetup"];
+    for (const t of order) if (tags.includes(t)) return `cal-pill--${t}`;
+    return "cal-pill--default";
+  }
+
+  /* ── primary tag label for popup ── */
+  function primaryTag(tags) {
+    const order = ["Community","Concert","Workshop","Conference","Meetup"];
+    for (const t of order) if (tags?.includes(t)) return t;
+    return tags?.[0] || "Event";
+  }
+
+  /* ── build / rebuild grid ── */
+  function buildGrid() {
+    document.getElementById("cal-month-title").textContent =
+      `${MONTHS_LONG[calMonth]} ${calYear}`;
+
+    const now     = new Date();
+    const todayY  = now.getFullYear();
+    const todayM  = now.getMonth();
+    const todayD  = now.getDate();
+
+    /* index events by "YYYY-M-D" — matches parseEventId() output */
+    const byDay = {};
+    events.forEach(ev => {
+      const d = parseEventId(ev.id);   // from events.js
+      if (!d) return;
+      if (d.year !== calYear || d.month !== calMonth) return;
+      const key = `${d.year}-${d.month}-${d.day}`;
+      (byDay[key] = byDay[key] || []).push(ev);
+    });
+
+    const firstDow  = new Date(calYear, calMonth, 1).getDay();
+    const daysInMon = new Date(calYear, calMonth + 1, 0).getDate();
+    const prevTotal = new Date(calYear, calMonth, 0).getDate();
+
+    const body = document.getElementById("cal-body");
+    body.innerHTML = "";
+
+    /* leading blanks */
+    for (let i = 0; i < firstDow; i++) {
+      body.appendChild(makeCell(prevTotal - firstDow + 1 + i, true, false, []));
+    }
+
+    /* current month */
+    for (let d = 1; d <= daysInMon; d++) {
+      const key     = `${calYear}-${calMonth}-${d}`;
+      const isToday = (calYear === todayY && calMonth === todayM && d === todayD);
+      body.appendChild(makeCell(d, false, isToday, byDay[key] || []));
+    }
+
+    /* trailing blanks */
+    const filled   = firstDow + daysInMon;
+    const trailing = filled % 7 === 0 ? 0 : 7 - (filled % 7);
+    for (let i = 1; i <= trailing; i++) {
+      body.appendChild(makeCell(i, true, false, []));
+    }
+  }
+
+  function makeCell(dayNum, other, isToday, dayEvents) {
+    const cell = document.createElement("div");
+    cell.className = "cal-cell"
+      + (other   ? " cal-cell--other" : "")
+      + (isToday ? " cal-cell--today" : "");
+
+    const num = document.createElement("div");
+    num.className = "cal-day-num";
+    num.textContent = dayNum;
+    cell.appendChild(num);
+
+    if (!other) {
+      const MAX = 2;
+      dayEvents.slice(0, MAX).forEach(ev => {
+        const d   = parseEventId(ev.id);
+        const btn = document.createElement("button");
+        btn.className = `cal-pill ${pillClass(ev.tags)}`;
+        btn.textContent = (d ? d.timeLabel + " " : "") + ev.title;
+        btn.title = ev.title;
+        btn.addEventListener("click", e => { e.stopPropagation(); openPopup(ev, btn); });
+        cell.appendChild(btn);
+      });
+
+      if (dayEvents.length > MAX) {
+        const more = document.createElement("button");
+        more.className = "cal-pill-more";
+        more.textContent = `+${dayEvents.length - MAX} more`;
+        more.addEventListener("click", () => switchView("list"));
+        cell.appendChild(more);
+      }
+    }
+    return cell;
+  }
+
+  /* ── popup ── */
+  function openPopup(ev, anchor) {
+    const d      = parseEventId(ev.id);   // from events.js
+    const popup  = document.getElementById("cal-popup");
+    const tagName = primaryTag(ev.tags);
+
+    /* reuse etag classes already in exponanta-added.css */
+    const tagCss = {
+      Community: "etag--blue", Concert: "etag--teal",
+      Workshop:  "etag--coral", Conference: "etag--blue",
+      Free:      "etag--free",
+    }[tagName] || "";
+
+    document.getElementById("cal-popup-tag").innerHTML =
+      `<span class="etag ${tagCss}" style="font-size:11px;padding:2px 10px;">${esc(tagName)}</span>`;
+
+    document.getElementById("cal-popup-title").textContent = ev.title;
+
+    document.getElementById("cal-popup-date").innerHTML = d
+      ? `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+           <rect x="3" y="4" width="18" height="18" rx="2"/>
+           <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+         </svg>
+         ${d.weekday}, ${d.monthLabel} ${d.day} · ${d.timeLabel}` : "";
+
+    document.getElementById("cal-popup-loc").innerHTML = ev.location
+      ? `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+           <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+         </svg>
+         ${esc(ev.location)}` : "";
+
+    document.getElementById("cal-popup-desc").textContent = ev.description || "";
+
+    /* reuse btn-ev-* classes from exponanta-added.css */
+    const btns = document.getElementById("cal-popup-btns");
+    btns.innerHTML = "";
+    if (ev.registerUrl) {
+      btns.innerHTML += `<a href="${esc(ev.registerUrl)}" target="_blank" rel="noopener" class="btn-ev-register">Register</a>`;
+    }
+    if (ev.calendar?.google) {
+      btns.innerHTML += `<a href="${esc(ev.calendar.google)}" target="_blank" rel="noopener" class="btn-ev-cal">Add to Calendar</a>`;
+    }
+    if (ev.connectUrl) {
+      btns.innerHTML += `<a href="${esc(ev.connectUrl)}" target="_blank" rel="noopener" class="btn-ev-connect">Connect</a>`;
+    }
+
+    /* position */
+    const rect = anchor.getBoundingClientRect();
+    let left = rect.left + window.scrollX;
+    let top  = rect.bottom + window.scrollY + 6;
+    if (left + 320 > window.innerWidth - 12) left = window.innerWidth - 322;
+    if (top + 300  > window.scrollY + window.innerHeight) top = rect.top + window.scrollY - 305;
+    popup.style.left = Math.max(8, left) + "px";
+    popup.style.top  = top + "px";
+    popup.classList.add("show");
+  }
+
+  document.getElementById("cal-popup-close").addEventListener("click", () => {
+    document.getElementById("cal-popup").classList.remove("show");
+  });
+  document.addEventListener("click", e => {
+    const popup = document.getElementById("cal-popup");
+    if (!popup.contains(e.target) && !e.target.classList.contains("cal-pill")) {
+      popup.classList.remove("show");
+    }
+  });
+
+  /* ── month navigation ── */
+  document.getElementById("cal-prev").addEventListener("click", () => {
+    if (--calMonth < 0) { calMonth = 11; calYear--; }
+    buildGrid();
+  });
+  document.getElementById("cal-next").addEventListener("click", () => {
+    if (++calMonth > 11) { calMonth = 0; calYear++; }
+    buildGrid();
+  });
+  document.getElementById("cal-today").addEventListener("click", () => {
+    calYear = new Date().getFullYear(); calMonth = new Date().getMonth();
+    buildGrid();
+  });
+
+  /* ── view toggle ── */
+  window.switchView = function (view) {
+    document.querySelectorAll(".view-btn").forEach(b =>
+      b.classList.toggle("active", b.dataset.view === view));
+    document.getElementById("view-calendar").style.display = view === "calendar" ? "" : "none";
+    document.getElementById("view-list").style.display     = view === "list"     ? "" : "none";
+  };
+  document.querySelectorAll(".view-btn").forEach(btn =>
+    btn.addEventListener("click", () => switchView(btn.dataset.view)));
+
+  /* ── receive events from fetch intercept ── */
+  window.__calReady = function (data) {
+    events = data;
+    buildGrid();
+  };
+
+  /* if fetch already resolved before this script ran (unlikely but safe) */
+  if (window.__calEvents) {
+    events = window.__calEvents;
+  }
+
+  /* initial empty render while fetch is in-flight */
+  document.addEventListener("DOMContentLoaded", buildGrid);
+
+})();
+</script>
+
+</body>
+</html>

@@ -73,6 +73,10 @@
     .evh-img { width: 100%; flex: none; height: 160px; }
     .card.evh { flex-direction: column !important; }
   }
+
+
+  /*avatar list overrides to show up to 4 stacked, then fade out the rest*/
+
 </style>
 </head>
 
@@ -254,7 +258,7 @@
                             </span>
                           </template>
                         </div>
-                        <span class="text-muted small" x-text="ev.data.going + ' going'"></span>
+                        <span class="text-muted small ms-3" x-text="ev.data.going + ' going'"></span>
                       </div>
 
                       <div class="d-flex gap-2 flex-wrap">
