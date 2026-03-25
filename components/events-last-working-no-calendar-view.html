@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Events | Exponanta</title>
+<meta name="description" content="Browse upcoming events in the Boston-Cambridge innovation community.">
+<link rel="canonical" href="https://exponanta.com/events/">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="../brandbook/tabler_added.css">
+
+<style>
+  .evh-img {
+    width: 180px;
+    flex: 0 0 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  .evh-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .evh-date {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(36,70,200,0.92);
+    color: #fff;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 6px;
+    line-height: 1.2;
+    min-width: 44px;
+  }
+  .evh-date-day { display: block; font-size: 1.25rem; font-weight: 700; }
+  .evh-date-mon { display: block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+  .tag-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .filter-group-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--tblr-muted);
+    align-self: center;
+    white-space: nowrap;
+  }
+  .filter-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--tblr-border-color);
+    align-self: center;
+  }
+
+  @media (max-width: 640px) {
+    .evh-img { width: 100%; flex: none; height: 160px; }
+    .card.evh { flex-direction: column !important; }
+  }
+
+
+  /*avatar list overrides to show up to 4 stacked, then fade out the rest*/
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div x-data x-init="fetch('/components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
+
+      <!-- Alpine app wraps everything so search/filter state is shared -->
+      <div x-data="eventsApp()" x-init="init()">
+
+        <!-- Page header -->
+        <div class="page-header mb-4">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1 class="page-title">Upcoming Events</h1>
+              <div class="text-muted">Boston · Cambridge innovation community</div>
+            </div>
+            <div class="col-auto">
+              <a href="/programs/host-event" class="btn btn-primary">Submit Your Pitch</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Zone 1: Full-width search + filters ── -->
+        <div class="mb-3">
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </span>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Search events…"
+                   x-model.debounce.200ms="search">
+            <button class="btn btn-outline-secondary"
+                    x-show="search"
+                    @click="search = ''"
+                    type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+          <button class="btn btn-sm"
+                  :class="activeTag === 'all' ? 'btn-primary' : 'btn-outline-secondary'"
+                  @click="activeTag = 'all'">All</button>
+
+          <template x-if="activeTechCategories.length > 0">
+            <span class="filter-divider"></span>
+          </template>
+          <template x-if="activeTechCategories.length > 0">
+            <span class="filter-group-label">Tech</span>
+          </template>
+          <template x-for="cat in activeTechCategories" :key="cat.id">
+            <button class="btn btn-sm d-inline-flex align-items-center gap-2"
+                    :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'"
+                    @click="activeTag = cat.id">
+              <span class="tag-dot" :style="{ background: cat.color }"></span>
+              <span x-text="cat.label"></span>
+            </button>
+          </template>
+
+          <template x-if="activeVerticalCategories.length > 0">
+            <span class="filter-divider"></span>
+          </template>
+          <template x-if="activeVerticalCategories.length > 0">
+            <span class="filter-group-label">Verticals</span>
+          </template>
+          <template x-for="cat in activeVerticalCategories" :key="cat.id">
+            <button class="btn btn-sm d-inline-flex align-items-center gap-2"
+                    :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'"
+                    @click="activeTag = cat.id">
+              <span class="tag-dot" :style="{ background: cat.color }"></span>
+              <span x-text="cat.label"></span>
+            </button>
+          </template>
+
+          <span class="text-muted small ms-auto"
+                x-text="filteredEvents.length + ' event' + (filteredEvents.length !== 1 ? 's' : '')"></span>
+        </div>
+
+        <!-- ── Zone 2: Cards + Sidebar ── -->
+        <div class="row g-4 align-items-start">
+
+          <!-- Event cards — 8 cols -->
+          <div class="col-lg-8 col-md-12">
+            <div class="space-y">
+              <template x-for="ev in filteredEvents" :key="ev.name">
+                <div class="card evh d-flex flex-row g-0 overflow-hidden mb-3">
+
+                  <!-- Image -->
+                  <div class="evh-img">
+                    <img :src="imgSrc(ev)"
+                         :alt="ev.title"
+                         loading="lazy"
+                         data-img-step="0"
+                         @error="imgError($event, ev)">
+                    <div class="evh-date">
+                      <span class="evh-date-day" x-text="getDay(ev.data.event_slot)"></span>
+                      <span class="evh-date-mon" x-text="getMon(ev.data.event_slot)"></span>
+                    </div>
+                  </div>
+
+                  <!-- Body -->
+                  <div class="card-body d-flex flex-column">
+
+                    <!-- Title + tags -->
+                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                      <h3 class="mb-0 fs-4">
+                        <a :href="'/events/event-detail.html?slug=' + ev.page_name"
+                           class="text-reset text-decoration-none"
+                           x-text="ev.title"></a>
+                      </h3>
+                      <div class="d-flex flex-wrap gap-1 flex-shrink-0">
+                        <template x-for="tag in legacyTags(ev)" :key="tag">
+                          <span class="badge" :class="tagClass(tag)" x-text="tag"></span>
+                        </template>
+                        <template x-for="catId in taxonomyTags(ev)" :key="catId">
+                          <template x-if="categoryById(catId)">
+                            <span class="badge bg-secondary-lt d-inline-flex align-items-center gap-1">
+                              <span class="tag-dot" :style="{ background: categoryById(catId).color }"></span>
+                              <span x-text="categoryById(catId).label"></span>
+                            </span>
+                          </template>
+                        </template>
+                      </div>
+                    </div>
+
+                    <!-- Deck -->
+                    <p class="text-muted small mb-2" x-text="ev.deck"></p>
+
+                    <!-- Meta -->
+                    <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1">
+                          <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                        <span x-text="formatSlot(ev.data.event_slot)"></span>
+                      </span>
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1">
+                          <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/>
+                          <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/>
+                        </svg>
+                        <span x-text="ev.data.location"></span>
+                      </span>
+                    </div>
+
+                    <!-- Footer: avatars + buttons -->
+                    <div class="d-flex justify-content-between align-items-center mt-auto flex-wrap gap-2">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="avatar-list avatar-list-stacked">
+                          <template x-for="(av, i) in ev.data.avatars.slice(0,4)" :key="i">
+                            <span class="avatar avatar-sm">
+                              <template x-if="isImgPath(av)">
+                                <img :src="av" :alt="av"
+                                     @error="$event.target.parentNode.textContent = getInitials(av)">
+                              </template>
+                              <template x-if="!isImgPath(av)">
+                                <span x-text="av"></span>
+                              </template>
+                            </span>
+                          </template>
+                        </div>
+                        <span class="text-muted small ms-3" x-text="ev.data.going + ' going'"></span>
+                      </div>
+
+                      <div class="d-flex gap-2 flex-wrap">
+                        <a :href="ev.data.calendar.google" target="_blank" rel="noopener"
+                           class="btn btn-sm btn-outline-secondary">Add to Calendar</a>
+                        <a :href="'/events/event-detail.html?slug=' + ev.page_name"
+                           class="btn btn-sm btn-outline-primary">Register</a>
+                        <a :href="ev.data.connectUrl" target="_blank" rel="noopener"
+                           class="btn btn-sm btn-primary">Connect</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </template>
+
+              <!-- Empty state -->
+              <div x-show="filteredEvents.length === 0 && !loading" class="empty">
+                <div class="empty-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" class="icon">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                  </svg>
+                </div>
+                <p class="empty-title">No events found</p>
+                <p class="empty-subtitle text-muted">Try a different filter or search term.</p>
+                <div class="empty-action">
+                  <button class="btn btn-primary" @click="activeTag = 'all'; search = ''">Show all events</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom CTA below cards -->
+            <div x-data x-init="fetch('../components/bottom-cta.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })" class="mt-4"></div>
+          </div>
+
+          <!-- Sidebar — 4 cols, sticks on scroll -->
+          <div class="col-lg-4 col-md-12 sidebar-sticky">
+            <div x-data x-init="fetch('../components/cta-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+            <div x-data x-init="fetch('../components/stats-card.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+            <div x-data x-init="fetch('../components/industry-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+          </div>
+
+        </div><!-- /row -->
+
+      </div><!-- /eventsApp -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+
+<!-- added auth-->
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+<script src="/assets/js/adapter-pocketbase.js"></script>
+<script src="/assets/js/CW-utils.js"></script>
+  <script src="/assets/js/auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+function eventsApp() {
+  return {
+    events:     [],
+    categories: [],
+    loading:    true,
+    activeTag:  'all',
+    search:     '',
+
+    async init() {
+      const param = new URLSearchParams(window.location.search).get('solution_categories');
+      if (param) this.activeTag = param;
+
+      try {
+        const [evRes, taxRes] = await Promise.all([
+          fetch('../data/db.json'),
+          fetch('../data/taxonomies.json')
+        ]);
+        const evData  = await evRes.json();
+        const taxData = await taxRes.json();
+        const raw = Array.isArray(evData) ? evData : (evData.events || []);
+        this.events     = raw.filter(e => e.category === 'event' && e.docstatus === 1);
+        this.categories = taxData.solution_categories || [];
+      } catch (err) {
+        console.error('Load error:', err);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    get _labelMap() {
+      const m = {};
+      this.categories.forEach(c => { m[c.label.toLowerCase()] = c.id; });
+      return m;
+    },
+
+    get usedCategoryIds() {
+      const used = new Set();
+      const lm = this._labelMap;
+      this.events.forEach(ev => {
+        (ev.tags || []).forEach(t => { const id = lm[t.toLowerCase()]; if (id) used.add(id); });
+        (ev.data?.solution_categories || []).forEach(id => used.add(id));
+      });
+      return used;
+    },
+
+    get activeTechCategories() {
+      return this.categories.filter(c => c.group === 'tech' && this.usedCategoryIds.has(c.id));
+    },
+    get activeVerticalCategories() {
+      return this.categories.filter(c => c.group === 'vertical' && this.usedCategoryIds.has(c.id));
+    },
+
+    categoryById(id) {
+      return this.categories.find(c => c.id === id) || null;
+    },
+
+    legacyTags(ev) {
+      const lm = this._labelMap;
+      return (ev.tags || []).filter(t => !lm[t.toLowerCase()]);
+    },
+    taxonomyTags(ev) {
+      const lm = this._labelMap;
+      const ids = new Set();
+      (ev.tags || []).forEach(t => { const id = lm[t.toLowerCase()]; if (id) ids.add(id); });
+      (ev.data?.solution_categories || []).forEach(id => ids.add(id));
+      return [...ids];
+    },
+
+    get filteredEvents() {
+      const q  = this.search.trim().toLowerCase();
+      return this.events.filter(ev => {
+        if (this.activeTag !== 'all') {
+          const cat     = this.categoryById(this.activeTag);
+          const byLabel = cat ? (ev.tags || []).some(t => t.toLowerCase() === cat.label.toLowerCase()) : false;
+          const byId    = (ev.data?.solution_categories || []).includes(this.activeTag);
+          if (!byLabel && !byId) return false;
+        }
+        if (q) {
+          const haystack = [ev.title, ev.deck, ev.data?.location, ...(ev.tags || [])]
+            .filter(Boolean).join(' ').toLowerCase();
+          if (!haystack.includes(q)) return false;
+        }
+        return true;
+      });
+    },
+
+    imgSrc(ev) { return ev.image || `/images/${ev.page_name}.png`; },
+    imgError(e, ev) {
+      const step = parseInt(e.target.dataset.imgStep || 0);
+      const cat  = ev.content_category || 'default';
+      const fallbacks = [`/images/${ev.page_name}.jpg`, `/images/${cat}.png`, `/images/${cat}.jpg`];
+      if (step < fallbacks.length) {
+        e.target.src = fallbacks[step];
+        e.target.dataset.imgStep = step + 1;
+      } else { e.target.onerror = null; e.target.src = ''; }
+    },
+
+    getDay(slot) { return slot ? slot.split('/')[0].slice(6, 8) : ''; },
+    getMon(slot) {
+      if (!slot) return '';
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      return months[parseInt(slot.split('/')[0].slice(4, 6)) - 1];
+    },
+    formatSlot(slot) {
+      if (!slot) return '';
+      try {
+        const s  = slot.split('/')[0];
+        const dt = new Date(`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}T${s.slice(9,11)}:${s.slice(11,13)}:00Z`);
+        return dt.toLocaleDateString('en-US', {
+          weekday: 'short', month: 'short', day: 'numeric',
+          hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York'
+        });
+      } catch { return slot; }
+    },
+
+    tagClass(tag) {
+      const map = {
+        'Free': 'bg-green-lt text-green', 'Community': 'bg-blue-lt text-blue',
+        'In-Person': 'bg-teal-lt text-teal', 'Online': 'bg-azure-lt text-azure',
+        'Concert': 'bg-purple-lt text-purple', 'Outdoor': 'bg-lime-lt text-lime',
+      };
+      return map[tag] || 'bg-secondary-lt text-secondary';
+    },
+
+    isImgPath(v) { return v && /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(v); },
+    getInitials(v) {
+      if (!v) return '?';
+      if (v.length <= 3 && !v.includes('/')) return v.toUpperCase();
+      const file = v.split('/').pop().split('.')[0];
+      return file.split(/[-_ ]+/).map(p => p[0]?.toUpperCase()).slice(0,2).join('') || '?';
+    }
+  };
+}
+</script>
+
+</body>
+</html>
