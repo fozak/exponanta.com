@@ -1,4 +1,9 @@
 
+/cfe history timeline
+
+https://claude.ai/chat/8aa1b23c-858a-4cf3-b325-54c7c011d5a9
+
+
 Here’s a clearer grouping for your Exponanta service:
 
 Build Presentation Skills – workshops, tips, and resources to help members speak confidently and effectively.
