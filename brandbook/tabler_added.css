@@ -22,3 +22,63 @@ html { overflow-x: hidden; }
   border-radius: 50% !important;
   overflow: hidden !important;
 }
+
+/*printing issue
+
+/* ── Print: render exactly as desktop screen ── */
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* show everything that might be hidden */
+  [style*="display:none"],
+  [style*="display: none"] {
+    display: block !important;
+  }
+
+  /* prevent elements breaking across pages */
+  .card,
+  .join-tier,
+  .join-tiers,
+  .join-info,
+  .evh,
+  .past-card,
+  .cal-cell {
+    break-inside: avoid !important;
+  }
+
+  /* remove shadows that print badly */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* keep backgrounds and colors */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ensure full width, no margin collapse */
+  .container,
+  .container-xl,
+  .container-fluid {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* hide things that don't belong in a specimen print */
+  .navbar,
+  #navbar,
+  #footer,
+  .modal,
+  .toast,
+  .cal-popup {
+    display: none !important;
+  }
+}
