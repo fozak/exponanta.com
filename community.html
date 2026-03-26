@@ -191,7 +191,12 @@
 <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+<script src="/assets/js/adapter-pocketbase.js"></script>
+<script src="/assets/js/CW-utils.js"></script>
+<script src="/assets/js/auth.js"></script>
+
+
 <script>
 function communityApp() {
   return {
@@ -257,6 +262,8 @@ function communityApp() {
   };
 }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </body>
 </html>
