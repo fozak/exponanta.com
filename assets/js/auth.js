@@ -119,7 +119,6 @@ function syncAlpineAuth(profile) {
 
 async function provisionUser(email, password, name) {
   const userId = generateId('User', email);
-  console.log('Provisioning user:', userId);
 
   // Step 1: Create auth user
   await pb.collection('users').create({
@@ -130,29 +129,23 @@ async function provisionUser(email, password, name) {
     name,
     emailVisibility: true
   });
-  console.log('✅ Auth user created');
 
-  // Step 2: Create item record
+  // Step 2: Login
+  await pb.collection('users').authWithPassword(email, password);
+
+  // Step 3: Create item record
   await pb.collection('item').create({
     id: userId,
     name: userId,
     doctype: 'User',
     docstatus: 0,
-    data: { id: userId, email, name, doctype: 'User', docstatus: 0 }
-  });
-  console.log('✅ Item record created');
-
-  // Step 3: Set RBAC
-  await pb.collection('item').update(userId, {
-    owner: '',
+    data: { id: userId, email, name, doctype: 'User', docstatus: 0 },
     _allowed: [SYSTEM_MANAGER_ROLE_ID],
-    _allowed_read: [userId]
+    _allowed_read: []
   });
-  console.log('✅ RBAC set');
 
   // Step 4: Send verification email
   await pb.collection('users').requestVerification(email);
-  console.log('✅ Verification email sent');
 
   return userId;
 }
