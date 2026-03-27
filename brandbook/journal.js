@@ -1,3 +1,27 @@
+roleeventmanagx
+
+
+await authRegister('test7@exponanta.com', 'test*******', 'Alan Doe');
+
+await authLogin('test6@exponanta.com', 'test********');
+
+try {
+  await pb.collection('item').create({
+    id: 'event26032tb3b6',
+    name: 'event26032tb3b6',
+    doctype: 'Event',
+    owner: '',
+    _allowed: ['rolesystemmanag'],
+    _allowed_read: ['roleispublicxxx'],
+    data: { title: 'Public Test Item' }
+  });
+} catch(e) {
+  console.log(JSON.stringify(e.response, null, 2));
+}
+
+
+_allowed_read.id ?= "roleispublicxxx"
+
 
 That's the full consolidated timeline. The richest primary source is the "Decode to timeline text" chat here: https://claude.ai/chat/8aa1b23c-858a-4cf3-b325-54c7c011d5a9 — which includes the actual board meeting minutes and financial charts. Want me to now spin off the Exponanta and YourSA versions from this base? And if so — blog post format, "About" narrative, or something else?remove all financial details at the end put table with program KPIs over the year in cumulative11:33 AMHere's the cleaned timeline with a cumulative KPI table at the end:
 
