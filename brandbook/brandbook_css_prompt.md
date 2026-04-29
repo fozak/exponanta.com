@@ -1,3 +1,10 @@
+
+BEFORE WRITING ANY CSS OR CLASS:
+1. Is it in tabler_added_combined.css? → use it
+2. Is it a Tabler core class? → use it
+3. Is it a Tabler marketing class? → use it
+4. None of the above? → STOP. Ask before inventing.
+
 # Exponanta — CSS & Markup Prompt for AI
 
 Use this document at the start of every design or coding session.
