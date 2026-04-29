@@ -28,7 +28,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler-theme.min.js"></script>
 
 <!-- ── NAVBAR ── -->
-<div x-data x-init="fetch('components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+<div x-data x-init="fetch('/components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 
 <!-- ════════════════════════════════════════════════════════════
@@ -405,7 +405,7 @@
 
 
 <!-- ── FOOTER ── -->
-<div x-data x-init="fetch('components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+<div x-data x-init="fetch('/components/footer.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
