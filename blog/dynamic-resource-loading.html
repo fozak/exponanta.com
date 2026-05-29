@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Resource Loading with loader.js | Exponanta Blog</title>
+<meta name="description" content="How to replace scattered link and script tags with a single loader.js that manages CSS layers, JS dependencies, and asset versioning across multiple sites.">
+<link rel="canonical" href="https://exponanta.com/blog/dynamic-resource-loading.html">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Dynamic Resource Loading with loader.js | Exponanta">
+<meta property="og:description" content="How to replace scattered link and script tags with a single loader.js that manages CSS layers, JS dependencies, and asset versioning across multiple sites.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://exponanta.com/blog/dynamic-resource-loading.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dynamic Resource Loading with loader.js",
+  "description": "How to replace scattered link and script tags with a single loader.js that manages CSS layers, JS dependencies, and asset versioning across multiple sites.",
+  "url": "https://exponanta.com/blog/dynamic-resource-loading.html",
+  "datePublished": "2026-05-29",
+  "publisher": { "@type": "Organization", "name": "Exponanta", "url": "https://exponanta.com" },
+  "author": { "@type": "Organization", "name": "Exponanta" }
+}
+</script>
+<!---
+<style>
+  /* preview styles since loader.js is not available in this standalone file */
+  @import url('https://rsms.me/inter/inter.css');
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --font: 'Inter', system-ui, sans-serif;
+    --bg: #f8f9fa;
+    --surface: #ffffff;
+    --border: #e9ecef;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --accent: #0054a6;
+    --accent-lt: #e8f0fb;
+    --code-bg: #f1f3f5;
+    --radius: 8px;
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); margin: 0; line-height: 1.7; }
+  .navbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 56px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .navbar-brand { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; letter-spacing: -0.02em; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
+  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+  .breadcrumb { display: flex; gap: 0.5rem; font-size: 0.85rem; color: var(--muted); list-style: none; padding: 0; margin: 0 0 2rem; }
+  .breadcrumb li + li::before { content: '/'; margin-right: 0.5rem; }
+  .breadcrumb a { color: var(--muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .active { color: var(--text); }
+  .badges { display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 4px; }
+  .badge-blue { background: var(--accent-lt); color: var(--accent); }
+  .badge-orange { background: #fff3e0; color: #e65100; }
+  .badge-teal { background: #e0f7f4; color: #00695c; }
+  h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin: 0 0 1rem; }
+  .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem; }
+  .byline { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-lt); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+  .byline-name { font-weight: 600; font-size: 0.9rem; }
+  .byline-meta { font-size: 0.8rem; color: var(--muted); }
+  article { font-size: 1.0625rem; }
+  h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; margin: 2.5rem 0 0.75rem; }
+  p { margin: 0 0 1.25rem; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; overflow-x: auto; margin: 0 0 1.5rem; }
+  code { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.6; color: #24292e; }
+  p code { background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.88em; }
+  strong { font-weight: 600; }
+  .cta-box { background: var(--accent); color: #fff; border-radius: var(--radius); padding: 2rem; margin-top: 3rem; }
+  .cta-box h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 0.5rem; }
+  .cta-box p { font-size: 0.9rem; opacity: 0.85; margin: 0 0 1.25rem; }
+  .cta-btn { display: inline-block; background: #fff; color: var(--accent); font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem; border-radius: 6px; text-decoration: none; }
+  .sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+  .sidebar-card h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 1rem; }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list a { color: var(--text); text-decoration: none; }
+  .toc-list a:hover { color: var(--accent); }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-val { font-weight: 700; color: var(--accent); }
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 4rem; }
+</style>
+IN PRODUCTION: replace all styles above with: -->
+<script src="https://cdn.jsdelivr.net/gh/fozak/common@v1.0.0/exponanta.com/loader.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="navbar-brand">Exponanta</a>
+</nav>
+
+<div class="container">
+  <div class="layout">
+
+    <!-- ARTICLE -->
+    <main>
+      <article>
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li class="active">Dynamic resource loading</li>
+        </ol>
+
+        <div class="badges">
+          <span class="badge badge-blue">Frontend</span>
+          <span class="badge badge-orange">Architecture</span>
+          <span class="badge badge-teal">Performance</span>
+        </div>
+
+        <h1>Dynamic Resource Loading with loader.js</h1>
+        <p class="lead">One script tag in your HTML head. Everything else — CSS layers, fonts, JS dependencies, versioning — managed in a single file you control.</p>
+
+        <div class="byline">
+          <div class="avatar">E</div>
+          <div>
+            <div class="byline-name">Exponanta</div>
+            <div class="byline-meta">May 29, 2026 · 7 min read</div>
+          </div>
+        </div>
+
+        <h2>The Problem with Scattered Tags</h2>
+        <p>Most HTML pages accumulate resource tags over time. A typical blog post head ends up looking like this:</p>
+        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/..."&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/..."&gt;
+&lt;link rel="stylesheet" href="../brandbook/tabler_added.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"&gt;&lt;/script&gt;
+&lt;script src="/assets/js/auth.js"&gt;&lt;/script&gt;</code></pre>
+        <p>Three problems compound each other. First, <code>@latest</code> means any CDN update silently changes what your page loads — a vendor CSS change breaks your layout with no warning and no connection to the cause. Second, the same tags are copied across every page, so updating a version means finding and editing every HTML file. Third, there is no guaranteed load order — CSS layers must load in sequence or overrides apply to nothing.</p>
+        <p>The membership process on a platform like Exponanta illustrates the same pattern at a higher level. A new member joining a business club goes through guest visits, an interview, and formal onboarding — each step in a defined sequence. Skip a step or reverse the order and the process breaks down. Resource loading works the same way: CSS layers have a strict sequence, and violating it produces silent failures.</p>
+
+        <h2>CSS Layers Are a Sequence Contract</h2>
+        <p>Before solving the loading problem it helps to understand why order matters. A well-structured frontend has three CSS layers:</p>
+        <pre><code>Layer 1 — tabler.min.css       vendor base, never touch
+Layer 2 — tabler-brand.css     stable brand overrides only
+Layer 3 — added.css            active work, page-specific rules</code></pre>
+        <p>Layer 2 overrides Layer 1. Layer 3 overrides both. If Layer 3 loads before Layer 2, the brand tokens it depends on do not exist yet. The override applies to nothing. The page renders incorrectly with no error message — the browser does not tell you the load order was wrong.</p>
+        <p>This is the core problem loader.js solves: it owns the sequence and enforces it programmatically, so no individual page can accidentally get it wrong.</p>
+
+        <h2>The loader.js Pattern</h2>
+        <p>Replace every <code>&lt;link&gt;</code> and <code>&lt;script&gt;</code> tag in your HTML with a single script tag:</p>
+        <pre><code>&lt;head&gt;
+  &lt;script src="https://cdn.jsdelivr.net/gh/fozak/common@v1.0.0/exponanta.com/loader.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+        <p>loader.js carries the full asset list and injects everything in the correct order. Head resources — CSS that must load before first paint — are injected immediately. Body resources — JS and non-critical assets — are injected after the DOM is ready.</p>
+        <pre><code>const ASSETS = {
+  head: {
+    favicon: '/assets/favicon.svg',
+    preconnect: ['https://rsms.me'],
+    css: [
+      'https://rsms.me/inter/inter.css',
+      'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css',
+      'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css',
+      'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler-marketing.min.css',
+      '/assets/added.css'
+    ]
+  },
+  body: {
+    js: [
+      'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js',
+      'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js',
+      '/assets/js/auth.js'
+    ]
+  }
+}</code></pre>
+
+        <h2>Two-Phase Loading</h2>
+        <p>The loader splits into two phases that map directly to the browser rendering pipeline.</p>
+        <p><strong>Phase 1 — head resources</strong> run immediately when the script executes. CSS <code>&lt;link&gt;</code> tags are injected in sequence. The browser fetches all CSS files in parallel but applies them in DOM order, which preserves the layer contract. The favicon and preconnect hints are also injected here so the browser starts the font connection as early as possible.</p>
+        <p><strong>Phase 2 — body resources</strong> run after <code>DOMContentLoaded</code>. JS files are injected in sequence — each waits for the previous to finish before the next starts. This guarantees that Tabler JS is ready before Alpine.js initializes, and Alpine is ready before your application code runs.</p>
+        <pre><code>loadHead()
+document.addEventListener('DOMContentLoaded', loadBody)</code></pre>
+
+        <h2>Versioning and the Tag Contract</h2>
+        <p>loader.js itself is versioned via a GitHub tag. The CDN URL contains the tag explicitly:</p>
+        <pre><code>cdn.jsdelivr.net/gh/fozak/common@v1.0.0/exponanta.com/loader.js</code></pre>
+        <p>A tagged URL is frozen forever. jsDelivr sends <code>Cache-Control: immutable</code> for tagged files, meaning returning visitors load loader.js from the browser cache instantly — zero network request. The same applies to every asset URL that includes a pinned version number.</p>
+        <p>When you need to update an asset — say Tabler upgrades from 1.4.0 to 1.5.0 — you edit loader.js once, commit, and create a new tag. Every page on every site that references the new tag gets the update simultaneously. No page-by-page editing.</p>
+
+        <h2>Multi-Site Benefit</h2>
+        <p>The pattern scales naturally across multiple sites. Each site has its own loader.js in the shared repo:</p>
+        <pre><code>common/
+  exponanta.com/loader.js
+  cfeglobal.org/loader.js
+  bostonelitecontractors.com/loader.js</code></pre>
+        <p>Layer 1 — the vendor Tabler CSS — is the same URL across all three loaders. A user who visits exponanta.com first has that file cached. When they visit cfeglobal.org, Tabler loads from cache instantly. Shared vendor assets across domains cost one network request total, not one per site.</p>
+
+        <h2>What This Looks Like in Practice</h2>
+        <p>A complete blog post HTML file is now around 40 lines. The head contains only meta tags, structured data, and the single loader script. No asset management, no version numbers, no load order decisions. Those concerns live in one place — loader.js — and are settled once.</p>
+        <p>The same principle applies to joining a business network. A well-run club does not ask each new member to figure out the onboarding sequence themselves. The process is defined once, managed centrally, and every new member follows the same path. loader.js applies the same thinking to frontend assets: define the sequence once, enforce it everywhere, update it in one place.</p>
+
+        <div class="cta-box">
+          <h3>Build on Exponanta</h3>
+          <p>Join a referral-first professional network where connections are earned, not collected.</p>
+          <a href="https://exponanta.com" class="cta-btn">Get started →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>In this article</h4>
+        <ul class="toc-list">
+          <li><a href="#the-problem-with-scattered-tags">The Problem with Scattered Tags</a></li>
+          <li><a href="#css-layers-are-a-sequence-contract">CSS Layers Are a Sequence Contract</a></li>
+          <li><a href="#the-loaderjs-pattern">The loader.js Pattern</a></li>
+          <li><a href="#two-phase-loading">Two-Phase Loading</a></li>
+          <li><a href="#versioning-and-the-tag-contract">Versioning and the Tag Contract</a></li>
+          <li><a href="#multi-site-benefit">Multi-Site Benefit</a></li>
+          <li><a href="#what-this-looks-like-in-practice">In Practice</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Key numbers</h4>
+        <div class="stat-row"><span>Head tag reduction</span><span class="stat-val">8 → 1</span></div>
+        <div class="stat-row"><span>CDN cache (tagged)</span><span class="stat-val">Forever</span></div>
+        <div class="stat-row"><span>loader.js overhead</span><span class="stat-val">~30ms</span></div>
+        <div class="stat-row"><span>Return visit overhead</span><span class="stat-val">0ms</span></div>
+        <div class="stat-row"><span>Sites from one loader</span><span class="stat-val">Unlimited</span></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 Exponanta · <a href="/blog/" style="color:inherit">Blog</a>
+</footer>
+
+</body>
+</html>
