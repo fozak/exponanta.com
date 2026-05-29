@@ -24,78 +24,12 @@
   "author": { "@type": "Organization", "name": "Exponanta" }
 }
 </script>
-<!---
-<style>
-  /* preview styles since loader.js is not available in this standalone file */
-  @import url('https://rsms.me/inter/inter.css');
-  *, *::before, *::after { box-sizing: border-box; }
-  :root {
-    --font: 'Inter', system-ui, sans-serif;
-    --bg: #f8f9fa;
-    --surface: #ffffff;
-    --border: #e9ecef;
-    --text: #1a1a2e;
-    --muted: #6c757d;
-    --accent: #0054a6;
-    --accent-lt: #e8f0fb;
-    --code-bg: #f1f3f5;
-    --radius: 8px;
-  }
-  body { font-family: var(--font); background: var(--bg); color: var(--text); margin: 0; line-height: 1.7; }
-  .navbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 56px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
-  .navbar-brand { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; letter-spacing: -0.02em; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
-  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
-  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
-  .breadcrumb { display: flex; gap: 0.5rem; font-size: 0.85rem; color: var(--muted); list-style: none; padding: 0; margin: 0 0 2rem; }
-  .breadcrumb li + li::before { content: '/'; margin-right: 0.5rem; }
-  .breadcrumb a { color: var(--muted); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--accent); }
-  .breadcrumb .active { color: var(--text); }
-  .badges { display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 4px; }
-  .badge-blue { background: var(--accent-lt); color: var(--accent); }
-  .badge-orange { background: #fff3e0; color: #e65100; }
-  .badge-teal { background: #e0f7f4; color: #00695c; }
-  h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin: 0 0 1rem; }
-  .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem; }
-  .byline { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
-  .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-lt); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
-  .byline-name { font-weight: 600; font-size: 0.9rem; }
-  .byline-meta { font-size: 0.8rem; color: var(--muted); }
-  article { font-size: 1.0625rem; }
-  h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; margin: 2.5rem 0 0.75rem; }
-  p { margin: 0 0 1.25rem; }
-  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; overflow-x: auto; margin: 0 0 1.5rem; }
-  code { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.6; color: #24292e; }
-  p code { background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.88em; }
-  strong { font-weight: 600; }
-  .cta-box { background: var(--accent); color: #fff; border-radius: var(--radius); padding: 2rem; margin-top: 3rem; }
-  .cta-box h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 0.5rem; }
-  .cta-box p { font-size: 0.9rem; opacity: 0.85; margin: 0 0 1.25rem; }
-  .cta-btn { display: inline-block; background: #fff; color: var(--accent); font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem; border-radius: 6px; text-decoration: none; }
-  .sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
-  .sidebar-card h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 1rem; }
-  .toc-list { list-style: none; padding: 0; margin: 0; }
-  .toc-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-  .toc-list li:last-child { border-bottom: none; }
-  .toc-list a { color: var(--text); text-decoration: none; }
-  .toc-list a:hover { color: var(--accent); }
-  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-  .stat-row:last-child { border-bottom: none; }
-  .stat-val { font-weight: 700; color: var(--accent); }
-  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 4rem; }
-</style>
-IN PRODUCTION: replace all styles above with: -->
+
 <script src="https://cdn.jsdelivr.net/gh/fozak/common@v1.1.0/exponanta.com/loader.js"></script>
 </head>
 <body>
 
 <div id="cmp-navbar"></div>
-
-<div id="cmp-header"></div>
-
-
 
 <div class="container">
   <div class="layout">
