@@ -87,13 +87,15 @@
   footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 4rem; }
 </style>
 IN PRODUCTION: replace all styles above with: -->
-<script src="https://cdn.jsdelivr.net/gh/fozak/common@v1.0.0/exponanta.com/loader.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fozak/common@v1.1.0/exponanta.com/loader.js"></script>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="/" class="navbar-brand">Exponanta</a>
-</nav>
+<div id="cmp-navbar"></div>
+
+<div id="cmp-header"></div>
+
+
 
 <div class="container">
   <div class="layout">
@@ -203,36 +205,7 @@ document.addEventListener('DOMContentLoaded', loadBody)</code></pre>
       </article>
     </main>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-card">
-        <h4>In this article</h4>
-        <ul class="toc-list">
-          <li><a href="#the-problem-with-scattered-tags">The Problem with Scattered Tags</a></li>
-          <li><a href="#css-layers-are-a-sequence-contract">CSS Layers Are a Sequence Contract</a></li>
-          <li><a href="#the-loaderjs-pattern">The loader.js Pattern</a></li>
-          <li><a href="#two-phase-loading">Two-Phase Loading</a></li>
-          <li><a href="#versioning-and-the-tag-contract">Versioning and the Tag Contract</a></li>
-          <li><a href="#multi-site-benefit">Multi-Site Benefit</a></li>
-          <li><a href="#what-this-looks-like-in-practice">In Practice</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-card">
-        <h4>Key numbers</h4>
-        <div class="stat-row"><span>Head tag reduction</span><span class="stat-val">8 → 1</span></div>
-        <div class="stat-row"><span>CDN cache (tagged)</span><span class="stat-val">Forever</span></div>
-        <div class="stat-row"><span>loader.js overhead</span><span class="stat-val">~30ms</span></div>
-        <div class="stat-row"><span>Return visit overhead</span><span class="stat-val">0ms</span></div>
-        <div class="stat-row"><span>Sites from one loader</span><span class="stat-val">Unlimited</span></div>
-      </div>
-    </aside>
-
-  </div>
-</div>
-
-<footer>
-  © 2026 Exponanta · <a href="/blog/" style="color:inherit">Blog</a>
-</footer>
+   <div id="cmp-footer"></div>
 
 </body>
 </html>
