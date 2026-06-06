@@ -113,7 +113,7 @@ function _dispatchAuthChange(profile) {
 
 async function fetchItemProfile(userId) {
   try {
-    const record = await pb.collection('item').getOne(userId);
+    const record = await globalThis.pb.collection('item').getOne(userId);
     return record?.data || {};
   } catch (e) {
     console.warn('Could not fetch item profile:', e);
@@ -133,30 +133,30 @@ async function provisionUser(email, password, name) {
   const usesId   = generateId('UserSettings', email);
 
   // Step 1: Create auth user
-  await pb.collection('users').create({
+  await globalThis.pb.collection('users').create({
     id: userId, email, password, passwordConfirm: password,
     name, emailVisibility: true,
   });
 
   // Step 2: Login
-  await pb.collection('users').authWithPassword(email, password);
+  await globalThis.pb.collection('users').authWithPassword(email, password);
 
   // Step 3: Create User item
-  await pb.collection('item').create({
+  await globalThis.pb.collection('item').create({
     id: userId, name: userId, doctype: 'User', docstatus: 0,
     owner: '', _allowed: [SYSTEM_MANAGER_ROLE_ID], _allowed_read: [],
     data: { id: userId, email, name, doctype: 'User', docstatus: 0 },
   });
 
   // Step 3A: Create UserSettings
-  await pb.collection('item').create({
+  await globalThis.pb.collection('item').create({
     id: usesId, name: usesId, doctype: 'UserSettings', docstatus: 0,
     owner: userId, _allowed: [userId], _allowed_read: [],
     data: { user: userId, email },
   });
 
   // Step 4: Send verification
-  await pb.collection('users').requestVerification(email);
+  await globalThis.pb.collection('users').requestVerification(email);
 
   console.log('✅ User provisioned:', userId);
   return { userId, usesId };
@@ -167,7 +167,7 @@ async function provisionUser(email, password, name) {
 // ============================================================
 
 async function authLogin(email, password) {
-  const authData = await pb.collection('users').authWithPassword(email, password);
+  const authData = await globalThis.pb.collection('users').authWithPassword(email, password);
   const itemData = await fetchItemProfile(authData.record.id);
   const profile  = buildProfile(authData.record, itemData);
   saveProfile(profile);
@@ -183,7 +183,7 @@ async function authLogin(email, password) {
 async function authRegister(email, password, name) {
   await provisionUser(email, password, name);
   // provisionUser already logged in — just build profile
-  const model    = pb.authStore.model;
+  const model    = globalThis.pb.authStore.model;
   const itemData = await fetchItemProfile(model.id);
   const profile  = buildProfile(model, itemData);
   saveProfile(profile);
@@ -196,8 +196,8 @@ async function authRegister(email, password, name) {
 // ============================================================
 
 function authLogout() {
-  const userId = pb.authStore.model?.id;
-  pb.authStore.clear();
+  const userId = globalThis.pb.authStore.model?.id;
+  globalThis.pb.authStore.clear();
   clearProfile(userId);
   _dispatchAuthChange(null);
   console.log('✅ Logged out');
@@ -209,8 +209,8 @@ function authLogout() {
 
 async function authRefresh() {
   try {
-    await pb.collection('users').authRefresh();
-    const model    = pb.authStore.model;
+    await globalThis.pb.collection('users').authRefresh();
+    const model    = globalThis.pb.authStore.model;
     const cached   = loadProfile(model.id) || {};
     const profile  = buildProfile(model, cached);
     profile.verified = model.verified;
@@ -231,13 +231,13 @@ async function authRefresh() {
 
 function authRestore() {
 
-if (!pb.authStore.isValid) {
-    pb.authStore.clear()        // ← add this
+if (!globalThis.pb.authStore.isValid) {
+    globalThis.pb.authStore.clear()        // ← add this
     _dispatchAuthChange(null)
     return null
   }
 
-  const userId  = pb.authStore.model?.id;
+  const userId  = globalThis.pb.authStore.model?.id;
   const profile = loadProfile(userId);
   if (profile) {
     _dispatchAuthChange(profile);
@@ -246,7 +246,7 @@ if (!pb.authStore.isValid) {
   }
   // cache miss — fetch fresh
   fetchItemProfile(userId).then(itemData => {
-    const profile = buildProfile(pb.authStore.model, itemData);
+    const profile = buildProfile(globalThis.pb.authStore.model, itemData);
     saveProfile(profile);
     _dispatchAuthChange(profile);
   });
@@ -258,12 +258,12 @@ if (!pb.authStore.isValid) {
 // ============================================================
 
 function authGuard(requireVerified = false) {
-  if (!pb.authStore.isValid) {
+  if (!globalThis.pb.authStore.isValid) {
     window.location.href = '/login.html';
     return false;
   }
   if (requireVerified) {
-    const profile = loadProfile(pb.authStore.model?.id);
+    const profile = loadProfile(globalThis.pb.authStore.model?.id);
     if (!profile?.verified) {
       window.location.href = '/auth/unverified.html';
       return false;
