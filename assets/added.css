@@ -167,3 +167,75 @@ html { overflow-x: hidden; }
 @media (max-width: 576px) {
   .stats-card { position: static; margin-top: 16px; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   EVENTS PAGE — events.html inline → added.css
+   All selectors confirmed used in DOM (Alpine x-for rendered)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── EVH horizontal event card ── */
+/* No Tabler equivalent — intentional custom component */
+.evh-img { width: 180px; flex: 0 0 180px; position: relative; overflow: hidden; }
+.evh-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.evh-date { position: absolute; top: 10px; left: 10px; background: rgba(36,70,200,0.92); color: #fff; text-align: center; padding: 4px 8px; border-radius: 6px; line-height: 1.2; min-width: 44px; }
+.evh-date-day { display: block; font-size: 1.25rem; font-weight: 700; }
+.evh-date-mon { display: block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+@media (max-width: 640px) {
+  .evh-img { width: 100%; flex: none; height: 160px; }
+  .card.evh { flex-direction: column !important; }
+}
+
+/* ── Tag dot — used in filter chips and taxonomy badges ── */
+.tag-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Filter bar labels and dividers ── */
+/* Note: candidates for Tabler utilities but kept for specificity */
+.filter-group-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--tblr-muted); align-self: center; white-space: nowrap; }
+.filter-divider { width: 1px; height: 20px; background: var(--tblr-border-color); align-self: center; }
+
+/* ── View toggle (List / Calendar) ── */
+/* No Tabler nav-pills equivalent with this exact behavior */
+.view-toggle { display: inline-flex; border: 1px solid var(--tblr-border-color); border-radius: var(--tblr-border-radius); overflow: hidden; }
+.view-toggle-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: .8125rem; font-weight: 500; border: none; background: transparent; color: var(--tblr-muted); cursor: pointer; transition: all .15s; border-right: 1px solid var(--tblr-border-color); }
+.view-toggle-btn:last-child { border-right: none; }
+.view-toggle-btn.active { background: var(--tblr-primary); color: #fff; }
+.view-toggle-btn:not(.active):hover { background: var(--tblr-light); }
+
+/* ── Calendar grid ── */
+/* Fully custom — no Tabler calendar component exists */
+.cal-grid-wrap { border: 1px solid var(--tblr-border-color); border-radius: var(--tblr-border-radius); overflow: hidden; background: #fff; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: auto; }
+.cal-dow-row { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; background: var(--tblr-light); border-bottom: 2px solid var(--tblr-border-color); }
+@supports not (grid-template-columns: subgrid) {
+  .cal-dow-row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
+.cal-dow { padding: 8px 0; text-align: center; font-size: .6875rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--tblr-muted); border-right: 1px solid var(--tblr-border-color); overflow: hidden; }
+.cal-dow:last-child { border-right: none; }
+.cal-body-grid { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
+@supports not (grid-template-columns: subgrid) {
+  .cal-body-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
+.cal-cell { height: 110px; border-right: 1px solid var(--tblr-border-color); border-bottom: 1px solid var(--tblr-border-color); padding: 6px 5px 4px; box-sizing: border-box; background: #fff; overflow: hidden; min-width: 0; }
+.cal-cell:nth-child(7n) { border-right: none; }
+.cal-cell--other { background: var(--tblr-light); }
+.cal-cell--today { background: rgba(32,107,196,.04); }
+.cal-day-num { font-size: .75rem; font-weight: 600; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3px; color: var(--tblr-body-color); flex-shrink: 0; }
+.cal-cell--today .cal-day-num { background: var(--tblr-primary); color: #fff; }
+.cal-cell--other .cal-day-num { color: var(--tblr-muted); opacity: .5; }
+.cal-pill { display: block; width: 100%; padding: 1px 5px; border-radius: 3px; font-size: .6875rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; cursor: pointer; border: none; text-align: left; line-height: 1.6; transition: opacity .12s; }
+.cal-pill:hover { opacity: .75; }
+.cal-pill--Community  { background: rgba(32,107,196,.12); color: #206bc4; }
+.cal-pill--Concert    { background: rgba(9,182,139,.15);  color: #09b68b; }
+.cal-pill--Workshop   { background: rgba(214,57,57,.12);  color: #d63939; }
+.cal-pill--Conference { background: rgba(32,107,196,.12); color: #206bc4; }
+.cal-pill--default    { background: var(--tblr-light);    color: var(--tblr-muted); border: 1px solid var(--tblr-border-color); }
+.cal-pill-more { font-size: .6875rem; font-weight: 600; color: var(--tblr-primary); cursor: pointer; background: none; border: none; padding: 0 2px; display: block; text-align: left; }
+.cal-month-nav { display: flex; align-items: center; gap: 8px; }
+.cal-month-title { font-size: 1rem; font-weight: 700; min-width: 180px; text-align: center; }
+.cal-nav-btn { width: 30px; height: 30px; border-radius: var(--tblr-border-radius); border: 1px solid var(--tblr-border-color); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--tblr-muted); transition: all .15s; }
+.cal-nav-btn:hover { border-color: var(--tblr-primary); color: var(--tblr-primary); }
+.cal-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: .75rem; color: var(--tblr-muted); align-items: center; }
+.cal-legend-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; display: inline-block; margin-right: 4px; vertical-align: middle; }
+.cal-popup { display: none; position: fixed; z-index: 9999; background: #fff; border: 1px solid var(--tblr-border-color); border-radius: var(--tblr-border-radius-lg); box-shadow: var(--tblr-shadow-lg, 0 8px 32px rgba(0,0,0,.12)); width: 300px; padding: 16px; }
+.cal-popup.show { display: block; }
+.cal-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 1.1rem; color: var(--tblr-muted); cursor: pointer; padding: 2px 6px; line-height: 1; }
