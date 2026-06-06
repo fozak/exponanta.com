@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events | Exponanta</title>
+<meta name="description" content="Browse upcoming events in the Boston-Cambridge innovation community.">
+<link rel="canonical" href="https://exponanta.com/events/">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="https://exponanta.com/brandbook/favicon.svg">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler-marketing.min.css">
+<link rel="stylesheet" href="/assets/added.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div x-data x-init="fetch('/components/navbar.html').then(r=>r.text()).then(h=>$el.innerHTML=h)"></div>
+
+<div class="page-wrapper">
+  <div class="page-body">
+    <div class="container-xl py-4">
+
+      <div x-data="eventsApp()" x-init="init()">
+
+        <!-- Page header -->
+        <div class="page-header mb-4">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1 class="page-title">Events</h1>
+              <div class="text-muted">Boston · Cambridge innovation community</div>
+            </div>
+            <div class="col-auto d-flex gap-2 align-items-center">
+              <!-- ── VIEW TOGGLE ── -->
+              <div class="view-toggle">
+                <button class="view-toggle-btn active" @click="view='list'" :class="{active: view==='list'}">
+                  <i class="ti ti-list"></i> List
+                </button>
+                <button class="view-toggle-btn" @click="view='calendar'" :class="{active: view==='calendar'}">
+                  <i class="ti ti-calendar"></i> Calendar
+                </button>
+              </div>
+              <a href="/programs/host-event" class="btn btn-primary">Submit Your Pitch</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Filters (list view only) ── -->
+        <div x-show="view === 'list'">
+          <div class="mb-3">
+            <div class="input-group">
+              <span class="input-group-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              <input type="text" class="form-control" placeholder="Search events…" x-model.debounce.200ms="search">
+              <button class="btn btn-outline-secondary" x-show="search" @click="search = ''" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+            <button class="btn btn-sm" :class="activeTag === 'all' ? 'btn-primary' : 'btn-outline-secondary'" @click="activeTag = 'all'">All</button>
+            <template x-if="activeTechCategories.length > 0"><span class="filter-divider"></span></template>
+            <template x-if="activeTechCategories.length > 0"><span class="filter-group-label">Tech</span></template>
+            <template x-for="cat in activeTechCategories" :key="cat.id">
+              <button class="btn btn-sm d-inline-flex align-items-center gap-2" :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'" @click="activeTag = cat.id">
+                <span class="tag-dot" :style="{ background: cat.color }"></span>
+                <span x-text="cat.label"></span>
+              </button>
+            </template>
+            <template x-if="activeVerticalCategories.length > 0"><span class="filter-divider"></span></template>
+            <template x-if="activeVerticalCategories.length > 0"><span class="filter-group-label">Verticals</span></template>
+            <template x-for="cat in activeVerticalCategories" :key="cat.id">
+              <button class="btn btn-sm d-inline-flex align-items-center gap-2" :class="activeTag === cat.id ? 'btn-primary' : 'btn-outline-secondary'" @click="activeTag = cat.id">
+                <span class="tag-dot" :style="{ background: cat.color }"></span>
+                <span x-text="cat.label"></span>
+              </button>
+            </template>
+            <span class="text-muted small ms-auto" x-text="filteredEvents.length + ' event' + (filteredEvents.length !== 1 ? 's' : '')"></span>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════
+             LIST VIEW
+        ════════════════════════════════════ -->
+        <div x-show="view === 'list'">
+          <div class="row g-4 align-items-start">
+
+            <!-- Cards — 8 cols -->
+            <div class="col-lg-8 col-md-12">
+              <div class="space-y">
+                <template x-for="ev in filteredEvents" :key="ev.name">
+                  <div class="card evh d-flex flex-row g-0 overflow-hidden mb-3">
+                    <div class="evh-img">
+                      <img :src="imgSrc(ev)" :alt="ev.title" loading="lazy" data-img-step="0" @error="imgError($event, ev)">
+                      <div class="evh-date">
+                        <span class="evh-date-day" x-text="getDay(ev.data.event_slot)"></span>
+                        <span class="evh-date-mon" x-text="getMon(ev.data.event_slot)"></span>
+                      </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <div class="mb-2">
+                        <h3 class="mb-1 fs-4">
+                          <a :href="'/events/event-detail.html?slug=' + ev.page_name" class="text-reset text-decoration-none" x-text="ev.title"></a>
+                        </h3>
+                        <div class="d-flex flex-wrap gap-1">
+                          <template x-for="tag in legacyTags(ev)" :key="tag">
+                            <span class="badge" :class="tagClass(tag)" x-text="tag"></span>
+                          </template>
+                          <template x-for="catId in taxonomyTags(ev)" :key="catId">
+                            <template x-if="categoryById(catId)">
+                              <span class="badge bg-secondary-lt d-inline-flex align-items-center gap-1">
+                                <span class="tag-dot" :style="{ background: categoryById(catId).color }"></span>
+                                <span x-text="categoryById(catId).label"></span>
+                              </span>
+                            </template>
+                          </template>
+                        </div>
+                      </div>
+                      <p class="text-muted small mb-2" x-text="ev.deck"></p>
+                      <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
+                        <span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                          <span x-text="formatSlot(ev.data.event_slot)"></span>
+                        </span>
+                        <span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-inline me-1"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg>
+                          <span x-text="ev.data.location"></span>
+                        </span>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center mt-auto flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="avatar-list avatar-list-stacked">
+                            <template x-for="(av, i) in ev.data.avatars.slice(0,4)" :key="i">
+                              <span class="avatar avatar-sm">
+                                <template x-if="isImgPath(av)"><img :src="av" :alt="av" @error="$event.target.parentNode.textContent = getInitials(av)"></template>
+                                <template x-if="!isImgPath(av)"><span x-text="av"></span></template>
+                              </span>
+                            </template>
+                          </div>
+                          <span class="text-muted small ms-2" x-text="ev.data.going + ' going'"></span>
+                        </div>
+                        <div class="d-flex gap-2 flex-wrap">
+                          <a :href="ev.data.calendar.google" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">Add to Calendar</a>
+                          <a :href="'/events/event-detail.html?slug=' + ev.page_name" class="btn btn-sm btn-outline-primary">Register</a>
+                          <a :href="ev.data.connectUrl" target="_blank" rel="noopener" class="btn btn-sm btn-primary">Connect</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <div x-show="filteredEvents.length === 0 && !loading" class="empty">
+                  <div class="empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                  <p class="empty-title">No events found</p>
+                  <p class="empty-subtitle text-muted">Try a different filter or search term.</p>
+                  <div class="empty-action"><button class="btn btn-primary" @click="activeTag = 'all'; search = ''">Show all events</button></div>
+                </div>
+              </div>
+              <div x-data x-init="fetch('../components/bottom-cta.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })" class="mt-4"></div>
+            </div>
+
+            <!-- Sidebar — 4 cols -->
+            <div class="col-lg-4 col-md-12 sidebar-sticky">
+              <div x-data x-init="fetch('../components/cta-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+              <div x-data x-init="fetch('../components/stats-card.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+              <div x-data x-init="fetch('../components/industry-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════
+             CALENDAR VIEW
+        ════════════════════════════════════ -->
+        <div x-show="view === 'calendar'" x-cloak>
+
+          <!-- Month nav + legend -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+            <div class="cal-month-nav">
+              <button class="cal-nav-btn" @click="calPrev()">
+                <i class="ti ti-chevron-left" style="font-size:.875rem;"></i>
+              </button>
+              <div class="cal-month-title" x-text="calMonthTitle"></div>
+              <button class="cal-nav-btn" @click="calNext()">
+                <i class="ti ti-chevron-right" style="font-size:.875rem;"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary ms-1" @click="calToday()">Today</button>
+            </div>
+            <div class="cal-legend">
+              <span><span class="cal-legend-dot" style="background:rgba(32,107,196,.2)"></span>Community</span>
+              <span><span class="cal-legend-dot" style="background:rgba(9,182,139,.2)"></span>Concert</span>
+              <span><span class="cal-legend-dot" style="background:rgba(214,57,57,.15)"></span>Workshop</span>
+            </div>
+          </div>
+
+          <!-- Grid -->
+          <div class="cal-grid-wrap mb-4">
+            <div class="cal-dow-row">
+              <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
+              <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div>
+              <div class="cal-dow">Sat</div>
+            </div>
+            <div class="cal-body-grid" id="cal-body"></div>
+          </div>
+
+        </div>
+
+      </div><!-- /eventsApp -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+</div>
+
+<!-- Popup -->
+<div class="cal-popup" id="cal-popup" role="dialog" aria-modal="true">
+  <button class="cal-popup-close" id="cal-popup-close">×</button>
+  <div id="cal-popup-tag" class="mb-2"></div>
+  <div id="cal-popup-title" style="font-weight:700;font-size:.9375rem;margin-bottom:5px;margin-right:20px;line-height:1.3;"></div>
+  <div id="cal-popup-date" class="text-muted small mb-1"></div>
+  <div id="cal-popup-loc"  class="text-muted small mb-2"></div>
+  <div id="cal-popup-desc" class="text-muted small mb-3" style="line-height:1.5;"></div>
+  <div id="cal-popup-btns" class="d-flex gap-2 flex-wrap"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.3/dist/pocketbase.umd.js"></script>
+<script src="/assets/js/adapter-pocketbase.js"></script>
+<script src="/assets/js/CW-utils.js"></script>
+<script src="/assets/js/auth.js"></script>
+
+<script>
+const MONTHS_SH = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const MONTHS_LG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DAYS_SH   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function esc(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+/* parse event_slot "20260319T220000Z/..." → Date */
+function slotToDate(slot) {
+  if (!slot) return null;
+  const s = slot.split("/")[0]; // "20260319T220000Z"
+  try {
+    return new Date(
+      s.slice(0,4) + "-" + s.slice(4,6) + "-" + s.slice(6,8) +
+      "T" + s.slice(9,11) + ":" + s.slice(11,13) + ":00Z"
+    );
+  } catch { return null; }
+}
+
+function pillClass(tags) {
+  for (const t of ["Community","Concert","Workshop","Conference"])
+    if ((tags||[]).includes(t)) return `cal-pill--${t}`;
+  return "cal-pill--default";
+}
+
+/* ── Calendar grid (vanilla JS, runs outside Alpine) ── */
+let _calYear  = new Date().getFullYear();
+let _calMonth = new Date().getMonth();
+let _calEvents = [];
+
+function buildCalGrid() {
+  const titleEl = document.getElementById("cal-month-title-el");
+  if (titleEl) titleEl.textContent = `${MONTHS_LG[_calMonth]} ${_calYear}`;
+
+  const now = new Date();
+  const todayY = now.getFullYear(), todayM = now.getMonth(), todayD = now.getDate();
+  const firstDow  = new Date(_calYear, _calMonth, 1).getDay();
+  const daysInMon = new Date(_calYear, _calMonth + 1, 0).getDate();
+  const prevTotal = new Date(_calYear, _calMonth, 0).getDate();
+
+  /* index by day */
+  const byDay = {};
+  _calEvents.forEach(ev => {
+    const dt = slotToDate(ev.data?.event_slot);
+    if (!dt || dt.getFullYear() !== _calYear || dt.getMonth() !== _calMonth) return;
+    const d = dt.getDate();
+    (byDay[d] = byDay[d] || []).push(ev);
+  });
+
+  const body = document.getElementById("cal-body");
+  if (!body) return;
+  body.innerHTML = "";
+
+  for (let i = 0; i < firstDow; i++)
+    body.appendChild(makeCalCell(prevTotal - firstDow + 1 + i, true, false, []));
+
+  for (let d = 1; d <= daysInMon; d++) {
+    const isToday = _calYear===todayY && _calMonth===todayM && d===todayD;
+    body.appendChild(makeCalCell(d, false, isToday, byDay[d] || []));
+  }
+
+  const filled   = firstDow + daysInMon;
+  const trailing = filled % 7 === 0 ? 0 : 7 - (filled % 7);
+  for (let i = 1; i <= trailing; i++)
+    body.appendChild(makeCalCell(i, true, false, []));
+}
+
+function makeCalCell(dayNum, other, isToday, dayEvents) {
+  const cell = document.createElement("div");
+  cell.className = "cal-cell"
+    + (other   ? " cal-cell--other" : "")
+    + (isToday ? " cal-cell--today" : "");
+
+  const num = document.createElement("div");
+  num.className = "cal-day-num";
+  num.textContent = dayNum;
+  cell.appendChild(num);
+
+  if (!other) {
+    const MAX = 2;
+    dayEvents.slice(0, MAX).forEach(ev => {
+      const dt   = slotToDate(ev.data?.event_slot);
+      const time = dt ? dt.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",timeZone:"America/New_York"}) : "";
+      const btn  = document.createElement("button");
+      btn.className = "cal-pill " + pillClass(ev.tags);
+      btn.textContent = (time ? time + " " : "") + ev.title;
+      btn.title = ev.title;
+      btn.addEventListener("click", e => { e.stopPropagation(); openCalPopup(ev, btn); });
+      cell.appendChild(btn);
+    });
+    if (dayEvents.length > MAX) {
+      const more = document.createElement("button");
+      more.className = "cal-pill-more";
+      more.textContent = `+${dayEvents.length - MAX} more`;
+      more.addEventListener("click", () => {
+        /* switch back to list view via Alpine */
+        Alpine.store && Alpine.store("view","list");
+        document.querySelector('[\\@click="view=\'list\'"]')?.click();
+      });
+      cell.appendChild(more);
+    }
+  }
+  return cell;
+}
+
+function openCalPopup(ev, anchor) {
+  const dt      = slotToDate(ev.data?.event_slot);
+  const weekday = dt ? DAYS_SH[dt.getDay()] : "";
+  const mon     = dt ? MONTHS_SH[dt.getMonth()] : "";
+  const day     = dt ? dt.getDate() : "";
+  const time    = dt ? dt.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",timeZone:"America/New_York"}) : "";
+  const tagName = (ev.tags||[]).find(t => ["Community","Concert","Workshop","Conference"].includes(t)) || (ev.tags||[])[0] || "Event";
+  const tagCss  = { Community:"bg-blue-lt text-blue", Concert:"bg-teal-lt text-teal", Workshop:"bg-red-lt text-red" };
+
+  document.getElementById("cal-popup-tag").innerHTML =
+    `<span class="badge ${tagCss[tagName]||"bg-secondary-lt"}">${esc(tagName)}</span>`;
+  document.getElementById("cal-popup-title").textContent = ev.title;
+  document.getElementById("cal-popup-date").innerHTML =
+    dt ? `<i class="ti ti-calendar me-1"></i>${weekday}, ${mon} ${day} · ${time}` : "";
+  document.getElementById("cal-popup-loc").innerHTML =
+    ev.data?.location ? `<i class="ti ti-map-pin me-1"></i>${esc(ev.data.location)}` : "";
+  document.getElementById("cal-popup-desc").textContent = ev.deck || "";
+
+  const btns = document.getElementById("cal-popup-btns");
+  btns.innerHTML = "";
+  if (ev.data?.registerUrl || ev.page_name)
+    btns.innerHTML += `<a href="${esc(ev.data?.registerUrl || "/events/event-detail.html?slug="+ev.page_name)}"
+      target="_blank" rel="noopener" class="btn btn-sm btn-primary">Register</a>`;
+  if (ev.data?.calendar?.google)
+    btns.innerHTML += `<a href="${esc(ev.data.calendar.google)}" target="_blank" rel="noopener"
+      class="btn btn-sm btn-outline-secondary">Add to Calendar</a>`;
+
+  const popup = document.getElementById("cal-popup");
+  const rect  = anchor.getBoundingClientRect();
+  /* rect coords are viewport-relative — use fixed positioning */
+  popup.style.position = "fixed";
+  let left = rect.left;
+  let top  = rect.bottom + 6;
+  if (left + 310 > window.innerWidth - 12) left = window.innerWidth - 314;
+  if (top  + 280 > window.innerHeight)     top  = rect.top - 285;
+  popup.style.left = Math.max(8, left) + "px";
+  popup.style.top  = Math.max(8, top)  + "px";
+  popup.classList.add("show");
+}
+
+document.getElementById("cal-popup-close").addEventListener("click", () =>
+  document.getElementById("cal-popup").classList.remove("show"));
+document.addEventListener("click", e => {
+  const p = document.getElementById("cal-popup");
+  if (!p.contains(e.target) && !e.target.classList.contains("cal-pill"))
+    p.classList.remove("show");
+});
+
+/* ── Alpine app ── */
+function eventsApp() {
+  return {
+    events: [],
+    categories: [],
+    loading: true,
+    activeTag: "all",
+    search: "",
+    view: "list",          // "list" | "calendar"
+
+    /* ── calendar state ── */
+    calYear:  new Date().getFullYear(),
+    calMonth: new Date().getMonth(),
+
+    get calMonthTitle() {
+      return `${MONTHS_LG[this.calMonth]} ${this.calYear}`;
+    },
+    calPrev() {
+      if (--this.calMonth < 0) { this.calMonth = 11; this.calYear--; }
+      _calYear = this.calYear; _calMonth = this.calMonth;
+      this.$nextTick(() => buildCalGrid());
+    },
+    calNext() {
+      if (++this.calMonth > 11) { this.calMonth = 0; this.calYear++; }
+      _calYear = this.calYear; _calMonth = this.calMonth;
+      this.$nextTick(() => buildCalGrid());
+    },
+    calToday() {
+      this.calYear = _calYear = new Date().getFullYear();
+      this.calMonth = _calMonth = new Date().getMonth();
+      this.$nextTick(() => buildCalGrid());
+    },
+
+    async init() {
+      const param = new URLSearchParams(window.location.search).get("solution_categories");
+      if (param) this.activeTag = param;
+      try {
+        const [evRes, taxRes] = await Promise.all([
+          fetch("../data/db.json"),
+          fetch("../data/taxonomies.json")
+        ]);
+        const evData  = await evRes.json();
+        const taxData = await taxRes.json();
+        const raw = Array.isArray(evData) ? evData : (evData.events || []);
+        this.events = raw
+          .filter(e => e.category === "event" && e.docstatus === 1)
+          .filter(e => {
+            // only show events that haven't started yet
+            const slot = e.data?.event_slot;
+            if (!slot) return true; // no date = include
+            const dt = slotToDate(slot);
+            return dt ? dt.getTime() >= Date.now() : true;
+          })
+          .sort((a, b) => {
+            const ta = slotToDate(a.data?.event_slot)?.getTime() ?? 0;
+            const tb = slotToDate(b.data?.event_slot)?.getTime() ?? 0;
+            return ta - tb;
+          });
+        this.categories = taxData.solution_categories || [];
+
+        /* feed calendar */
+        _calEvents = this.events;
+        this.$nextTick(() => buildCalGrid());
+      } catch (err) {
+        console.error("Load error:", err);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    /* watch view change → rebuild grid */
+    get _watchView() {
+      if (this.view === "calendar") {
+        _calYear = this.calYear; _calMonth = this.calMonth;
+        this.$nextTick(() => buildCalGrid());
+      }
+      return this.view;
+    },
+
+    get _labelMap() {
+      const m = {};
+      this.categories.forEach(c => { m[c.label.toLowerCase()] = c.id; });
+      return m;
+    },
+    get usedCategoryIds() {
+      const used = new Set();
+      const lm = this._labelMap;
+      this.events.forEach(ev => {
+        (ev.tags||[]).forEach(t => { const id = lm[t.toLowerCase()]; if (id) used.add(id); });
+        (ev.data?.solution_categories||[]).forEach(id => used.add(id));
+      });
+      return used;
+    },
+    get activeTechCategories()     { return this.categories.filter(c => c.group==="tech"     && this.usedCategoryIds.has(c.id)); },
+    get activeVerticalCategories() { return this.categories.filter(c => c.group==="vertical" && this.usedCategoryIds.has(c.id)); },
+    categoryById(id)               { return this.categories.find(c => c.id === id) || null; },
+    legacyTags(ev)  { const lm=this._labelMap; return (ev.tags||[]).filter(t=>!lm[t.toLowerCase()]); },
+    taxonomyTags(ev){ const lm=this._labelMap; const ids=new Set(); (ev.tags||[]).forEach(t=>{const id=lm[t.toLowerCase()];if(id)ids.add(id);}); (ev.data?.solution_categories||[]).forEach(id=>ids.add(id)); return [...ids]; },
+    get filteredEvents() {
+      const q = this.search.trim().toLowerCase();
+      return this.events
+        .filter(ev => {
+          if (this.activeTag !== "all") {
+            const cat = this.categoryById(this.activeTag);
+            const byLabel = cat ? (ev.tags||[]).some(t=>t.toLowerCase()===cat.label.toLowerCase()) : false;
+            const byId    = (ev.data?.solution_categories||[]).includes(this.activeTag);
+            if (!byLabel && !byId) return false;
+          }
+          if (q) {
+            const hay = [ev.title,ev.deck,ev.data?.location,...(ev.tags||[])].filter(Boolean).join(" ").toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        })
+        .sort((a, b) => {
+          const ta = slotToDate(a.data?.event_slot)?.getTime() ?? 0;
+          const tb = slotToDate(b.data?.event_slot)?.getTime() ?? 0;
+          return ta - tb; // nearest first
+        });
+    },
+    imgSrc(ev)      { return ev.image || `/images/${ev.page_name}.png`; },
+    imgError(e, ev) {
+      const step = parseInt(e.target.dataset.imgStep||0);
+      const cat  = ev.content_category||"default";
+      const fb   = [`/images/${ev.page_name}.jpg`,`/images/${cat}.png`,`/images/${cat}.jpg`];
+      if (step < fb.length) { e.target.src = fb[step]; e.target.dataset.imgStep = step+1; }
+      else { e.target.onerror=null; e.target.src=""; }
+    },
+    getDay(slot)    { return slot ? slot.split("/")[0].slice(6,8) : ""; },
+    getMon(slot)    { if (!slot) return ""; return MONTHS_SH[parseInt(slot.split("/")[0].slice(4,6))-1]; },
+    formatSlot(slot) {
+      if (!slot) return "";
+      try {
+        const s  = slot.split("/")[0];
+        const dt = new Date(`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}T${s.slice(9,11)}:${s.slice(11,13)}:00Z`);
+        return dt.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"America/New_York"});
+      } catch { return slot; }
+    },
+    tagClass(tag) {
+      return ({Free:"bg-green-lt text-green",Community:"bg-blue-lt text-blue","In-Person":"bg-teal-lt text-teal",Online:"bg-azure-lt text-azure",Concert:"bg-purple-lt text-purple",Outdoor:"bg-lime-lt text-lime"})[tag] || "bg-secondary-lt text-secondary";
+    },
+    isImgPath(v)    { return v && /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(v); },
+    getInitials(v)  { if (!v) return "?"; if (v.length<=3&&!v.includes("/")) return v.toUpperCase(); return v.split("/").pop().split(".")[0].split(/[-_ ]+/).map(p=>p[0]?.toUpperCase()).slice(0,2).join("")||"?"; }
+  };
+}
+</script>
+<!-- Alpine loads AFTER eventsApp() is defined above — no defer -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
