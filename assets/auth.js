@@ -1,9 +1,13 @@
+
+
 // ============================================================
 // auth.js — Exponanta auth module
 // Depends on: pocketbase.umd.js, CW-utils.js
 // Load order: pb SDK → CW-utils → auth.js
 // No Alpine dependency — fires cw:auth:change event instead
 // ============================================================
+
+//added - globalThis.pb
 
 const SYSTEM_MANAGER_ROLE_ID = 'rolesystemmanag';
 
