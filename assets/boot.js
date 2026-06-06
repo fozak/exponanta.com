@@ -1,21 +1,38 @@
 //boot only 
 // boot.js
+
 async function bootstrap() {
+  const base = window.location.origin;
+
+  // ── 1. Load schemas from db.json ─────────────────────────
+  const docs = await fetch(`${base}/db.json`).then(r => r.json());
+  globalThis.CW.Schema = {};
+  for (const s of docs.filter(d => d.doctype === "Schema")) {
+    globalThis.CW.Schema[s.schema_name] = s;
+  }
+  globalThis.CW._compileSchemas();
+
+  // ── 2. Init PocketBase adapter ───────────────────────────
   await globalThis.Adapter.pocketbase.init();
 
-  const schemaRun = await CW.run({
+  // ── 3. Restore auth session ──────────────────────────────
+  if (typeof authRestore === "function") authRestore();
+
+  // ── 4. Load compiled Adapter records from PB ─────────────
+  const adapterRun = await CW.run({
     operation: 'select',
-    target_doctype: 'Schema',
-    query: { filter: 'doctype = "Schema"' }
+    target_doctype: 'Adapter',
+    view: 'form',
+    options: { render: false }
   });
-  CW.Schema = {};
-  for (const s of schemaRun.target?.data || []) {
-    CW.Schema[s.schema_name] = s;
+  if (adapterRun.success) {
+    adapterRun.target.data = adapterRun.target.data.filter(a => a.docstatus === 1);
+    await CW._compileDocument(adapterRun);
   }
 
-  CW._compileSchemas();
-  if (typeof authRestore === "function") authRestore();
-  if (typeof appBoot    === "function") appBoot();
+  console.log("✅ bootstrap complete");
+  globalThis.CW._booted = true;
+  globalThis.dispatchEvent(new CustomEvent('CW:booted'));
 }
 
-bootstrap().catch(console.error);
+window.addEventListener("load", () => bootstrap());
