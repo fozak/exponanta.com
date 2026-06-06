@@ -35,7 +35,7 @@ globalThis.CW._config = {
     todo: "ToDo",
   },
 
-  pb_url: "http://143.198.29.88:8090",
+  pb_url: "https://pb.exponanta.com",   //test "http://143.198.29.88:8090",
   collection: "item",
 
   topLevelFields: new Set([
