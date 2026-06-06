@@ -160,14 +160,14 @@
                   <div class="empty-action"><button class="btn btn-primary" @click="activeTag = 'all'; search = ''">Show all events</button></div>
                 </div>
               </div>
-              <div x-data x-init="fetch('../components/bottom-cta.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })" class="mt-4"></div>
+              <div x-data x-init="fetch('/components/bottom-cta.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })" class="mt-4"></div>
             </div>
 
             <!-- Sidebar — 4 cols -->
             <div class="col-lg-4 col-md-12 sidebar-sticky">
-              <div x-data x-init="fetch('../components/cta-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
-              <div x-data x-init="fetch('../components/stats-card.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
-              <div x-data x-init="fetch('../components/industry-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+              <div x-data x-init="fetch('/components/cta-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+              <div x-data x-init="fetch('/components/stats-card.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+              <div x-data x-init="fetch('/components/industry-sidebar.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
             </div>
           </div>
         </div>
@@ -211,7 +211,7 @@
   </div>
 
   <!-- Footer -->
-  <div x-data x-init="fetch('../components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
+  <div x-data x-init="fetch('/components/footer.html').then(r=>r.text()).then(h=>{ $el.innerHTML=h })"></div>
 </div>
 
 <!-- Popup -->
@@ -424,8 +424,8 @@ function eventsApp() {
       if (param) this.activeTag = param;
       try {
         const [evRes, taxRes] = await Promise.all([
-          fetch("../data/db.json"),
-          fetch("../data/taxonomies.json")
+          fetch("/data/db.json"),
+          fetch("/data/taxonomies.json")
         ]);
         const evData  = await evRes.json();
         const taxData = await taxRes.json();
