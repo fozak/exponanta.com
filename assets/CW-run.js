@@ -8,7 +8,7 @@
 
 //const CW = globalThis.CW;
 
-const CW = globalThis.CW || (globalThis.CW = {});
+
 
 // ============================================================
 // RESOLVER
