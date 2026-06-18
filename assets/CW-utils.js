@@ -203,10 +203,22 @@ const EMAIL_KEYED = {
   UserSettings: "uses",
 };
 
+const PATH_KEYED = {
+  File:    "file",
+  Person:  "pers",
+  Company: "comp",
+  Event:   "event",
+};
+
 function generateId(doctype, title = null) {
   if (EMAIL_KEYED[doctype]) {
     if (!title?.trim()) throw new Error(`${doctype} requires an email address`);
-    return (EMAIL_KEYED[doctype] + hashEmail(title)).substring(0, 15);
+    return (EMAIL_KEYED[doctype] + hashString(title)).substring(0, 15);
+  }
+
+  if (PATH_KEYED[doctype]) {
+    if (!title?.trim()) throw new Error(`${doctype} requires a path`);
+    return (PATH_KEYED[doctype] + hashString(title)).substring(0, 15);
   }
 
   return SINGLE_DOCTYPES.has(doctype)
@@ -214,7 +226,7 @@ function generateId(doctype, title = null) {
     : generateMultiId(doctype, title);
 }
 
-function hashEmail(email) {
+function hashString(email) {
   let h1 = 0,
     h2 = 0x9747b28c;
   for (let i = 0; i < email.length; i++) {
@@ -349,7 +361,9 @@ function _getDimValue(doc, dim, dimDef) {
   var state = doc._state;
   if (typeof state === "string") {
     try {
-      state = JSON.parse(state);
+      //state = JSON.parse(state);
+      state = tryParseJSON(state);
+
     } catch (_) {
       state = {};
     }
@@ -499,7 +513,7 @@ function _resolveViewComponent(doctype, view, fallback_container) {
     container: fallback_container || "main_container",
   };
 }
-//== get fiels===============================================================================
+//== get fields===============================================================================
 
 function _getListFields(run_doc) {
   const doctype = run_doc.target_doctype || run_doc.source_doctype;
@@ -616,7 +630,7 @@ function _parseSmartSearch(term, schema) {
     const titleField = schema?.title_field || "name";
 
     // title_field always first
-    const titlePath = CW._config.topLevelFields.has(titleField)
+    const titlePath = CW._config.LevelFields.has(titleField)
       ? titleField
       : `data.${titleField}`;
 
@@ -749,12 +763,27 @@ CW.searchDebounced = searchDebounced;
 
 //=====change to fix
 
-async function _patchDataField(docName, fieldName, value) {
+/*async function _patchDataField(docName, fieldName, value) {
   const collection = CW._config.collection
   const current    = await globalThis.pb.collection(collection).getOne(docName)
   const existing   = Array.isArray(current.data[fieldName]) ? current.data[fieldName] : []
   const mergedData = { ...current.data, [fieldName]: [...existing, value] }
   await globalThis.pb.collection(collection).update(docName, { data: mergedData })
+}*/
+
+async function _patchDataField(docName, fieldName, value) {
+  const collection = CW._config.collection;
+  try {
+    const current  = await globalThis.pb.collection(collection).getOne(docName);
+    const existing = Array.isArray(current.data[fieldName]) ? current.data[fieldName] : [];
+    await globalThis.pb.collection(collection).update(docName, {
+      //data: { [fieldName]: [...existing, value] }  //bug
+      data: { ...current.data, [fieldName]: [...existing, value] }  //corrected
+    });
+  } catch (err) {
+    if (err?.status === 404) return;
+    throw err;
+  }
 }
 
 // ============================================================
@@ -762,29 +791,49 @@ async function _patchDataField(docName, fieldName, value) {
 // ============================================================
 
 async function _logChanges(run_doc, explicitChanges = null) {
-  if (run_doc.options?._logging === false) return
-  if (!CW._config.systemSettings?.logChanges) return
+  //console.log('[_logChanges] input keys:', Object.keys(run_doc.input));
 
-  const doc = run_doc.target?.data?.[0]
-  if (!doc?.name) return
+  if (run_doc.options?._logging === false) return;
+  if (!CW._config.systemSettings?.logChanges) return;
 
-  let changes
+  const adapters = CW._getAdapters(run_doc);
+  if (adapters.some(a => CW._config.adapters.registry?.[a]?.logChanges === 0)) return;
+
+  const doc = run_doc.target?.data?.[0];
+  if (!doc?.name) return;
+
+  // find Script sibling in run tree
+const parentRun = CW.runs?.[run_doc.parent_run_id];  // ← MISSING
+const sourceRuns = parentRun?.child_run_ids
+  ?.map(id => CW.runs[id])
+  ?.filter(r => r?.target_doctype === 'Script' && r?.success);
+const provenance = sourceRuns?.length
+  ? { Script: sourceRuns.map(r => r.target?.data?.[0]?.title).join(', ') }
+  : {};
+  
+  let changes;
 
   if (explicitChanges) {
-    changes = explicitChanges
+    changes = explicitChanges;
   } else {
-    const skip = new Set(['_changes', 'modified', 'modified_by', 'creation', 'files+', 'files-'])
+    const skip = new Set(['_changes', 'modified', 'modified_by', 'creation', 'files+', 'files-']);
     changes = Object.entries(run_doc.input)
       .filter(([k]) => !skip.has(k) && k !== '_state')
-      .map(([k, v]) => ({ field: k, from: doc[k] ?? null, to: v }))
-      .filter(c => JSON.stringify(c.from) !== JSON.stringify(c.to))
+      .map(([k, v]) => ({
+        field: k,
+        from: doc[k] ?? null,
+        to: v,
+        source: CW._getAdapters(run_doc).join(','),
+        ...provenance
+      }))
+      .filter(c => JSON.stringify(c.from) !== JSON.stringify(c.to));
   }
 
   const signals = explicitChanges ? [] : Object.entries(run_doc.input._state || {})
     .filter(([, v]) => v === '')
-    .map(([k]) => k)
+    .map(([k]) => k);
 
-  if (!changes.length && !signals.length) return
+  if (!changes.length && !signals.length) return;
 
   const entry = {
     at: Date.now(),
@@ -792,17 +841,16 @@ async function _logChanges(run_doc, explicitChanges = null) {
     op: run_doc.operation,
     ...(changes.length && { ch: changes }),
     ...(signals.length && { sig: signals }),
-  }
+  };
 
-  const existing = Array.isArray(doc._changes) ? doc._changes : []
-  const next     = [...existing, entry]
+  const existing = Array.isArray(doc._changes) ? doc._changes : [];
+  const next     = [...existing, entry];
 
   try {
-    //await _patchDataField(doc.name, '_changes', next)
-    await _patchDataField(doc.name, '_changes', entry)
-    doc._changes = next
+    await _patchDataField(doc.name, '_changes', entry);
+    doc._changes = next;
   } catch (err) {
-    console.warn('[CW] _logChanges failed:', err.message)
+    console.warn('[CW] _logChanges failed:', err.message);
   }
 }
 
@@ -926,6 +974,98 @@ function _resolveQuery(run_doc, fieldname) {
 
 
 
+// ============================================================
+// runChain
+// ============================================================
+
+async function runChain(notebookName) {
+  // root — load the notebook template
+  const notebook_run = await CW.run({
+    operation: 'select',
+    target_doctype: 'Run',
+    query: { where: { name: notebookName } },
+    view: 'form',
+    options: { render: false }
+  });
+
+  //const cells = JSON.parse(notebook_run.target.data[0].steps);
+  const cells = tryParseJSON(notebook_run.target.data[0].steps);
+  let prev = notebook_run;
+
+  // cell1 — load select template
+  const selectCell = cells.find(c => c.type === 'select');
+  const selectTemplate = await prev.child({
+    operation: 'select',
+    target_doctype: 'Run',
+    query: { where: { name: selectCell.name } },
+    view: 'form',
+    options: { render: false }
+  });
+  prev = selectTemplate;
+  const st = selectTemplate.target.data[0];
+
+  // cell2 — execute select
+  const parent = await prev.child({
+    operation: st.operation,
+    target_doctype: st.target_doctype,
+    //query: JSON.parse(st.query),
+    query: tryParseJSON(st.query),
+    options: { render: false }
+  });
+  prev = parent;
+
+  // cell3..N — load script templates and execute
+  const scriptCells = cells.filter(c => c.type === 'script');
+  const fns = [];
+  for (const cell of scriptCells) {
+    const t = await prev.child({
+      operation: 'select',
+      target_doctype: 'Run',
+      query: { where: { name: cell.name } },
+      view: 'form',
+      options: { render: false }
+    });
+    prev = t;
+    const template = t.target.data[0];
+    const script = await prev.child({
+      operation: template.operation,
+      target_doctype: template.target_doctype,
+      //query: JSON.parse(template.query),
+      query: tryParseJSON(template.query),
+      options: { render: false }
+    });
+    prev = script;
+    fns.push(new Function('doc', script.target.data[0].code));
+  }
+
+  // last cell — update
+  await Promise.all(parent.target.data.map(async doc =>
+    prev.child({
+      operation: 'update',
+      target_doctype: st.target_doctype,
+      query: { where: { name: doc.name } },
+      input: Object.assign({}, ...await Promise.all(fns.map(fn => fn(doc)))),
+      options: { render: false, expand: false }
+    })
+  ));
+}
+
+// ─── assign to CW ─────────────────────────────────────────────────────────────
+
+CW.runChain = runChain;
+
+
+//---------------------
+
+function tryParseJSON(val) {
+  if (typeof val === 'string') {
+    try { return JSON.parse(val); } catch { return val; }
+  }
+  return val;
+}
+CW.tryParseJSON = tryParseJSON;
+
+
 // ─── assign to CW ────────────────────────────────────────────────────────────
 
 CW.getGridSelected   = getGridSelected;
@@ -970,4 +1110,4 @@ Object.assign(globalThis, {
   searchGridDebounced,
 });
 
-console.log("✅ CW-utils.js v40 loaded");
+console.log("✅ CW-utils.js v41 loaded");
